@@ -1,0 +1,4 @@
+[submodule "capella-releng-parent"]
+	path = capella-releng-parent
+	url = https://github.com/felixdo/capella-releng-parent.git
+	branch = v1.3.x
