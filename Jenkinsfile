@@ -7,6 +7,13 @@ pipeline {
     }
 
     stages {
+
+	stage ('Update capella-releng-parent'){
+	    steps {
+		sh 'git submodule update --init'
+	    }
+	}
+
 	stage ('Generate Targetplatform'){
 	    steps {
 		// must use mvn install so the addon build can find the .target
