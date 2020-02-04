@@ -1,5 +1,11 @@
 pipeline {
-    agent any
+
+    agent { label "migration" }
+    tools {
+	maven "apache-maven-latest"
+	jdk "oracle-jdk8-latest"
+    }
+
     stages {
 	stage ('Generate Targetplatform'){
 	    steps {
