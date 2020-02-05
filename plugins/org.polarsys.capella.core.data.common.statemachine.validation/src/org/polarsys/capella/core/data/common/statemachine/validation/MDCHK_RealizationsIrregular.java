@@ -64,7 +64,7 @@ public class MDCHK_RealizationsIrregular extends AbstractModelConstraint
                   config2 = config3;
                 }
                 else if(fctObj instanceof LogicalFunction){
-                  if(config1.eContainer() instanceof org.polarsys.capella.core.data.ctx.System){
+                  if(config1.eContainer() instanceof org.polarsys.capella.core.data.ctx.SystemComponent){
                     config3 = config1;
                     config1 = config2;
                     config2 = config3;

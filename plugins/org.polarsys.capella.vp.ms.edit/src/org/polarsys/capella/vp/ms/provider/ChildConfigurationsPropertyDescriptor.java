@@ -30,7 +30,6 @@ import org.polarsys.capella.common.mdsofa.common.helper.ExtensionPointHelper;
 import org.polarsys.capella.common.model.IDelegatedListener;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.la.LogicalComponent;
-import org.polarsys.capella.core.data.pa.PhysicalActor;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.vp.ms.CSConfiguration;
 import org.polarsys.kitalpha.emde.model.ExtensibleElement;
@@ -125,12 +124,6 @@ public class ChildConfigurationsPropertyDescriptor extends ExtensionItemProperty
       Set<PhysicalComponent> seen = new HashSet<>();
       seen.add((PhysicalComponent) parent);
       walkPhysicalComponentHierarchy(result, toVisit, seen);
-
-    } else if (parent instanceof PhysicalActor) {
-
-      Deque<PhysicalComponent> toVisit = new ArrayDeque<>();
-      toVisit.addAll(((PhysicalActor) parent).getDeployedPhysicalComponents());
-      walkPhysicalComponentHierarchy(result, toVisit, new HashSet<PhysicalComponent>());
 
     }
 

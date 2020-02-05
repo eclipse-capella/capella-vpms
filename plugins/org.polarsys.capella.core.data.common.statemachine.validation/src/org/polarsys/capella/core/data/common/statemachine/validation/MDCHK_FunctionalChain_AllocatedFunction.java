@@ -16,7 +16,7 @@ import org.eclipse.emf.validation.AbstractModelConstraint;
 import org.eclipse.emf.validation.IValidationContext;
 import org.polarsys.capella.core.data.capellacommon.State;
 import org.polarsys.capella.core.data.capellacommon.StateMachine;
-import org.polarsys.capella.core.data.cs.SystemComponent;
+import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
 
@@ -34,12 +34,11 @@ public class MDCHK_FunctionalChain_AllocatedFunction extends AbstractModelConstr
         EList<State> availableInStates = functionalChain.getAvailableInStates();
 
         EList<AbstractFunction> involvedFunctions = functionalChain.getInvolvedFunctions();
-
         EList<StateMachine> stateMachines = StateMachineUtils.getAllStateMachines(availableInStates);
 
-        EList<SystemComponent> systemComponents = StateMachineUtils.getSystemComponents(stateMachines);
+        EList<Component> systemComponents = StateMachineUtils.getSystemComponents(stateMachines);
 
-        for (SystemComponent systemComponent : systemComponents) {
+        for (Component systemComponent : systemComponents) {
           for (AbstractFunction involvedFunction : involvedFunctions) {
             if (!systemComponent.getAllocatedFunctions().contains(involvedFunction)) {
               return ctx.createFailureStatus(functionalChain.getName(), systemComponent.getName());

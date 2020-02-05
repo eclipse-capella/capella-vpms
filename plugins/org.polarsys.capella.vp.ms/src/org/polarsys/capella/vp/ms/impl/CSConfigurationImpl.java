@@ -30,9 +30,9 @@ import org.polarsys.capella.core.data.capellacommon.AbstractState;
 import org.polarsys.capella.core.data.capellacore.impl.NamedElementImpl;
 import org.polarsys.capella.core.data.cs.AbstractDeploymentLink;
 import org.polarsys.capella.core.data.cs.Component;
+import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.cs.PhysicalPort;
-import org.polarsys.capella.core.data.ctx.Actor;
-import org.polarsys.capella.core.data.ctx.System;
+import org.polarsys.capella.core.data.ctx.SystemComponent;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.ComponentFunctionalAllocation;
 import org.polarsys.capella.core.data.fa.ComponentPort;
@@ -40,13 +40,10 @@ import org.polarsys.capella.core.data.fa.FunctionInputPort;
 import org.polarsys.capella.core.data.fa.FunctionOutputPort;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.core.data.information.AbstractInstance;
-import org.polarsys.capella.core.data.information.Partition;
 import org.polarsys.capella.core.data.information.Port;
 import org.polarsys.capella.core.data.interaction.InstanceRole;
 import org.polarsys.capella.core.data.interaction.Scenario;
-import org.polarsys.capella.core.data.la.LogicalActor;
 import org.polarsys.capella.core.data.la.LogicalComponent;
-import org.polarsys.capella.core.data.pa.PhysicalActor;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.vp.ms.CSConfiguration;
 import org.polarsys.capella.vp.ms.MsPackage;
@@ -472,11 +469,7 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
 
             } else if (current instanceof PhysicalComponent) {
 
-              if (((PhysicalComponent) current).getDeployingPhysicalActors().size() > 0) {
-
-                current = ((PhysicalComponent) current).getDeployingPhysicalActors().get(0);
-
-              } else if (((PhysicalComponent) current).getDeployingPhysicalComponents().size() > 0) {
+              if (((PhysicalComponent) current).getDeployingPhysicalComponents().size() > 0) {
 
                 current = ((PhysicalComponent) current).getDeployingPhysicalComponents().get(0);
 
@@ -525,18 +518,12 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
   public EList<ModelElement> getScope() {
     Component parent = (Component) eContainer();
     EList<ModelElement> result = new UniqueEList<ModelElement>();
-    if (parent instanceof System) {
-      recurseComponentsForComboBox(result, (System) parent);
-    } else if (parent instanceof Actor) {
-      recurseComponentsForComboBox(result, (Actor) parent);
+    if (parent instanceof SystemComponent) {
+      recurseComponentsForComboBox(result, (SystemComponent) parent);
     } else if (parent instanceof LogicalComponent) {
       recurseComponentsForComboBox(result, (LogicalComponent) parent);
-    } else if (parent instanceof LogicalActor) {
-      recurseComponentsForComboBox(result, (LogicalActor) parent);
     } else if (parent instanceof PhysicalComponent) {
       recurseComponentsForComboBox(result, (PhysicalComponent) parent);
-    } else if (parent instanceof PhysicalActor) {
-      recurseComponentsForComboBox(result, (PhysicalActor) parent);
     }
     return result;
 
@@ -558,7 +545,7 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
     return result;
   }
 
-  private void recurseComponentsForComboBox(Collection<ModelElement> result, System parent) {
+  private void recurseComponentsForComboBox(Collection<ModelElement> result, SystemComponent parent) {
     addComboBoxElements(result, parent);
   }
 
@@ -572,13 +559,6 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
 
   }
 
-  private void recurseComponentsForComboBox(Collection<ModelElement> result, LogicalActor parent) {
-    addComboBoxElements(result, parent);
-  }
-
-  private void recurseComponentsForComboBox(Collection<ModelElement> result, Actor parent) {
-    addComboBoxElements(result, parent);
-  }
 
   private void recurseComponentsForComboBox(Collection<ModelElement> result, PhysicalComponent parent) {
     addComboBoxElements(result, parent);
@@ -596,19 +576,9 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
     }
   }
 
-  private void recurseComponentsForComboBox(Collection<ModelElement> result, PhysicalActor parent) {
-    addComboBoxElements(result, (PhysicalActor) parent);
-
-    if (getAccess() == access_Type.FULL) {
-      for (PhysicalComponent child : parent.getDeployedPhysicalComponents()) {
-        recurseComponentsForComboBox(result, child);
-      }
-    }
-  }
-
   private void addComboBoxElements(Collection<ModelElement> result, Component parent) {
 
-    for (Partition part : parent.getRepresentingPartitions()) {
+    for (Part part : parent.getRepresentingParts()) {
       addComboboxElements(result, part);
     }
 
@@ -638,15 +608,11 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
     for (ComponentPort cp : parent.getContainedComponentPorts()) {
       result.add(cp);
       result.addAll(cp.getComponentExchanges());
-
-      addComboboxElements(result, cp);
     }
 
     for (PhysicalPort pp : parent.getContainedPhysicalPorts()) {
       result.add(pp);
       result.addAll(pp.getInvolvedLinks());
-
-      addComboboxElements(result, pp);
     }
   }
 
@@ -656,10 +622,6 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
         result.add((Scenario) ir.eContainer());
       }
     }
-  }
-
-  private void addComboBoxElements(Collection<ModelElement> result, System parent) {
-    addComboBoxElements(result, (Component) parent);
   }
 
   private void addComboBoxElements(Collection<ModelElement> result, LogicalComponent parent) {
@@ -679,13 +641,6 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
       result.add(deployed);
     }
 
-  }
-
-  private void addComboBoxElements(Collection<ModelElement> result, PhysicalActor parent) {
-    addComboBoxElements(result, (Component) parent);
-    for (PhysicalComponent deployed : parent.getDeployedPhysicalComponents()) {
-      result.add(deployed);
-    }
   }
 
   /**

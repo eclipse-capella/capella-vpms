@@ -21,6 +21,7 @@ import org.eclipse.emf.validation.AbstractModelConstraint;
 import org.eclipse.emf.validation.IValidationContext;
 import org.eclipse.emf.validation.model.ConstraintStatus;
 import org.polarsys.capella.core.data.cs.Component;
+import org.polarsys.capella.core.data.ctx.SystemComponent;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FunctionRealization;
 import org.polarsys.capella.core.data.la.LogicalComponent;
@@ -57,7 +58,7 @@ public class MDCHK_differentLayer extends AbstractModelConstraint{
                config2 = config3;
              }
              else if(config2.eContainer() instanceof LogicalComponent){
-               if(config1.eContainer() instanceof org.polarsys.capella.core.data.ctx.System){
+               if(config1.eContainer() instanceof SystemComponent){
                  config3 = config1;
                  config1 = config2;
                  config2 = config3;

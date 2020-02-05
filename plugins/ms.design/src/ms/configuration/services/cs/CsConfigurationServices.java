@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
+import org.eclipse.sirius.common.tools.api.interpreter.IInterpreter;
 import org.eclipse.sirius.diagram.AbstractDNode;
 import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.DDiagramElement;
@@ -41,6 +43,9 @@ import org.eclipse.sirius.diagram.DNode;
 import org.eclipse.sirius.diagram.DNodeContainer;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.eclipse.sirius.diagram.EdgeTarget;
+import org.eclipse.sirius.diagram.business.internal.metamodel.description.extensions.INodeMappingExt;
+import org.eclipse.sirius.diagram.business.internal.metamodel.helper.EdgeMappingHelper;
+import org.eclipse.sirius.diagram.business.internal.metamodel.helper.NodeMappingHelper;
 import org.eclipse.sirius.diagram.description.EdgeMapping;
 import org.eclipse.sirius.diagram.description.Layer;
 import org.eclipse.sirius.diagram.description.NodeMapping;
@@ -48,6 +53,7 @@ import org.eclipse.sirius.diagram.sequence.SequenceDDiagram;
 import org.eclipse.sirius.diagram.sequence.description.InstanceRoleMapping;
 import org.eclipse.sirius.table.metamodel.table.DTable;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
+import org.eclipse.sirius.viewpoint.SiriusPlugin;
 import org.eclipse.sirius.viewpoint.description.DAnnotation;
 import org.eclipse.sirius.viewpoint.description.DModelElement;
 import org.eclipse.sirius.viewpoint.description.DescriptionFactory;
@@ -64,15 +70,11 @@ import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.cs.PhysicalPort;
-import org.polarsys.capella.core.data.ctx.System;
-import org.polarsys.capella.core.data.ctx.SystemAnalysis;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.core.data.interaction.InstanceRole;
 import org.polarsys.capella.core.data.interaction.Scenario;
-import org.polarsys.capella.core.data.la.LogicalArchitecture;
 import org.polarsys.capella.core.data.la.LogicalComponent;
-import org.polarsys.capella.core.data.pa.PhysicalArchitecture;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.CapellaElementExt;
@@ -135,6 +137,7 @@ public class CsConfigurationServices {
 
       Session session = SessionManager.INSTANCE.getSession(diagram);
       Map<CSConfiguration, DNode> shown = getCurrentConfigNodeMap(diagram);
+      IInterpreter interpreter = SiriusPlugin.getDefault().getInterpreterRegistry().getInterpreter(diagram);
 
       for (Object o : (Object[]) selection) {
 
@@ -142,11 +145,10 @@ public class CsConfigurationServices {
 
         if (node == null) {
           NodeMapping nodeMapping = MsMappingConstants.getConfigurationNodeMapping(diagram);
-          node = nodeMapping.createNode((CSConfiguration) o, diagram, diagram);
+          node = new NodeMappingHelper(interpreter).createNode((INodeMappingExt) nodeMapping, (CSConfiguration) o, diagram, diagram);
           diagram.getOwnedDiagramElements().add(node);
         }
 
-        
         if (ir == null) { // config is applied to whole diagram => remove all existing ir->config edges
           for (DEdge in : node.getIncomingEdges()) {
             if (in.getSourceNode() instanceof DSemanticDecorator && ((DSemanticDecorator) in).getTarget() instanceof InstanceRole) {
@@ -155,9 +157,9 @@ public class CsConfigurationServices {
           }
 
         } else {  // config is applied to instance role => ensure an edge ir->config exists
-
-          EdgeMapping edgeMapping = MsMappingConstants.getInstanceRoleConfigurationEdgeMapping(diagram); 
-          diagram.getOwnedDiagramElements().add(edgeMapping.createEdge(irNode, node, diagram, ir));
+          EdgeMapping edgeMapping = MsMappingConstants.getInstanceRoleConfigurationEdgeMapping(diagram);
+          DEdge edge = new EdgeMappingHelper(interpreter).createEdge(edgeMapping, irNode, node, diagram, ir);
+          diagram.getOwnedDiagramElements().add(edge);
         }
 
       }
@@ -754,12 +756,9 @@ public class CsConfigurationServices {
       cmp = (Component) ((Part) context).getType();
     } else {
       BlockArchitecture ba = BlockArchitectureExt.getRootBlockArchitecture(context);
-      if (ba instanceof SystemAnalysis) {
-        cmp = ((SystemAnalysis) ba).getOwnedSystem();
-      } else if (ba instanceof LogicalArchitecture) {
-        cmp = ((LogicalArchitecture)ba).getOwnedLogicalComponent();
-      } else if (ba instanceof PhysicalArchitecture) {
-        cmp = ((PhysicalArchitecture)ba).getOwnedPhysicalComponent();
+      Iterator<Component> roots = BlockArchitectureExt.getRootComponents(ba).iterator();
+      if (roots.hasNext()) {
+        cmp = roots.next();
       }
     }
 

@@ -19,7 +19,7 @@ import org.eclipse.emf.validation.AbstractModelConstraint;
 import org.eclipse.emf.validation.IValidationContext;
 import org.polarsys.capella.core.data.capellacommon.State;
 import org.polarsys.capella.core.data.capellacommon.StateMachine;
-import org.polarsys.capella.core.data.cs.SystemComponent;
+import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.interaction.InstanceRole;
 import org.polarsys.capella.core.sirius.analysis.SequenceDiagramServices;
 
@@ -32,8 +32,8 @@ public class MDCHK_InstanceRole_Component_FSM extends AbstractModelConstraint {
   public IStatus validate(IValidationContext ctx) {
     if (ctx.getTarget() instanceof InstanceRole) {
       InstanceRole instanceRole = (InstanceRole) ctx.getTarget();
-      if (instanceRole.getRepresentedInstance().getType() instanceof SystemComponent) {
-        SystemComponent systemComponent = (SystemComponent) instanceRole.getRepresentedInstance().getType();
+      if (instanceRole.getRepresentedInstance().getType() instanceof Component) {
+        Component systemComponent = (Component) instanceRole.getRepresentedInstance().getType();
         EList<StateMachine> stateMachines = systemComponent.getOwnedStateMachines();
         if (!stateMachines.isEmpty()) {
           List<EObject> orderedElementsOfInstanceRole = InteractionUtils.getOrderedElementsOfInstanceRole(instanceRole);

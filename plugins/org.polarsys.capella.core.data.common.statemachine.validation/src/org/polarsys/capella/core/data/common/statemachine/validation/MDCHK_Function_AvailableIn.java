@@ -29,8 +29,8 @@ public class MDCHK_Function_AvailableIn extends AbstractModelConstraint {
   public IStatus validate(IValidationContext ctx) {
     if (ctx.getTarget() instanceof LogicalFunction) {
       LogicalFunction logicalFunction = (LogicalFunction) ctx.getTarget();
-      if (!logicalFunction.getAllocatorLogicalComponents().isEmpty()) {
-        LogicalComponent logicalComponentRoot = logicalFunction.getAllocatorLogicalComponents().get(0);
+      if (!logicalFunction.getAllocatingLogicalComponents().isEmpty()) {
+        LogicalComponent logicalComponentRoot = logicalFunction.getAllocatingLogicalComponents().get(0);
         EList<StateMachine> allStateMachines = StateMachineUtils.getAllStateMachines(logicalComponentRoot);
         for (StateMachine stateMachine : allStateMachines) {
           if (StateMachineUtils.isAvailableIn(logicalFunction, stateMachine)) {
@@ -43,8 +43,8 @@ public class MDCHK_Function_AvailableIn extends AbstractModelConstraint {
     }
     if (ctx.getTarget() instanceof PhysicalFunction) {
       PhysicalFunction physicalFunction = (PhysicalFunction) ctx.getTarget();
-      if (!physicalFunction.getAllocatorPhysicalComponents().isEmpty()) {
-        PhysicalComponent physicalComponentRoot = physicalFunction.getAllocatorPhysicalComponents().get(0);
+      if (!physicalFunction.getAllocatingPhysicalComponents().isEmpty()) {
+        PhysicalComponent physicalComponentRoot = physicalFunction.getAllocatingPhysicalComponents().get(0);
         EList<StateMachine> allStateMachines = StateMachineUtils.getAllStateMachines(physicalComponentRoot);
         for (StateMachine stateMachine : allStateMachines) {
           if (StateMachineUtils.isAvailableIn(physicalFunction, stateMachine)) {

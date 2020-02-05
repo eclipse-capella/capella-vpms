@@ -8,11 +8,10 @@ import org.eclipse.emf.validation.AbstractModelConstraint;
 import org.eclipse.emf.validation.IValidationContext;
 import org.eclipse.emf.validation.model.ConstraintStatus;
 import org.polarsys.capella.core.data.cs.Component;
-import org.polarsys.capella.core.data.ctx.System;
+import org.polarsys.capella.core.data.ctx.SystemComponent;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FunctionRealization;
 import org.polarsys.capella.core.data.la.LogicalComponent;
-import org.polarsys.capella.core.data.pa.LogicalComponentRealization;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.vp.ms.CSConfiguration;
 import org.polarsys.capella.vp.ms.Comparison;
@@ -30,10 +29,10 @@ public class MDCHK_MSVAL_ValidateBetweenPhysicalAndLogical extends AbstractModel
     Comparison comparison = (Comparison) eObj;
     CSConfiguration config1 = comparison.getConfiguration1().get(0);
     CSConfiguration config2 = comparison.getConfiguration2().get(0);
-    CSConfiguration physicalConfig = config1.eContainer() instanceof System ? config1 : config2;
+    CSConfiguration physicalConfig = config1.eContainer() instanceof SystemComponent ? config1 : config2;
     CSConfiguration logicalConfig = config2.eContainer() instanceof LogicalComponent ? config2 : config1;
     ArrayList<FunctionRealization> logicalFunctionList = new ArrayList<>();
-    ArrayList<LogicalComponentRealization> logicalComponentList = new ArrayList<>();
+    ArrayList<LogicalComponent> logicalComponentList = new ArrayList<>();
     for(AbstractFunction fct : physicalConfig.getFunctions()){
       if(!fct.getOwnedFunctionRealizations().isEmpty()){
         logicalFunctionList.addAll(fct.getOwnedFunctionRealizations());
@@ -41,9 +40,7 @@ public class MDCHK_MSVAL_ValidateBetweenPhysicalAndLogical extends AbstractModel
     }
     for(Component component : physicalConfig.getComponents()){
       PhysicalComponent myComp = (PhysicalComponent)component;
-      if(!myComp.getOwnedLogicalComponentRealizations().isEmpty()){
-        logicalComponentList.addAll(myComp.getOwnedLogicalComponentRealizations());
-      }
+      logicalComponentList.addAll(myComp.getRealizedLogicalComponents());
     }
     if (physicalConfig.getSelector().equals(selector_Type.INCLUSION) && logicalConfig.getSelector().equals(selector_Type.EXCLUSION) && logicalConfig.eContainer() instanceof LogicalComponent && physicalConfig.eContainer() instanceof PhysicalComponent){
       for(FunctionRealization function : logicalFunctionList){
@@ -53,10 +50,10 @@ public class MDCHK_MSVAL_ValidateBetweenPhysicalAndLogical extends AbstractModel
           }
         }
       }
-      for(LogicalComponentRealization lc : logicalComponentList){
+      for(LogicalComponent lc : logicalComponentList){
         for(Component cpt : logicalConfig.getComponents()){
-          if(lc.getTargetElement().getId().equals(cpt.getId())){
-            failureMessageArgument1.add(ctx.createFailureStatus(logicalConfig.getName(), lc.getTargetElement().getLabel(), physicalConfig.getName(), lc.getTargetElement().getLabel(), "component"));
+          if(lc.getId().equals(cpt.getId())){
+            failureMessageArgument1.add(ctx.createFailureStatus(logicalConfig.getName(), lc.getLabel(), physicalConfig.getName(), lc.getLabel(), "component"));
           }
         }
       }

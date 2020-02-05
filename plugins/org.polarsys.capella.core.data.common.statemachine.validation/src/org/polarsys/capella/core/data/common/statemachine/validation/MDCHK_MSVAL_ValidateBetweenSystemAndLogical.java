@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.validation.AbstractModelConstraint;
 import org.eclipse.emf.validation.IValidationContext;
 import org.eclipse.emf.validation.model.ConstraintStatus;
-import org.polarsys.capella.core.data.ctx.System;
+import org.polarsys.capella.core.data.ctx.SystemComponent;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FunctionRealization;
 import org.polarsys.capella.core.data.la.LogicalComponent;
@@ -39,7 +39,7 @@ public class MDCHK_MSVAL_ValidateBetweenSystemAndLogical extends AbstractModelCo
     Comparison comparison = (Comparison) eObj;
     CSConfiguration config1 = comparison.getConfiguration1().get(0);
     CSConfiguration config2 = comparison.getConfiguration2().get(0);
-    CSConfiguration systemConfig = config1.eContainer() instanceof System ? config1 : config2;
+    CSConfiguration systemConfig = config1.eContainer() instanceof SystemComponent ? config1 : config2;
     CSConfiguration logicalConfig = config2.eContainer() instanceof LogicalComponent ? config2 : config1;
     ArrayList<FunctionRealization> systemFunctionList = new ArrayList<>();
     for(AbstractFunction fct : logicalConfig.getFunctions()){
@@ -48,7 +48,7 @@ public class MDCHK_MSVAL_ValidateBetweenSystemAndLogical extends AbstractModelCo
       }
     }
     systemFunctionList.get(0).getTargetElement().getId();
-    if (systemConfig.getSelector().equals(selector_Type.INCLUSION) && logicalConfig.getSelector().equals(selector_Type.EXCLUSION) && logicalConfig.eContainer() instanceof LogicalComponent && systemConfig.eContainer() instanceof System){
+    if (systemConfig.getSelector().equals(selector_Type.INCLUSION) && logicalConfig.getSelector().equals(selector_Type.EXCLUSION) && logicalConfig.eContainer() instanceof LogicalComponent && systemConfig.eContainer() instanceof SystemComponent){
       for(FunctionRealization function : systemFunctionList){
         for(AbstractFunction fct : systemConfig.getFunctions()){
           if(function.getTargetElement().getId().equals(fct.getId())){

@@ -30,7 +30,6 @@ import org.polarsys.capella.core.data.capellacommon.State;
 import org.polarsys.capella.core.data.capellacommon.StateMachine;
 import org.polarsys.capella.core.data.capellacommon.StateTransition;
 import org.polarsys.capella.core.data.cs.Component;
-import org.polarsys.capella.core.data.cs.SystemComponent;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.la.LogicalComponent;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
@@ -214,15 +213,15 @@ public final class StateMachineUtils {
   }
 
   /**
-   * Return all {@link SystemComponent}s container of one or more {@link StateMachine}.
+   * Return all {@link Component}s container of one or more {@link StateMachine}.
    * @param stateMachines a given list of {@link StateMachine}s
-   * @return a list of {@link SystemComponent}
+   * @return a list of {@link Component}
    */
-  public static EList<SystemComponent> getSystemComponents(EList<StateMachine> stateMachines) {
-    EList<SystemComponent> systemComponents = new BasicEList<SystemComponent>();
+  public static EList<Component> getSystemComponents(EList<StateMachine> stateMachines) {
+    EList<Component> systemComponents = new BasicEList<Component>();
     for (StateMachine stateMachine : stateMachines) {
-      if (stateMachine.eContainer() instanceof SystemComponent && !systemComponents.contains(stateMachine.eContainer())) {
-        systemComponents.add((SystemComponent) stateMachine.eContainer());
+      if (stateMachine.eContainer() instanceof Component && !systemComponents.contains(stateMachine.eContainer())) {
+        systemComponents.add((Component) stateMachine.eContainer());
       }
     }
     return systemComponents;
