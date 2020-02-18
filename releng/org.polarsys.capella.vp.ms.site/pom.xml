@@ -16,7 +16,7 @@
 	<parent>
 		<groupId>org.polarsys</groupId>
 		<artifactId>capella-addon-site</artifactId>
-		<version>1.4.0-SNAPSHOT</version>
+		<version>1.5.0-SNAPSHOT</version>
 		<relativePath>../../../capella-releng-parent/capella-addon-site.xml</relativePath>
 	</parent>
 
