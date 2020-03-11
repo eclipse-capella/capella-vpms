@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:description_2="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:description_3="http://www.eclipse.org/sirius/diagram/sequence/description/2.0.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" name="ms" version="12.0.0.2017041100">
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:description_2="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:description_3="http://www.eclipse.org/sirius/diagram/sequence/description/2.0.0" xmlns:dialect_0.9="https://www.polarsys.org/capella/vp/ms/dialect/0.9" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" name="ms" version="12.0.0.2017041100">
   <ownedViewpoints name="ms">
     <ownedRepresentations xsi:type="description_1:CrossTableDescription" name="MS_Function_Configuration" label="Configuration Elements" domainClass="cs.Component">
       <ownedLineMappings name="MS_F_C_ComponentsRoot" domainClass="Component" semanticCandidatesExpression="service:table.msComponentRoot(root)" headerLabelExpression="feature:name">
@@ -228,8 +228,22 @@
         </backgroundConditionalStyle>
       </intersection>
     </ownedRepresentations>
+    <ownedRepresentations xsi:type="description_1:CrossTableDescription" name="Situation Expressions" domainClass="cs.Component">
+      <metamodel href="../../org.polarsys.capella.core.data.gen/model/CompositeStructure.ecore#/"/>
+      <metamodel href="../../org.polarsys.capella.core.data.gen/model/CapellaCommon.ecore#/"/>
+      <metamodel href="../../org.polarsys.capella.core.data.gen/model/CapellaCore.ecore#/"/>
+      <metamodel href="../../org.polarsys.capella.vp.ms/models/ms.ecore#/"/>
+      <ownedLineMappings name="component_root" reusedSubLines="//@ownedViewpoints[name='ms']/@ownedRepresentations[name='Situation%20Expressions']/@ownedLineMappings[name='component_root']/@ownedSubLines[name='components']/@ownedSubLines[name='statemachines']" domainClass="cs.Component" semanticCandidatesExpression="var:root" headerLabelExpression="feature:name">
+        <ownedSubLines name="components" reusedSubLines="//@ownedViewpoints[name='ms']/@ownedRepresentations[name='Situation%20Expressions']/@ownedLineMappings[name='component_root']/@ownedSubLines[name='components'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='Situation%20Expressions']/@ownedLineMappings[name='component_root']/@ownedSubLines[name='componentpkgs']" reusedInMappings="//@ownedViewpoints[name='ms']/@ownedRepresentations[name='Situation%20Expressions']/@ownedLineMappings[name='component_root']/@ownedSubLines[name='components'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='Situation%20Expressions']/@ownedLineMappings[name='component_root']/@ownedSubLines[name='componentpkgs']" domainClass="cs.Component" semanticCandidatesExpression="service:container.msSituationExpressionComponentLines" headerLabelExpression="feature:name">
+          <ownedSubLines name="statemachines" reusedInMappings="//@ownedViewpoints[name='ms']/@ownedRepresentations[name='Situation%20Expressions']/@ownedLineMappings[name='component_root']" domainClass="capellacommon.StateMachine" semanticCandidatesExpression="service:container.msSituationExpressionStateMachineLines"/>
+        </ownedSubLines>
+        <ownedSubLines name="componentpkgs" reusedSubLines="//@ownedViewpoints[name='ms']/@ownedRepresentations[name='Situation%20Expressions']/@ownedLineMappings[name='component_root']/@ownedSubLines[name='componentpkgs'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='Situation%20Expressions']/@ownedLineMappings[name='component_root']/@ownedSubLines[name='components']" reusedInMappings="//@ownedViewpoints[name='ms']/@ownedRepresentations[name='Situation%20Expressions']/@ownedLineMappings[name='component_root']/@ownedSubLines[name='componentpkgs'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='Situation%20Expressions']/@ownedLineMappings[name='component_root']/@ownedSubLines[name='components']" domainClass="cs.ComponentPkg" semanticCandidatesExpression="service:container.msSituationExpressionComponentPkgLines"/>
+      </ownedLineMappings>
+      <ownedColumnMappings name="situations" domainClass="ms.Situation" semanticCandidatesExpression="service:container.msSituationExpressionColumns()"/>
+      <intersection name="intersection" lineMapping="//@ownedViewpoints[name='ms']/@ownedRepresentations[name='Situation%20Expressions']/@ownedLineMappings[name='component_root']/@ownedSubLines[name='components']/@ownedSubLines[name='statemachines']" columnMapping="//@ownedViewpoints[name='ms']/@ownedRepresentations[name='Situation%20Expressions']/@ownedColumnMappings.0" labelExpression="service:lineSemantic.msSituationExpression(columnSemantic, line, column)" columnFinderExpression="service:msAllSituations"/>
+    </ownedRepresentations>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="mode" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/Common" representationName="Modes &amp; States">
-      <metamodel href="http://www.polarsys.org/capella/core/cs/1.3.0#/"/>
+      <metamodel href="http://www.polarsys.org/capella/core/cs/1.4.0#/"/>
       <layers name="LAB_Layer_ModeAutomata" label="ModeAutomata">
         <toolSections name="modeAutomata" label="Mode Automata">
           <reusedTools xsi:type="tool_1:EdgeCreationDescription" href="../../org.polarsys.capella.core.sirius.analysis/description/common.odesign#//@ownedViewpoints[name='Common']/@ownedRepresentations[name='Modes%20%26%20States']/@defaultLayer/@toolSections.0/@ownedTools[name='Transition']"/>
@@ -252,7 +266,7 @@
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="LAConfigurations" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/Logical Architecture" representationName="Logical Architecture Blank">
       <metamodel href="../../org.polarsys.capella.vp.ms/models/ms.ecore#/"/>
-      <metamodel href="http://www.polarsys.org/capella/core/cs/1.3.0#/"/>
+      <metamodel href="http://www.polarsys.org/capella/core/cs/1.4.0#/"/>
       <layers name="LAB_Layer_Configuration" label="Configurations">
         <nodeMappings name="LAB_Layer_ConfigurationNode" createElements="false" domainClass="ms.CSConfiguration">
           <style xsi:type="style:LozengeNodeDescription" showIcon="false" sizeComputationExpression="10" labelPosition="node" resizeKind="NSEW">
@@ -676,7 +690,7 @@
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="LADFBConfigurations" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/Logical Architecture" representationName="Logical Data Flow Blank">
       <metamodel href="../../org.polarsys.capella.vp.ms/models/ms.ecore#/"/>
-      <metamodel href="http://www.polarsys.org/capella/core/cs/1.3.0#/"/>
+      <metamodel href="http://www.polarsys.org/capella/core/cs/1.4.0#/"/>
       <layers name="LADFB_Layer_Configuration" label="Configurations">
         <nodeMappings name="LADFB_Layer_ConfigurationNode" createElements="false" domainClass="ms.CSConfiguration">
           <style xsi:type="style:LozengeNodeDescription" showIcon="false" sizeComputationExpression="10" labelPosition="node" resizeKind="NSEW">
@@ -723,7 +737,7 @@
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="SADFBConfigurations" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/System Analysis" representationName="System Data Flow Blank">
       <metamodel href="../../org.polarsys.capella.vp.ms/models/ms.ecore#/"/>
-      <metamodel href="http://www.polarsys.org/capella/core/cs/1.3.0#/"/>
+      <metamodel href="http://www.polarsys.org/capella/core/cs/1.4.0#/"/>
       <layers name="SADFB_Layer_Configuration" label="Configurations">
         <nodeMappings name="SADFB_Layer_ConfigurationNode" createElements="false" domainClass="ms.CSConfiguration">
           <style xsi:type="style:LozengeNodeDescription" showIcon="false" sizeComputationExpression="10" labelPosition="node" resizeKind="NSEW">
@@ -770,7 +784,7 @@
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="PADFBConfigurations" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/Physical Architecture" representationName="Physical Data Flow Blank">
       <metamodel href="../../org.polarsys.capella.vp.ms/models/ms.ecore#/"/>
-      <metamodel href="http://www.polarsys.org/capella/core/cs/1.3.0#/"/>
+      <metamodel href="http://www.polarsys.org/capella/core/cs/1.4.0#/"/>
       <layers name="PADFB_Layer_Configuration" label="Configurations">
         <nodeMappings name="PADFB_Layer_ConfigurationNode" createElements="false" domainClass="ms.CSConfiguration">
           <style xsi:type="style:LozengeNodeDescription" showIcon="false" sizeComputationExpression="10" labelPosition="node" resizeKind="NSEW">
@@ -817,7 +831,7 @@
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="ESConfigurations" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/Common" representationName="Component Exchanges Scenario">
       <metamodel href="../../org.polarsys.capella.vp.ms/models/ms.ecore#/"/>
-      <metamodel href="http://www.polarsys.org/capella/core/cs/1.3.0#/"/>
+      <metamodel href="http://www.polarsys.org/capella/core/cs/1.4.0#/"/>
       <layers name="ES_Layer_Configuration" label="Configurations">
         <nodeMappings name="ES_Layer_ConfigurationNode" createElements="false" domainClass="ms.CSConfiguration">
           <style xsi:type="style:LozengeNodeDescription" showIcon="false" sizeComputationExpression="10" labelPosition="node" resizeKind="NSEW">
@@ -866,7 +880,7 @@
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="ISConfigurations" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/Common" representationName="Component Interfaces Scenario">
       <metamodel href="../../org.polarsys.capella.vp.ms/models/ms.ecore#/"/>
-      <metamodel href="http://www.polarsys.org/capella/core/cs/1.3.0#/"/>
+      <metamodel href="http://www.polarsys.org/capella/core/cs/1.4.0#/"/>
       <layers name="IS_Layer_Configuration" label="Configurations">
         <nodeMappings name="IS_Layer_ConfigurationNode" createElements="false" domainClass="ms.CSConfiguration">
           <style xsi:type="style:LozengeNodeDescription" showIcon="false" sizeComputationExpression="10" labelPosition="node" resizeKind="NSEW">

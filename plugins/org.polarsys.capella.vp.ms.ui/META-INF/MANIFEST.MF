@@ -21,7 +21,10 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.sirius.ui,
  org.polarsys.capella.vp.ms.edit,
  org.polarsys.capella.vp.ms,
- org.polarsys.capella.vp.ms.ui.preferences
+ org.polarsys.capella.vp.ms.ui.preferences,
+ org.polarsys.capella.common.linkedtext.ui;bundle-version="1.4.0",
+ org.polarsys.capella.core.linkedtext.ui;bundle-version="1.4.0",
+ org.polarsys.capella.core.diagram.helpers
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.polarsys.capella.vp.ms.ui,

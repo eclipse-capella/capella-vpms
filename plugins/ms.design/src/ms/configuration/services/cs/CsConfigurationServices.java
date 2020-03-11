@@ -51,6 +51,8 @@ import org.eclipse.sirius.diagram.description.Layer;
 import org.eclipse.sirius.diagram.description.NodeMapping;
 import org.eclipse.sirius.diagram.sequence.SequenceDDiagram;
 import org.eclipse.sirius.diagram.sequence.description.InstanceRoleMapping;
+import org.eclipse.sirius.table.metamodel.table.DColumn;
+import org.eclipse.sirius.table.metamodel.table.DLine;
 import org.eclipse.sirius.table.metamodel.table.DTable;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.sirius.viewpoint.SiriusPlugin;
@@ -61,13 +63,19 @@ import org.polarsys.capella.common.data.activity.InputPin;
 import org.polarsys.capella.common.data.activity.OutputPin;
 import org.polarsys.capella.common.data.modellingcore.ModelElement;
 import org.polarsys.capella.common.helpers.EObjectExt;
+import org.polarsys.capella.common.helpers.EcoreUtil2;
+import org.polarsys.capella.common.linkedtext.ui.LinkedTextDocument;
 import org.polarsys.capella.common.platform.sirius.ted.SemanticEditingDomainFactory.SemanticEditingDomain;
 import org.polarsys.capella.core.data.capellacommon.AbstractState;
 import org.polarsys.capella.core.data.capellacommon.FinalState;
 import org.polarsys.capella.core.data.capellacommon.Mode;
 import org.polarsys.capella.core.data.capellacommon.State;
+import org.polarsys.capella.core.data.capellacommon.StateMachine;
 import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.Component;
+import org.polarsys.capella.core.data.cs.ComponentArchitecture;
+import org.polarsys.capella.core.data.cs.ComponentPkg;
+import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.cs.PhysicalPort;
 import org.polarsys.capella.core.data.ctx.SystemComponent;
@@ -77,8 +85,10 @@ import org.polarsys.capella.core.data.interaction.InstanceRole;
 import org.polarsys.capella.core.data.interaction.Scenario;
 import org.polarsys.capella.core.data.la.LogicalComponent;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
+import org.polarsys.capella.core.linkedtext.ui.CapellaEmbeddedLinkedTextEditorInput;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.CapellaElementExt;
+import org.polarsys.capella.vp.ms.BooleanExpression;
 import org.polarsys.capella.vp.ms.BooleanOperation;
 import org.polarsys.capella.vp.ms.CSConfiguration;
 import org.polarsys.capella.vp.ms.Comparison;
@@ -90,6 +100,8 @@ import org.polarsys.capella.vp.ms.Situation;
 import org.polarsys.capella.vp.ms.selector_Type;
 import org.polarsys.capella.vp.ms.provider.MsEditPlugin;
 import org.polarsys.capella.vp.ms.ui.preferences.MsPreferenceConstants;
+import org.polarsys.capella.vp.ms.util.LinkedText2Situation;
+import org.polarsys.capella.vp.ms.util.LinkedText2Situation.SplitExpression;
 //import org.polarsys.capella.vp.ms.ui.MsUICommandHandler;
 import org.polarsys.kitalpha.emde.model.ElementExtension;
 
@@ -962,7 +974,7 @@ public class CsConfigurationServices {
   }
 
   private static boolean isAnnotationDetailSet(DModelElement element, String key, boolean defaultValue) {
-    DAnnotation annot = getAnnotation(element, false);
+    DAnnotation annot = getAnnotation(element, DANNOTATION_SOURCE, false);
     if (annot != null && annot.getDetails().containsKey(key)) {
       return Boolean.valueOf(annot.getDetails().get(key));
     }
@@ -970,15 +982,15 @@ public class CsConfigurationServices {
   }
 
   private static void setAnnotationDetail(DModelElement element, String key, boolean value) {
-    DAnnotation annot = getAnnotation(element, true);
+    DAnnotation annot = getAnnotation(element, DANNOTATION_SOURCE, true);
     annot.getDetails().put(key, String.valueOf(value));
   }
 
-  private static DAnnotation getAnnotation(DModelElement element, boolean create) {
-    DAnnotation result = element.getDAnnotation(DANNOTATION_SOURCE);
+  private static DAnnotation getAnnotation(DModelElement element, String source, boolean create) {
+    DAnnotation result = element.getDAnnotation(source);
     if (result == null && create) {
       result = DescriptionFactory.eINSTANCE.createDAnnotation();
-      result.setSource(DANNOTATION_SOURCE);
+      result.setSource(source);
       element.getEAnnotations().add(result);
     }
 
@@ -986,9 +998,93 @@ public class CsConfigurationServices {
   }
   
   
-
   public boolean msConfigurationNodeCreationPrecondition(EObject container) {
     return container instanceof Component | container instanceof Part;
+  }
+
+  public String msSituationExpression(StateMachine row, Situation situation, DLine line, DColumn column ) {
+    SplitExpression split = SplitExpression.of(situation.getExpression());
+    BooleanExpression expression = split.get(row);
+    if (expression == null) {
+      return "";
+    }
+    String label = new LinkedText2Situation.ExpressionUnparser().unparse(expression);
+    return LinkedTextDocument.load(new CapellaEmbeddedLinkedTextEditorInput.Readonly(row, label)).get();
+  }
+
+  public Collection<Situation> msAllSituations(EObject context){
+    Collection<Situation> result = new ArrayList<>();
+    EObject architecture = (ComponentArchitecture) EcoreUtil2.getFirstContainer(context, CsPackage.Literals.COMPONENT_ARCHITECTURE);
+    EObject rootPkg = null;
+    if (architecture != null) {
+      for (EObject e : architecture.eContents()) {
+        if (e instanceof ComponentPkg) {
+          rootPkg = e;
+          break;
+        }
+      }
+    }
+    if (rootPkg != null) {
+      for (Iterator<EObject> it = rootPkg.eAllContents(); it.hasNext();) {
+        EObject next = it.next();
+        if (next instanceof Situation) {
+          result.add((Situation) next);
+        }
+      }
+    }
+    return result;
+  }
+
+  public Collection<EObject> msSituationExpressionComponentLines(EObject container){
+    Collection<EObject> result = new ArrayList<EObject>();
+    for (EObject e : container.eContents()) {
+      if (e instanceof Component && hasNestedStateMachine(e)) {
+        result.add(e);
+      }
+    }
+    return result;
+  }
+  
+  public Collection<EObject> msSituationExpressionComponentPkgLines(EObject target){
+    Collection<EObject> result = new ArrayList<>();
+    for (EObject e : target.eContents()) {
+      if (e instanceof ComponentPkg && hasNestedStateMachine(e)) {
+        result.add(e);
+      }
+    }
+    return result;
+  }
+
+  public boolean hasNestedStateMachine(EObject e) {
+    for (Iterator<EObject> it = e.eAllContents(); it.hasNext();) {
+      if (it.next() instanceof StateMachine) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  public Collection<? extends EObject> msSituationExpressionStateMachineLines(EObject container){
+    if (container instanceof Component) {
+      return ((Component) container).getOwnedStateMachines();
+    }
+    return Collections.emptyList();
+  }
+
+  public Collection<Situation> msSituationExpressionColumns(Component container){
+    Collection<Situation> result = new ArrayList<>();
+    for (Iterator<EObject> it = container.eAllContents(); it.hasNext();) {
+      EObject next = it.next();
+      if (next instanceof Situation) {
+        try {
+          SplitExpression.of(((Situation) next).getExpression());
+          result.add((Situation) next);
+        } catch (IllegalArgumentException e) {
+          e.printStackTrace(); // TODO silence this and create validation rule...
+        }
+      }
+    }
+    return result;
   }
 
 }

@@ -65,6 +65,14 @@
               class="org.polarsys.capella.vp.ms.ui.ConfigurationContentFilter"
               id="org.polarsys.capella.vp.ms.ui.configurationContentFilter">
         </dynamic>
+        <command
+              commandId="org.polarsys.capella.vp.ms.ui.editSituationExpression"
+              label="Change Expression ..."
+              style="push">
+           <visibleWhen
+                 checkEnabled="true">
+           </visibleWhen>
+        </command>
      </menuContribution>
      <menuContribution
            allPopups="false"
@@ -216,6 +224,44 @@
               menubarPath="org.polarsys.capella.vp.ms.ui.menu1/group2">
         </action>
      </objectContribution>
+  </extension>
+  <extension
+        point="org.eclipse.core.expressions.propertyTesters">
+     <propertyTester
+           class="org.polarsys.capella.vp.ms.ui.DiagramPropertyTester"
+           id="org.polarsys.capella.vp.ms.ui.diagramproperties"
+           namespace="msdiagramproperties"
+           properties="description"
+           type="org.eclipse.ui.IEditorPart">
+     </propertyTester>
+  </extension>
+  <extension
+        point="org.eclipse.ui.commands">
+     <command
+           id="org.polarsys.capella.vp.ms.ui.editSituationExpression"
+           name="Change Expression ...">
+     </command>
+  </extension>
+  <extension
+        point="org.eclipse.ui.handlers">
+     <handler
+           class="org.polarsys.capella.vp.ms.ui.SituationExpressionHandler"
+           commandId="org.polarsys.capella.vp.ms.ui.editSituationExpression">
+        <activeWhen>
+           <and>
+              <with
+                    variable="activeEditor">
+                 <test
+                       property="msdiagramproperties.description"
+                       value="Situation Expressions">
+                 </test>
+              </with>
+              <count
+                    value="1">
+              </count>
+           </and>
+        </activeWhen>
+     </handler>
   </extension>
 
 </plugin>

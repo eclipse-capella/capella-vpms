@@ -32,9 +32,11 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import ms.configuration.services.cs.CsConfigurationServices;
+import ms.configuration.services.cs.DiagramConstants;
 
 public class ConfigurationContentFilter extends CompoundContributionItem implements IWorkbenchContribution {
 
+  private final static IContributionItem[] NO_ITEMS = {};
   private IPartService partService;
 
   private IContributionItem makeItem(final String text, final Predicate<DTable> checked,
@@ -82,6 +84,10 @@ public class ConfigurationContentFilter extends CompoundContributionItem impleme
 
     final DTableEditor editor = (DTableEditor) partService.getActivePart();
     final DTable table = (DTable) (((SessionEditorInput) editor.getEditorInput())).getInput();
+
+    if (!DiagramConstants.MS_CONFIGURATION_ELEMENTS.equals(table.getDescription().getName())) {
+      return NO_ITEMS;
+    }
 
     IContributionItem[] items = new IContributionItem[5];
 
