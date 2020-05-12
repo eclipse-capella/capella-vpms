@@ -16,7 +16,7 @@
   <parent>
     <groupId>org.polarsys</groupId>
     <artifactId>capella-addon</artifactId>
-    <relativePath>../capella-releng-parent/capella-addon.xml</relativePath>
+    <relativePath>releng/capella-releng-parent/capella-addon.xml</relativePath>
     <version>1.3.0-SNAPSHOT</version>
   </parent>
 
