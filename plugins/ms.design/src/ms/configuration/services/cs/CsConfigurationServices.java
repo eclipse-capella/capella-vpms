@@ -70,6 +70,7 @@ import org.polarsys.capella.core.data.cs.BlockArchitecture;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.cs.PhysicalPort;
+import org.polarsys.capella.core.data.ctx.SystemComponent;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.core.data.interaction.InstanceRole;
@@ -803,7 +804,7 @@ public class CsConfigurationServices {
     return result;
   }
 
-  public Collection<? extends EObject> msCrossTableComponentsRecurse(DTable table, System component, System root) {
+  public Collection<? extends EObject> msCrossTableComponentsRecurse(DTable table, SystemComponent component, SystemComponent root) {
     return Collections.emptyList();
   }
 
