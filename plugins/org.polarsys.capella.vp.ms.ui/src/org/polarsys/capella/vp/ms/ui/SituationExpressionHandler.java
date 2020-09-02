@@ -32,7 +32,7 @@ public class SituationExpressionHandler extends AbstractHandler {
     DColumn col = cell.getColumn();
     DLine row = cell.getLine();
     String inputText = "";
-    
+
     if (col.getTarget() instanceof Situation && row.getTarget() instanceof StateMachine) {
 
       StateMachine rowSm = (StateMachine) row.getTarget();
@@ -54,12 +54,17 @@ public class SituationExpressionHandler extends AbstractHandler {
         public void setText(String linkedText) {
         }
       };
-      SituationEditorDialog dialog = new SituationEditorDialog(HandlerUtil.getActiveShell(event), (StateMachine) row.getTarget(), input);
+      SituationEditorDialog dialog = new SituationEditorDialog(HandlerUtil.getActiveShell(event), input);
 
       if (dialog.open() == Window.OK) {
         SituationExpressionParser parser = new SituationExpressionParser(dialog.getDocument());
         try {
-          splitExpression.put(rowSm, parser.parse()); 
+          BooleanExpression expr = parser.parse();
+          if (expr != null) {
+            splitExpression.put(rowSm, expr);
+          } else {
+            splitExpression.remove(rowSm);
+          }
           TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(col.getTarget()); 
           Command cmd = new RecordingCommand(domain) { 
             @Override
