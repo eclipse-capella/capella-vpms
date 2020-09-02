@@ -9,9 +9,9 @@ import org.polarsys.capella.common.linkedtext.ui.LinkedTextHyperlink;
 import org.polarsys.capella.core.data.capellacommon.AbstractState;
 import org.polarsys.capella.vp.ms.AndOperation;
 import org.polarsys.capella.vp.ms.BooleanExpression;
-import org.polarsys.capella.vp.ms.BooleanOperation;
 import org.polarsys.capella.vp.ms.InStateExpression;
 import org.polarsys.capella.vp.ms.MsFactory;
+import org.polarsys.capella.vp.ms.NotOperation;
 import org.polarsys.capella.vp.ms.OrOperation;
 import org.polarsys.capella.vp.ms.util.LinkedText2Situation.Token;
 
@@ -29,11 +29,8 @@ import org.polarsys.capella.vp.ms.util.LinkedText2Situation.Token;
  *    NotExpression ('AND' NotExpression)*
  *    
  * NotExpression:
- *    'NOT' Expression
- *    HYPERLINK
+ *    'NOT'? (HYPERLINK | '(' Expression ')')
  * 
- * 
- * NOT A OR B
  */
 public class SituationExpressionParser {
 
@@ -54,33 +51,20 @@ public class SituationExpressionParser {
   }
  
   public BooleanExpression parse() throws ExpressionError {
-    BooleanExpression result = expr();
+    
+    // special case, if the stream is empty, it's an empty expression and we return null
+    if (peek() == Token.EOS) {
+      return null;
+    }
+
+    BooleanExpression result = orExpr();
     Token next = next();
     if (next != Token.EOS) {
       try {
-        throw new ExpressionError("Expected end of expression but saw: " + next + ": ^" + document.get(scanner.pos, Math.min(10, document.getLength() - scanner.pos)));
+        throw new ExpressionError("Expected end of expression but found: " + next + ": ^" + document.get(scanner.pos, Math.min(10, document.getLength() - scanner.pos)));
       } catch (BadLocationException e) {
         /**/
       }
-    }
-    return result;
-  }
-
-  private BooleanExpression expr() throws ExpressionError {
-    BooleanExpression result = null;
-    if (peek() == Token.PAREN_O) {
-      next();
-      result = expr();
-      Token paren_c = next();
-      if (paren_c != Token.PAREN_C) {
-        try {
-          throw new ExpressionError("Expected ')' but saw " + paren_c + ": ^" + document.get(scanner.pos, Math.min(10, document.getLength() - scanner.pos)));
-        } catch (BadLocationException e) {
-          /**/
-        }
-      }
-    } else {
-      result = orExpr();
     }
     return result;
   }
@@ -120,17 +104,38 @@ public class SituationExpressionParser {
     }
     return result;
   }
-  
+
+  // notExpr:
+  //    NOT? (Hyperlink | '(' expr ')')
   private BooleanExpression notExpr() throws ExpressionError {
+
     BooleanExpression result = null;
-    Token next = scanner.nextToken();
+    boolean negate = false;
+
+    Token next = next();
+    if (next == Token.NOT) {
+      negate = true;
+      next = next();
+    }
+
     if (next == Token.HYPERLINK) {
       LinkedTextHyperlink link = scanner.nextHyperlink();
       result = MsFactory.eINSTANCE.createInStateExpression();
       ((InStateExpression) result).setState((AbstractState) link.getTarget());
-    } else if (next == Token.NOT) {
-      result = MsFactory.eINSTANCE.createNotOperation();
-      ((BooleanOperation) result).getChildren().add(expr());
+    } else if (next == Token.PAREN_O) {  
+      result = orExpr();
+      next = next();
+      if (next != Token.PAREN_C) {
+        throw new ExpressionError("Expected ) but found: " + next);
+      }
+    } else {
+      throw new ExpressionError("Expected " + (!negate ? "NOT, " : "") + "Hyperlink or ( but found: " + next);
+    }
+
+    if (negate) {
+      NotOperation not = MsFactory.eINSTANCE.createNotOperation();
+      not.getChildren().add(result);
+      result = not;
     }
     return result;
   }
@@ -142,7 +147,7 @@ public class SituationExpressionParser {
     }
     return result;
   }
-  
+
   private Token next() throws ExpressionError {
     Token result = scanner.nextToken();
     if (result == Token.ERROR) {
