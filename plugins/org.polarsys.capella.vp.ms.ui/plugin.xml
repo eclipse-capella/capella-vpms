@@ -231,8 +231,8 @@
            class="org.polarsys.capella.vp.ms.ui.DiagramPropertyTester"
            id="org.polarsys.capella.vp.ms.ui.diagramproperties"
            namespace="msdiagramproperties"
-           properties="description"
-           type="org.eclipse.ui.IEditorPart">
+           properties="description,lineId"
+           type="java.lang.Object">
      </propertyTester>
   </extension>
   <extension
@@ -259,6 +259,12 @@
               <count
                     value="1">
               </count>
+              <iterate>
+                 <test
+                       property="msdiagramproperties.lineId"
+                       value="statemachines">
+                 </test>
+              </iterate>
            </and>
         </activeWhen>
      </handler>
