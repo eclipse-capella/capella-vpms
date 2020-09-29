@@ -1,10 +1,23 @@
 package org.polarsys.capella.vp.ms.ui;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Function;
+
+import org.antlr.v4.runtime.ANTLRErrorListener;
+import org.antlr.v4.runtime.BaseErrorListener;
+import org.antlr.v4.runtime.RecognitionException;
+import org.antlr.v4.runtime.Recognizer;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
@@ -15,13 +28,16 @@ import org.eclipse.sirius.table.metamodel.table.DColumn;
 import org.eclipse.sirius.table.metamodel.table.DLine;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.statushandlers.StatusManager;
+import org.polarsys.capella.common.linkedtext.ui.LinkedTextDocument;
+import org.polarsys.capella.common.linkedtext.ui.LinkedTextHyperlink;
 import org.polarsys.capella.core.data.capellacommon.StateMachine;
 import org.polarsys.capella.core.linkedtext.ui.CapellaEmbeddedLinkedTextEditorInput;
 import org.polarsys.capella.vp.ms.BooleanExpression;
 import org.polarsys.capella.vp.ms.Situation;
-import org.polarsys.capella.vp.ms.ui.SituationExpressionParser.ExpressionError;
-import org.polarsys.capella.vp.ms.util.LinkedText2Situation;
-import org.polarsys.capella.vp.ms.util.LinkedText2Situation.SplitExpression;
+import org.polarsys.capella.vp.ms.expression.parser.MsExpressionUnparser;
+import org.polarsys.capella.vp.ms.expression.parser.LinkedText2Situation;
+import org.polarsys.capella.vp.ms.expression.parser.MsExpressionUtil;
+import org.polarsys.capella.vp.ms.expression.parser.LinkedText2Situation.SplitExpression;
 
 public class SituationExpressionHandler extends AbstractHandler {
 
@@ -41,10 +57,11 @@ public class SituationExpressionHandler extends AbstractHandler {
       BooleanExpression rowExpression = splitExpression.get(rowSm);
 
       if (rowExpression != null) {
-        inputText = new LinkedText2Situation.ExpressionUnparser().unparse(rowExpression);
+        inputText = new MsExpressionUnparser(MsExpressionUnparser.Mode.HYPERLINK).unparse(rowExpression);
       }
 
       final String text = inputText;
+      final AtomicReference<String> toParse = new AtomicReference<String>(text);
       CapellaEmbeddedLinkedTextEditorInput input = new CapellaEmbeddedLinkedTextEditorInput(row.getTarget()) {
         @Override
         public String getText() {
@@ -52,33 +69,75 @@ public class SituationExpressionHandler extends AbstractHandler {
         }
         @Override
         public void setText(String linkedText) {
+          toParse.set(linkedText);
         }
       };
       SituationEditorDialog dialog = new SituationEditorDialog(HandlerUtil.getActiveShell(event), input);
 
       if (dialog.open() == Window.OK) {
-        SituationExpressionParser parser = new SituationExpressionParser(dialog.getDocument());
-        try {
-          BooleanExpression expr = parser.parse();
-          if (expr != null) {
-            splitExpression.put(rowSm, expr);
-          } else {
-            splitExpression.remove(rowSm);
-          }
-          TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(col.getTarget()); 
-          Command cmd = new RecordingCommand(domain) { 
-            @Override
-            protected void doExecute() {
-              ((Situation)col.getTarget()).setExpression(splitExpression.merge());
+
+
+        String expression = dialog.getDocument().get().trim();
+
+        if (expression.isEmpty()) {          
+          splitExpression.remove(rowSm);
+        } else {
+          // FIXME understand antlr error handling? Why do I have to listen to errors, but then also catch them ? :/
+          try {
+            List<String> errors = new ArrayList<>();
+            BooleanExpression expr = MsExpressionUtil.parse(
+                toParse.get(), 
+                createResolver(dialog.getDocument()),
+                createErrorListener(errors));
+            if (errors.isEmpty()) {
+              splitExpression.put(rowSm, expr);
+            } else {
+              StatusManager.getManager().handle(new Status(IStatus.ERROR, Activator.PLUGIN_ID, errors.get(0)), StatusManager.BLOCK);
+              return null;
             }
-          };
-          domain.getCommandStack().execute(cmd);
-        } catch (ExpressionError e) {
-          StatusManager.getManager().handle(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e), StatusManager.LOG | StatusManager.BLOCK);
+          } catch (RecognitionException | NoSuchElementException e) {
+            StatusManager.getManager().handle(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e), StatusManager.BLOCK);
+            return null;
+          }
         }
+
+        TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(col.getTarget()); 
+        Command cmd = new RecordingCommand(domain) { 
+          @Override
+          protected void doExecute() {
+            ((Situation)col.getTarget()).setExpression(splitExpression.merge());
+          }
+        };
+        domain.getCommandStack().execute(cmd);
       }
     }
     return null;
   }
 
+  private ANTLRErrorListener createErrorListener(Collection<String> errors) {
+    return new BaseErrorListener() {
+      @Override
+      public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine,
+          String msg, RecognitionException e) {
+        errors.add("line " + line + ":" + charPositionInLine + " " + msg);
+      }
+    };
+  }
+
+  private Function<String,EObject> createResolver(LinkedTextDocument document){
+    return new Function<String,EObject>() {
+      @Override
+      public EObject apply(String t) {
+        for (LinkedTextHyperlink hl : document.getHyperlinks()) {
+          if (t.equals(EcoreUtil.getID((EObject) hl.getTarget()))) {
+            return (EObject) hl.getTarget();
+          }
+        }
+        throw new NoSuchElementException(t);
+      }
+    };
+
+  }
+
+  
 }

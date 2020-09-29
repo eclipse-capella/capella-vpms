@@ -26,7 +26,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.sirius.table.ui,
  org.polarsys.capella.core.linkedtext.ui;bundle-version="1.4.0",
  org.polarsys.capella.common.linkedtext.ui,
- org.eclipse.jface.text;bundle-version="3.15.200"
+ org.eclipse.jface.text;bundle-version="3.15.200",
+ org.polarsys.capella.vp.ms.expression
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: ms.configuration.services.cs,

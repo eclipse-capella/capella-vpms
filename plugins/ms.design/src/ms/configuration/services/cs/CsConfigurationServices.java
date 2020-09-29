@@ -98,10 +98,10 @@ import org.polarsys.capella.vp.ms.MsPackage;
 import org.polarsys.capella.vp.ms.Result;
 import org.polarsys.capella.vp.ms.Situation;
 import org.polarsys.capella.vp.ms.selector_Type;
+import org.polarsys.capella.vp.ms.expression.parser.LinkedText2Situation.SplitExpression;
+import org.polarsys.capella.vp.ms.expression.parser.MsExpressionUnparser;
 import org.polarsys.capella.vp.ms.provider.MsEditPlugin;
 import org.polarsys.capella.vp.ms.ui.preferences.MsPreferenceConstants;
-import org.polarsys.capella.vp.ms.util.LinkedText2Situation;
-import org.polarsys.capella.vp.ms.util.LinkedText2Situation.SplitExpression;
 //import org.polarsys.capella.vp.ms.ui.MsUICommandHandler;
 import org.polarsys.kitalpha.emde.model.ElementExtension;
 
@@ -1008,7 +1008,7 @@ public class CsConfigurationServices {
     if (expression == null) {
       return "";
     }
-    String label = new LinkedText2Situation.ExpressionUnparser().unparse(expression);
+    String label = new MsExpressionUnparser(MsExpressionUnparser.Mode.NAME).unparse(expression);
     return LinkedTextDocument.load(new CapellaEmbeddedLinkedTextEditorInput.Readonly(row, label)).get();
   }
 

@@ -1,14 +1,10 @@
-package org.polarsys.capella.vp.ms.util;
+package org.polarsys.capella.vp.ms.expression.parser;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.polarsys.capella.common.helpers.EcoreUtil2;
 import org.polarsys.capella.core.data.capellacommon.CapellacommonPackage;
 import org.polarsys.capella.core.data.capellacommon.StateMachine;
@@ -19,9 +15,8 @@ import org.polarsys.capella.vp.ms.InSituationExpression;
 import org.polarsys.capella.vp.ms.InStateExpression;
 import org.polarsys.capella.vp.ms.MsFactory;
 import org.polarsys.capella.vp.ms.MsPackage;
-import org.polarsys.capella.vp.ms.NotOperation;
-import org.polarsys.capella.vp.ms.OrOperation;
 import org.polarsys.capella.vp.ms.Situation;
+import org.polarsys.capella.vp.ms.util.MsSwitch;
 
 public class LinkedText2Situation {
 
@@ -48,65 +43,6 @@ public class LinkedText2Situation {
 
   
   
-  public static class ExpressionUnparser extends MsSwitch<String> {
-
-    private BooleanExpression root;
-    
-    public String unparse(BooleanExpression expression) {
-      root = expression;
-      return doSwitch(expression);
-    }
-
-    private String getHref(EObject e) {
-      return "<a href=\"" + EcoreUtil.getID(e) + "\"/>"; // FIXME linkedtext should offer a helper for this  
-    }
-    
-    @Override
-    public String caseInStateExpression(InStateExpression object) {
-      return getHref(object.getState());
-    }
-
-    @Override
-    public String caseInSituationExpression(InSituationExpression object) {
-      return getHref(object.getSituation());
-    }
-
-    @Override
-    public String caseAndOperation(AndOperation object) {
-      Collection<String> childText = new ArrayList<String>(); 
-      for (BooleanExpression child : object.getChildren()) {
-        childText.add(doSwitch(child));
-      }
-      String result = String.join(" AND ", childText);
-      if (object != root && object.eContainer().eClass() == MsPackage.Literals.NOT_OPERATION) {
-        result = "(" + result + ")";
-      }
-      return result;
-    }
-
-    @Override
-    public String caseOrOperation(OrOperation object) {
-      Collection<String> childText = new ArrayList<String>(); 
-      for (BooleanExpression child : object.getChildren()) {
-        childText.add(doSwitch(child));
-      }
-      String result = String.join(" OR ", childText);
-      if (object != root && (object.eContainer().eClass() == MsPackage.Literals.AND_OPERATION || object.eContainer().eClass() == MsPackage.Literals.NOT_OPERATION)) {
-        result = "(" + result + ")";
-      }
-      return result;
-    }
-
-    @Override
-    public String caseNotOperation(NotOperation object) {
-      String result = "NOT " + doSwitch(object.getChildren().get(0));
-      if (object != root && object.eContainer().eClass() == MsPackage.Literals.NOT_OPERATION) {
-        result = "(" + result + ")";
-      }
-      return result;
-    }
-  }
-
   /**
    * Provides a method {@link #split()} to split the boolean expression
    * that defines a {@link Situation} into subexpressions to allow displaying them in a 

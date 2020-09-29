@@ -73,6 +73,10 @@
                  checkEnabled="true">
            </visibleWhen>
         </command>
+        <command
+              commandId="org.polarsys.capella.vp.ms.ui.exportExpressionTable"
+              style="push">
+        </command>
      </menuContribution>
      <menuContribution
            allPopups="false"
@@ -241,6 +245,10 @@
            id="org.polarsys.capella.vp.ms.ui.editSituationExpression"
            name="Change Expression ...">
      </command>
+     <command
+           id="org.polarsys.capella.vp.ms.ui.exportExpressionTable"
+           name="Export Expression Table">
+     </command>
   </extension>
   <extension
         point="org.eclipse.ui.handlers">
@@ -266,6 +274,19 @@
                  </test>
               </iterate>
            </and>
+        </activeWhen>
+     </handler>
+     <handler
+           class="org.polarsys.capella.vp.ms.ui.SituationExpressionExportHandler"
+           commandId="org.polarsys.capella.vp.ms.ui.exportExpressionTable">
+        <activeWhen>
+           <with
+                 variable="activeEditor">
+              <test
+                    property="msdiagramproperties.description"
+                    value="Situation Expressions">
+              </test>
+           </with>
         </activeWhen>
      </handler>
   </extension>

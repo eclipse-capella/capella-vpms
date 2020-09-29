@@ -1,0 +1,108 @@
+#
+# Test fixture format: Each fixture is 4 lines followed by a line of whitespace.
+# Line 1: Input
+# Line 2: Expected roundtrip output (Needed because the parser/unparse does not conserve record unnecessary parentheses
+# Line 3: Expected NNF
+# Line 4: Expected DNF
+# If a line is a -, it means "same as the previous line"
+#
+NOT sm1.a
+-
+-
+-
+
+NOT (a)
+NOT a
+-
+-
+
+a                  
+-
+-
+- 
+
+sm1.a AND NOT sm2.b        
+-
+-
+-
+
+a AND b            
+-
+-
+-
+
+(a)                
+a
+-
+-
+
+(NOT a)            
+NOT a
+-
+-
+
+a AND (NOT a)      
+a AND NOT a
+-
+-
+
+a AND (b OR c)
+-
+-
+a AND b OR a AND c
+
+NOT A OR NOT B 
+-
+-
+-
+
+NOT A AND NOT B    
+-
+-
+-
+
+(NOT A) AND (NOT B)
+NOT A AND NOT B
+-
+-
+
+(NOT (A OR B))
+NOT (A OR B)
+NOT A AND NOT B
+-
+
+NOT (A OR B)
+-
+NOT A AND NOT B
+-
+
+NOT A OR B
+-
+-
+-
+
+(A OR B) AND (C OR D)
+-
+-
+A AND C OR A AND D OR B AND C OR B AND D
+
+(A OR B) AND (C OR D) AND (E OR F)
+-
+-
+A AND C AND E OR A AND C AND F OR A AND D AND E OR A AND D AND F OR B AND C AND E OR B AND C AND F OR B AND D AND E OR B AND D AND F
+
+A AND (B OR (C AND D))
+A AND (B OR C AND D)
+-
+A AND B OR A AND C AND D
+
+A OR (B AND C) OR (C AND D)
+A OR B AND C OR C AND D
+-
+-
+
+NOT (A OR B) AND NOT (C OR D)
+-
+NOT A AND NOT B AND NOT C AND NOT D
+-
+
