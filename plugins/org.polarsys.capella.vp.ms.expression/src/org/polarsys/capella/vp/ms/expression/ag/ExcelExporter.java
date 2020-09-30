@@ -1,15 +1,19 @@
 package org.polarsys.capella.vp.ms.expression.ag;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVPrinter;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.polarsys.capella.common.helpers.EcoreUtil2;
 import org.polarsys.capella.core.data.capellacommon.AbstractState;
 import org.polarsys.capella.core.data.capellacommon.CapellacommonPackage;
@@ -20,6 +24,7 @@ import org.polarsys.capella.vp.ms.InSituationExpression;
 import org.polarsys.capella.vp.ms.InStateExpression;
 import org.polarsys.capella.vp.ms.MsPackage;
 import org.polarsys.capella.vp.ms.NotOperation;
+import org.polarsys.capella.vp.ms.Situation;
 import org.polarsys.capella.vp.ms.expression.parser.MsExpressionUnparser;
 import org.polarsys.capella.vp.ms.expression.transfo.ExpressionToDNF;
 import org.polarsys.capella.vp.ms.expression.transfo.ExpressionToNNF;
@@ -28,23 +33,19 @@ import org.polarsys.capella.vp.ms.util.MsSwitch;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 
-public class CSVExporter extends MsSwitch<Object> {
+public class ExcelExporter extends MsSwitch<Object> {
 
   List<String> smHeaders = new ArrayList<String>();
+  
   Map<StateMachine, Integer> smColumns = new HashMap<StateMachine, Integer>();
-  List<Multimap<StateMachine, BooleanExpression>> records = new ArrayList<>();
-
+  
+  Map<Situation, List<Multimap<StateMachine, BooleanExpression>>> exportmap = new LinkedHashMap<>();
   int index = 0;
   
   // this maps the root disjunctions to a collection of literals that make up the conjunctions
   Multimap<BooleanExpression, BooleanExpression> literals;
   BooleanExpression root;
-  CSVFormat format;
   
-  public CSVExporter(CSVFormat format) {
-    this.format = format;
-  }
-
   private StateMachine getStateMachine(BooleanExpression e) {
     if (e instanceof NotOperation) {
       return getStateMachine(((NotOperation) e).getChildren().iterator().next());
@@ -56,33 +57,58 @@ public class CSVExporter extends MsSwitch<Object> {
     return null;
   }
 
-  public void finish(Appendable out) throws IOException {
+  public void finish(OutputStream out) throws IOException {
+    Workbook wb = new XSSFWorkbook();  // or new XSSFWorkbook();
 
-    CSVFormat withHeaders = format.withHeader(smHeaders.toArray(new String[smHeaders.size()]));
-    MsExpressionUnparser unparser = new MsExpressionUnparser(MsExpressionUnparser.Mode.NAME);
-    CSVPrinter printer = withHeaders.print(out);
-    CSVPrinter debug = withHeaders.print(System.out);
-    for (Multimap<StateMachine, BooleanExpression> r : records) {
-      Object[] printableRecord = new String[smColumns.size()];
-      Arrays.fill(printableRecord, "");
-      for (StateMachine sm : r.keySet()) {
-        int colIndex = smColumns.get(sm);
-        printableRecord[colIndex] = r.get(sm).stream().map(be -> unparser.unparse(be)).collect(Collectors.joining(", "));
-      }
-      printer.printRecord(printableRecord);
-      debug.printRecord(printableRecord);
+    Sheet sheet1 = wb.createSheet("new sheet");
+
+    // create the headers
+    int rowIndex = 0;
+    Row row = sheet1.createRow(rowIndex++);
+    for (int i = 0; i < smHeaders.size(); i++) {
+      Cell cell = row.createCell(i+1);
+      cell.setCellValue(smHeaders.get(i));
     }
+
+    MsExpressionUnparser unparser = new MsExpressionUnparser(MsExpressionUnparser.Mode.NAME);
+
+    for (Situation situation : exportmap.keySet()) {
+
+      row = sheet1.createRow(rowIndex++);
+      Cell sitCell = row.createCell(0);
+      sitCell.setCellValue(situation.getName());
+      
+      StringBuilder[] printableRecord = new StringBuilder[smColumns.size() + 1]; // +1 for the situation column (first column)
+      for (int i = 0; i < printableRecord.length; i++) {
+        printableRecord[i] = new StringBuilder();
+      }
+      printableRecord[0].append(situation.getName());
+
+      for (Multimap<StateMachine, BooleanExpression> r : exportmap.get(situation)) {
+        for (StateMachine sm : r.keySet()) {
+          int colIndex = smColumns.get(sm) + 1;
+          Cell cell = row.createCell(colIndex);
+          cell.setCellValue(r.get(sm).stream().map(be -> unparser.unparse(be)).collect(Collectors.joining(", ")));
+        }
+        row = sheet1.createRow(rowIndex++);
+      }
+    }
+    for (int i = 0; i < smColumns.size() + 1; i++) {
+      sheet1.autoSizeColumn(i);
+    }
+    wb.write(out);
   }
 
-  public CSVExporter export(BooleanExpression expression) {
 
-    BooleanExpression dnf = new ExpressionToDNF().doSwitch(new ExpressionToNNF().doSwitch(expression));
+  public ExcelExporter export(Situation situation) {
+
+    BooleanExpression dnf = new ExpressionToDNF().doSwitch(new ExpressionToNNF().doSwitch(situation.getExpression()));
     literals = LinkedHashMultimap.create();
     root = dnf;
 
     // this fills the literals map
     doSwitch(dnf);
-
+    List<Multimap<StateMachine, BooleanExpression>> records = new ArrayList<>();
     for (BooleanExpression key : literals.keySet()) {
       Multimap<StateMachine,BooleanExpression> record = LinkedHashMultimap.create();
       for (BooleanExpression element : literals.get(key)) {
@@ -95,7 +121,7 @@ public class CSVExporter extends MsSwitch<Object> {
       }
       records.add(record);
     }
-
+    exportmap.put(situation, records);
     return this;
   }
 

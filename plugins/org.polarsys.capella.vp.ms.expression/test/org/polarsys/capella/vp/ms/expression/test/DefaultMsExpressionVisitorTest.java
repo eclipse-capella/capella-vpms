@@ -15,7 +15,6 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStreamRewriter;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import org.apache.commons.csv.CSVFormat;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EObject;
@@ -28,7 +27,6 @@ import org.polarsys.capella.core.data.capellacommon.Region;
 import org.polarsys.capella.core.data.capellacommon.StateMachine;
 import org.polarsys.capella.vp.ms.BooleanExpression;
 import org.polarsys.capella.vp.ms.expression.MsExpressionPlugin;
-import org.polarsys.capella.vp.ms.expression.ag.CSVExporter;
 import org.polarsys.capella.vp.ms.expression.parser.DefaultMsExpressionVisitor;
 import org.polarsys.capella.vp.ms.expression.parser.MsExpressionBaseListener;
 import org.polarsys.capella.vp.ms.expression.parser.MsExpressionLexer;
@@ -102,7 +100,6 @@ public class DefaultMsExpressionVisitorTest {
     assertEquals(expectedDNF, unparsedDNFExpr);
 
     System.out.println("======");
-    new CSVExporter(CSVFormat.EXCEL).export(msExpression).finish(System.out);
     
   }
 

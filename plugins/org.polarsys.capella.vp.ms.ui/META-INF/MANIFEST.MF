@@ -26,8 +26,7 @@ Require-Bundle: org.eclipse.ui,
  org.polarsys.capella.core.linkedtext.ui;bundle-version="1.4.0",
  org.polarsys.capella.core.diagram.helpers,
  org.polarsys.capella.vp.ms.expression;bundle-version="1.0.0",
- org.antlr.runtime;bundle-version="4.3.0",
- org.apache.commons.csv;bundle-version="1.8.0"
+ org.antlr.runtime;bundle-version="4.3.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.polarsys.capella.vp.ms.ui,
