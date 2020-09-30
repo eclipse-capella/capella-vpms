@@ -58,9 +58,10 @@ public class ExcelExporter extends MsSwitch<Object> {
   }
 
   public void finish(OutputStream out) throws IOException {
+
     Workbook wb = new XSSFWorkbook();  // or new XSSFWorkbook();
 
-    Sheet sheet1 = wb.createSheet("new sheet");
+    Sheet sheet1 = wb.createSheet();
 
     // create the headers
     int rowIndex = 0;
@@ -77,7 +78,7 @@ public class ExcelExporter extends MsSwitch<Object> {
       row = sheet1.createRow(rowIndex++);
       Cell sitCell = row.createCell(0);
       sitCell.setCellValue(situation.getName());
-      
+
       StringBuilder[] printableRecord = new StringBuilder[smColumns.size() + 1]; // +1 for the situation column (first column)
       for (int i = 0; i < printableRecord.length; i++) {
         printableRecord[i] = new StringBuilder();

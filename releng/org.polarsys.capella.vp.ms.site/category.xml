@@ -4,4 +4,5 @@
       <category name="org.polarsys.capella.addon.vpms"/>
    </feature>
    <category-def name="org.polarsys.capella.addon.vpms" label="Vpms Addon"/>
+   <repository-reference location="https://download.eclipse.org/tools/orbit/downloads/drops/R20200831200620/repository/" enabled="true" />
 </site>

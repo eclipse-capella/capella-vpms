@@ -12,10 +12,9 @@ Require-Bundle: org.antlr.runtime;bundle-version="[4.3.0,4.4.0)",
  org.junit.jupiter.engine;bundle-version="5.4.0";resolution:=optional,
  org.junit.jupiter.params;bundle-version="5.4.0";resolution:=optional,
  com.google.guava;bundle-version="[15.0.0,16.0.0)",
- org.apache.poi;bundle-version="3.9.0",
- org.apache.poi.ooxml;bundle-version="3.9.0",
- org.apache.xmlbeans;bundle-version="2.3.0",
- org.apache.commons.compress;bundle-version="1.18.0"
+ org.apache.poi;bundle-version="[3.9.0,4.0.0)",
+ org.apache.poi.ooxml;bundle-version="[3.9.0,4.0.0)",
+ org.apache.poi.ooxml.schemas;bundle-version="[3.9.0,4.0.0)"
 Bundle-Activator: org.polarsys.capella.vp.ms.expression.MsExpressionPlugin
 Bundle-ActivationPolicy: lazy
 Export-Package: org.polarsys.capella.vp.ms.expression,

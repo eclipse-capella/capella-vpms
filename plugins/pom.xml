@@ -33,5 +33,6 @@
     <module>org.polarsys.capella.vp.ms.fc</module>
     <module>org.polarsys.capella.vp.ms.ui</module>
     <module>org.polarsys.capella.vp.ms.ui.preferences</module>
+    <module>org.polarsys.capella.vp.ms.expression</module>
   </modules>
 </project>

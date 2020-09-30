@@ -26,6 +26,7 @@
 
   <properties>
     <tycho.scmUrl>scm:git:https://github.com/eclipse/capella-vpms</tycho.scmUrl>
+    <target-definition-artifactId>org.polarsys.capella.vp.ms.target</target-definition-artifactId>
   </properties>
 
   <modules>
