@@ -1039,12 +1039,25 @@ public class CsConfigurationServices {
     Collection<EObject> result = new ArrayList<EObject>();
     for (EObject e : container.eContents()) {
       if (e instanceof Component && hasNestedStateMachine(e)) {
-        result.add(e);
+        boolean add = true;
+        if (e instanceof PhysicalComponent && ((PhysicalComponent) e).getDeployingPhysicalComponents().size() > 0){
+            add = false;
+        }
+        if (add) {
+          result.add(e);
+        }
+      }
+    }
+    if (container instanceof PhysicalComponent) {
+      for (PhysicalComponent deployed : ((PhysicalComponent) container).getDeployedPhysicalComponents()) {
+        if (hasNestedStateMachine(deployed)) {
+          result.add(deployed);
+        }
       }
     }
     return result;
   }
-  
+
   public Collection<EObject> msSituationExpressionComponentPkgLines(EObject target){
     Collection<EObject> result = new ArrayList<>();
     for (EObject e : target.eContents()) {
