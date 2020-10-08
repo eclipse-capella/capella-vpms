@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<!--
+    Copyright (c) 2020 THALES GLOBAL SERVICES.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+      
+    Contributors:
+       Thales - initial API and implementation
+ -->
+
+<plugin>
+   <extension
+         id="org.polarsys.capella.core.transition.system.topdown"
+         name="Transition System IntraModel Mapping"
+         point="org.polarsys.kitalpha.transposer.rules.handler.mapping">
+      <mapping
+            context="org.polarsys.capella.core.transition.common.context.TransitionContext"
+            extendedMappingExtensionID="org.polarsys.capella.core.transition.system"
+            mappingName="VPMS System Transition Extension"
+            mappingPurpose="org.polarsys.capella.core.transition"
+            private="false">
+         <mappingElement
+               domainMetaClass="org.polarsys.capella.vp.ms.CSConfiguration"
+               reuseExtendedElementDefaultPossibility="true"
+               reuseExtendedElementPossibilities="true">
+            <defaultMappingPossibility
+                  completeRule="org.polarsys.capella.vp.ms.transition.CSConfigurationRule"
+                  enabled="true"
+                  incompleteRule="org.polarsys.capella.vp.ms.transition.CSConfigurationRule">
+            </defaultMappingPossibility>
+         </mappingElement>
+      </mapping>
+   </extension>
+   <extension
+         point="org.polarsys.capella.core.transition.handlers">
+      <handlers
+            id="VPMS Extension"
+            mapping="all"
+            purpose="org.polarsys.capella.core.transition">
+         <domain
+               id="http://www.polarsys.org/capella/ms">
+         </domain>
+         <scopeRetriever
+               class="org.polarsys.capella.vp.ms.transition.MsTransitionScopeRetriever"
+               id="org.polarsys.capella.vp.ms.transition.scopeRetriever1">
+         </scopeRetriever>
+      </handlers>
+   </extension>
+
+</plugin>

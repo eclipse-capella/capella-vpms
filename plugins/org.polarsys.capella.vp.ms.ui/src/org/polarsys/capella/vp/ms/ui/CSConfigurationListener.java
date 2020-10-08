@@ -83,33 +83,36 @@ public class CSConfigurationListener extends AbstractEditingDomainResourceSetLis
     for (EObject root : rootToConfigs.keySet()) {
 
       Session session = SessionManager.INSTANCE.getSession(root);
-      URI uri = session.getSessionResource().getURI();
-      IProject project = ResourcesPlugin.getWorkspace().getRoot().findMember(uri.toPlatformString(true)).getProject();
-      IPreferenceStore store = new ScopedPreferenceStore(new ProjectScope(project), Activator.PLUGIN_ID);
-
-      String accessLiteral = Platform.getPreferencesService().getString(org.polarsys.capella.vp.ms.ui.preferences.Activator.PLUGIN_ID,
-          MsPreferenceConstants.PREF_DEFAULT_CONFIGURATION_ACCESS, "", null); //$NON-NLS-1$
-
-      // String accessLiteral = store.getString(MsUIConstants.PREF_DEFAULT_CONFIGURATION_ACCESS);
-
-
-      if (accessLiteral.isEmpty()) {
-        new InitializeConfigurationAccessDialog(Display.getCurrent().getActiveShell(), store).open();
-        accessLiteral = store.getString(MsPreferenceConstants.PREF_DEFAULT_CONFIGURATION_ACCESS);
-        if (accessLiteral.isEmpty()) {
-          throw new RollbackException(new Status(IStatus.CANCEL, Activator.PLUGIN_ID, "User canceled operation")); //$NON-NLS-1$
-        }
-      }
       
-      access_Type access = access_Type.get(accessLiteral);
-      Collection<CSConfiguration> added = rootToConfigs.get(root);
+      if (session != null) {
+        URI uri = session.getSessionResource().getURI();
+        IProject project = ResourcesPlugin.getWorkspace().getRoot().findMember(uri.toPlatformString(true)).getProject();
+        IPreferenceStore store = new ScopedPreferenceStore(new ProjectScope(project), Activator.PLUGIN_ID);
 
-      ((CompoundCommand) result).append(new RecordingCommand(event.getEditingDomain()) {
-        @Override
-        protected void doExecute() {
-          added.forEach(conf -> conf.setAccess(access));
+        String accessLiteral = Platform.getPreferencesService().getString(org.polarsys.capella.vp.ms.ui.preferences.Activator.PLUGIN_ID,
+            MsPreferenceConstants.PREF_DEFAULT_CONFIGURATION_ACCESS, "", null); //$NON-NLS-1$
+
+        // String accessLiteral = store.getString(MsUIConstants.PREF_DEFAULT_CONFIGURATION_ACCESS);
+
+
+        if (accessLiteral.isEmpty()) {
+          new InitializeConfigurationAccessDialog(Display.getCurrent().getActiveShell(), store).open();
+          accessLiteral = store.getString(MsPreferenceConstants.PREF_DEFAULT_CONFIGURATION_ACCESS);
+          if (accessLiteral.isEmpty()) {
+            throw new RollbackException(new Status(IStatus.CANCEL, Activator.PLUGIN_ID, "User canceled operation")); //$NON-NLS-1$
+          }
         }
-      });
+
+        access_Type access = access_Type.get(accessLiteral);
+        Collection<CSConfiguration> added = rootToConfigs.get(root);
+
+        ((CompoundCommand) result).append(new RecordingCommand(event.getEditingDomain()) {
+          @Override
+          protected void doExecute() {
+            added.forEach(conf -> conf.setAccess(access));
+          }
+        });
+      }
     }
     return result;
   }
