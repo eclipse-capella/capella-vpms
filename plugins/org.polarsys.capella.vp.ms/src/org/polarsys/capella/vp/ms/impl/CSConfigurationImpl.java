@@ -12,8 +12,10 @@
 
 package org.polarsys.capella.vp.ms.impl;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Deque;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.BasicEList;
@@ -25,26 +27,29 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreEList;
 import org.polarsys.capella.common.data.activity.InputPin;
 import org.polarsys.capella.common.data.activity.OutputPin;
+import org.polarsys.capella.common.data.modellingcore.AbstractType;
 import org.polarsys.capella.common.data.modellingcore.ModelElement;
 import org.polarsys.capella.core.data.capellacommon.AbstractState;
+import org.polarsys.capella.core.data.capellacore.Feature;
 import org.polarsys.capella.core.data.capellacore.impl.NamedElementImpl;
 import org.polarsys.capella.core.data.cs.AbstractDeploymentLink;
 import org.polarsys.capella.core.data.cs.Component;
+import org.polarsys.capella.core.data.cs.ComponentPkg;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.cs.PhysicalPort;
-import org.polarsys.capella.core.data.ctx.SystemComponent;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.ComponentFunctionalAllocation;
 import org.polarsys.capella.core.data.fa.ComponentPort;
 import org.polarsys.capella.core.data.fa.FunctionInputPort;
 import org.polarsys.capella.core.data.fa.FunctionOutputPort;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
-import org.polarsys.capella.core.data.information.AbstractInstance;
 import org.polarsys.capella.core.data.information.Port;
 import org.polarsys.capella.core.data.interaction.InstanceRole;
 import org.polarsys.capella.core.data.interaction.Scenario;
 import org.polarsys.capella.core.data.la.LogicalComponent;
+import org.polarsys.capella.core.data.la.LogicalComponentPkg;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
+import org.polarsys.capella.core.data.pa.PhysicalComponentPkg;
 import org.polarsys.capella.vp.ms.CSConfiguration;
 import org.polarsys.capella.vp.ms.MsPackage;
 import org.polarsys.capella.vp.ms.Situation;
@@ -518,15 +523,8 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
   public EList<ModelElement> getScope() {
     Component parent = (Component) eContainer();
     EList<ModelElement> result = new UniqueEList<ModelElement>();
-    if (parent instanceof SystemComponent) {
-      recurseComponentsForComboBox(result, (SystemComponent) parent);
-    } else if (parent instanceof LogicalComponent) {
-      recurseComponentsForComboBox(result, (LogicalComponent) parent);
-    } else if (parent instanceof PhysicalComponent) {
-      recurseComponentsForComboBox(result, (PhysicalComponent) parent);
-    }
+    addComboBoxElements(result, parent);
     return result;
-
   }
 
   /**
@@ -545,47 +543,62 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
     return result;
   }
 
-  private void recurseComponentsForComboBox(Collection<ModelElement> result, SystemComponent parent) {
-    addComboBoxElements(result, parent);
-  }
-
-  private void recurseComponentsForComboBox(Collection<ModelElement> result, LogicalComponent parent) {
-    addComboBoxElements(result, parent);
-    if (getAccess() == access_Type.SUBCOMPONENTS || getAccess() == access_Type.FULL) {
-      for (LogicalComponent child : parent.getOwnedLogicalComponents()) {
-        recurseComponentsForComboBox(result, child);
-      }
-    }
-
-  }
-
-
-  private void recurseComponentsForComboBox(Collection<ModelElement> result, PhysicalComponent parent) {
-    addComboBoxElements(result, parent);
-
-    if (getAccess() == access_Type.SUBCOMPONENTS || getAccess() == access_Type.FULL) {
-      for (PhysicalComponent owned : parent.getOwnedPhysicalComponents()) {
-        recurseComponentsForComboBox(result, owned);
-      }
-    }
-
-    if (getAccess() == access_Type.FULL) {
-      for (PhysicalComponent deployed : parent.getDeployedPhysicalComponents()) {
-        recurseComponentsForComboBox(result, deployed);
-      }
+  private void handlePart(Collection<ModelElement> result, Part part) {
+    AbstractType type = part.getAbstractType();
+    result.add(type);
+    if (type instanceof Component && getAccess() == access_Type.FULL || getAccess() == access_Type.SUBCOMPONENTS) {
+      addComboBoxElements(result, (Component) type);
     }
   }
 
   private void addComboBoxElements(Collection<ModelElement> result, Component parent) {
 
-    for (Part part : parent.getRepresentingParts()) {
-      addComboboxElements(result, part);
+    for (Feature f : parent.getOwnedFeatures()) {
+      if (f instanceof Part && ((Part) f).getDeployingParts().isEmpty()) {
+        handlePart(result, (Part) f);
+      }
+    }
+
+    Deque<ComponentPkg> toVisit = new ArrayDeque<ComponentPkg>();
+    if (parent instanceof PhysicalComponent) {
+      toVisit.addAll(((PhysicalComponent) parent).getOwnedPhysicalComponentPkgs());
+    } else if (parent instanceof LogicalComponent) {
+      toVisit.addAll(((LogicalComponent) parent).getOwnedLogicalComponentPkgs());
+    }
+
+    while (!toVisit.isEmpty()) {
+      ComponentPkg pkg = toVisit.pop();
+      for (Part p : pkg.getOwnedParts()) {
+        handlePart(result, p);
+      }
+      if (pkg instanceof PhysicalComponentPkg) {
+        toVisit.addAll(((PhysicalComponentPkg) pkg).getOwnedPhysicalComponentPkgs());
+      } else if (pkg instanceof LogicalComponentPkg) {
+        toVisit.addAll(((LogicalComponentPkg) pkg).getOwnedLogicalComponentPkgs());
+      }
+    }
+
+    for (Part representingPart : parent.getRepresentingParts()) {
+      for (InstanceRole ir : representingPart.getRepresentingInstanceRoles()) {
+        if (ir.eContainer() instanceof Scenario) {
+          result.add((Scenario) ir.eContainer());
+        }
+      }
+      if (getAccess() == access_Type.FULL) {
+        for (Part deployed : representingPart.getDeployedParts()) {
+          handlePart(result, deployed);
+        }
+      }
     }
 
     for (AbstractFunction allocated : parent.getAllocatedFunctions()) {
-      result.add(allocated);
 
-      addComboboxElements(result, allocated);
+      result.add(allocated);
+      for (InstanceRole ir : allocated.getRepresentingInstanceRoles()) {
+        if (ir.eContainer() instanceof Scenario) {
+          result.add((Scenario) ir.eContainer());
+        }
+      }
 
       for (InputPin in : allocated.getInputs()) {
         if (in instanceof FunctionInputPort) {
@@ -616,32 +629,7 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
     }
   }
 
-  private void addComboboxElements(Collection<ModelElement> result, AbstractInstance allocated) {
-    for (InstanceRole ir : allocated.getRepresentingInstanceRoles()) {
-      if (ir.eContainer() instanceof Scenario) {
-        result.add((Scenario) ir.eContainer());
-      }
-    }
-  }
 
-  private void addComboBoxElements(Collection<ModelElement> result, LogicalComponent parent) {
-    addComboBoxElements(result, (Component) parent);
-    for (LogicalComponent child : parent.getOwnedLogicalComponents()) {
-      result.add(child);
-    }
-  }
-
-  private void addComboBoxElements(Collection<ModelElement> result, PhysicalComponent parent) {
-    addComboBoxElements(result, (Component) parent);
-
-    for (PhysicalComponent child : parent.getOwnedPhysicalComponents()) {
-      result.add(child);
-    }
-    for (PhysicalComponent deployed : parent.getDeployedPhysicalComponents()) {
-      result.add(deployed);
-    }
-
-  }
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
