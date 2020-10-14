@@ -16,9 +16,11 @@ import java.util.Collections;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.transition.common.handlers.scope.IScopeRetriever;
 import org.polarsys.capella.vp.ms.CSConfiguration;
+import org.polarsys.capella.vp.ms.Situation;
 import org.polarsys.kitalpha.emde.model.ExtensibleElement;
 import org.polarsys.kitalpha.transposer.rules.handler.rules.api.IContext;
 
@@ -45,6 +47,15 @@ public class MsTransitionScopeRetriever implements IScopeRetriever {
       for (EObject eObject : ((ExtensibleElement) element).getOwnedExtensions()) {
         if (eObject instanceof CSConfiguration) {
             elements.add(eObject);
+        }
+        else if (eObject instanceof Situation) {
+          Situation situation = (Situation) eObject; 
+          elements.add(situation);
+          if (situation.getExpression() != null) {
+            elements.add(((Situation)eObject).getExpression()); 
+            // also transform the referenced state machines
+            elements.addAll(EcoreUtil.ExternalCrossReferencer.find(((Situation)eObject).getExpression()).keySet());
+          }
         }
       }
     }
