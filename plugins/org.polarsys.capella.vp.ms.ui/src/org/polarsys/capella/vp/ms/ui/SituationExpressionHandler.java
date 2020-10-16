@@ -10,6 +10,7 @@ import org.antlr.v4.runtime.ANTLRErrorListener;
 import org.antlr.v4.runtime.BaseErrorListener;
 import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Recognizer;
+import org.antlr.v4.runtime.tree.ParseTree;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -35,6 +36,7 @@ import org.polarsys.capella.core.linkedtext.ui.CapellaEmbeddedLinkedTextEditorIn
 import org.polarsys.capella.vp.ms.BooleanExpression;
 import org.polarsys.capella.vp.ms.Situation;
 import org.polarsys.capella.vp.ms.expression.parser.MsExpressionUnparser;
+import org.polarsys.capella.vp.ms.expression.parser.DefaultMsExpressionVisitor;
 import org.polarsys.capella.vp.ms.expression.parser.LinkedText2Situation;
 import org.polarsys.capella.vp.ms.expression.parser.MsExpressionUtil;
 import org.polarsys.capella.vp.ms.expression.parser.LinkedText2Situation.SplitExpression;
@@ -82,15 +84,13 @@ public class SituationExpressionHandler extends AbstractHandler {
         if (expression.isEmpty()) {          
           splitExpression.remove(rowSm);
         } else {
-          // FIXME understand antlr error handling? Why do I have to listen to errors, but then also catch them ? :/
           try {
             List<String> errors = new ArrayList<>();
-            BooleanExpression expr = MsExpressionUtil.parse(
+            ParseTree tree = MsExpressionUtil.parse(
                 toParse.get(), 
-                createResolver(dialog.getDocument()),
                 createErrorListener(errors));
             if (errors.isEmpty()) {
-              splitExpression.put(rowSm, expr);
+              splitExpression.put(rowSm, new DefaultMsExpressionVisitor(createResolver(dialog.getDocument())).visit(tree));
             } else {
               StatusManager.getManager().handle(new Status(IStatus.ERROR, Activator.PLUGIN_ID, errors.get(0)), StatusManager.BLOCK);
               return null;
