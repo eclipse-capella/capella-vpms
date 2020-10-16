@@ -48,6 +48,20 @@
 	  </excludes>
 	</configuration>
       </plugin>
+         <plugin>
+  			<groupId>org.eclipse.tycho</groupId>
+            <artifactId>tycho-surefire-plugin</artifactId>
+            <version>${tycho-extras-version}</version>
+            <configuration>
+            <dependencies>
+               <!-- avoid CNFE in Surefire when looking for JUnitPlatformProvider -->
+               <dependency>
+                 <artifactId>org.junit</artifactId>
+                 <type>eclipse-plugin</type>
+               </dependency>
+            </dependencies>
+            </configuration>
+         </plugin>
     </plugins>
   </build>
 

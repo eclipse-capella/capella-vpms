@@ -34,6 +34,7 @@
     <module>org.polarsys.capella.vp.ms.ui</module>
     <module>org.polarsys.capella.vp.ms.ui.preferences</module>
     <module>org.polarsys.capella.vp.ms.expression</module>
+    <module>org.polarsys.capella.vp.ms.expression.tests</module>
     <module>org.polarsys.capella.vp.ms.transition</module>
   </modules>
 </project>

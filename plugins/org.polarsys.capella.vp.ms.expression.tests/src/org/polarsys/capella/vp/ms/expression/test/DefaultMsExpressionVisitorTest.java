@@ -17,6 +17,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -26,7 +27,6 @@ import org.polarsys.capella.core.data.capellacommon.CapellacommonFactory;
 import org.polarsys.capella.core.data.capellacommon.Region;
 import org.polarsys.capella.core.data.capellacommon.StateMachine;
 import org.polarsys.capella.vp.ms.BooleanExpression;
-import org.polarsys.capella.vp.ms.expression.MsExpressionPlugin;
 import org.polarsys.capella.vp.ms.expression.parser.DefaultMsExpressionVisitor;
 import org.polarsys.capella.vp.ms.expression.parser.MsExpressionBaseListener;
 import org.polarsys.capella.vp.ms.expression.parser.MsExpressionLexer;
@@ -98,8 +98,6 @@ public class DefaultMsExpressionVisitorTest {
     BooleanExpression dnfExpression = new ExpressionToDNF().doSwitch(nnfExpression);
     String unparsedDNFExpr = up.unparse(dnfExpression);
     assertEquals(expectedDNF, unparsedDNFExpr);
-
-    System.out.println("======");
     
   }
 
@@ -176,7 +174,7 @@ public class DefaultMsExpressionVisitorTest {
     
     try (BufferedReader in = new BufferedReader(
         new InputStreamReader(
-            FileLocator.openStream(MsExpressionPlugin.getDefault().getBundle(), new Path("test/fixtures.txt"), false)))){
+            FileLocator.openStream(Platform.getBundle("org.polarsys.capella.vp.ms.expression.tests"), new Path("fixtures.txt"), false)))){
       String inputline = null;
       Object[] args = new String[4];
       int argIndex = 0;

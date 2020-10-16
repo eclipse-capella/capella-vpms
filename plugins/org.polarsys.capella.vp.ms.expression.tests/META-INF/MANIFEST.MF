@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Vmps Expression Tests
+Bundle-SymbolicName: org.polarsys.capella.vp.ms.expression.tests
+Bundle-Version: 0.14.0.qualifier
+Automatic-Module-Name: org.polarsys.capella.vp.ms.expression.test
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.polarsys.capella.vp.ms.expression;bundle-version="1.0.0",
+ org.polarsys.capella.vp.ms,
+ org.antlr.runtime;bundle-version="4.3.0",
+ org.junit.jupiter.api;bundle-version="5.4.0",
+ org.junit.jupiter.params;bundle-version="5.4.0"
+Export-Package: org.polarsys.capella.vp.ms.expression.test
