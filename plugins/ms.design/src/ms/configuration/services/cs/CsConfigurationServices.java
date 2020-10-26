@@ -20,6 +20,9 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.security.auth.login.Configuration;
 
@@ -84,7 +87,9 @@ import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.core.data.interaction.InstanceRole;
 import org.polarsys.capella.core.data.interaction.Scenario;
 import org.polarsys.capella.core.data.la.LogicalComponent;
+import org.polarsys.capella.core.data.la.LogicalComponentPkg;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
+import org.polarsys.capella.core.data.pa.PhysicalComponentPkg;
 import org.polarsys.capella.core.linkedtext.ui.CapellaEmbeddedLinkedTextEditorInput;
 import org.polarsys.capella.core.model.helpers.BlockArchitectureExt;
 import org.polarsys.capella.core.model.helpers.CapellaElementExt;
@@ -117,9 +122,20 @@ public class CsConfigurationServices {
   public static final String DANNOTATION_DETAIL_SHOW_SCENARIOS = "showScenarios"; //$NON-NLS-1$
 
   private static final String CONFIGURATIONS_LAYER_LABEL = Messages.CsConfigurationServices_Configurations_Layer_Name;
+  
+  private static final Predicate<Component> HAS_STATEMACHINE = new Predicate<Component>() {
+    @Override
+    public boolean test(Component t) {
+      return t.getOwnedStateMachines().size() > 0;
+    }
+  };
+  
+  
   protected List<CSConfiguration> configListFiltered = new ArrayList<CSConfiguration>();
   protected List<CSConfiguration> configList = new ArrayList<CSConfiguration>();
 
+  
+  
   private Map<CSConfiguration, DNode> getCurrentConfigNodeMap(DDiagram diagram){
     Map<CSConfiguration, DNode> current = new HashMap<CSConfiguration, DNode>();
     for (DNode node : diagram.getNodes()) {
@@ -1035,48 +1051,79 @@ public class CsConfigurationServices {
     return result;
   }
 
-  public Collection<EObject> msSituationExpressionComponentLines(EObject container){
-    Collection<EObject> result = new ArrayList<EObject>();
-    for (EObject e : container.eContents()) {
-      if (e instanceof Component && hasNestedStateMachine(e)) {
-        boolean add = true;
-        if (e instanceof PhysicalComponent && ((PhysicalComponent) e).getDeployingPhysicalComponents().size() > 0){
-            add = false;
-        }
-        if (add) {
-          result.add(e);
-        }
-      }
-    }
-    if (container instanceof PhysicalComponent) {
-      for (PhysicalComponent deployed : ((PhysicalComponent) container).getDeployedPhysicalComponents()) {
-        if (hasNestedStateMachine(deployed)) {
-          result.add(deployed);
-        }
-      }
-    }
-    return result;
+  public Collection<EObject> msSituationExpressionComponentLines(LogicalComponent c){
+    return c.getOwnedLogicalComponents().stream().filter(child -> componentHierarchyWithPredicate(child, HAS_STATEMACHINE)).collect(Collectors.toList());
+  }
+  
+  public Collection<EObject> msSituationExpressionComponentLines(LogicalComponentPkg p) {
+    return p.getOwnedLogicalComponents().stream().filter(child -> componentHierarchyWithPredicate(child, HAS_STATEMACHINE)).collect(Collectors.toList());
+  }
+
+  public Collection<EObject> msSituationExpressionComponentLines(PhysicalComponent c){
+    Stream<PhysicalComponent> candidateChildren = Stream.concat(
+        c.getDeployedPhysicalComponents().stream(),
+        c.getOwnedPhysicalComponents().stream().filter(child -> child.getDeployingPhysicalComponents().isEmpty()));
+    return candidateChildren.filter(child -> componentHierarchyWithPredicate(child, HAS_STATEMACHINE)).collect(Collectors.toList());
+  }
+
+  public Collection<EObject> msSituationExpressionComponentLines(PhysicalComponentPkg p){
+    return p.getOwnedPhysicalComponents().stream().filter(child -> componentHierarchyWithPredicate(child, HAS_STATEMACHINE)).collect(Collectors.toList());
   }
 
   public Collection<EObject> msSituationExpressionComponentPkgLines(EObject target){
     Collection<EObject> result = new ArrayList<>();
     for (EObject e : target.eContents()) {
-      if (e instanceof ComponentPkg && hasNestedStateMachine(e)) {
+      if (e instanceof ComponentPkg && componentHierarchyWithPredicate(e, HAS_STATEMACHINE)) {
         result.add(e);
       }
     }
     return result;
   }
 
-  public boolean hasNestedStateMachine(EObject e) {
-    for (Iterator<EObject> it = e.eAllContents(); it.hasNext();) {
-      if (it.next() instanceof StateMachine) {
-        return true;
-      }
+  /**
+   * Does any of the components in the hierarchy satisfy a given predicate?
+   * @param e
+   * @param predicate
+   * @return
+   */
+  public boolean componentHierarchyWithPredicate(EObject e, Predicate<Component> predicate) {
+
+    if (e instanceof Component && predicate.test((Component) e)) {
+      return true;
     }
+
+    if (e instanceof LogicalComponentPkg) {
+      return Stream.concat(
+          ((LogicalComponentPkg) e).getOwnedLogicalComponents().stream(),
+          ((LogicalComponentPkg) e).getOwnedLogicalComponentPkgs().stream())
+          .anyMatch(t -> componentHierarchyWithPredicate(t, predicate));
+    }
+
+    if (e instanceof LogicalComponent) {
+      return Stream.concat(
+          ((LogicalComponent) e).getOwnedLogicalComponents().stream(),
+          ((LogicalComponent) e).getOwnedLogicalComponentPkgs().stream())
+          .anyMatch(t -> componentHierarchyWithPredicate(t, predicate));
+    }
+
+    if (e instanceof PhysicalComponent) {
+      return Stream.concat(Stream.concat(
+          (((PhysicalComponent) e).getDeployedPhysicalComponents().stream()),
+          (((PhysicalComponent) e).getOwnedPhysicalComponentPkgs().stream())),
+          (((PhysicalComponent) e).getOwnedPhysicalComponents().stream().filter(p -> p.getDeployingPhysicalComponents().isEmpty())))
+          .anyMatch(t -> componentHierarchyWithPredicate(t, predicate));
+    }
+
+    if (e instanceof PhysicalComponentPkg) {
+      return Stream.concat(
+          ((PhysicalComponentPkg) e).getOwnedPhysicalComponents().stream().filter(p -> p.getDeployingPhysicalComponents().isEmpty()),
+          ((PhysicalComponentPkg) e).getOwnedPhysicalComponentPkgs().stream())
+          .anyMatch(t -> componentHierarchyWithPredicate(t, predicate));
+    }
+
     return false;
   }
-  
+
   public Collection<? extends EObject> msSituationExpressionStateMachineLines(EObject container){
     if (container instanceof Component) {
       return ((Component) container).getOwnedStateMachines();
