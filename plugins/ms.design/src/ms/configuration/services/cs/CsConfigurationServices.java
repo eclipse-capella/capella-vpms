@@ -81,7 +81,6 @@ import org.polarsys.capella.core.data.cs.ComponentPkg;
 import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.cs.PhysicalPort;
-import org.polarsys.capella.core.data.ctx.SystemComponent;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
 import org.polarsys.capella.core.data.interaction.InstanceRole;
@@ -110,6 +109,8 @@ import org.polarsys.capella.vp.ms.ui.preferences.MsPreferenceConstants;
 //import org.polarsys.capella.vp.ms.ui.MsUICommandHandler;
 import org.polarsys.kitalpha.emde.model.ElementExtension;
 
+import com.google.common.base.Predicates;
+
 public class CsConfigurationServices {
 
   public static final String DANNOTATION_SOURCE = "http://polarsys.org/capella/vp/ms"; //$NON-NLS-1$
@@ -129,7 +130,6 @@ public class CsConfigurationServices {
       return t.getOwnedStateMachines().size() > 0;
     }
   };
-  
   
   protected List<CSConfiguration> configListFiltered = new ArrayList<CSConfiguration>();
   protected List<CSConfiguration> configList = new ArrayList<CSConfiguration>();
@@ -832,39 +832,6 @@ public class CsConfigurationServices {
     return result;
   }
 
-  public Collection<? extends EObject> msCrossTableComponentsRecurse(DTable table, SystemComponent component, SystemComponent root) {
-    return Collections.emptyList();
-  }
-
-  public Collection<? extends EObject> msCrossTableComponentsRecurse(DTable table, LogicalComponent component,
-      LogicalComponent root) {
-    if (isShowComponents(table)) {
-      return component.getOwnedLogicalComponents();
-    }
-    return Collections.emptyList();
-  }
-
-  public Collection<? extends EObject> msCrossTableComponentsRecurse(DTable table, PhysicalComponent component,
-      PhysicalComponent root) {
-    if (!isShowComponents(table)) {
-      return Collections.emptyList();
-    }
-
-    Collection<PhysicalComponent> result = new LinkedHashSet<PhysicalComponent>();
-
-    result.addAll(component.getOwnedPhysicalComponents());
-
-    // to avoid duplication of rows
-    // only show deployed components that are outside the containment hierarchy of the table's root component
-    for (PhysicalComponent deployed : component.getDeployedPhysicalComponents()) {
-      if (!EcoreUtil.isAncestor(root, deployed)) {
-        result.add(deployed);
-      }
-    }
-
-    return result;
-  }
-
   public Collection<?> msCrossTableFunctionalChains(DTable table, Component component) {
     return msCrossTableElements(table, component, MsPackage.Literals.CS_CONFIGURATION__FUNCTIONAL_CHAINS);
   }
@@ -918,6 +885,18 @@ public class CsConfigurationServices {
       return component.getAllocatedFunctions();
     }
     return Collections.emptyList();
+  }
+
+  public Collection<EObject> msCrossTableComponentLines(LogicalComponent c){
+    return c.getOwnedLogicalComponents().stream().filter(child -> componentHierarchyWithPredicate(child, Predicates.alwaysTrue())).collect(Collectors.toList());
+  }
+
+  public Collection<EObject> msCrossTableComponentLines(LogicalComponentPkg p) {
+    return p.getOwnedLogicalComponents().stream().filter(child -> componentHierarchyWithPredicate(child, Predicates.alwaysTrue())).collect(Collectors.toList());
+  }
+
+  public Collection<EObject> msCrossTableComponentLines(PhysicalComponentPkg p){
+    return p.getOwnedPhysicalComponents().stream().filter(child -> componentHierarchyWithPredicate(child, Predicates.alwaysTrue())).collect(Collectors.toList());
   }
 
   public Collection<? extends EObject> msContainedComponentPorts(DTable table, Component component) {
@@ -1060,20 +1039,36 @@ public class CsConfigurationServices {
   }
 
   public Collection<EObject> msSituationExpressionComponentLines(PhysicalComponent c){
-    Stream<PhysicalComponent> candidateChildren = Stream.concat(
-        c.getDeployedPhysicalComponents().stream(),
-        c.getOwnedPhysicalComponents().stream().filter(child -> child.getDeployingPhysicalComponents().isEmpty()));
-    return candidateChildren.filter(child -> componentHierarchyWithPredicate(child, HAS_STATEMACHINE)).collect(Collectors.toList());
+    return msComponentLines(c, HAS_STATEMACHINE);
+  }
+
+  public Collection<EObject> msCrossTableComponentLines(PhysicalComponent c){
+    return msComponentLines(c, Predicates.alwaysTrue());
   }
 
   public Collection<EObject> msSituationExpressionComponentLines(PhysicalComponentPkg p){
     return p.getOwnedPhysicalComponents().stream().filter(child -> componentHierarchyWithPredicate(child, HAS_STATEMACHINE)).collect(Collectors.toList());
   }
 
+  public Collection<EObject> msCrossTableComponentPkgLines(EObject target){
+    return msComponentPkgLines(target, Predicates.alwaysTrue());
+  }
+
   public Collection<EObject> msSituationExpressionComponentPkgLines(EObject target){
+    return msComponentPkgLines(target, HAS_STATEMACHINE);
+  }
+
+  public Collection<EObject> msComponentLines(PhysicalComponent c, Predicate<Component> predicate){
+    Stream<PhysicalComponent> candidateChildren = Stream.concat(
+        c.getDeployedPhysicalComponents().stream(),
+        c.getOwnedPhysicalComponents().stream().filter(child -> child.getDeployingPhysicalComponents().isEmpty()));
+    return candidateChildren.filter(child -> componentHierarchyWithPredicate(child, predicate)).collect(Collectors.toList());    
+  }
+
+  public Collection<EObject> msComponentPkgLines(EObject target, Predicate<Component> predicate){
     Collection<EObject> result = new ArrayList<>();
     for (EObject e : target.eContents()) {
-      if (e instanceof ComponentPkg && componentHierarchyWithPredicate(e, HAS_STATEMACHINE)) {
+      if (e instanceof ComponentPkg && componentHierarchyWithPredicate(e, predicate)) {
         result.add(e);
       }
     }
