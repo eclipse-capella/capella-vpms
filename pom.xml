@@ -45,6 +45,9 @@
 	<configuration>
 	  <excludes>
 	    <plugin id="org.polarsys.capella.vp.ms.doc" />
+	    <plugin id="org.apache.poi" />
+	    <plugin id="org.apache.poi.ooxml" />
+	    <plugin id="org.apache.poi.ooxml.schemas" />
 	  </excludes>
 	</configuration>
       </plugin>
