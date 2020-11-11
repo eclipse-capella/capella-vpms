@@ -14,6 +14,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.polarsys.capella.common.data.modellingcore.AbstractNamedElement;
 import org.polarsys.capella.common.helpers.EcoreUtil2;
 import org.polarsys.capella.core.data.capellacommon.AbstractState;
 import org.polarsys.capella.core.data.capellacommon.CapellacommonPackage;
@@ -116,7 +117,7 @@ public class ExcelExporter extends MsSwitch<Object> {
         StateMachine sm = getStateMachine(element);
         if (!smColumns.containsKey(sm)) {
           smColumns.put(sm, index++);
-          smHeaders.add(sm.getName());
+          smHeaders.add(((AbstractNamedElement) sm.eContainer()).getName() + "/" + sm.getName());
         }
         record.put(sm, element);
       }
