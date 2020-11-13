@@ -50,12 +50,11 @@ public class MsTransitionScopeRetriever implements IScopeRetriever {
         }
         else if (eObject instanceof Situation) {
           Situation situation = (Situation) eObject; 
-          elements.add(situation);
           if (situation.getExpression() != null) {
-            elements.add(((Situation)eObject).getExpression()); 
             // also transform the referenced state machines
             elements.addAll(EcoreUtil.ExternalCrossReferencer.find(((Situation)eObject).getExpression()).keySet());
           }
+          elements.add(situation);
         }
       }
     }

@@ -42,16 +42,6 @@
                   incompleteRule="org.polarsys.capella.vp.ms.transition.SituationRule">
             </defaultMappingPossibility>
          </mappingElement>
-          <mappingElement
-               domainMetaClass="org.polarsys.capella.vp.ms.BooleanExpression"
-               reuseExtendedElementDefaultPossibility="true"
-               reuseExtendedElementPossibilities="true">
-            <defaultMappingPossibility
-                  completeRule="org.polarsys.capella.vp.ms.transition.BooleanExpressionRule"
-                  enabled="true"
-                  incompleteRule="org.polarsys.capella.vp.ms.transition.BooleanExpressionRule">
-            </defaultMappingPossibility>
-         </mappingElement>
       </mapping>
    </extension>
    <extension
