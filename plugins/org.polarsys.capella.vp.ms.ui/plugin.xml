@@ -290,5 +290,11 @@
         </activeWhen>
      </handler>
   </extension>
+  <extension
+        point="org.polarsys.capella.core.model.handler.deleteCommandProvider">
+     <deleteHelper
+           class="org.polarsys.capella.vp.ms.ui.MsDeleteHelper">
+     </deleteHelper>
+  </extension>
 
 </plugin>
