@@ -13,29 +13,12 @@
 package ms.design;
 
 import org.eclipse.sirius.diagram.DDiagram;
-import org.eclipse.sirius.diagram.DDiagramElement;
 import org.eclipse.sirius.diagram.business.api.refresh.IRefreshExtension;
-
-import ms.configuration.services.cs.CsConfigurationServices;
 
 abstract class AbstractMsRefreshExtension implements IRefreshExtension {
 
-  protected final CsConfigurationServices cs = new CsConfigurationServices();
-  protected final CSSRefreshExtension css;
-  
-  AbstractMsRefreshExtension(CSSRefreshExtension css){
-    this.css = css;
-  }
-  
   @Override
   public void beforeRefresh(DDiagram dDiagram) {    
-  }
-
-  /**
-   * Finds or creates the style object for the given element
-   */
-  protected final CSConfigurationStyle getCSConfigurationStyle(DDiagramElement view) {
-    return css.getCSConfigurationStyle(view);
   }
 
 

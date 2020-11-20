@@ -27,12 +27,10 @@ import org.polarsys.capella.common.helpers.EObjectLabelProviderHelper;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.Interface;
 import org.polarsys.capella.core.data.cs.Part;
+import org.polarsys.capella.vp.ms.ui.css.CSSAdapter;
 
 public class InterfaceDiagramMsRefreshExtension extends DefaultMsRefreshExtension {
 
-  InterfaceDiagramMsRefreshExtension(CSSRefreshExtension css) {
-    super(css);
-  }
 
   @Override
   public void postRefresh(DDiagram dDiagram) {
@@ -41,21 +39,19 @@ public class InterfaceDiagramMsRefreshExtension extends DefaultMsRefreshExtensio
 
   @Override
   protected ScopeVisitor<?> createVisitor() {
-    return new ConfigurationScopeVisitor(css) {
+    return new ConfigurationScopeVisitor() {
 
       @Override
       protected void updateStyle(AbstractDNodeScope asd) {
         AbstractDNode node = (AbstractDNode)asd.getElement(); 
         
         if (node.getTarget() instanceof Interface) {
-          CSConfigurationStyle interfaceStyle = css.getCSConfigurationStyle(node);
+          CSSAdapter interfaceStyle = CSSAdapter.getAdapter(node);
           for (DEdge edge : ((EdgeTarget) node).getIncomingEdges()){
-            CSConfigurationStyle portStyle = css.getCSConfigurationStyle(edge.getSourceNode());
-            CSConfigurationStyle edgeStyle = css.getCSConfigurationStyle(edge);
-            for (String clazz : portStyle.getStyle()) {
-              interfaceStyle.addClass(clazz);
-              edgeStyle.addClass(clazz);
-            }
+            CSSAdapter portStyle = CSSAdapter.getAdapter(edge.getSourceNode());
+            CSSAdapter edgeStyle = CSSAdapter.getAdapter(edge);
+            interfaceStyle.addCSSClass(portStyle);
+            edgeStyle.addCSSClass(portStyle);
           }
         } else {
           super.updateStyle(asd);

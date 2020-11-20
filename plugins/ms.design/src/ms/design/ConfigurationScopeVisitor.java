@@ -24,20 +24,17 @@ import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.polarsys.capella.common.data.modellingcore.ModelElement;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.vp.ms.CSConfiguration;
+import org.polarsys.capella.vp.ms.ui.css.CSSAdapter;
 
 import ms.configuration.services.cs.CsConfigurationServices;
 
 public class ConfigurationScopeVisitor implements ScopeVisitor<Collection<CSConfiguration>> {
 
   private static final CsConfigurationServices cs = new CsConfigurationServices();
-  private final CSSRefreshExtension css;
 
   private final static String KEY_CONFIGURATIONS = "vpms_Configurations";
   private final static String KEY_ALL_CONFIGURATIONS = "vpms_AllConfigurations";
 
-  public ConfigurationScopeVisitor(CSSRefreshExtension css) {
-    this.css = css;
-  }
   @Override
   public Collection<CSConfiguration> visitDiagramScope(DiagramScope ds) {
     updateConfigurationsAttribute(ds, cs.getSelectedConfigurations((DSemanticDiagram) ds.getElement()));
@@ -99,26 +96,31 @@ public class ConfigurationScopeVisitor implements ScopeVisitor<Collection<CSConf
    * @param appliedConfigurations the configurations that should be queried for inclusion/exclusion of the semantic element
    */
   protected void updateStyle(DDiagramElement element, Collection<CSConfiguration> appliedConfigurations) {
-    CSConfigurationStyle style = css.getCSConfigurationStyle(element).clear();
+    CSSAdapter style = CSSAdapter.getAdapter(element).clear();
     EObject target = getTarget(element);
     updateStyle(style, target, appliedConfigurations);
   }
 
-  protected void updateStyle(CSConfigurationStyle style, EObject semantic, Collection<CSConfiguration> appliedConfigurations) {
+  protected void updateStyle(CSSAdapter style, EObject semantic, Collection<CSConfiguration> appliedConfigurations) {
     if (semantic != null) {
       for (Iterator<CSConfiguration> it = appliedConfigurations.iterator(); it.hasNext();) {
         CSConfiguration c = it.next();
+        
+        // adding a class that includes the configuration name allows
+        // users to apply styles to a concrete configuration
+
         if (c.getScope().contains(semantic)) {
           if (c.includes((ModelElement)semantic)) {//FIXME cast
-            style.addClass("included");
+            style.addCSSClass("vpms-included");
+            style.addCSSClass("vpms-included-" + c.getName());
           } else {
-            style.addClass("excluded");
+            style.addCSSClass("vpms-excluded");
+            style.addCSSClass("vpms-excluded-" + c.getName());
           }
         }
       }
     }
   }
-  
 
   /**
    * Which semantic element should be checked for inclusion/exclusion when the style

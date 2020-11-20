@@ -18,19 +18,16 @@ import java.util.Deque;
 import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.DDiagramElement;
 import org.eclipse.sirius.diagram.DEdge;
+import org.polarsys.capella.vp.ms.ui.css.CSSAdapter;
 
 public class DefaultMsRefreshExtension extends AbstractMsRefreshExtension {
-
-  DefaultMsRefreshExtension(CSSRefreshExtension css){
-    super(css);
-  }
 
   protected ScopeFactory createScopeFactory() {
     return new ScopeFactory();
   }
 
   protected ScopeVisitor<?> createVisitor(){
-    return new ConfigurationScopeVisitor(css);
+    return new ConfigurationScopeVisitor();
   }
 
   protected void refreshNodes(DDiagram dDiagram) {
@@ -54,27 +51,21 @@ public class DefaultMsRefreshExtension extends AbstractMsRefreshExtension {
 
   protected void refreshEdges(DDiagram dDiagram) {
     for (DEdge edge : dDiagram.getEdges()) {
-      CSConfigurationStyle style = getCSConfigurationStyle(edge);
-      style.clear();
-      for (String clazz : getCSConfigurationStyle((DDiagramElement) edge.getTargetNode()).getStyle()) {
-        style.addClass(clazz);
-      }
-      for (String clazz : getCSConfigurationStyle((DDiagramElement) edge.getSourceNode()).getStyle()) {
-        style.addClass(clazz);
-      } 
+      CSSAdapter style = CSSAdapter.getAdapter(edge).clear();
+
+      CSSAdapter targetStyle = CSSAdapter.getAdapter(edge.getTargetNode());
+      style.addCSSClass(targetStyle);
+
+      CSSAdapter sourceStyle = CSSAdapter.getAdapter(edge.getSourceNode());
+      style.addCSSClass(sourceStyle);
+
     }
   }
-  
+
   @Override
   public void postRefresh(DDiagram dDiagram) {
     refreshNodes(dDiagram);
     refreshEdges(dDiagram);
   }
-
-  @Override
-  public void beforeRefresh(DDiagram dDiagram) {
-  }
-
-  
 
 }

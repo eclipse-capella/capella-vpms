@@ -40,16 +40,14 @@ import org.polarsys.capella.core.data.interaction.InstanceRole;
 import org.polarsys.capella.core.data.interaction.SequenceMessage;
 import org.polarsys.capella.core.data.interaction.StateFragment;
 import org.polarsys.capella.vp.ms.CSConfiguration;
+import org.polarsys.capella.vp.ms.ui.css.CSSAdapter;
 
 public class ScenarioMsRefreshExtension extends DefaultMsRefreshExtension {
 
-  ScenarioMsRefreshExtension(CSSRefreshExtension css) {
-    super(css);
-  }
 
   @Override
   protected ScopeVisitor<?> createVisitor() {
-    return new ConfigurationScopeVisitor(css) {
+    return new ConfigurationScopeVisitor() {
 
       Map<DEdge, Scope> rememberedEdgeScopes = new HashMap<DEdge, Scope>();
 
@@ -92,19 +90,17 @@ public class ScenarioMsRefreshExtension extends DefaultMsRefreshExtension {
 
       private void updateExchangeStyle(DEdge edge, Scope inScope, EObject inScopeTarget, Scope outScope, EObject outScopeTarget) {
 
-        CSConfigurationStyle style = getCSConfigurationStyle(edge).clear();
+        CSSAdapter style = CSSAdapter.getAdapter(edge).clear();
         updateStyle(style, outScopeTarget, getAllScopeConfigurations(outScope));
         updateStyle(style, inScopeTarget, getAllScopeConfigurations(inScope));
 
         applyExecutionStyleFromEdge(edge, style);
       }
 
-      private void applyExecutionStyleFromEdge(DEdge edge, CSConfigurationStyle style) {
+      private void applyExecutionStyleFromEdge(DEdge edge, CSSAdapter style) {
         if (edge.getTargetNode() instanceof DDiagramElement && ((DDiagramElement) edge.getTargetNode()).getMapping() instanceof ExecutionMapping) {
-          CSConfigurationStyle execStyle = getCSConfigurationStyle((DDiagramElement) edge.getTargetNode()).clear();
-          for (String s : style.getStyle()) {
-            execStyle.addClass(s);
-          }
+          CSSAdapter execStyle = CSSAdapter.getAdapter((DDiagramElement) edge.getTargetNode()).clear();
+          execStyle.addCSSClass(style);
         }
       }
 
@@ -132,7 +128,7 @@ public class ScenarioMsRefreshExtension extends DefaultMsRefreshExtension {
 
       private void updateExchangeItemAllocationStyle(DEdge edge, ExchangeItemAllocation op, Scope in, Scope out) {
 
-        CSConfigurationStyle style = getCSConfigurationStyle(edge).clear();
+        CSSAdapter style = CSSAdapter.getAdapter(edge).clear();
         SequenceMessage msg = (SequenceMessage) edge.getTarget();
 
         Classifier sender = (Classifier) msg.getSendingPart().getType();

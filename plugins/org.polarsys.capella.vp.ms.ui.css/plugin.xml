@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<!--
+    Copyright (c) 2020 THALES GLOBAL SERVICES.
+     
+    This program and the accompanying materials are made available under the
+    terms of the Eclipse Public License 2.0 which is available at
+    http://www.eclipse.org/legal/epl-2.0
+   
+    SPDX-License-Identifier: EPL-2.0
+   
+    Contributors:
+       Thales - initial API and implementation
+ -->
+
+<plugin>
+   <extension
+         point="org.eclipse.e4.ui.css.core.elementProvider">
+      <provider
+            class="org.polarsys.capella.vp.ms.ui.css.DiagramElementProvider">
+         <widget
+               class="org.eclipse.sirius.viewpoint.DSemanticDecorator">
+         </widget>
+      </provider>
+   </extension>
+   <extension
+         point="org.eclipse.e4.ui.css.core.propertyHandler">
+      <handler
+            adapter="org.polarsys.capella.vp.ms.ui.css.dom.DSemanticDecoratorElement"
+            handler="org.polarsys.capella.vp.ms.ui.css.properties.DiagramPropertyHandler">
+         <property-name
+               name="background-color">
+         </property-name>
+         <property-name
+               name="stroke">
+         </property-name>
+         <property-name
+               name="color">
+         </property-name>
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.sirius.refreshExtensionProvider">
+      <refreshExtensionProvider
+            priority="low"
+            providerClass="org.polarsys.capella.vp.ms.ui.css.CSSRefreshExtension">
+      </refreshExtensionProvider>
+   </extension>
+
+</plugin>

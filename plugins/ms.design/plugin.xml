@@ -28,9 +28,5 @@
            priority="normal"
            providerClass="ms.design.MsRefreshExtensionProvider">
      </refreshExtensionProvider>
-     <refreshExtensionProvider
-           priority="low"
-           providerClass="ms.design.CSSRefreshExtension">
-     </refreshExtensionProvider>
   </extension>
 </plugin>
