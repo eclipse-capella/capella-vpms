@@ -3,10 +3,12 @@ package org.polarsys.capella.vp.ms.expression.ag;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -36,13 +38,10 @@ import com.google.common.collect.Multimap;
 
 public class ExcelExporter extends MsSwitch<Object> {
 
-  List<String> smHeaders = new ArrayList<String>();
-  
-  Map<StateMachine, Integer> smColumns = new HashMap<StateMachine, Integer>();
-  
+  List<StateMachine> statemachines = new ArrayList<>();
   Map<Situation, List<Multimap<StateMachine, BooleanExpression>>> exportmap = new LinkedHashMap<>();
-  int index = 0;
-  
+  Function<StateMachine, String> headers = (StateMachine s) -> (((AbstractNamedElement) s.eContainer()).getName() + "/" + s.getName());
+
   // this maps the root disjunctions to a collection of literals that make up the conjunctions
   Multimap<BooleanExpression, BooleanExpression> literals;
   BooleanExpression root;
@@ -58,7 +57,11 @@ public class ExcelExporter extends MsSwitch<Object> {
     return null;
   }
 
-  public void finish(OutputStream out) throws IOException {
+  private void finish(OutputStream out) throws IOException {
+
+    // now that we know all the state machines in the table,
+    // we can sort columns by component name / statemachine name 
+    statemachines.sort(Comparator.comparing(headers));
 
     Workbook wb = new XSSFWorkbook();  // or new XSSFWorkbook();
 
@@ -67,9 +70,9 @@ public class ExcelExporter extends MsSwitch<Object> {
     // create the headers
     int rowIndex = 0;
     Row row = sheet1.createRow(rowIndex++);
-    for (int i = 0; i < smHeaders.size(); i++) {
+    for (int i = 0; i < statemachines.size(); i++) {
       Cell cell = row.createCell(i+1);
-      cell.setCellValue(smHeaders.get(i));
+      cell.setCellValue(headers.apply(statemachines.get(i)));
     }
 
     MsExpressionUnparser unparser = new MsExpressionUnparser(MsExpressionUnparser.Mode.NAME);
@@ -80,7 +83,7 @@ public class ExcelExporter extends MsSwitch<Object> {
       Cell sitCell = row.createCell(0);
       sitCell.setCellValue(situation.getName());
 
-      StringBuilder[] printableRecord = new StringBuilder[smColumns.size() + 1]; // +1 for the situation column (first column)
+      StringBuilder[] printableRecord = new StringBuilder[statemachines.size() + 1]; // +1 for the situation column (first column)
       for (int i = 0; i < printableRecord.length; i++) {
         printableRecord[i] = new StringBuilder();
       }
@@ -88,21 +91,34 @@ public class ExcelExporter extends MsSwitch<Object> {
 
       for (Multimap<StateMachine, BooleanExpression> r : exportmap.get(situation)) {
         for (StateMachine sm : r.keySet()) {
-          int colIndex = smColumns.get(sm) + 1;
+          int colIndex = statemachines.indexOf(sm) + 1;
           Cell cell = row.createCell(colIndex);
           cell.setCellValue(r.get(sm).stream().map(be -> unparser.unparse(be)).collect(Collectors.joining(", ")));
         }
         row = sheet1.createRow(rowIndex++);
       }
     }
-    for (int i = 0; i < smColumns.size() + 1; i++) {
+    for (int i = 0; i < statemachines.size() + 1; i++) {
       sheet1.autoSizeColumn(i);
     }
     wb.write(out);
   }
 
+  /**
+   * Export a collection of situations. This method may only be called once for every exporter.
+   * 
+   * @param situations
+   * @param out
+   * @throws IOException
+   */
+  public void export(Collection<? extends Situation> situations, OutputStream out) throws IOException {
+    for (Situation s : situations) {
+      export(s);
+    }
+    finish(out);
+  }
 
-  public ExcelExporter export(Situation situation) {
+  private ExcelExporter export(Situation situation) {
 
     BooleanExpression dnf = new ExpressionToDNF().doSwitch(new ExpressionToNNF().doSwitch(situation.getExpression()));
     literals = LinkedHashMultimap.create();
@@ -115,9 +131,8 @@ public class ExcelExporter extends MsSwitch<Object> {
       Multimap<StateMachine,BooleanExpression> record = LinkedHashMultimap.create();
       for (BooleanExpression element : literals.get(key)) {
         StateMachine sm = getStateMachine(element);
-        if (!smColumns.containsKey(sm)) {
-          smColumns.put(sm, index++);
-          smHeaders.add(((AbstractNamedElement) sm.eContainer()).getName() + "/" + sm.getName());
+        if (!statemachines.contains(sm)) {
+          statemachines.add(sm);
         }
         record.put(sm, element);
       }

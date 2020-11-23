@@ -5,6 +5,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.core.commands.AbstractHandler;
@@ -32,12 +34,12 @@ public class SituationExpressionExportHandler extends AbstractHandler {
 
     DTableEditor editor = (DTableEditor) HandlerUtil.getActiveEditor(event);
     ExcelExporter exporter = new ExcelExporter();
-
+    Collection<Situation> toExport = new ArrayList<>();
     DTable table = (DTable) editor.getRepresentation();
     for (DColumn c : table.getColumns()) {
       Situation s = (Situation) c.getTarget();
       if (s.getExpression() != null) {
-        exporter.export(s);
+        toExport.add(s);
       }
     }
 
@@ -54,7 +56,7 @@ public class SituationExpressionExportHandler extends AbstractHandler {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 
     try {
-      exporter.finish(bytes);
+      exporter.export(toExport, bytes);
       ByteArrayInputStream inbb = new ByteArrayInputStream(bytes.toByteArray());
       file.create(inbb, true, new NullProgressMonitor());
     } catch (IOException | CoreException e) {
