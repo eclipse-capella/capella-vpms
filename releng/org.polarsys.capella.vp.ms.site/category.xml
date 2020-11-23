@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (c) 2020 THALES GLOBAL SERVICES.
+     
+    This program and the accompanying materials are made available under the
+    terms of the Eclipse Public License 2.0 which is available at
+    http://www.eclipse.org/legal/epl-2.0
+   
+    SPDX-License-Identifier: EPL-2.0
+   
+    Contributors:
+       Thales - initial API and implementation
+ -->
+
 <site>
    <feature url="features/org.polarsys.capella.vp.ms.feature_0.15.0.qualifier.jar" id="org.polarsys.capella.vp.ms.feature" version="0.15.0.qualifier">
       <category name="org.polarsys.capella.addon.vpms"/>

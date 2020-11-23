@@ -1,10 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2017 ALTRAN.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *   
+ * Copyright (c) 2020 ALTRAN.
+ *  
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
  * Contributors:
  *    Altran - initial API and implementation
  *******************************************************************************/
@@ -221,13 +223,13 @@ public class CalculatedConfiguration {
 		String BooleanOperator;
 		boolean isComposite;
 		boolean isExcluded;
-		boolean valStatus; // applicable a un noeud composite : mis à 1 si la
-							// configuration résultante sur ce noeud est valide
+		boolean valStatus; // applicable a un noeud composite : mis ï¿½ 1 si la
+							// configuration rï¿½sultante sur ce noeud est valide
 
 		List<BooleanExpr> children;
 
-		ConfList linked_configurations; // liste des cnofigurations associées à
-										// ce noeud. (liste séparées par des OU)
+		ConfList linked_configurations; // liste des cnofigurations associï¿½es ï¿½
+										// ce noeud. (liste sï¿½parï¿½es par des OU)
 
 		public BooleanExpr() {
 			children = new ArrayList<BooleanExpr>();
@@ -269,7 +271,7 @@ public class CalculatedConfiguration {
 		LightConfiguration rcfg = new LightConfiguration("Computed Configuration");
 
 		// range les fonctions inclues dans la liste des fonctions exclue de la
-		// configuration retournée
+		// configuration retournï¿½e
 		for (int i = 0; i < cfgs.lF.size(); i++) {
 			rcfg.excl_lF.add(cfgs.lF.get(i));
 		}
@@ -280,7 +282,7 @@ public class CalculatedConfiguration {
 			rcfg.excl_lC.add(cfgs.lC.get(i));
 		}
 		// range les fonctions exclues dans la liste des fonctions inclues de la
-		// configuration retournée
+		// configuration retournï¿½e
 		for (int i = 0; i < cfgs.excl_lF.size(); i++) {
 			rcfg.lF.add(cfgs.excl_lF.get(i));
 		}
@@ -303,8 +305,8 @@ public class CalculatedConfiguration {
 	private static boolean CHK_ERR_Alloc_on_exluded_comp(LightConfiguration... cfgs) {
 		boolean rule_failed = false;
 
-		// parcours deux à deux les cfgs[ ] et verifie si un élément inclus dans
-		// le premier n'est pas exlu dans le deuxieme et inversément
+		// parcours deux ï¿½ deux les cfgs[ ] et verifie si un ï¿½lï¿½ment inclus dans
+		// le premier n'est pas exlu dans le deuxieme et inversï¿½ment
 		if (cfgs.length >= 2) {
 
 			// for each configurations in parameters :
@@ -312,7 +314,7 @@ public class CalculatedConfiguration {
 				for (int j = 0; j < cfgs.length; j++) {
 					ArrayList<AbstractFunction> incl_Fs = new ArrayList<AbstractFunction>(cfgs[i].lF);
 
-					// recupere la liste des fonctinos allouée sur les
+					// recupere la liste des fonctinos allouï¿½e sur les
 					// composants exclus
 					List<AbstractFunction> F_allocatedOnExclComp = new ArrayList<AbstractFunction>();
 
@@ -343,7 +345,7 @@ public class CalculatedConfiguration {
 
 					ArrayList<AbstractFunction> involved_Fs = new ArrayList<AbstractFunction>();
 
-					// recupere la liste des fonctinos allouée sur les
+					// recupere la liste des fonctinos allouï¿½e sur les
 					// composants exclus
 					F_allocatedOnExclComp = new ArrayList<AbstractFunction>();
 
@@ -385,8 +387,8 @@ public class CalculatedConfiguration {
 	private static boolean CHK_ERR_Alloc_FC_on_exluded_comp(LightConfiguration... cfgs) {
 		boolean rule_failed = false;
 
-		// parcours deux à deux les cfgs[ ] et verifie si un élément inclus dans
-		// le premier n'est pas exlu dans le deuxieme et inversément
+		// parcours deux ï¿½ deux les cfgs[ ] et verifie si un ï¿½lï¿½ment inclus dans
+		// le premier n'est pas exlu dans le deuxieme et inversï¿½ment
 		if (cfgs.length >= 2) {
 
 			// for each configurations in parameters :
@@ -401,7 +403,7 @@ public class CalculatedConfiguration {
 						ArrayList<AbstractFunction> incl_Fs = new ArrayList<AbstractFunction>(
 								incl_CFs.get(ifc).getInvolvedFunctions());
 
-						// recupere la liste des fonctions allouée sur les
+						// recupere la liste des fonctions allouï¿½e sur les
 						// composants exclus
 						List<AbstractFunction> F_allocatedOnExclComp = new ArrayList<AbstractFunction>();
 
@@ -443,8 +445,8 @@ public class CalculatedConfiguration {
 	private static boolean CHK_ERR_FC_vs_F_inclusion_exclusion(LightConfiguration... cfgs) {
 		boolean rule_failed = false;
 
-		// parcours deux à deux les cfgs[ ] et verifie si un élément inclus dans
-		// le premier n'est pas exlu dans le deuxieme et inversément
+		// parcours deux ï¿½ deux les cfgs[ ] et verifie si un ï¿½lï¿½ment inclus dans
+		// le premier n'est pas exlu dans le deuxieme et inversï¿½ment
 		if (cfgs.length >= 2) {
 
 			// for each configurations in parameters :
@@ -528,8 +530,8 @@ public class CalculatedConfiguration {
 	private static boolean CHK_ERR_AND_inclusion_exclusion(LightConfiguration... cfgs) {
 		boolean rule_failed = false;
 
-		// parcours deux à deux les cfgs[ ] et verifie si un élément inclus dans
-		// le premier n'est pas exlu dans le deuxieme et inversément
+		// parcours deux ï¿½ deux les cfgs[ ] et verifie si un ï¿½lï¿½ment inclus dans
+		// le premier n'est pas exlu dans le deuxieme et inversï¿½ment
 		if (cfgs.length >= 2) {
 
 			for (int i = 0; i < cfgs.length; i++) {
@@ -622,21 +624,21 @@ public class CalculatedConfiguration {
 		return cfgs[0];
 	}
 
-	// réalise l'operation ET sur deux ou plus de deux listes de configuerations
+	// rï¿½alise l'operation ET sur deux ou plus de deux listes de configuerations
 	private static ConfList Operator_AND(ArrayList<ConfList> operandes) {
 		ConfList cl = new ConfList("Computed Configuration");
 		// cl = operandes.get(0);
-		// realise le développement du ET sur les listes de configurations de
+		// realise le dï¿½veloppement du ET sur les listes de configurations de
 		// chaque operande, 2 a 2 :
 		int k_oper = 0;
 
 		if (operandes.size() == 1) {
-			cl = operandes.get(0); // cas d'un ET d'un seul élément
+			cl = operandes.get(0); // cas d'un ET d'un seul ï¿½lï¿½ment
 		}
 		if (operandes.size() > 1) {
 			while (k_oper < operandes.size() - 1) {
-				// copie les deux premiers opérandes, ou, pour le premier, le
-				// résultat de l'iteration precedente pour l'itération actuelle
+				// copie les deux premiers opï¿½randes, ou, pour le premier, le
+				// rï¿½sultat de l'iteration precedente pour l'itï¿½ration actuelle
 				ConfList operandes_1 = new ConfList("Computed Configuration");
 				if (k_oper == 0) // premiere iteration
 					operandes_1 = operandes.get(0);
@@ -662,9 +664,9 @@ public class CalculatedConfiguration {
 
 	// realise l'operation NOT sur une expression booleene contenant une
 	// plusieurs listes de configurations
-	// si le NOT s'applique à une configuration calculée, contenant une liste de
+	// si le NOT s'applique ï¿½ une configuration calculï¿½e, contenant une liste de
 	// configurations potentielles
-	// séparées par des OU, alors, fusionne ces configurations potentielles en
+	// sï¿½parï¿½es par des OU, alors, fusionne ces configurations potentielles en
 	// une seule car NON (A ou B) = NON(A) et NON(B)
 
 	private static ConfList Operator_NOT(ArrayList<ConfList> operandes) {
@@ -677,21 +679,21 @@ public class CalculatedConfiguration {
 		return cl;
 	}
 
-	// réalise l'operation XOR sur deux ou plus de deux listes de
+	// rï¿½alise l'operation XOR sur deux ou plus de deux listes de
 	// configuerations
 	private static ConfList Operator_XOR(ArrayList<ConfList> operandes) {
 		ConfList cl = new ConfList("Computed Configuration", null);
 
-		// realise le développement du ET sur les listes de configurations de
+		// realise le dï¿½veloppement du ET sur les listes de configurations de
 		// chaque operande, 2 a 2 :
 		int k_oper = 0;
 		if (operandes.size() == 1) {
-			cl = operandes.get(0); // cas d'un OU d'un seul élément
+			cl = operandes.get(0); // cas d'un OU d'un seul ï¿½lï¿½ment
 		}
 		if (operandes.size() > 1) {
 			while (k_oper < operandes.size() - 1) {
-				// copie les deux premiers opérandes, ou, pour le premier, le
-				// résultat de l'iteration precedente pour l'itération actuelle
+				// copie les deux premiers opï¿½randes, ou, pour le premier, le
+				// rï¿½sultat de l'iteration precedente pour l'itï¿½ration actuelle
 				ConfList operandes_1 = new ConfList("Computed Configuration", null);
 				if (k_oper == 0) // premiere iteration
 					operandes_1 = operandes.get(0);
@@ -715,9 +717,9 @@ public class CalculatedConfiguration {
 		return cl;
 	}
 
-	// explore récursivement l'arborescence, et calcule la liste de
+	// explore rï¿½cursivement l'arborescence, et calcule la liste de
 	// configurations
-	// résultantes en remontant depuis les noeuds feuilles.
+	// rï¿½sultantes en remontant depuis les noeuds feuilles.
 	private static ConfList Explore_be(BooleanExpr be) {
 		// ConfList cl = new ConfList("cl", null);
 		// si le noeud est un noeud composite (operateur AND OR NOT)
@@ -746,7 +748,7 @@ public class CalculatedConfiguration {
 				break;
 			}
 
-			// fin de parcourt de tous les enfants, réaliser la compilation sur
+			// fin de parcourt de tous les enfants, rï¿½aliser la compilation sur
 			// ce noeud
 			System.out.print(" calcul " + be.label + " ");
 			for (int i = 0; i < operandes.size(); i++) {
@@ -769,7 +771,7 @@ public class CalculatedConfiguration {
 			return be.linked_configurations;
 
 		} else // noeud not composite : c'est un Mode ou Etat. => faire un ET
-				// des configurations associées à ce M/S
+				// des configurations associï¿½es ï¿½ ce M/S
 		{
 			// System.out.println(" % ");
 
@@ -777,7 +779,7 @@ public class CalculatedConfiguration {
 			operandes = new ArrayList<ConfList>();
 
 			for (int i = 0; i < be.linked_configurations.Cl.size(); i++) {
-				// cree un conflist a partir des configurations associée a la
+				// cree un conflist a partir des configurations associï¿½e a la
 				ConfList cl = new ConfList("w", be.linked_configurations.Cl.get(i));
 				operandes.add(cl);
 			}
