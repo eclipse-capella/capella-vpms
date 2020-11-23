@@ -1132,10 +1132,11 @@ public class CsConfigurationServices {
       EObject next = it.next();
       if (next instanceof Situation) {
         try {
+          // test if the expression structure follows the convention for situation expression tables
           SplitExpression.of(((Situation) next).getExpression());
           result.add((Situation) next);
         } catch (IllegalArgumentException e) {
-          e.printStackTrace(); // TODO silence this and create validation rule...
+          // and if not, don't show the situation in the table
         }
       }
     }

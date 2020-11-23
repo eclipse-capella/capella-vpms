@@ -90,20 +90,20 @@ public class LinkedText2Situation {
       StateMachineCounter counter = new StateMachineCounter();
 
       if (expression != null) {
+
         // Each child-expression must then reference exactly one StateMachine
         for (BooleanExpression child : ((AndOperation) expression).getChildren()) {
-
           Set<StateMachine> childReferencedStateMachines = counter.doSwitch(child);
-            
-          if (childReferencedStateMachines.size() == 1) {
-
-            StateMachine sm = childReferencedStateMachines.iterator().next();
-
-            if (put(sm, child) != null) {                
-              throw new IllegalArgumentException("Found references to " + sm.getName() + " in more than one subexpressions");
+          switch (childReferencedStateMachines.size()) {
+            case 0: throw new IllegalArgumentException("Found no statemachine references in subexpression");
+            case 1: {
+              StateMachine sm = childReferencedStateMachines.iterator().next();
+              if (put(sm, child) != null) {                
+                throw new IllegalArgumentException("Found references to " + sm.getName() + " in more than one subexpressions");
+              }
+              break;
             }
-          } else {
-            throw new IllegalArgumentException("Found reference to more than one statemachine in a subexpression");
+            default: throw new IllegalArgumentException("Found reference to more than one statemachine in a subexpression");
           }
         }
       }
