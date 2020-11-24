@@ -91,12 +91,15 @@
            class="org.polarsys.capella.vp.ms.ui.CSConfigurationListener">
      </editingDomainListener>
   </extension>
+  
+  
   <extension
         point="org.polarsys.capella.common.ui.toolkit.browser.contentProviderCategory">
+
      <category
-           id="org.polarsys.capella.vp.ms.ui.CSConfiguration.Elements"
+           id="org.polarsys.capella.vp.ms.ui.CSConfiguration.Included"
            isTopLevel="true"
-           name="Elements">
+           name="Included">
         <availableForType
               class="org.polarsys.capella.vp.ms.CSConfiguration">
         </availableForType>
@@ -105,14 +108,32 @@
         </targetBrowserId>
         <categoryQuery>
            <basicQuery
-                 class="org.polarsys.capella.vp.ms.ui.contextual.MsContextualQueries$Elements">
+                 class="org.polarsys.capella.vp.ms.ui.contextual.MsContextualQueries$Included">
            </basicQuery>
         </categoryQuery>
      </category>
+
      <category
-           id="org.polarsys.capella.vp.ms.ui.ModelElement.Configurations"
+           id="org.polarsys.capella.vp.ms.ui.CSConfiguration.Excluded"
            isTopLevel="true"
-           name="Configurations">
+           name="Excluded">
+        <availableForType
+              class="org.polarsys.capella.vp.ms.CSConfiguration">
+        </availableForType>
+        <targetBrowserId
+              id="ReferencedElementBrowser">
+        </targetBrowserId>
+        <categoryQuery>
+           <basicQuery
+                 class="org.polarsys.capella.vp.ms.ui.contextual.MsContextualQueries$Excluded">
+           </basicQuery>
+        </categoryQuery>
+     </category>
+
+     <category
+           id="org.polarsys.capella.vp.ms.ui.ModelElement.ConfigurationsIncluding"
+           isTopLevel="true"
+           name="Including Configurations">
         <availableForType
               class="org.polarsys.capella.common.data.modellingcore.ModelElement">
         </availableForType>
@@ -121,10 +142,28 @@
         </targetBrowserId>
         <categoryQuery>
            <basicQuery
-                 class="org.polarsys.capella.vp.ms.ui.contextual.MsContextualQueries$ElementsInverse">
+                 class="org.polarsys.capella.vp.ms.ui.contextual.MsContextualQueries$IncludedInverse">
            </basicQuery>
         </categoryQuery>
      </category>
+
+     <category
+           id="org.polarsys.capella.vp.ms.ui.ModelElement.ConfigurationsExcluding"
+           isTopLevel="true"
+           name="Excluding Configurations">
+        <availableForType
+              class="org.polarsys.capella.common.data.modellingcore.ModelElement">
+        </availableForType>
+        <targetBrowserId
+              id="ReferencingElementBrowser">
+        </targetBrowserId>
+        <categoryQuery>
+           <basicQuery
+                 class="org.polarsys.capella.vp.ms.ui.contextual.MsContextualQueries$ExcludedInverse">
+           </basicQuery>
+        </categoryQuery>
+     </category>
+     
      <category
            id="org.polarsys.capella.vp.ms.ui.Configuration.Modes"
            isTopLevel="true"

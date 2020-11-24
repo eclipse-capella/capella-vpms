@@ -12,11 +12,6 @@
  *******************************************************************************/
 package org.polarsys.capella.vp.ms.ui.properties;
 
-import static com.google.common.base.Predicates.instanceOf;
-import static com.google.common.base.Predicates.not;
-import static com.google.common.base.Predicates.or;
-import static org.polarsys.capella.vp.ms.MsPackage.Literals.CS_CONFIGURATION__ELEMENTS;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -29,15 +24,9 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
-import org.polarsys.capella.common.data.modellingcore.ModelElement;
 import org.polarsys.capella.common.ef.command.AbstractReadWriteCommand;
 import org.polarsys.capella.core.business.queries.IBusinessQuery;
 import org.polarsys.capella.core.data.core.properties.sections.NamedElementSection;
-import org.polarsys.capella.core.data.cs.Component;
-import org.polarsys.capella.core.data.fa.AbstractFunction;
-import org.polarsys.capella.core.data.fa.FunctionalChain;
-import org.polarsys.capella.core.data.information.Port;
-import org.polarsys.capella.core.data.interaction.Scenario;
 import org.polarsys.capella.core.model.handler.helpers.CapellaAdapterHelper;
 import org.polarsys.capella.core.ui.properties.controllers.AbstractMultipleSemanticFieldController;
 import org.polarsys.capella.core.ui.properties.controllers.IMultipleSemanticFieldController;
@@ -47,20 +36,12 @@ import org.polarsys.capella.vp.ms.CSConfiguration;
 import org.polarsys.capella.vp.ms.MsPackage;
 import org.polarsys.capella.vp.ms.provider.MsEditPlugin;
 
-import com.google.common.collect.Collections2;
-
 public class CSConfigurationSection extends NamedElementSection {
 
-  private MultipleSemanticField functionsField;
-  private MultipleSemanticField functionalChainsField;
-  private MultipleSemanticField portsField;
-  private MultipleSemanticField componentsField;
-  private MultipleSemanticField scenariosField;
-  private MultipleSemanticField elementsField;
+  private MultipleSemanticField includedField;
+  private MultipleSemanticField excludedField;
 
   private MultipleSemanticField contextField;
-
-  private SelectorGroup selectorGroup;
 
   private MultipleSemanticField childConfigurationsField;
 
@@ -82,43 +63,17 @@ public class CSConfigurationSection extends NamedElementSection {
 
     boolean displayedInWizard = isDisplayedInWizard();
 
-    selectorGroup = new SelectorGroup(rootParentComposite, getWidgetFactory(),
-        MsEditPlugin.INSTANCE.getString("_UI_CSConfiguration_selector_feature"), 2); //$NON-NLS-1$
-    selectorGroup.setDisplayedInWizard(displayedInWizard);
-
     kindGroup = new KindGroup(rootParentComposite, getWidgetFactory(),
         MsEditPlugin.INSTANCE.getString("_UI_CSConfiguration_kind_feature"), 2); //$NON-NLS-1$
 
-    IMultipleSemanticFieldController elementsController = new DerivedElementsController();
 
-    functionsField = new DerivedMultipleSemanticField(getReferencesGroup(),
-        MsEditPlugin.INSTANCE.getString("_UI_CSConfiguration_functions_feature"), getWidgetFactory(), //$NON-NLS-1$
-        elementsController, CS_CONFIGURATION__ELEMENTS);
-    functionsField.setDisplayedInWizard(displayedInWizard);
-
-    functionalChainsField = new DerivedMultipleSemanticField(getReferencesGroup(),
-        MsEditPlugin.INSTANCE.getString("_UI_CSConfiguration_functionalChains_feature"), //$NON-NLS-1$
-        getWidgetFactory(), elementsController, CS_CONFIGURATION__ELEMENTS);
-    functionalChainsField.setDisplayedInWizard(displayedInWizard);
-
-    componentsField = new DerivedMultipleSemanticField(getReferencesGroup(),
-        MsEditPlugin.INSTANCE.getString("_UI_CSConfiguration_components_feature"), getWidgetFactory(), //$NON-NLS-1$
-        elementsController, CS_CONFIGURATION__ELEMENTS);
-    componentsField.setDisplayedInWizard(displayedInWizard);
-
-    portsField = new DerivedMultipleSemanticField(getReferencesGroup(),
-        MsEditPlugin.INSTANCE.getString("_UI_CSConfiguration_ports_feature"), getWidgetFactory(), elementsController, //$NON-NLS-1$
-        CS_CONFIGURATION__ELEMENTS);
-    portsField.setDisplayedInWizard(displayedInWizard);
-
-    scenariosField = new DerivedMultipleSemanticField(getReferencesGroup(),
-        MsEditPlugin.INSTANCE.getString("_UI_CSConfiguration_scenarios_feature"), getWidgetFactory(), elementsController, //$NON-NLS-1$
-        CS_CONFIGURATION__ELEMENTS);
-    scenariosField.setDisplayedInWizard(displayedInWizard);
-
-    elementsField = new MultipleSemanticField(getReferencesGroup(),
-        MsEditPlugin.INSTANCE.getString("_UI_CSConfiguration_other_elements"), getWidgetFactory(), elementsController); //$NON-NLS-1$
-    elementsField.setDisplayedInWizard(displayedInWizard);
+    includedField = new MultipleSemanticField(getReferencesGroup(),
+        MsEditPlugin.INSTANCE.getString("_UI_CSConfiguration_included_feature"), getWidgetFactory(), new ItemProviderFieldController()); //$NON-NLS-1$
+    includedField.setDisplayedInWizard(displayedInWizard);
+    
+    excludedField = new MultipleSemanticField(getReferencesGroup(),
+        MsEditPlugin.INSTANCE.getString("_UI_CSConfiguration_excluded_feature"), getWidgetFactory(), new ItemProviderFieldController()); //$NON-NLS-1$
+    excludedField.setDisplayedInWizard(displayedInWizard);
 
     childConfigurationsField = new MultipleSemanticField(getReferencesGroup(),
         MsEditPlugin.INSTANCE.getString("_UI_CSConfiguration_childConfigurations_feature"), getWidgetFactory(), //$NON-NLS-1$
@@ -136,14 +91,10 @@ public class CSConfigurationSection extends NamedElementSection {
   @Override
   public void loadData(EObject capellaElement) {
     super.loadData(capellaElement);
-    functionsField.loadData(capellaElement, MsPackage.Literals.CS_CONFIGURATION__FUNCTIONS);
-    functionalChainsField.loadData(capellaElement, MsPackage.Literals.CS_CONFIGURATION__FUNCTIONAL_CHAINS);
-    componentsField.loadData(capellaElement, MsPackage.Literals.CS_CONFIGURATION__COMPONENTS);
-    portsField.loadData(capellaElement, MsPackage.Literals.CS_CONFIGURATION__PORTS);
-    scenariosField.loadData(capellaElement, MsPackage.Literals.CS_CONFIGURATION__SCENARIOS);
-    elementsField.loadData(capellaElement, MsPackage.Literals.CS_CONFIGURATION__ELEMENTS);
+  
+    includedField.loadData(capellaElement, MsPackage.Literals.CS_CONFIGURATION__INCLUDED);
+    excludedField.loadData(capellaElement, MsPackage.Literals.CS_CONFIGURATION__EXCLUDED);
     childConfigurationsField.loadData(capellaElement, MsPackage.Literals.CS_CONFIGURATION__CHILD_CONFIGURATIONS);
-    selectorGroup.loadData(capellaElement, MsPackage.Literals.CS_CONFIGURATION__SELECTOR);
     kindGroup.loadData(capellaElement, MsPackage.Literals.CS_CONFIGURATION__KIND);
     contextField.loadData(capellaElement, MsPackage.Literals.CS_CONFIGURATION__CONTEXT);
   }
@@ -155,13 +106,8 @@ public class CSConfigurationSection extends NamedElementSection {
   public List<AbstractSemanticField> getSemanticFields() {
     List<AbstractSemanticField> fields = new ArrayList<AbstractSemanticField>();
     fields.addAll(super.getSemanticFields());
-    fields.add(functionsField);
-    fields.add(functionalChainsField);
-    fields.add(componentsField);
-    fields.add(portsField);
-    fields.add(scenariosField);
-    fields.add(elementsField);
-    fields.add(selectorGroup);
+    fields.add(includedField);
+    fields.add(excludedField);
     fields.add(kindGroup);
     fields.add(childConfigurationsField);
     fields.add(contextField);
@@ -218,44 +164,6 @@ public class CSConfigurationSection extends NamedElementSection {
     @Override
     protected IBusinessQuery getReadOpenValuesQuery(EObject semanticElement) {
       throw new UnsupportedOperationException();
-    }
-
-  }
-
-  /*
-   *  A specialized controller that
-   *   - always stores elements in CSConfiguration.elements
-   *   - filters values so that the 'other elements' field does not show elements
-   *     from one of the typed elements fields, and vice-versa.
-   */
-  private class DerivedElementsController extends ItemProviderFieldController {
-
-    @Override
-    public List<EObject> loadValues(EObject semanticElement, EStructuralFeature semanticFeature) {
-      List<EObject> values = super.loadValues(semanticElement, semanticFeature);
-      if (semanticFeature == MsPackage.Literals.CS_CONFIGURATION__ELEMENTS) {
-        values = new ArrayList<EObject>(Collections2.filter(values,
-            not(
-              or(
-               instanceOf(AbstractFunction.class),
-               instanceOf(FunctionalChain.class),
-               instanceOf(Component.class),
-               instanceOf(Port.class),
-               instanceOf(Scenario.class)))));
-      }
-      return values;
-    }
-
-    @Override
-    protected void doAddOperationInWriteOpenValues(EObject semanticElement, EStructuralFeature semanticFeature,
-        EObject object) {
-      ((CSConfiguration) semanticElement).getElements().add((ModelElement) object);
-    }
-
-    @Override
-    protected void doRemoveOperationInWriteOpenValues(EObject semanticElement, EStructuralFeature semanticFeature,
-        EObject object) {
-      ((CSConfiguration) semanticElement).getElements().remove(object);
     }
 
   }

@@ -184,6 +184,7 @@ public enum kind_Type implements Enumerator {
    * 
    * @generated
    */
+  @Override
   public int getValue() {
     return value;
   }
@@ -193,6 +194,7 @@ public enum kind_Type implements Enumerator {
    * 
    * @generated
    */
+  @Override
   public String getName() {
     return name;
   }
@@ -202,6 +204,7 @@ public enum kind_Type implements Enumerator {
    * 
    * @generated
    */
+  @Override
   public String getLiteral() {
     return literal;
   }

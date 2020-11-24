@@ -27,10 +27,10 @@ import org.polarsys.capella.vp.ms.Situation;
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Situation</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  * <li>{@link org.polarsys.capella.vp.ms.impl.SituationImpl#getExpression <em>Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -73,6 +73,7 @@ public class SituationImpl extends NamedElementImpl implements Situation {
    * @generated
    */
 
+  @Override
   public BooleanExpression getExpression() {
 
     return expression;
@@ -106,6 +107,7 @@ public class SituationImpl extends NamedElementImpl implements Situation {
    * @generated
    */
 
+  @Override
   public void setExpression(BooleanExpression newExpression) {
 
     if (newExpression != expression) {

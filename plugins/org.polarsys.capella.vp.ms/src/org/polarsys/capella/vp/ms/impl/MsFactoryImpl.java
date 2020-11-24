@@ -22,20 +22,15 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.polarsys.capella.common.lib.IdGenerator;
 import org.polarsys.capella.vp.ms.AndOperation;
 import org.polarsys.capella.vp.ms.CSConfiguration;
-import org.polarsys.capella.vp.ms.Comparison;
-import org.polarsys.capella.vp.ms.FSMType;
 import org.polarsys.capella.vp.ms.InSituationExpression;
 import org.polarsys.capella.vp.ms.InStateExpression;
 import org.polarsys.capella.vp.ms.MsFactory;
 import org.polarsys.capella.vp.ms.MsPackage;
 import org.polarsys.capella.vp.ms.NotOperation;
 import org.polarsys.capella.vp.ms.OrOperation;
-import org.polarsys.capella.vp.ms.Result;
 import org.polarsys.capella.vp.ms.Situation;
 import org.polarsys.capella.vp.ms.access_Type;
 import org.polarsys.capella.vp.ms.kind_Type;
-import org.polarsys.capella.vp.ms.ms_Type;
-import org.polarsys.capella.vp.ms.selector_Type;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!-- end-user-doc -->
@@ -79,8 +74,6 @@ public class MsFactoryImpl extends EFactoryImpl implements MsFactory {
     switch (eClass.getClassifierID()) {
     case MsPackage.CS_CONFIGURATION:
       return createCSConfiguration();
-    case MsPackage.FSM_TYPE:
-      return createFSMType();
     case MsPackage.SITUATION:
       return createSituation();
     case MsPackage.IN_STATE_EXPRESSION:
@@ -93,10 +86,6 @@ public class MsFactoryImpl extends EFactoryImpl implements MsFactory {
       return createOrOperation();
     case MsPackage.NOT_OPERATION:
       return createNotOperation();
-    case MsPackage.COMPARISON:
-      return createComparison();
-    case MsPackage.RESULT:
-      return createResult();
     default:
       throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
     }
@@ -114,10 +103,6 @@ public class MsFactoryImpl extends EFactoryImpl implements MsFactory {
       return createkind_TypeFromString(eDataType, initialValue);
     case MsPackage.ACCESS_TYPE:
       return createaccess_TypeFromString(eDataType, initialValue);
-    case MsPackage.SELECTOR_TYPE:
-      return createselector_TypeFromString(eDataType, initialValue);
-    case MsPackage.MS_TYPE:
-      return createms_TypeFromString(eDataType, initialValue);
     default:
       throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
     }
@@ -135,10 +120,6 @@ public class MsFactoryImpl extends EFactoryImpl implements MsFactory {
       return convertkind_TypeToString(eDataType, instanceValue);
     case MsPackage.ACCESS_TYPE:
       return convertaccess_TypeToString(eDataType, instanceValue);
-    case MsPackage.SELECTOR_TYPE:
-      return convertselector_TypeToString(eDataType, instanceValue);
-    case MsPackage.MS_TYPE:
-      return convertms_TypeToString(eDataType, instanceValue);
     default:
       throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
     }
@@ -157,21 +138,6 @@ public class MsFactoryImpl extends EFactoryImpl implements MsFactory {
 
     // end-capella-code
     return csConfiguration;
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public FSMType createFSMType() {
-    FSMTypeImpl fsmType = new FSMTypeImpl();
-    // begin-capella-code
-
-    fsmType.setId(IdGenerator.createId());
-
-    // end-capella-code
-    return fsmType;
   }
 
   /**
@@ -269,36 +235,6 @@ public class MsFactoryImpl extends EFactoryImpl implements MsFactory {
    * 
    * @generated
    */
-  public Comparison createComparison() {
-    ComparisonImpl comparison = new ComparisonImpl();
-    // begin-capella-code
-
-    comparison.setId(IdGenerator.createId());
-
-    // end-capella-code
-    return comparison;
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public Result createResult() {
-    ResultImpl result = new ResultImpl();
-    // begin-capella-code
-
-    result.setId(IdGenerator.createId());
-
-    // end-capella-code
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
   public kind_Type createkind_TypeFromString(EDataType eDataType, String initialValue) {
     kind_Type result = kind_Type.get(initialValue);
     if (result == null)
@@ -343,50 +279,6 @@ public class MsFactoryImpl extends EFactoryImpl implements MsFactory {
    * 
    * @generated
    */
-  public selector_Type createselector_TypeFromString(EDataType eDataType, String initialValue) {
-    selector_Type result = selector_Type.get(initialValue);
-    if (result == null)
-      throw new IllegalArgumentException(
-          "The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public String convertselector_TypeToString(EDataType eDataType, Object instanceValue) {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public ms_Type createms_TypeFromString(EDataType eDataType, String initialValue) {
-    ms_Type result = ms_Type.get(initialValue);
-    if (result == null)
-      throw new IllegalArgumentException(
-          "The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  public String convertms_TypeToString(EDataType eDataType, Object instanceValue) {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
   public MsPackage getMsPackage() {
     return (MsPackage) getEPackage();
   }
@@ -422,49 +314,10 @@ public class MsFactoryImpl extends EFactoryImpl implements MsFactory {
    *          : default name of created element
    * @generated
    */
-  public FSMType createFSMType(String name_p) {
-    FSMType fsmType = createFSMType();
-    fsmType.setName(name_p);
-    return fsmType;
-  }
-
-  /**
-   * Creates class and sets its name (This method comes from a customization of the standard EMF generator)
-   *
-   * @param name_p
-   *          : default name of created element
-   * @generated
-   */
   public Situation createSituation(String name_p) {
     Situation situation = createSituation();
     situation.setName(name_p);
     return situation;
-  }
-
-  /**
-   * Creates class and sets its name (This method comes from a customization of the standard EMF generator)
-   *
-   * @param name_p
-   *          : default name of created element
-   * @generated
-   */
-  public Comparison createComparison(String name_p) {
-    Comparison comparison = createComparison();
-    comparison.setName(name_p);
-    return comparison;
-  }
-
-  /**
-   * Creates class and sets its name (This method comes from a customization of the standard EMF generator)
-   *
-   * @param name_p
-   *          : default name of created element
-   * @generated
-   */
-  public Result createResult(String name_p) {
-    Result result = createResult();
-    result.setName(name_p);
-    return result;
   }
 
 } // MsFactoryImpl

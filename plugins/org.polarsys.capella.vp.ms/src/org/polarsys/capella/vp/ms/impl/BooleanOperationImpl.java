@@ -77,6 +77,7 @@ public abstract class BooleanOperationImpl extends BooleanExpressionImpl impleme
    * @generated
    */
 
+  @Override
   public EList<BooleanExpression> getChildren() {
 
     if (children == null) {

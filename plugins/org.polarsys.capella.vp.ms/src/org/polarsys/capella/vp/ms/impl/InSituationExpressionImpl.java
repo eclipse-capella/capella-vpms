@@ -26,10 +26,10 @@ import org.polarsys.capella.vp.ms.Situation;
  * end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  * <li>{@link org.polarsys.capella.vp.ms.impl.InSituationExpressionImpl#getSituation <em>Situation</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -72,6 +72,7 @@ public class InSituationExpressionImpl extends BooleanExpressionImpl implements 
    * @generated
    */
 
+  @Override
   public Situation getSituation() {
 
     if (situation != null && situation.eIsProxy()) {
@@ -103,6 +104,7 @@ public class InSituationExpressionImpl extends BooleanExpressionImpl implements 
    * @generated
    */
 
+  @Override
   public void setSituation(Situation newSituation) {
 
     Situation oldSituation = situation;

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.polarsys.capella.common.helpers.query.IQuery;
@@ -25,22 +26,45 @@ import org.polarsys.capella.vp.ms.MsPackage;
 
 public class MsContextualQueries {
 
-  public static class Elements implements IQuery {
-
+  public static class Included implements IQuery {
     @Override
     public List<Object> compute(Object configuration) {
-      return new ArrayList<Object>(((CSConfiguration) configuration).getElements());
+      return new ArrayList<Object>(((CSConfiguration) configuration).getIncluded());
     }
   }
 
-  public static class ElementsInverse implements IQuery {
+  public static class Excluded implements IQuery {
+    @Override
+    public List<Object> compute(Object configuration) {
+      return new ArrayList<Object>(((CSConfiguration) configuration).getExcluded());
+    }
+  }
+
+  public static class IncludedInverse extends InverseRefQuery {
+    public IncludedInverse() {
+      super(MsPackage.Literals.CS_CONFIGURATION__INCLUDED);
+    }
+  }
+  
+  public static class ExcludedInverse extends InverseRefQuery {
+    public ExcludedInverse() {
+      super(MsPackage.Literals.CS_CONFIGURATION__EXCLUDED);
+    }
+  }
+  
+  protected static class InverseRefQuery implements IQuery {
+    private final EReference ref;
+    InverseRefQuery(EReference ref){
+      this.ref  = ref;
+    }
+
     @Override
     public List<Object> compute(Object modelElement) {
       List<Object> result = new ArrayList<Object>();
       SemanticEditingDomain domain = (SemanticEditingDomain) TransactionUtil.getEditingDomain(modelElement);
       if (domain != null) {
         for (Setting s : domain.getCrossReferencer().getInverseReferences((EObject) modelElement,
-            MsPackage.Literals.CS_CONFIGURATION__ELEMENTS, true)) {
+            ref, true)) {
           result.add(s.getEObject());
         }
       }

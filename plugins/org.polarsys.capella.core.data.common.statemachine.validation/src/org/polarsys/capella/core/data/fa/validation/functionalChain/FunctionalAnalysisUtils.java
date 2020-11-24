@@ -115,8 +115,8 @@ public final class FunctionalAnalysisUtils {
     if (!StateMachineUtils.getConfigurations(state).isEmpty()) {
       for (CSConfiguration configuration : StateMachineUtils.getConfigurations(state)) {
         EList<AbstractFunction> missingFunctions = new BasicEList<AbstractFunction>(commonFunctions);
-        missingFunctions.removeAll(configuration.getFunctions());
-        if (!configuration.getFunctions().containsAll(commonFunctions)) {
+        missingFunctions.removeAll(configuration.getIncluded());
+        if (!configuration.getIncluded().containsAll(commonFunctions)) {
           FunctionalChainAnalysisResult fcAnalysisResult = new FunctionalChainAnalysisResult(fc, state, component, configuration, missingFunctions);
           fcAnalysisResults.add(fcAnalysisResult);
         }

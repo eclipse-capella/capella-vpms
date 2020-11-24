@@ -26,10 +26,10 @@ import org.polarsys.capella.vp.ms.MsPackage;
  * end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  * <li>{@link org.polarsys.capella.vp.ms.impl.InStateExpressionImpl#getState <em>State</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -72,6 +72,7 @@ public class InStateExpressionImpl extends BooleanExpressionImpl implements InSt
    * @generated
    */
 
+  @Override
   public AbstractState getState() {
 
     if (state != null && state.eIsProxy()) {
@@ -103,6 +104,7 @@ public class InStateExpressionImpl extends BooleanExpressionImpl implements InSt
    * @generated
    */
 
+  @Override
   public void setState(AbstractState newState) {
 
     AbstractState oldState = state;

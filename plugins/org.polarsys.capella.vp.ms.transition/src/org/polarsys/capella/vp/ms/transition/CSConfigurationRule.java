@@ -29,9 +29,9 @@ public class CSConfigurationRule extends AbstractCapellaElementRule {
   public CSConfigurationRule() {
     registerUpdatedAttribute(MsPackage.Literals.CS_CONFIGURATION__ACCESS);
     registerUpdatedAttribute(MsPackage.Literals.CS_CONFIGURATION__KIND);
-    registerUpdatedAttribute(MsPackage.Literals.CS_CONFIGURATION__SELECTOR);
     registerUpdatedReference(MsPackage.Literals.CS_CONFIGURATION__CHILD_CONFIGURATIONS);
-    registerUpdatedReference(MsPackage.Literals.CS_CONFIGURATION__ELEMENTS);
+    registerUpdatedReference(MsPackage.Literals.CS_CONFIGURATION__INCLUDED);
+    registerUpdatedReference(MsPackage.Literals.CS_CONFIGURATION__EXCLUDED);
   }
   
   @Override
@@ -47,7 +47,8 @@ public class CSConfigurationRule extends AbstractCapellaElementRule {
   @Override
   protected void attachRelated(EObject element, EObject result, IContext context) {
     super.attachRelated(element, result, context);
-    AttachmentHelper.getInstance(context).attachTracedElements(element, result, MsPackage.Literals.CS_CONFIGURATION__ELEMENTS, context);
+    AttachmentHelper.getInstance(context).attachTracedElements(element, result, MsPackage.Literals.CS_CONFIGURATION__INCLUDED, context);
+    AttachmentHelper.getInstance(context).attachTracedElements(element, result, MsPackage.Literals.CS_CONFIGURATION__EXCLUDED, context);
     AttachmentHelper.getInstance(context).attachTracedElements(element, result, MsPackage.Literals.CS_CONFIGURATION__CHILD_CONFIGURATIONS, context);
   }
 
@@ -55,12 +56,16 @@ public class CSConfigurationRule extends AbstractCapellaElementRule {
   protected void premicesRelated(EObject element, ArrayList<IPremise> needed) {
     super.premicesRelated(element, needed);
     needed.addAll(createDefaultPrecedencePremices(element, MsPackage.Literals.CS_CONFIGURATION__CHILD_CONFIGURATIONS));
-    needed.addAll(createDefaultPrecedencePremices(element, MsPackage.Literals.CS_CONFIGURATION__ELEMENTS));
+    needed.addAll(createDefaultPrecedencePremices(element, MsPackage.Literals.CS_CONFIGURATION__INCLUDED));
+    needed.addAll(createDefaultPrecedencePremices(element, MsPackage.Literals.CS_CONFIGURATION__EXCLUDED));
   }
 
   @Override
   public List<EObject> retrieveRelatedElements(EObject element, IContext context) {
-    return new ArrayList<>(((CSConfiguration) element).getElements());
+    List<EObject> result = new ArrayList<>();
+    result.addAll(((CSConfiguration) element).getIncluded());
+    result.addAll(((CSConfiguration) element).getExcluded());
+    return result;
   }  
 
 }

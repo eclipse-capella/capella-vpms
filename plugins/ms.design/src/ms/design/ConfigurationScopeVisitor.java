@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.diagram.AbstractDNode;
 import org.eclipse.sirius.diagram.DDiagramElement;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
-import org.polarsys.capella.common.data.modellingcore.ModelElement;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.vp.ms.CSConfiguration;
 import org.polarsys.capella.vp.ms.ui.css.CSSAdapter;
@@ -105,18 +104,15 @@ public class ConfigurationScopeVisitor implements ScopeVisitor<Collection<CSConf
     if (semantic != null) {
       for (Iterator<CSConfiguration> it = appliedConfigurations.iterator(); it.hasNext();) {
         CSConfiguration c = it.next();
-        
         // adding a class that includes the configuration name allows
         // users to apply styles to a concrete configuration
-
-        if (c.getScope().contains(semantic)) {
-          if (c.includes((ModelElement)semantic)) {//FIXME cast
+        if (c.getIncluded().contains(semantic)) {
             style.addCSSClass("vpms-included");
             style.addCSSClass("vpms-included-" + c.getName());
-          } else {
+        }
+        if (c.getExcluded().contains(semantic)) { 
             style.addCSSClass("vpms-excluded");
             style.addCSSClass("vpms-excluded-" + c.getName());
-          }
         }
       }
     }

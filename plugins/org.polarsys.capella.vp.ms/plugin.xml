@@ -21,12 +21,18 @@
    
 <!--@generated-->
   <extension point="org.eclipse.emf.ecore.generated_package">
-      <package class="org.polarsys.capella.vp.ms.MsPackage" genModel="models/ms.genmodel" uri="http://www.polarsys.org/capella/ms"/>
+      <package class="org.polarsys.capella.vp.ms.MsPackage" genModel="models/ms.genmodel" uri="http://www.polarsys.org/capella/ms/0.11"/>
    </extension>
 
 
 <!--@generated-->
   <extension point="org.polarsys.capella.common.model.helpers.helper">
-    <helperImpl class="org.polarsys.capella.vp.ms.helpers.MsPackageHelper" nsURI="http://www.polarsys.org/capella/ms"/>
+    <helperImpl class="org.polarsys.capella.vp.ms.helpers.MsPackageHelper" nsURI="http://www.polarsys.org/capella/ms/0.11"/>
+  </extension>
+  <extension
+        point="org.polarsys.capella.core.data.migration.migrationContributions">
+     <migrationContribution
+           class="org.polarsys.capella.vp.ms.migration.MsMigrationContribution">
+     </migrationContribution>
   </extension>
 </plugin>

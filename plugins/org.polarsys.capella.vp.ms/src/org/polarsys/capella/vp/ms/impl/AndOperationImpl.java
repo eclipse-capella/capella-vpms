@@ -19,8 +19,6 @@ import org.polarsys.capella.vp.ms.MsPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>And Operation</b></em>'. <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

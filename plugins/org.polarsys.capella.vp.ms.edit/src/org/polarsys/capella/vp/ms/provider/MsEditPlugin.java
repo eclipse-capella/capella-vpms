@@ -13,8 +13,6 @@
 
 package org.polarsys.capella.vp.ms.provider;
 
-import java.util.MissingResourceException;
-
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.polarsys.capella.common.data.activity.provider.ActivityEditPlugin;
@@ -50,7 +48,7 @@ public final class MsEditPlugin extends EMFPlugin {
    */
   public MsEditPlugin() {
     super(new ResourceLocator[] { ActivityEditPlugin.INSTANCE, BehaviorEditPlugin.INSTANCE,
-        CapellaModellerEditPlugin.INSTANCE, ModellingCoreEditPlugin.INSTANCE, EmdeEditPlugin.INSTANCE, });
+        CapellaModellerEditPlugin.INSTANCE, EmdeEditPlugin.INSTANCE, ModellingCoreEditPlugin.INSTANCE, });
   }
 
   /**
@@ -92,33 +90,6 @@ public final class MsEditPlugin extends EMFPlugin {
       //
       plugin = this;
     }
-  }
-
-  /**
-   * @generated
-   */
-  @Override
-  public Object getImage(String key) {
-    Object image = super.getImage(key);
-    if (image == null)
-      return delegatedGetImage(key);
-    return image;
-  }
-
-  /**
-   * @generated
-   */
-  @Override
-  protected Object delegatedGetImage(String key) throws MissingResourceException {
-    for (int i = 0; i < delegateResourceLocators.length; ++i) {
-      try {
-        Object image = delegateResourceLocators[i].getImage(key);
-        if (image != null)
-          return image;
-      } catch (MissingResourceException exception) {
-      }
-    }
-    return null;
   }
 
 }

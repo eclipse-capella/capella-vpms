@@ -17,12 +17,6 @@ import org.eclipse.emf.common.util.EList;
 import org.polarsys.capella.common.data.modellingcore.ModelElement;
 import org.polarsys.capella.core.data.capellacommon.AbstractState;
 import org.polarsys.capella.core.data.capellacore.NamedElement;
-import org.polarsys.capella.core.data.cs.AbstractDeploymentLink;
-import org.polarsys.capella.core.data.cs.Component;
-import org.polarsys.capella.core.data.fa.AbstractFunction;
-import org.polarsys.capella.core.data.fa.FunctionalChain;
-import org.polarsys.capella.core.data.information.Port;
-import org.polarsys.capella.core.data.interaction.Scenario;
 import org.polarsys.kitalpha.emde.model.ElementExtension;
 
 /**
@@ -77,137 +71,32 @@ public interface CSConfiguration extends NamedElement, ElementExtension {
   EList<AbstractState> getSupportedModes();
 
   /**
-   * Returns the value of the '<em><b>Elements</b></em>' reference list. The list contents are of type
+   * Returns the value of the '<em><b>Included</b></em>' reference list. The list contents are of type
    * {@link org.polarsys.capella.common.data.modellingcore.ModelElement}.
    * 
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Elements</em>' reference list isn't clear, there really should be more of a description
-   * here...
-   * </p>
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
-   * @return the value of the '<em>Elements</em>' reference list.
-   * @see org.polarsys.capella.vp.ms.MsPackage#getCSConfiguration_Elements()
+   * @return the value of the '<em>Included</em>' reference list.
+   * @see org.polarsys.capella.vp.ms.MsPackage#getCSConfiguration_Included()
    * @model
    * @generated
    */
 
-  EList<ModelElement> getElements();
+  EList<ModelElement> getIncluded();
 
   /**
-   * Returns the value of the '<em><b>Deployment Links</b></em>' reference list. The list contents are of type
-   * {@link org.polarsys.capella.core.data.cs.AbstractDeploymentLink}.
+   * Returns the value of the '<em><b>Excluded</b></em>' reference list. The list contents are of type
+   * {@link org.polarsys.capella.common.data.modellingcore.ModelElement}.
    * 
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Deployment Links</em>' reference list isn't clear, there really should be more of a
-   * description here...
-   * </p>
-   * <!-- end-user-doc -->
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
-   * @return the value of the '<em>Deployment Links</em>' reference list.
-   * @see org.polarsys.capella.vp.ms.MsPackage#getCSConfiguration_DeploymentLinks()
-   * @model transient="true" changeable="false" volatile="true" derived="true"
+   * @return the value of the '<em>Excluded</em>' reference list.
+   * @see org.polarsys.capella.vp.ms.MsPackage#getCSConfiguration_Excluded()
+   * @model
    * @generated
    */
 
-  EList<AbstractDeploymentLink> getDeploymentLinks();
-
-  /**
-   * Returns the value of the '<em><b>Functions</b></em>' reference list. The list contents are of type
-   * {@link org.polarsys.capella.core.data.fa.AbstractFunction}.
-   * 
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Functions</em>' reference list isn't clear, there really should be more of a description
-   * here...
-   * </p>
-   * <!-- end-user-doc -->
-   * 
-   * @return the value of the '<em>Functions</em>' reference list.
-   * @see org.polarsys.capella.vp.ms.MsPackage#getCSConfiguration_Functions()
-   * @model transient="true" changeable="false" volatile="true" derived="true"
-   * @generated
-   */
-
-  EList<AbstractFunction> getFunctions();
-
-  /**
-   * Returns the value of the '<em><b>Functional Chains</b></em>' reference list. The list contents are of type
-   * {@link org.polarsys.capella.core.data.fa.FunctionalChain}.
-   * 
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Functional Chains</em>' reference list isn't clear, there really should be more of a
-   * description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * 
-   * @return the value of the '<em>Functional Chains</em>' reference list.
-   * @see org.polarsys.capella.vp.ms.MsPackage#getCSConfiguration_FunctionalChains()
-   * @model transient="true" changeable="false" volatile="true" derived="true"
-   * @generated
-   */
-
-  EList<FunctionalChain> getFunctionalChains();
-
-  /**
-   * Returns the value of the '<em><b>Scenarios</b></em>' reference list. The list contents are of type
-   * {@link org.polarsys.capella.core.data.interaction.Scenario}.
-   * 
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Scenarios</em>' reference list isn't clear, there really should be more of a description
-   * here...
-   * </p>
-   * <!-- end-user-doc -->
-   * 
-   * @return the value of the '<em>Scenarios</em>' reference list.
-   * @see org.polarsys.capella.vp.ms.MsPackage#getCSConfiguration_Scenarios()
-   * @model transient="true" changeable="false" volatile="true" derived="true"
-   * @generated
-   */
-
-  EList<Scenario> getScenarios();
-
-  /**
-   * Returns the value of the '<em><b>Components</b></em>' reference list. The list contents are of type
-   * {@link org.polarsys.capella.core.data.cs.Component}.
-   * 
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Components</em>' reference list isn't clear, there really should be more of a
-   * description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * 
-   * @return the value of the '<em>Components</em>' reference list.
-   * @see org.polarsys.capella.vp.ms.MsPackage#getCSConfiguration_Components()
-   * @model transient="true" changeable="false" volatile="true" derived="true"
-   * @generated
-   */
-
-  EList<Component> getComponents();
-
-  /**
-   * Returns the value of the '<em><b>Ports</b></em>' reference list. The list contents are of type
-   * {@link org.polarsys.capella.core.data.information.Port}.
-   * 
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ports</em>' reference list isn't clear, there really should be more of a description
-   * here...
-   * </p>
-   * <!-- end-user-doc -->
-   * 
-   * @return the value of the '<em>Ports</em>' reference list.
-   * @see org.polarsys.capella.vp.ms.MsPackage#getCSConfiguration_Ports()
-   * @model transient="true" changeable="false" volatile="true" derived="true"
-   * @generated
-   */
-
-  EList<Port> getPorts();
+  EList<ModelElement> getExcluded();
 
   /**
    * Returns the value of the '<em><b>Child Configurations</b></em>' reference list. The list contents are of type
@@ -297,41 +186,6 @@ public interface CSConfiguration extends NamedElement, ElementExtension {
   void setAccess(access_Type value);
 
   /**
-   * Returns the value of the '<em><b>Selector</b></em>' attribute. The literals are from the enumeration
-   * {@link org.polarsys.capella.vp.ms.selector_Type}.
-   * 
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Selector</em>' attribute isn't clear, there really should be more of a description
-   * here...
-   * </p>
-   * <!-- end-user-doc -->
-   * 
-   * @return the value of the '<em>Selector</em>' attribute.
-   * @see org.polarsys.capella.vp.ms.selector_Type
-   * @see #setSelector(selector_Type)
-   * @see org.polarsys.capella.vp.ms.MsPackage#getCSConfiguration_Selector()
-   * @model
-   * @generated
-   */
-
-  selector_Type getSelector();
-
-  /**
-   * Sets the value of the '{@link org.polarsys.capella.vp.ms.CSConfiguration#getSelector <em>Selector</em>}' attribute.
-   * 
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @param value
-   *          the new value of the '<em>Selector</em>' attribute.
-   * @see org.polarsys.capella.vp.ms.selector_Type
-   * @see #getSelector()
-   * @generated
-   */
-
-  void setSelector(selector_Type value);
-
-  /**
    * Returns the value of the '<em><b>Context</b></em>' reference list. The list contents are of type
    * {@link org.polarsys.capella.vp.ms.Situation}.
    * 
@@ -368,16 +222,6 @@ public interface CSConfiguration extends NamedElement, ElementExtension {
    */
 
   EList<CSConfiguration> getCompareTo();
-
-  /**
-   * 
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @model required="true" elementRequired="true"
-   * @generated
-   */
-
-  boolean includes(ModelElement element);
 
   /**
    * 

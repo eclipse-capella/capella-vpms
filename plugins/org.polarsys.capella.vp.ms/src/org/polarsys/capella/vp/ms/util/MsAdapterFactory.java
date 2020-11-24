@@ -28,14 +28,11 @@ import org.polarsys.capella.vp.ms.AndOperation;
 import org.polarsys.capella.vp.ms.BooleanExpression;
 import org.polarsys.capella.vp.ms.BooleanOperation;
 import org.polarsys.capella.vp.ms.CSConfiguration;
-import org.polarsys.capella.vp.ms.Comparison;
-import org.polarsys.capella.vp.ms.FSMType;
 import org.polarsys.capella.vp.ms.InSituationExpression;
 import org.polarsys.capella.vp.ms.InStateExpression;
 import org.polarsys.capella.vp.ms.MsPackage;
 import org.polarsys.capella.vp.ms.NotOperation;
 import org.polarsys.capella.vp.ms.OrOperation;
-import org.polarsys.capella.vp.ms.Result;
 import org.polarsys.capella.vp.ms.Situation;
 import org.polarsys.kitalpha.emde.model.Element;
 import org.polarsys.kitalpha.emde.model.ElementExtension;
@@ -98,11 +95,6 @@ public class MsAdapterFactory extends AdapterFactoryImpl {
     }
 
     @Override
-    public Adapter caseFSMType(FSMType object) {
-      return createFSMTypeAdapter();
-    }
-
-    @Override
     public Adapter caseSituation(Situation object) {
       return createSituationAdapter();
     }
@@ -140,16 +132,6 @@ public class MsAdapterFactory extends AdapterFactoryImpl {
     @Override
     public Adapter caseNotOperation(NotOperation object) {
       return createNotOperationAdapter();
-    }
-
-    @Override
-    public Adapter caseComparison(Comparison object) {
-      return createComparisonAdapter();
-    }
-
-    @Override
-    public Adapter caseResult(Result object) {
-      return createResultAdapter();
     }
 
     @Override
@@ -226,19 +208,6 @@ public class MsAdapterFactory extends AdapterFactoryImpl {
    * @generated
    */
   public Adapter createCSConfigurationAdapter() {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.polarsys.capella.vp.ms.FSMType <em>FSM Type</em>}'. <!--
-   * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
-   * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
-   * 
-   * @return the new adapter.
-   * @see org.polarsys.capella.vp.ms.FSMType
-   * @generated
-   */
-  public Adapter createFSMTypeAdapter() {
     return null;
   }
 
@@ -343,32 +312,6 @@ public class MsAdapterFactory extends AdapterFactoryImpl {
    * @generated
    */
   public Adapter createNotOperationAdapter() {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.polarsys.capella.vp.ms.Comparison <em>Comparison</em>}'.
-   * <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
-   * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
-   * 
-   * @return the new adapter.
-   * @see org.polarsys.capella.vp.ms.Comparison
-   * @generated
-   */
-  public Adapter createComparisonAdapter() {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.polarsys.capella.vp.ms.Result <em>Result</em>}'. <!--
-   * begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's useful to
-   * ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
-   * 
-   * @return the new adapter.
-   * @see org.polarsys.capella.vp.ms.Result
-   * @generated
-   */
-  public Adapter createResultAdapter() {
     return null;
   }
 

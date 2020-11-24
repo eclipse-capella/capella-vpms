@@ -235,6 +235,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public EList<AbstractTrace> getIncomingTraces() {
 
     // INJECTED-CODE-BEGIN
@@ -249,6 +250,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public EList<AbstractTrace> getOutgoingTraces() {
 
     // INJECTED-CODE-BEGIN
@@ -263,6 +265,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public boolean isVisibleInDoc() {
 
     return visibleInDoc;
@@ -274,6 +277,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public void setVisibleInDoc(boolean newVisibleInDoc) {
 
     boolean oldVisibleInDoc = visibleInDoc;
@@ -290,6 +294,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public boolean isVisibleInLM() {
 
     return visibleInLM;
@@ -301,6 +306,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public void setVisibleInLM(boolean newVisibleInLM) {
 
     boolean oldVisibleInLM = visibleInLM;
@@ -317,6 +323,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public String getSummary() {
 
     return summary;
@@ -328,6 +335,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public void setSummary(String newSummary) {
 
     String oldSummary = summary;
@@ -344,6 +352,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public String getDescription() {
 
     return description;
@@ -355,6 +364,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public void setDescription(String newDescription) {
 
     String oldDescription = description;
@@ -371,6 +381,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public String getReview() {
 
     return review;
@@ -382,6 +393,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public void setReview(String newReview) {
 
     String oldReview = review;
@@ -397,6 +409,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public EList<AbstractPropertyValue> getOwnedPropertyValues() {
 
     if (ownedPropertyValues == null) {
@@ -412,6 +425,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public EList<EnumerationPropertyType> getOwnedEnumerationPropertyTypes() {
 
     if (ownedEnumerationPropertyTypes == null) {
@@ -427,6 +441,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public EList<AbstractPropertyValue> getAppliedPropertyValues() {
 
     if (appliedPropertyValues == null) {
@@ -442,6 +457,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public EList<PropertyValueGroup> getOwnedPropertyValueGroups() {
 
     if (ownedPropertyValueGroups == null) {
@@ -457,6 +473,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public EList<PropertyValueGroup> getAppliedPropertyValueGroups() {
 
     if (appliedPropertyValueGroups == null) {
@@ -472,6 +489,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public EnumerationPropertyLiteral getStatus() {
 
     if (status != null && status.eIsProxy()) {
@@ -503,6 +521,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public void setStatus(EnumerationPropertyLiteral newStatus) {
 
     EnumerationPropertyLiteral oldStatus = status;
@@ -518,6 +537,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
    * @generated
    */
 
+  @Override
   public EList<EnumerationPropertyLiteral> getFeatures() {
 
     if (features == null) {
@@ -829,7 +849,7 @@ public abstract class BooleanExpressionImpl extends ModelElementImpl implements 
     if (eIsProxy())
       return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (visibleInDoc: "); //$NON-NLS-1$
     result.append(visibleInDoc);
     result.append(", visibleInLM: "); //$NON-NLS-1$

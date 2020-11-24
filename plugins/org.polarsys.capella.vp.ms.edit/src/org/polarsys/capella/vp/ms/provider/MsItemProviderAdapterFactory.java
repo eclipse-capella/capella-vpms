@@ -126,29 +126,6 @@ public class MsItemProviderAdapterFactory extends MsAdapterFactory
   }
 
   /**
-   * This keeps track of the one adapter used for all {@link org.polarsys.capella.vp.ms.ms.FSMType} instances. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected FSMTypeItemProvider fsmTypeItemProvider;
-
-  /**
-   * This creates an adapter for a {@link org.polarsys.capella.vp.ms.FSMType}. <!-- begin-user-doc --> <!-- end-user-doc
-   * -->
-   * 
-   * @generated
-   */
-  @Override
-  public Adapter createFSMTypeAdapter() {
-    if (fsmTypeItemProvider == null) {
-      fsmTypeItemProvider = new FSMTypeItemProvider(this);
-    }
-
-    return fsmTypeItemProvider;
-  }
-
-  /**
    * This keeps track of the one adapter used for all {@link org.polarsys.capella.vp.ms.ms.Situation} instances. <!--
    * begin-user-doc --> <!-- end-user-doc -->
    * 
@@ -287,56 +264,11 @@ public class MsItemProviderAdapterFactory extends MsAdapterFactory
   }
 
   /**
-   * This keeps track of the one adapter used for all {@link org.polarsys.capella.vp.ms.Comparison} instances. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected ComparisonItemProvider comparisonItemProvider;
-
-  /**
-   * This creates an adapter for a {@link org.polarsys.capella.vp.ms.Comparison}. <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * 
-   * @generated
-   */
-  @Override
-  public Adapter createComparisonAdapter() {
-    if (comparisonItemProvider == null) {
-      comparisonItemProvider = new ComparisonItemProvider(this);
-    }
-
-    return comparisonItemProvider;
-  }
-
-  /**
-   * This keeps track of the one adapter used for all {@link org.polarsys.capella.vp.ms.Result} instances. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected ResultItemProvider resultItemProvider;
-
-  /**
-   * This creates an adapter for a {@link org.polarsys.capella.vp.ms.Result}. <!-- begin-user-doc --> <!-- end-user-doc
-   * -->
-   * 
-   * @generated
-   */
-  @Override
-  public Adapter createResultAdapter() {
-    if (resultItemProvider == null) {
-      resultItemProvider = new ResultItemProvider(this);
-    }
-
-    return resultItemProvider;
-  }
-
-  /**
    * This returns the root adapter factory that contains this factory. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @generated
    */
+  @Override
   public ComposeableAdapterFactory getRootAdapterFactory() {
     return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
   }
@@ -346,6 +278,7 @@ public class MsItemProviderAdapterFactory extends MsAdapterFactory
    * 
    * @generated
    */
+  @Override
   public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
     this.parentAdapterFactory = parentAdapterFactory;
   }
@@ -420,6 +353,7 @@ public class MsItemProviderAdapterFactory extends MsAdapterFactory
    * 
    * @generated
    */
+  @Override
   public void addListener(INotifyChangedListener notifyChangedListener) {
     changeNotifier.addListener(notifyChangedListener);
   }
@@ -429,6 +363,7 @@ public class MsItemProviderAdapterFactory extends MsAdapterFactory
    * 
    * @generated
    */
+  @Override
   public void removeListener(INotifyChangedListener notifyChangedListener) {
     changeNotifier.removeListener(notifyChangedListener);
   }
@@ -439,6 +374,7 @@ public class MsItemProviderAdapterFactory extends MsAdapterFactory
    * 
    * @generated
    */
+  @Override
   public void fireNotifyChanged(Notification notification) {
     changeNotifier.fireNotifyChanged(notification);
 
@@ -452,11 +388,10 @@ public class MsItemProviderAdapterFactory extends MsAdapterFactory
    * 
    * @generated
    */
+  @Override
   public void dispose() {
     if (csConfigurationItemProvider != null)
       csConfigurationItemProvider.dispose();
-    if (fsmTypeItemProvider != null)
-      fsmTypeItemProvider.dispose();
     if (situationItemProvider != null)
       situationItemProvider.dispose();
     if (inStateExpressionItemProvider != null)
@@ -469,10 +404,6 @@ public class MsItemProviderAdapterFactory extends MsAdapterFactory
       orOperationItemProvider.dispose();
     if (notOperationItemProvider != null)
       notOperationItemProvider.dispose();
-    if (comparisonItemProvider != null)
-      comparisonItemProvider.dispose();
-    if (resultItemProvider != null)
-      resultItemProvider.dispose();
   }
 
   /**
@@ -516,14 +447,14 @@ public class MsItemProviderAdapterFactory extends MsAdapterFactory
       /**
        * <!-- begin-user-doc --> <!-- end-user-doc -->
        * 
-       * @generated NOT
+       * @generated
        */
       @Override
       public Object caseExtensibleElement(ExtensibleElement object) {
         // begin-extension-code
         if (ModelExtensionHelper.getInstance(object).isExtensionModelDisabled(
             EcoreUtil.getRootContainer(object).eClass().getEPackage().getNsURI(),
-            "http://www.polarsys.org/capella/ms")) { //$NON-NLS-1$
+            "http://www.polarsys.org/capella/ms/0.11")) { //$NON-NLS-1$
           return null;
         }
         // end-extension-code
@@ -540,42 +471,11 @@ public class MsItemProviderAdapterFactory extends MsAdapterFactory
         // begin-extension-code
         {
           CommandParameter commandParameter = createChildParameter(
-              EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createFSMType());
-          if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
-            newChildDescriptors.add(commandParameter);
-          }
-        }
-        // end-extension-code
-
-        // begin-extension-code
-        {
-          CommandParameter commandParameter = createChildParameter(
               EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createSituation());
           if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
             newChildDescriptors.add(commandParameter);
           }
         }
-        // end-extension-code
-
-        // FIXME better fix that in the genmodel..
-        // begin-extension-code
-//        {
-//          CommandParameter commandParameter = createChildParameter(
-//              EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createComparison());
-//          if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
-//            newChildDescriptors.add(commandParameter);
-//          }
-//        }
-        // end-extension-code
-
-        // begin-extension-code
-//        {
-//          CommandParameter commandParameter = createChildParameter(
-//              EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createResult());
-//          if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
-//            newChildDescriptors.add(commandParameter);
-//          }
-//        }
         // end-extension-code
 
         return null;

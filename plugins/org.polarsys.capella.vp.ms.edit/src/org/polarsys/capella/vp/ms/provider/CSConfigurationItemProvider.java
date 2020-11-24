@@ -65,17 +65,11 @@ public class CSConfigurationItemProvider extends NamedElementItemProvider implem
       super.getPropertyDescriptors(object);
 
       addSupportedModesPropertyDescriptor(object);
-      addElementsPropertyDescriptor(object);
-      addDeploymentLinksPropertyDescriptor(object);
-      addFunctionsPropertyDescriptor(object);
-      addFunctionalChainsPropertyDescriptor(object);
-      addScenariosPropertyDescriptor(object);
-      addComponentsPropertyDescriptor(object);
-      addPortsPropertyDescriptor(object);
+      addIncludedPropertyDescriptor(object);
+      addExcludedPropertyDescriptor(object);
       addChildConfigurationsPropertyDescriptor(object);
       addKindPropertyDescriptor(object);
       addAccessPropertyDescriptor(object);
-      addSelectorPropertyDescriptor(object);
       addContextPropertyDescriptor(object);
       addCompareToPropertyDescriptor(object);
     }
@@ -106,140 +100,40 @@ public class CSConfigurationItemProvider extends NamedElementItemProvider implem
   }
 
   /**
-   * This adds a property descriptor for the Elements feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * This adds a property descriptor for the Included feature. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @generated
    */
-  protected void addElementsPropertyDescriptor(Object object) {
+  protected void addIncludedPropertyDescriptor(Object object) {
 
     // begin-extension-code
     itemPropertyDescriptors.add(createItemPropertyDescriptor
     // end-extension-code
     (((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-        getString("_UI_CSConfiguration_elements_feature"), //$NON-NLS-1$
-        getString("_UI_PropertyDescriptor_description", "_UI_CSConfiguration_elements_feature", //$NON-NLS-1$ //$NON-NLS-2$
+        getString("_UI_CSConfiguration_included_feature"), //$NON-NLS-1$
+        getString("_UI_PropertyDescriptor_description", "_UI_CSConfiguration_included_feature", //$NON-NLS-1$ //$NON-NLS-2$
             "_UI_CSConfiguration_type"), //$NON-NLS-1$
-        MsPackage.Literals.CS_CONFIGURATION__ELEMENTS, true, false, true, null, null,
+        MsPackage.Literals.CS_CONFIGURATION__INCLUDED, true, false, true, null, null,
         // begin-extension-code
         null));
     // end-extension-code
   }
 
   /**
-   * This adds a property descriptor for the Deployment Links feature. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * This adds a property descriptor for the Excluded feature. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @generated
    */
-  protected void addDeploymentLinksPropertyDescriptor(Object object) {
+  protected void addExcludedPropertyDescriptor(Object object) {
 
     // begin-extension-code
     itemPropertyDescriptors.add(createItemPropertyDescriptor
     // end-extension-code
     (((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-        getString("_UI_CSConfiguration_deploymentLinks_feature"), //$NON-NLS-1$
-        getString("_UI_PropertyDescriptor_description", "_UI_CSConfiguration_deploymentLinks_feature", //$NON-NLS-1$ //$NON-NLS-2$
+        getString("_UI_CSConfiguration_excluded_feature"), //$NON-NLS-1$
+        getString("_UI_PropertyDescriptor_description", "_UI_CSConfiguration_excluded_feature", //$NON-NLS-1$ //$NON-NLS-2$
             "_UI_CSConfiguration_type"), //$NON-NLS-1$
-        MsPackage.Literals.CS_CONFIGURATION__DEPLOYMENT_LINKS, false, false, false, null, null,
-        // begin-extension-code
-        null));
-    // end-extension-code
-  }
-
-  /**
-   * This adds a property descriptor for the Functions feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected void addFunctionsPropertyDescriptor(Object object) {
-
-    // begin-extension-code
-    itemPropertyDescriptors.add(createItemPropertyDescriptor
-    // end-extension-code
-    (((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-        getString("_UI_CSConfiguration_functions_feature"), //$NON-NLS-1$
-        getString("_UI_PropertyDescriptor_description", "_UI_CSConfiguration_functions_feature", //$NON-NLS-1$ //$NON-NLS-2$
-            "_UI_CSConfiguration_type"), //$NON-NLS-1$
-        MsPackage.Literals.CS_CONFIGURATION__FUNCTIONS, false, false, false, null, null,
-        // begin-extension-code
-        null));
-    // end-extension-code
-  }
-
-  /**
-   * This adds a property descriptor for the Functional Chains feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected void addFunctionalChainsPropertyDescriptor(Object object) {
-
-    // begin-extension-code
-    itemPropertyDescriptors.add(createItemPropertyDescriptor
-    // end-extension-code
-    (((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-        getString("_UI_CSConfiguration_functionalChains_feature"), //$NON-NLS-1$
-        getString("_UI_PropertyDescriptor_description", "_UI_CSConfiguration_functionalChains_feature", //$NON-NLS-1$ //$NON-NLS-2$
-            "_UI_CSConfiguration_type"), //$NON-NLS-1$
-        MsPackage.Literals.CS_CONFIGURATION__FUNCTIONAL_CHAINS, false, false, false, null, null,
-        // begin-extension-code
-        null));
-    // end-extension-code
-  }
-
-  /**
-   * This adds a property descriptor for the Scenarios feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected void addScenariosPropertyDescriptor(Object object) {
-
-    // begin-extension-code
-    itemPropertyDescriptors.add(createItemPropertyDescriptor
-    // end-extension-code
-    (((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-        getString("_UI_CSConfiguration_scenarios_feature"), //$NON-NLS-1$
-        getString("_UI_PropertyDescriptor_description", "_UI_CSConfiguration_scenarios_feature", //$NON-NLS-1$ //$NON-NLS-2$
-            "_UI_CSConfiguration_type"), //$NON-NLS-1$
-        MsPackage.Literals.CS_CONFIGURATION__SCENARIOS, false, false, false, null, null,
-        // begin-extension-code
-        null));
-    // end-extension-code
-  }
-
-  /**
-   * This adds a property descriptor for the Components feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected void addComponentsPropertyDescriptor(Object object) {
-
-    // begin-extension-code
-    itemPropertyDescriptors.add(createItemPropertyDescriptor
-    // end-extension-code
-    (((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-        getString("_UI_CSConfiguration_components_feature"), //$NON-NLS-1$
-        getString("_UI_PropertyDescriptor_description", "_UI_CSConfiguration_components_feature", //$NON-NLS-1$ //$NON-NLS-2$
-            "_UI_CSConfiguration_type"), //$NON-NLS-1$
-        MsPackage.Literals.CS_CONFIGURATION__COMPONENTS, false, false, false, null, null,
-        // begin-extension-code
-        null));
-    // end-extension-code
-  }
-
-  /**
-   * This adds a property descriptor for the Ports feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected void addPortsPropertyDescriptor(Object object) {
-
-    // begin-extension-code
-    itemPropertyDescriptors.add(createItemPropertyDescriptor
-    // end-extension-code
-    (((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-        getString("_UI_CSConfiguration_ports_feature"), //$NON-NLS-1$
-        getString("_UI_PropertyDescriptor_description", "_UI_CSConfiguration_ports_feature", //$NON-NLS-1$ //$NON-NLS-2$
-            "_UI_CSConfiguration_type"), //$NON-NLS-1$
-        MsPackage.Literals.CS_CONFIGURATION__PORTS, false, false, false, null, null,
+        MsPackage.Literals.CS_CONFIGURATION__EXCLUDED, true, false, true, null, null,
         // begin-extension-code
         null));
     // end-extension-code
@@ -306,27 +200,6 @@ public class CSConfigurationItemProvider extends NamedElementItemProvider implem
   }
 
   /**
-   * This adds a property descriptor for the Selector feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-  protected void addSelectorPropertyDescriptor(Object object) {
-
-    // begin-extension-code
-    itemPropertyDescriptors.add(createItemPropertyDescriptor
-    // end-extension-code
-    (((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-        getString("_UI_CSConfiguration_selector_feature"), //$NON-NLS-1$
-        getString("_UI_PropertyDescriptor_description", "_UI_CSConfiguration_selector_feature", //$NON-NLS-1$ //$NON-NLS-2$
-            "_UI_CSConfiguration_type"), //$NON-NLS-1$
-        MsPackage.Literals.CS_CONFIGURATION__SELECTOR, true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-        null,
-        // begin-extension-code
-        null));
-    // end-extension-code
-  }
-
-  /**
    * This adds a property descriptor for the Context feature. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @generated
@@ -373,8 +246,7 @@ public class CSConfigurationItemProvider extends NamedElementItemProvider implem
    */
   @Override
   public Object getImage(Object object) {
-    String suffix = ((CSConfiguration) object).getSelector().getLiteral();
-    return overlayImage(object, getResourceLocator().getImage("full/obj16/CSConfiguration_" + suffix)); //$NON-NLS-1$
+    return overlayImage(object, getResourceLocator().getImage("full/obj16/CSConfiguration")); //$NON-NLS-1$
   }
 
   /**
@@ -404,7 +276,6 @@ public class CSConfigurationItemProvider extends NamedElementItemProvider implem
     switch (notification.getFeatureID(CSConfiguration.class)) {
     case MsPackage.CS_CONFIGURATION__KIND:
     case MsPackage.CS_CONFIGURATION__ACCESS:
-    case MsPackage.CS_CONFIGURATION__SELECTOR:
       fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
       return;
     }
@@ -433,37 +304,7 @@ public class CSConfigurationItemProvider extends NamedElementItemProvider implem
     // begin-extension-code
     {
       CommandParameter commandParameter = createChildParameter(
-          EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createFSMType());
-      if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
-        newChildDescriptors.add(commandParameter);
-      }
-    }
-    // end-extension-code
-
-    // begin-extension-code
-    {
-      CommandParameter commandParameter = createChildParameter(
           EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createSituation());
-      if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
-        newChildDescriptors.add(commandParameter);
-      }
-    }
-    // end-extension-code
-
-    // begin-extension-code
-    {
-      CommandParameter commandParameter = createChildParameter(
-          EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createComparison());
-      if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
-        newChildDescriptors.add(commandParameter);
-      }
-    }
-    // end-extension-code
-
-    // begin-extension-code
-    {
-      CommandParameter commandParameter = createChildParameter(
-          EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createResult());
       if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
         newChildDescriptors.add(commandParameter);
       }
@@ -484,13 +325,8 @@ public class CSConfigurationItemProvider extends NamedElementItemProvider implem
       boolean isSettable_p, boolean multiLine_p, boolean sortChoices_p, Object staticImage_p, String category_p,
       String[] filterFlags_p) {
 
-    if (feature_p == MsPackage.Literals.CS_CONFIGURATION__ELEMENTS
-        || feature_p == MsPackage.Literals.CS_CONFIGURATION__COMPONENTS
-        || feature_p == MsPackage.Literals.CS_CONFIGURATION__DEPLOYMENT_LINKS
-        || feature_p == MsPackage.Literals.CS_CONFIGURATION__FUNCTIONAL_CHAINS
-        || feature_p == MsPackage.Literals.CS_CONFIGURATION__FUNCTIONS
-        || feature_p == MsPackage.Literals.CS_CONFIGURATION__PORTS
-        || feature_p == MsPackage.Literals.CS_CONFIGURATION__SCENARIOS) {
+    if (feature_p == MsPackage.Literals.CS_CONFIGURATION__INCLUDED
+        || feature_p == MsPackage.Literals.CS_CONFIGURATION__EXCLUDED) {
 
       return new CSConfigurationItemPropertyDescriptor(adapterFactory_p, resourceLocator_p, displayName_p,
           description_p, feature_p, isSettable_p, multiLine_p, sortChoices_p, staticImage_p, category_p, filterFlags_p);

@@ -14,7 +14,6 @@
 package org.polarsys.capella.vp.ms.impl;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Deque;
 
@@ -25,7 +24,6 @@ import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.EcoreEList;
 import org.polarsys.capella.common.data.activity.InputPin;
 import org.polarsys.capella.common.data.activity.OutputPin;
 import org.polarsys.capella.common.data.modellingcore.AbstractType;
@@ -33,18 +31,15 @@ import org.polarsys.capella.common.data.modellingcore.ModelElement;
 import org.polarsys.capella.core.data.capellacommon.AbstractState;
 import org.polarsys.capella.core.data.capellacore.Feature;
 import org.polarsys.capella.core.data.capellacore.impl.NamedElementImpl;
-import org.polarsys.capella.core.data.cs.AbstractDeploymentLink;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.ComponentPkg;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.cs.PhysicalPort;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
-import org.polarsys.capella.core.data.fa.ComponentFunctionalAllocation;
 import org.polarsys.capella.core.data.fa.ComponentPort;
 import org.polarsys.capella.core.data.fa.FunctionInputPort;
 import org.polarsys.capella.core.data.fa.FunctionOutputPort;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
-import org.polarsys.capella.core.data.information.Port;
 import org.polarsys.capella.core.data.interaction.InstanceRole;
 import org.polarsys.capella.core.data.interaction.Scenario;
 import org.polarsys.capella.core.data.la.LogicalComponent;
@@ -56,7 +51,6 @@ import org.polarsys.capella.vp.ms.MsPackage;
 import org.polarsys.capella.vp.ms.Situation;
 import org.polarsys.capella.vp.ms.access_Type;
 import org.polarsys.capella.vp.ms.kind_Type;
-import org.polarsys.capella.vp.ms.selector_Type;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>CS Configuration</b></em>'. <!-- end-user-doc
@@ -91,14 +85,24 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
   protected EList<AbstractState> supportedModes;
 
   /**
-   * The cached value of the '{@link #getElements() <em>Elements</em>}' reference list. <!-- begin-user-doc --> <!--
+   * The cached value of the '{@link #getIncluded() <em>Included</em>}' reference list. <!-- begin-user-doc --> <!--
    * end-user-doc -->
    * 
-   * @see #getElements()
+   * @see #getIncluded()
    * @generated
    * @ordered
    */
-  protected EList<ModelElement> elements;
+  protected EList<ModelElement> included;
+
+  /**
+   * The cached value of the '{@link #getExcluded() <em>Excluded</em>}' reference list. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
+   * @see #getExcluded()
+   * @generated
+   * @ordered
+   */
+  protected EList<ModelElement> excluded;
 
   /**
    * The cached value of the '{@link #getChildConfigurations() <em>Child Configurations</em>}' reference list. <!--
@@ -150,26 +154,6 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
   protected access_Type access = ACCESS_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getSelector() <em>Selector</em>}' attribute. <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * 
-   * @see #getSelector()
-   * @generated
-   * @ordered
-   */
-  protected static final selector_Type SELECTOR_EDEFAULT = selector_Type.INCLUSION;
-
-  /**
-   * The cached value of the '{@link #getSelector() <em>Selector</em>}' attribute. <!-- begin-user-doc --> <!--
-   * end-user-doc -->
-   * 
-   * @see #getSelector()
-   * @generated
-   * @ordered
-   */
-  protected selector_Type selector = SELECTOR_EDEFAULT;
-
-  /**
    * The cached value of the '{@link #getContext() <em>Context</em>}' reference list. <!-- begin-user-doc --> <!--
    * end-user-doc -->
    * 
@@ -216,6 +200,7 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
    * @generated
    */
 
+  @Override
   public EList<AbstractState> getSupportedModes() {
 
     if (supportedModes == null) {
@@ -231,77 +216,14 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
    * @generated
    */
 
-  public EList<ModelElement> getElements() {
+  @Override
+  public EList<ModelElement> getIncluded() {
 
-    if (elements == null) {
-      elements = new EObjectResolvingEList<ModelElement>(ModelElement.class, this,
-          MsPackage.CS_CONFIGURATION__ELEMENTS);
+    if (included == null) {
+      included = new EObjectResolvingEList<ModelElement>(ModelElement.class, this,
+          MsPackage.CS_CONFIGURATION__INCLUDED);
     }
-    return elements;
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated NOT
-   */
-  public EList<AbstractDeploymentLink> getDeploymentLinks() {
-    Object[] data = getElementsFiltered(AbstractDeploymentLink.class);
-    return new EcoreEList.UnmodifiableEList<AbstractDeploymentLink>(this,
-        MsPackage.Literals.CS_CONFIGURATION__DEPLOYMENT_LINKS, data.length, data);
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated NOT
-   */
-  public EList<AbstractFunction> getFunctions() {
-    Object[] data = getElementsFiltered(AbstractFunction.class);
-    return new EcoreEList.UnmodifiableEList<AbstractFunction>(this, MsPackage.Literals.CS_CONFIGURATION__FUNCTIONS,
-        data.length, data);
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated NOT
-   */
-  public EList<FunctionalChain> getFunctionalChains() {
-    Object[] data = getElementsFiltered(FunctionalChain.class);
-    return new EcoreEList.UnmodifiableEList<FunctionalChain>(this,
-        MsPackage.Literals.CS_CONFIGURATION__FUNCTIONAL_CHAINS, data.length, data);
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated NOT
-   */
-  public EList<Scenario> getScenarios() {
-    Object[] data = getElementsFiltered(Scenario.class);
-    return new EcoreEList.UnmodifiableEList<Scenario>(this, MsPackage.Literals.CS_CONFIGURATION__SCENARIOS, data.length, data);
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated NOT
-   */
-  public EList<Component> getComponents() {
-    Object[] data = getElementsFiltered(Component.class);
-    return new EcoreEList.UnmodifiableEList<Component>(this, MsPackage.Literals.CS_CONFIGURATION__COMPONENTS,
-        data.length, data);
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated NOT
-   */
-  public EList<Port> getPorts() {
-    Object[] data = getElementsFiltered(Port.class);
-    return new EcoreEList.UnmodifiableEList<Port>(this, MsPackage.Literals.CS_CONFIGURATION__PORTS, data.length, data);
+    return included;
   }
 
   /**
@@ -310,6 +232,23 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
    * @generated
    */
 
+  @Override
+  public EList<ModelElement> getExcluded() {
+
+    if (excluded == null) {
+      excluded = new EObjectResolvingEList<ModelElement>(ModelElement.class, this,
+          MsPackage.CS_CONFIGURATION__EXCLUDED);
+    }
+    return excluded;
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+
+  @Override
   public EList<CSConfiguration> getChildConfigurations() {
 
     if (childConfigurations == null) {
@@ -325,6 +264,7 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
    * @generated
    */
 
+  @Override
   public kind_Type getKind() {
 
     return kind;
@@ -336,6 +276,7 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
    * @generated
    */
 
+  @Override
   public void setKind(kind_Type newKind) {
 
     kind_Type oldKind = kind;
@@ -351,6 +292,7 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
    * @generated
    */
 
+  @Override
   public access_Type getAccess() {
 
     return access;
@@ -362,6 +304,7 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
    * @generated
    */
 
+  @Override
   public void setAccess(access_Type newAccess) {
 
     access_Type oldAccess = access;
@@ -377,33 +320,7 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
    * @generated
    */
 
-  public selector_Type getSelector() {
-
-    return selector;
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-
-  public void setSelector(selector_Type newSelector) {
-
-    selector_Type oldSelector = selector;
-    selector = newSelector == null ? SELECTOR_EDEFAULT : newSelector;
-    if (eNotificationRequired())
-      eNotify(
-          new ENotificationImpl(this, Notification.SET, MsPackage.CS_CONFIGURATION__SELECTOR, oldSelector, selector));
-
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated
-   */
-
+  @Override
   public EList<Situation> getContext() {
 
     if (context == null) {
@@ -418,6 +335,7 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
    * @generated
    */
 
+  @Override
   public EList<CSConfiguration> getCompareTo() {
 
     if (compareTo == null) {
@@ -425,95 +343,6 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
           MsPackage.CS_CONFIGURATION__COMPARE_TO);
     }
     return compareTo;
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated NOT
-   */
-
-  public boolean includes(ModelElement element) {
-
-    if (getScope().contains(element)) {
-
-      if (getSelector() == selector_Type.INCLUSION) {
-
-        if (getElements().contains(element)) {
-
-          return true;
-
-        } else {
-
-          return false;
-
-        }
-
-      } else {
-
-        ModelElement current = element;
-
-        do {
-
-          if (getElements().contains(current)) {
-
-            return false;
-
-          } else {
-
-            // the current element is not explitly included in the inactive
-            // elements list, but maybe one of its logical ancestors is.
-            // e.g. a function that is allocated in an inactive component
-            // is implicitly excluded
-
-            if (current instanceof AbstractFunction) {
-
-              for (ComponentFunctionalAllocation alloc : ((AbstractFunction) current)
-                  .getComponentFunctionalAllocations()) {
-                current = alloc.getBlock();
-              }
-
-            } else if (current instanceof PhysicalComponent) {
-
-              if (((PhysicalComponent) current).getDeployingPhysicalComponents().size() > 0) {
-
-                current = ((PhysicalComponent) current).getDeployingPhysicalComponents().get(0);
-
-              } else {
-
-                current = (ModelElement) current.eContainer();
-              }
-
-            } else {
-
-              current = (ModelElement) current.eContainer();
-
-            }
-          }
-
-        } while (getScope().contains(current));
-
-        return true;
-
-      }
-
-    }
-
-    return false;
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @generated NOT
-   */
-
-  public boolean excludes(ModelElement element) {
-
-    // TODO: implement this method
-    // Ensure that you remove @generated or mark it @generated NOT
-    throw new UnsupportedOperationException();
-
   }
 
   /**
@@ -611,7 +440,7 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
       for (OutputPin out : allocated.getOutputs()) {
         if (out instanceof FunctionOutputPort) {
           result.add(out);
-          result.addAll(((FunctionOutputPort)out).getOutgoingFunctionalExchanges());
+          result.addAll(((FunctionOutputPort) out).getOutgoingFunctionalExchanges());
         }
       }
       for (FunctionalChain chain : allocated.getInvolvingFunctionalChains()) {
@@ -630,8 +459,6 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
     }
   }
 
-
-
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
@@ -642,28 +469,16 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
     switch (featureID) {
     case MsPackage.CS_CONFIGURATION__SUPPORTED_MODES:
       return getSupportedModes();
-    case MsPackage.CS_CONFIGURATION__ELEMENTS:
-      return getElements();
-    case MsPackage.CS_CONFIGURATION__DEPLOYMENT_LINKS:
-      return getDeploymentLinks();
-    case MsPackage.CS_CONFIGURATION__FUNCTIONS:
-      return getFunctions();
-    case MsPackage.CS_CONFIGURATION__FUNCTIONAL_CHAINS:
-      return getFunctionalChains();
-    case MsPackage.CS_CONFIGURATION__SCENARIOS:
-      return getScenarios();
-    case MsPackage.CS_CONFIGURATION__COMPONENTS:
-      return getComponents();
-    case MsPackage.CS_CONFIGURATION__PORTS:
-      return getPorts();
+    case MsPackage.CS_CONFIGURATION__INCLUDED:
+      return getIncluded();
+    case MsPackage.CS_CONFIGURATION__EXCLUDED:
+      return getExcluded();
     case MsPackage.CS_CONFIGURATION__CHILD_CONFIGURATIONS:
       return getChildConfigurations();
     case MsPackage.CS_CONFIGURATION__KIND:
       return getKind();
     case MsPackage.CS_CONFIGURATION__ACCESS:
       return getAccess();
-    case MsPackage.CS_CONFIGURATION__SELECTOR:
-      return getSelector();
     case MsPackage.CS_CONFIGURATION__CONTEXT:
       return getContext();
     case MsPackage.CS_CONFIGURATION__COMPARE_TO:
@@ -685,9 +500,13 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
       getSupportedModes().clear();
       getSupportedModes().addAll((Collection<? extends AbstractState>) newValue);
       return;
-    case MsPackage.CS_CONFIGURATION__ELEMENTS:
-      getElements().clear();
-      getElements().addAll((Collection<? extends ModelElement>) newValue);
+    case MsPackage.CS_CONFIGURATION__INCLUDED:
+      getIncluded().clear();
+      getIncluded().addAll((Collection<? extends ModelElement>) newValue);
+      return;
+    case MsPackage.CS_CONFIGURATION__EXCLUDED:
+      getExcluded().clear();
+      getExcluded().addAll((Collection<? extends ModelElement>) newValue);
       return;
     case MsPackage.CS_CONFIGURATION__CHILD_CONFIGURATIONS:
       getChildConfigurations().clear();
@@ -698,9 +517,6 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
       return;
     case MsPackage.CS_CONFIGURATION__ACCESS:
       setAccess((access_Type) newValue);
-      return;
-    case MsPackage.CS_CONFIGURATION__SELECTOR:
-      setSelector((selector_Type) newValue);
       return;
     case MsPackage.CS_CONFIGURATION__CONTEXT:
       getContext().clear();
@@ -725,8 +541,11 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
     case MsPackage.CS_CONFIGURATION__SUPPORTED_MODES:
       getSupportedModes().clear();
       return;
-    case MsPackage.CS_CONFIGURATION__ELEMENTS:
-      getElements().clear();
+    case MsPackage.CS_CONFIGURATION__INCLUDED:
+      getIncluded().clear();
+      return;
+    case MsPackage.CS_CONFIGURATION__EXCLUDED:
+      getExcluded().clear();
       return;
     case MsPackage.CS_CONFIGURATION__CHILD_CONFIGURATIONS:
       getChildConfigurations().clear();
@@ -736,9 +555,6 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
       return;
     case MsPackage.CS_CONFIGURATION__ACCESS:
       setAccess(ACCESS_EDEFAULT);
-      return;
-    case MsPackage.CS_CONFIGURATION__SELECTOR:
-      setSelector(SELECTOR_EDEFAULT);
       return;
     case MsPackage.CS_CONFIGURATION__CONTEXT:
       getContext().clear();
@@ -760,28 +576,16 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
     switch (featureID) {
     case MsPackage.CS_CONFIGURATION__SUPPORTED_MODES:
       return supportedModes != null && !supportedModes.isEmpty();
-    case MsPackage.CS_CONFIGURATION__ELEMENTS:
-      return elements != null && !elements.isEmpty();
-    case MsPackage.CS_CONFIGURATION__DEPLOYMENT_LINKS:
-      return !getDeploymentLinks().isEmpty();
-    case MsPackage.CS_CONFIGURATION__FUNCTIONS:
-      return !getFunctions().isEmpty();
-    case MsPackage.CS_CONFIGURATION__FUNCTIONAL_CHAINS:
-      return !getFunctionalChains().isEmpty();
-    case MsPackage.CS_CONFIGURATION__SCENARIOS:
-      return !getScenarios().isEmpty();
-    case MsPackage.CS_CONFIGURATION__COMPONENTS:
-      return !getComponents().isEmpty();
-    case MsPackage.CS_CONFIGURATION__PORTS:
-      return !getPorts().isEmpty();
+    case MsPackage.CS_CONFIGURATION__INCLUDED:
+      return included != null && !included.isEmpty();
+    case MsPackage.CS_CONFIGURATION__EXCLUDED:
+      return excluded != null && !excluded.isEmpty();
     case MsPackage.CS_CONFIGURATION__CHILD_CONFIGURATIONS:
       return childConfigurations != null && !childConfigurations.isEmpty();
     case MsPackage.CS_CONFIGURATION__KIND:
       return kind != KIND_EDEFAULT;
     case MsPackage.CS_CONFIGURATION__ACCESS:
       return access != ACCESS_EDEFAULT;
-    case MsPackage.CS_CONFIGURATION__SELECTOR:
-      return selector != SELECTOR_EDEFAULT;
     case MsPackage.CS_CONFIGURATION__CONTEXT:
       return context != null && !context.isEmpty();
     case MsPackage.CS_CONFIGURATION__COMPARE_TO:
@@ -800,25 +604,13 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
     if (eIsProxy())
       return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (kind: "); //$NON-NLS-1$
     result.append(kind);
     result.append(", access: "); //$NON-NLS-1$
     result.append(access);
-    result.append(", selector: "); //$NON-NLS-1$
-    result.append(selector);
     result.append(')');
     return result.toString();
-  }
-
-  private Object[] getElementsFiltered(Class<?> clazz) {
-    ArrayList<Object> result = new ArrayList<Object>();
-    for (ModelElement elem : getElements()) {
-      if (clazz.isInstance(elem)) {
-        result.add(elem);
-      }
-    }
-    return result.toArray();
   }
 
 } // CSConfigurationImpl

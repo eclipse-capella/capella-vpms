@@ -39,14 +39,6 @@ public interface MsFactory extends EFactory {
   CSConfiguration createCSConfiguration();
 
   /**
-   * Returns a new object of class '<em>FSM Type</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @return a new object of class '<em>FSM Type</em>'.
-   * @generated
-   */
-  FSMType createFSMType();
-
-  /**
    * Returns a new object of class '<em>Situation</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @return a new object of class '<em>Situation</em>'.
@@ -93,22 +85,6 @@ public interface MsFactory extends EFactory {
    * @generated
    */
   NotOperation createNotOperation();
-
-  /**
-   * Returns a new object of class '<em>Comparison</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @return a new object of class '<em>Comparison</em>'.
-   * @generated
-   */
-  Comparison createComparison();
-
-  /**
-   * Returns a new object of class '<em>Result</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
-   * 
-   * @return a new object of class '<em>Result</em>'.
-   * @generated
-   */
-  Result createResult();
 
   /**
    * Returns the package supported by this factory. <!-- begin-user-doc --> <!-- end-user-doc -->
