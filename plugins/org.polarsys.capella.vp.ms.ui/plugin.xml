@@ -191,46 +191,6 @@
      
   </extension>
   <extension
-        point="org.eclipse.ui.popupMenus">
-     <objectContribution
-           adaptable="true"
-           id="org.polarsys.capella.vp.ms.ui.objectContribution1"
-           objectClass="java.lang.Object">
-        <menu
-              id="org.polarsys.capella.vp.ms.ui.menu1"
-              label="Add/Update..."
-              path="additions">
-           <separator
-                 name="group1">
-           </separator>
-           <separator
-                 name="group2">
-           </separator>
-        </menu>
-        <action
-              class="org.polarsys.capella.vp.ms.ui.AddComparison"
-              enablesFor="2"
-              id="org.polarsys.capella.vp.ms.ui.NewAction"
-              label="Comparison"
-              menubarPath="org.polarsys.capella.vp.ms.ui.menu1/group1">
-        </action>
-        <action
-              class="org.polarsys.capella.vp.ms.ui.AddResult"
-              enablesFor="1"
-              id="org.polarsys.capella.vp.ms.ui.ActionMan"
-              label="Result"
-              menubarPath="org.polarsys.capella.vp.ms.ui.menu1/group2">
-        </action>
-        <action
-              class="org.polarsys.capella.vp.ms.ui.CompareTo"
-              enablesFor="2"
-              id="org.polarsys.capella.vp.ms.ui.action1"
-              label="CompareTo"
-              menubarPath="org.polarsys.capella.vp.ms.ui.menu1/group2">
-        </action>
-     </objectContribution>
-  </extension>
-  <extension
         point="org.eclipse.core.expressions.propertyTesters">
      <propertyTester
            class="org.polarsys.capella.vp.ms.ui.DiagramPropertyTester"
