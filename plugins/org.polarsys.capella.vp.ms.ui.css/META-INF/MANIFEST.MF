@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Capella VPMS CSS Plugin
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.polarsys.capella.vp.ms.ui.css;singleton:=true
 Bundle-Version: 0.17.0.qualifier
 Automatic-Module-Name: org.eclipse.sirius.ui.css.dom
@@ -12,4 +12,8 @@ Require-Bundle: org.eclipse.e4.ui.css.core;bundle-version="0.12.700",
  org.eclipse.swt
 Import-Package: org.eclipse.core.runtime
 Export-Package: org.polarsys.capella.vp.ms.ui.css,
- org.polarsys.capella.vp.ms.ui.css.engine
+ org.polarsys.capella.vp.ms.ui.css.dom,
+ org.polarsys.capella.vp.ms.ui.css.engine,
+ org.polarsys.capella.vp.ms.ui.css.helpers,
+ org.polarsys.capella.vp.ms.ui.css.properties
+Bundle-Vendor: %providerName
