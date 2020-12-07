@@ -53,6 +53,7 @@
 	    <plugin id="org.apache.poi.ooxml.schemas" />
 	    <plugin id="org.dom4j" />
 	    <plugin id="org.apache.xmlbeans" />
+	    <plugin id="javax.xml.bind" />
 	  </excludes>
 	</configuration>
       </plugin>
