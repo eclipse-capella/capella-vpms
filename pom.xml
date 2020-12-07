@@ -51,6 +51,8 @@
 	    <plugin id="org.apache.poi" />
 	    <plugin id="org.apache.poi.ooxml" />
 	    <plugin id="org.apache.poi.ooxml.schemas" />
+	    <plugin id="org.dom4j" />
+	    <plugin id="org.apache.xmlbeans" />
 	  </excludes>
 	</configuration>
       </plugin>
