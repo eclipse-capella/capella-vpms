@@ -29,7 +29,7 @@
                namespaceUri="http://www.polarsys.org/capella/core/interaction/1.4.0">
          </package>
          <package
-               namespaceUri="http://www.polarsys.org/capella/ms">
+               namespaceUri="http://www.polarsys.org/capella/ms/0.11">
          </package>
          <constraints
                categories="capella.category/design/well-formedness/state_machines">
