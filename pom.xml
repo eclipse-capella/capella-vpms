@@ -42,38 +42,23 @@
   <build>
     <plugins>
       <plugin>
-	<groupId>org.eclipse.tycho.extras</groupId>
-	<artifactId>tycho-source-feature-plugin</artifactId>
-	<version>${tycho-extras-version}</version>
-	<configuration>
-	  <excludes>
-	    <plugin id="org.polarsys.capella.vp.ms.doc" />
-	    <plugin id="org.apache.poi" />
-	    <plugin id="org.apache.poi.ooxml" />
-	    <plugin id="org.apache.poi.ooxml.schemas" />
-	    <plugin id="org.dom4j" />
-	    <plugin id="org.apache.xmlbeans" />
-	    <plugin id="javax.xml.bind" />
-	    <plugin id="javax.activation" />
-	  </excludes>
-	</configuration>
+		<groupId>org.eclipse.tycho.extras</groupId>
+		<artifactId>tycho-source-feature-plugin</artifactId>
+		<version>${tycho-extras-version}</version>
+		<configuration>
+	  		<excludes>
+	    		<plugin id="org.polarsys.capella.vp.ms.doc" />
+	    		<plugin id="org.apache.poi" />
+	    		<plugin id="org.apache.poi.ooxml" />
+	    		<plugin id="org.apache.poi.ooxml.schemas" />
+	    		<plugin id="org.dom4j" />
+	    		<plugin id="org.apache.xmlbeans" />
+	    		<plugin id="javax.xml.bind" />
+	    		<plugin id="javax.activation" />
+	  		</excludes>
+		</configuration>
       </plugin>
-         <plugin>
-  			<groupId>org.eclipse.tycho</groupId>
-            <artifactId>tycho-surefire-plugin</artifactId>
-            <version>${tycho-extras-version}</version>
-            <configuration>
-            <dependencies>
-               <!-- avoid CNFE in Surefire when looking for JUnitPlatformProvider -->
-               <dependency>
-                 <artifactId>org.junit</artifactId>
-                 <type>eclipse-plugin</type>
-               </dependency>
-            </dependencies>
-            </configuration>
-         </plugin>
     </plugins>
   </build>
 
-  
 </project>

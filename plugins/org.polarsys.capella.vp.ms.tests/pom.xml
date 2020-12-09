@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2017, 2020 THALES GLOBAL SERVICES. This program and the 
+	accompanying materials are made available under the terms of the Eclipse 
+	Public License 2.0 which is available at http://www.eclipse.org/legal/epl-2.0 
+	SPDX-License-Identifier: EPL-2.0 Contributors: Thales - initial API and implementation -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.polarsys</groupId>
+		<artifactId>org.polarsys.capella.vp.ms-addon</artifactId>
+		<version>0.17.0-SNAPSHOT</version>
+		<relativePath>../../pom.xml</relativePath>
+	</parent>
+
+	<artifactId>org.polarsys.capella.vp.ms.tests</artifactId>
+	<packaging>eclipse-test-plugin</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<dependency-resolution>
+						<extraRequirements>
+							<requirement>
+								<type>eclipse-feature</type>
+								<id>org.polarsys.capella.vp.ms.feature</id>
+								<versionRange>0.0.0</versionRange>
+							</requirement>
+						</extraRequirements>
+					</dependency-resolution>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>${tycho-extras-version}</version>
+				<configuration>
+					<dependencies>
+						<!-- avoid CNFE in Surefire when looking for JUnitPlatformProvider -->
+						<dependency>
+							<artifactId>org.junit</artifactId>
+							<type>eclipse-plugin</type>
+						</dependency>
+					</dependencies>
+					<useUIHarness>true</useUIHarness>
+					<useUIThread>true</useUIThread>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

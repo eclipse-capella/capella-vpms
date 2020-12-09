@@ -13,3 +13,5 @@ Require-Bundle: org.antlr.runtime;bundle-version="4.3.0",
  org.polarsys.capella.test.framework;bundle-version="1.4.2",
  org.polarsys.capella.test.transition.ju;bundle-version="1.4.2",
  org.polarsys.capella.vp.ms
+Export-Package: org.polarsys.capella.vp.ms.expression.test,
+ org.polarsys.capella.vp.ms.transition.test

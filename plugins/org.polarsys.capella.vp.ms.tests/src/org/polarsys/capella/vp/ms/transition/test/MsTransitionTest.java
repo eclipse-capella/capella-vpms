@@ -32,20 +32,8 @@ public class MsTransitionTest extends TopDownTransitionTestCase {
     return Collections.singletonList("MsTransitionTest");
   }
 
-  @BeforeEach
-  public void j5setup() throws Exception {
-    setUp();
-  }
-  
-  @AfterEach
-  public void j5teadrown() throws Exception {
-    tearDown();
-  }
-  
-  @Test
-  public void junit5testTransition() throws Exception {
-  // TODO Auto-generated method stub
-    
+  public void performTest() throws Exception {
+
     LogicalComponent lc = getObject("8d465cd0-5a81-4b15-85f6-9315fe026a90");
     
     CSConfiguration c = getObject("a234fcac-821c-46dc-a6f1-1a5a73a4bf18");
@@ -74,11 +62,6 @@ public class MsTransitionTest extends TopDownTransitionTestCase {
     assertEquals(c.getName(), cstar.getName());
     assertEquals(c.getKind(), cstar.getKind());
 
-  }
-
-  @Override
-  public void performTest() throws Exception {
-    junit5testTransition();
   }
 
 }

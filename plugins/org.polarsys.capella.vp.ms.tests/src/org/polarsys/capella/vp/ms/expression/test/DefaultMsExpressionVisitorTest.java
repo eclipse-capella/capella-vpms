@@ -174,7 +174,7 @@ public class DefaultMsExpressionVisitorTest {
     
     try (BufferedReader in = new BufferedReader(
         new InputStreamReader(
-            FileLocator.openStream(Platform.getBundle("org.polarsys.capella.vp.ms.expression.tests"), new Path("fixtures.txt"), false)))){
+            FileLocator.openStream(Platform.getBundle("org.polarsys.capella.vp.ms.tests"), new Path("fixtures.txt"), false)))){
       String inputline = null;
       Object[] args = new String[4];
       int argIndex = 0;
