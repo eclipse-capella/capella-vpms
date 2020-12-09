@@ -25,7 +25,7 @@ import org.polarsys.capella.core.data.la.LogicalComponent;
 import org.polarsys.capella.test.transition.ju.TopDownTransitionTestCase;
 import org.polarsys.capella.vp.ms.CSConfiguration;
 
-public class MsTransitionTest1 extends TopDownTransitionTestCase {
+public class MsTransitionTest extends TopDownTransitionTestCase {
 
   @Override
   public List<String> getRequiredTestModels() {
