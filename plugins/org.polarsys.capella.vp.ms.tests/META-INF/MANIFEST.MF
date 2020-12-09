@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.polarsys.capella.vp.ms.tests
+Bundle-Version: 0.17.0.qualifier
+Bundle-Vendor: %providerName
+Automatic-Module-Name: org.polarsys.capella.vp.ms.tests
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.antlr.runtime;bundle-version="4.3.0",
+ org.junit.jupiter.api;bundle-version="5.4.0",
+ org.junit.jupiter.params;bundle-version="5.4.0",
+ org.polarsys.capella.vp.ms.expression;bundle-version="0.16.0",
+ org.polarsys.capella.test.framework;bundle-version="1.4.2",
+ org.polarsys.capella.test.transition.ju;bundle-version="1.4.2",
+ org.polarsys.capella.vp.ms
