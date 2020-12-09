@@ -17,6 +17,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.polarsys.capella.common.data.modellingcore.ModelElement;
 import org.polarsys.capella.core.data.la.LogicalComponent;
 import org.polarsys.capella.test.transition.ju.TopDownTransitionTestCase;
@@ -29,9 +32,19 @@ public class MsTransitionTest1 extends TopDownTransitionTestCase {
     return Collections.singletonList("MsTransitionTest");
   }
 
-  @Override
-  public void performTest() throws Exception {
-    // TODO Auto-generated method stub
+  @BeforeEach
+  public void j5setup() throws Exception {
+    setUp();
+  }
+  
+  @AfterEach
+  public void j5teadrown() throws Exception {
+    tearDown();
+  }
+  
+  @Test
+  public void junit5testTransition() throws Exception {
+  // TODO Auto-generated method stub
     
     LogicalComponent lc = getObject("8d465cd0-5a81-4b15-85f6-9315fe026a90");
     
@@ -61,6 +74,11 @@ public class MsTransitionTest1 extends TopDownTransitionTestCase {
     assertEquals(c.getName(), cstar.getName());
     assertEquals(c.getKind(), cstar.getKind());
 
+  }
+
+  @Override
+  public void performTest() throws Exception {
+    junit5testTransition();
   }
 
 }
