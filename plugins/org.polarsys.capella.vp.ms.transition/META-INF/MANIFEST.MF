@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Modes & States Addon Transition
 Bundle-SymbolicName: org.polarsys.capella.vp.ms.transition;singleton:=true
-Bundle-Version: 0.16.0.qualifier
+Bundle-Version: 0.17.0.qualifier
 Automatic-Module-Name: org.polarsys.capella.vp.ms.transition
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.polarsys.capella.common.transition;bundle-version="1.4.0",
