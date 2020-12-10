@@ -19,11 +19,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Notification;
@@ -34,24 +31,20 @@ import org.eclipse.emf.transaction.NotificationFilter;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.RollbackException;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.polarsys.capella.common.ef.domain.AbstractEditingDomainResourceSetListenerImpl;
 import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.vp.ms.CSConfiguration;
 import org.polarsys.capella.vp.ms.access_Type;
-import org.polarsys.capella.vp.ms.ui.preferences.InitializeConfigurationAccessDialog;
 import org.polarsys.capella.vp.ms.ui.preferences.MsPreferenceConstants;
 import org.polarsys.kitalpha.emde.model.EmdePackage;
 
 public class CSConfigurationListener extends AbstractEditingDomainResourceSetListenerImpl {
 
   public CSConfigurationListener() {
-    super(NotificationFilter.createFeatureFilter(CsPackage.Literals.COMPONENT,
-        EmdePackage.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS));
+    super(NotificationFilter.createNotifierTypeFilter(CsPackage.Literals.COMPONENT).and(
+        NotificationFilter.createFeatureFilter(EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS)));
   }
 
   @Override
@@ -86,23 +79,21 @@ public class CSConfigurationListener extends AbstractEditingDomainResourceSetLis
       Session session = SessionManager.INSTANCE.getSession(root);
       
       if (session != null) {
-        URI uri = session.getSessionResource().getURI();
-        IProject project = ResourcesPlugin.getWorkspace().getRoot().findMember(uri.toPlatformString(true)).getProject();
-        IPreferenceStore store = new ScopedPreferenceStore(new ProjectScope(project), Activator.PLUGIN_ID);
+        //URI uri = session.getSessionResource().getURI();
+        //IProject project = ResourcesPlugin.getWorkspace().getRoot().findMember(uri.toPlatformString(true)).getProject();
+        //IPreferenceStore store = new ScopedPreferenceStore(new ProjectScope(project), Activator.PLUGIN_ID);
 
         String accessLiteral = Platform.getPreferencesService().getString(org.polarsys.capella.vp.ms.ui.preferences.Activator.PLUGIN_ID,
             MsPreferenceConstants.PREF_DEFAULT_CONFIGURATION_ACCESS, "", null); //$NON-NLS-1$
 
         // String accessLiteral = store.getString(MsUIConstants.PREF_DEFAULT_CONFIGURATION_ACCESS);
-
-
-        if (accessLiteral.isEmpty()) {
-          new InitializeConfigurationAccessDialog(Display.getCurrent().getActiveShell(), store).open();
-          accessLiteral = store.getString(MsPreferenceConstants.PREF_DEFAULT_CONFIGURATION_ACCESS);
-          if (accessLiteral.isEmpty()) {
-            throw new RollbackException(new Status(IStatus.CANCEL, Activator.PLUGIN_ID, "User canceled operation")); //$NON-NLS-1$
-          }
-        }
+//        if (accessLiteral.isEmpty()) {
+//          new InitializeConfigurationAccessDialog(Display.getCurrent().getActiveShell(), store).open();
+//          accessLiteral = store.getString(MsPreferenceConstants.PREF_DEFAULT_CONFIGURATION_ACCESS);
+//          if (accessLiteral.isEmpty()) {
+//            throw new RollbackException(new Status(IStatus.CANCEL, Activator.PLUGIN_ID, "User canceled operation")); //$NON-NLS-1$
+//          }
+//        }
 
         access_Type access = access_Type.get(accessLiteral);
         Collection<CSConfiguration> added = rootToConfigs.get(root);
