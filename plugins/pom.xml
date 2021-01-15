@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.polarsys</groupId>
     <artifactId>org.polarsys.capella.vp.ms-addon</artifactId>
-    <version>0.16.0-SNAPSHOT</version>
+    <version>0.16.1-SNAPSHOT</version>
   </parent>
 
   <modules>
@@ -34,6 +34,7 @@
     <module>org.polarsys.capella.vp.ms.ui</module>
     <module>org.polarsys.capella.vp.ms.ui.preferences</module>
     <module>org.polarsys.capella.vp.ms.expression</module>
+    <module>org.polarsys.capella.vp.ms.expression.ag</module>
     <module>org.polarsys.capella.vp.ms.expression.tests</module>
     <module>org.polarsys.capella.vp.ms.transition</module>
   </modules>

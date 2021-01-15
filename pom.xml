@@ -25,7 +25,7 @@
   <name>Capella Modes &amp; States Viewpoint</name>
   <artifactId>org.polarsys.capella.vp.ms-addon</artifactId>
   <packaging>pom</packaging>
-  <version>0.16.0-SNAPSHOT</version>
+  <version>0.16.1-SNAPSHOT</version>
 
   <properties>
     <tycho.scmUrl>scm:git:https://github.com/eclipse/capella-vpms</tycho.scmUrl>
@@ -48,13 +48,7 @@
 	<configuration>
 	  <excludes>
 	    <plugin id="org.polarsys.capella.vp.ms.doc" />
-	    <plugin id="org.apache.poi" />
-	    <plugin id="org.apache.poi.ooxml" />
-	    <plugin id="org.apache.poi.ooxml.schemas" />
-	    <plugin id="org.dom4j" />
-	    <plugin id="org.apache.xmlbeans" />
-	    <plugin id="javax.xml.bind" />
-	    <plugin id="javax.activation" />
+	    <feature id="org.apache.poi.feature" />
 	  </excludes>
 	</configuration>
       </plugin>
