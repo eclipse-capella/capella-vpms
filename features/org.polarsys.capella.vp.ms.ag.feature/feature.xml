@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.polarsys.capella.vp.ms.ag.feature"
+      label="%featureName"
+      version="0.16.1.qualifier"
+      provider-name="%providerName">
+
+   <description>
+      This feature defines the transformation of Situation Expression Tables to Excel tables.
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <includes
+         id="org.apache.poi.feature"
+         version="0.0.0"/>
+
+   <requires>
+      <import feature="org.polarsys.capella.vp.ms.feature" version="0.16.1.qualifier"/>
+   </requires>
+
+   <plugin
+         id="org.polarsys.capella.vp.ms.expression.ag"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

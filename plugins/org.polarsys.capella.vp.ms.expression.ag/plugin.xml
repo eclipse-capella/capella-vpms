@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<!--
+    Copyright (c) 2021 THALES GLOBAL SERVICES.
+     
+    This program and the accompanying materials are made available under the
+    terms of the Eclipse Public License 2.0 which is available at
+    http://www.eclipse.org/legal/epl-2.0
+   
+    SPDX-License-Identifier: EPL-2.0
+   
+    Contributors:
+       Thales - initial API and implementation
+ -->
+
+<plugin>
+<extension
+        point="org.eclipse.ui.commands">
+     <command
+           id="org.polarsys.capella.vp.ms.expression.ag.exportExpressionTable"
+           name="Export Expression Table">
+     </command>
+  </extension>
+<extension
+        point="org.eclipse.ui.handlers">
+     <handler
+           class="org.polarsys.capella.vp.ms.expression.ag.SituationExpressionExportHandler"
+           commandId="org.polarsys.capella.vp.ms.expression.ag.exportExpressionTable">
+        <activeWhen>
+           <with
+                 variable="activeEditor">
+              <test
+                    property="msdiagramproperties.description"
+                    value="Situation Expressions">
+              </test>
+           </with>
+        </activeWhen>
+     </handler>
+  </extension>
+<extension
+      point="org.eclipse.ui.menus">
+   <menuContribution
+         allPopups="false"
+         locationURI="popup:org.eclipse.sirius.table.ui.CrossTableEditorID?after=additions">
+      <command
+            commandId="org.polarsys.capella.vp.ms.expression.ag.exportExpressionTable"
+            style="push">
+         <visibleWhen
+               checkEnabled="true">
+         </visibleWhen>
+      </command>
+   </menuContribution>
+</extension>  
+</plugin>

@@ -14,10 +14,6 @@ include "../capella-releng-parent/tp/capella-default-addon-target/capella-defaul
 
 with source, requirements
 
-location orbit-2020-08 "https://download.eclipse.org/tools/orbit/downloads/drops/R20200831200620/repository" {
-	org.apache.poi [3.9.0, 4.0.0)
- 	org.apache.poi.ooxml [3.9.0, 4.0.0)
- 	org.apache.poi.ooxml.schemas [3.9.0, 4.0.0)
- 	org.apache.xmlbeans lazy
- 	org.apache.commons.compress lazy
+location m2doc "https://s3-eu-west-1.amazonaws.com/obeo-m2doc-releases/3.1.1/repository" {
+	org.apache.poi.feature.feature.group
 }

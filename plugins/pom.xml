@@ -25,7 +25,7 @@
 
   <modules>
     <module>ms.design</module>
-    <module>org.polarsys.capella.core.data.common.statemachine.validation</module>
+	<module>org.polarsys.capella.core.data.common.statemachine.validation</module>
     <module>org.polarsys.capella.vp.ms</module>
     <module>org.polarsys.capella.vp.ms.af</module>
     <module>org.polarsys.capella.vp.ms.doc</module>
@@ -35,6 +35,8 @@
     <module>org.polarsys.capella.vp.ms.ui.preferences</module>
     <module>org.polarsys.capella.vp.ms.ui.css</module>
     <module>org.polarsys.capella.vp.ms.expression</module>
+    <module>org.polarsys.capella.vp.ms.expression.ag</module>
+    <module>org.polarsys.capella.vp.ms.expression.tests</module>
     <module>org.polarsys.capella.vp.ms.transition</module>
     <module>org.polarsys.capella.vp.ms.tests</module>
   </modules>

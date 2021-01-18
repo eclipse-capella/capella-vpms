@@ -1,20 +1,17 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Expression
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.polarsys.capella.vp.ms.expression;singleton:=true
-Bundle-Version: 0.16.0.qualifier
+Bundle-Version: 0.16.1.qualifier
 Automatic-Module-Name: org.polarsys.capella.vp.ms.expression
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.antlr.runtime;bundle-version="[4.3.0,4.4.0)",
  org.polarsys.capella.vp.ms;bundle-version="0.10.0",
  org.eclipse.emf.ecore,
- com.google.guava;bundle-version="[15.0.0,16.0.0)",
- org.apache.poi;bundle-version="[3.9.0,4.0.0)",
- org.apache.poi.ooxml;bundle-version="[3.9.0,4.0.0)",
- org.apache.poi.ooxml.schemas;bundle-version="[3.9.0,4.0.0)"
+ com.google.guava;bundle-version="[15.0.0,16.0.0)"
 Bundle-Activator: org.polarsys.capella.vp.ms.expression.MsExpressionPlugin
 Bundle-ActivationPolicy: lazy
 Export-Package: org.polarsys.capella.vp.ms.expression,
- org.polarsys.capella.vp.ms.expression.ag,
  org.polarsys.capella.vp.ms.expression.parser,
  org.polarsys.capella.vp.ms.expression.transfo
+Bundle-Vendor: %providerName

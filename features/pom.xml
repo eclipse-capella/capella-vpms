@@ -22,5 +22,6 @@
 	</parent>
 	<modules>
 		<module>org.polarsys.capella.vp.ms.feature</module>
+		<module>org.polarsys.capella.vp.ms.ag.feature</module>
 	</modules>
 </project>

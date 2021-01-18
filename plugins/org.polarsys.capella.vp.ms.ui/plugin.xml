@@ -74,10 +74,6 @@
                  checkEnabled="true">
            </visibleWhen>
         </command>
-        <command
-              commandId="org.polarsys.capella.vp.ms.ui.exportExpressionTable"
-              style="push">
-        </command>
      </menuContribution>
      <menuContribution
            allPopups="false"
@@ -270,10 +266,6 @@
            name="Change Expression ...">
      </command>
      <command
-           id="org.polarsys.capella.vp.ms.ui.exportExpressionTable"
-           name="Export Expression Table">
-     </command>
-     <command
            id="org.polarsys.capella.vp.ms.ui.excludeUndefined"
            name="Exclude undefined">
      </command>
@@ -306,19 +298,6 @@
                  </test>
               </iterate>
            </and>
-        </activeWhen>
-     </handler>
-     <handler
-           class="org.polarsys.capella.vp.ms.ui.SituationExpressionExportHandler"
-           commandId="org.polarsys.capella.vp.ms.ui.exportExpressionTable">
-        <activeWhen>
-           <with
-                 variable="activeEditor">
-              <test
-                    property="msdiagramproperties.description"
-                    value="Situation Expressions">
-              </test>
-           </with>
         </activeWhen>
      </handler>
      <handler
