@@ -84,6 +84,30 @@
            class="org.polarsys.capella.vp.ms.ui.MsUITabbarContributionFactory"
            locationURI="toolbar:org.eclipse.sirius.diagram.ui.tabbar?after=additions">
      </menuContribution>
+     <menuContribution
+           allPopups="false"
+           locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+        <separator
+              name="org.polarsys.capella.vp.ms.ui.separator1">
+        </separator>
+        <command
+              commandId="org.polarsys.capella.vp.ms.ui.excludeUndefined"
+              style="push">
+           <visibleWhen
+                 checkEnabled="true">
+           </visibleWhen>
+        </command>
+        <command
+              commandId="org.polarsys.capella.vp.ms.ui.includeUndefined"
+              style="push">
+           <visibleWhen
+                 checkEnabled="true">
+           </visibleWhen>
+        </command>
+        <separator
+              name="org.polarsys.capella.vp.ms.ui.separator2">
+        </separator>
+     </menuContribution>
   </extension>
   <extension
         point="org.polarsys.capella.common.ef.editingDomainListener">
@@ -235,7 +259,7 @@
            class="org.polarsys.capella.vp.ms.ui.DiagramPropertyTester"
            id="org.polarsys.capella.vp.ms.ui.diagramproperties"
            namespace="msdiagramproperties"
-           properties="description,lineId"
+           properties="description,lineId,target"
            type="java.lang.Object">
      </propertyTester>
   </extension>
@@ -248,6 +272,14 @@
      <command
            id="org.polarsys.capella.vp.ms.ui.exportExpressionTable"
            name="Export Expression Table">
+     </command>
+     <command
+           id="org.polarsys.capella.vp.ms.ui.excludeUndefined"
+           name="Exclude undefined">
+     </command>
+     <command
+           id="org.polarsys.capella.vp.ms.ui.includeUndefined"
+           name="Include undefined">
      </command>
   </extension>
   <extension
@@ -287,6 +319,40 @@
                     value="Situation Expressions">
               </test>
            </with>
+        </activeWhen>
+     </handler>
+     <handler
+           class="org.polarsys.capella.vp.ms.ui.IncludeExcludeUndefinedHandler"
+           commandId="org.polarsys.capella.vp.ms.ui.excludeUndefined">
+        <activeWhen>
+           <iterate>
+              <or>
+                 <test
+                       property="msdiagramproperties.target"
+                       value="CSConfiguration">
+                 </test>
+                 <instanceof
+                       value="org.polarsys.capella.vp.ms.CSConfiguration">
+                 </instanceof>
+              </or>
+           </iterate>
+        </activeWhen>
+     </handler>
+     <handler
+           class="org.polarsys.capella.vp.ms.ui.IncludeExcludeUndefinedHandler"
+           commandId="org.polarsys.capella.vp.ms.ui.includeUndefined">
+        <activeWhen>
+           <iterate>
+              <or>
+                 <instanceof
+                       value="org.polarsys.capella.vp.ms.CSConfiguration">
+                 </instanceof>
+                 <test
+                       property="msdiagramproperties.target"
+                       value="CSConfiguration">
+                 </test>
+              </or>
+           </iterate>
         </activeWhen>
      </handler>
   </extension>

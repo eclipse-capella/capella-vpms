@@ -13,12 +13,15 @@
 package org.polarsys.capella.vp.ms.ui;
 
 import org.eclipse.core.expressions.PropertyTester;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.ui.tools.api.editor.DDiagramEditor;
 import org.eclipse.sirius.table.metamodel.table.DCell;
 import org.eclipse.sirius.table.metamodel.table.DLine;
 import org.eclipse.sirius.table.metamodel.table.DTable;
 import org.eclipse.sirius.table.ui.tools.api.editor.DTableEditor;
+import org.eclipse.sirius.viewpoint.DSemanticDecorator;
+import org.polarsys.capella.vp.ms.MsPackage;
 
 public class DiagramPropertyTester extends PropertyTester {
 
@@ -43,6 +46,13 @@ public class DiagramPropertyTester extends PropertyTester {
         final DDiagramEditor editor = (DDiagramEditor) receiver;
         final DDiagram diagram = (DDiagram) editor.getRepresentation();
         return expectedValue.equals(diagram.getDescription().getName());
+      }
+      return false;
+    }
+    if ("target".equals(property)) {
+      if (receiver instanceof DSemanticDecorator) {
+        EObject target = ((DSemanticDecorator) receiver).getTarget();
+        return target.eClass().getEPackage() == MsPackage.eINSTANCE && target.eClass().getName().equals(expectedValue);
       }
       return false;
     }
