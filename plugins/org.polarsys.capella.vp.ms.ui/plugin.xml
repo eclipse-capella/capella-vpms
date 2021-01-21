@@ -83,26 +83,20 @@
      <menuContribution
            allPopups="false"
            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
-        <separator
-              name="org.polarsys.capella.vp.ms.ui.separator1">
-        </separator>
         <command
-              commandId="org.polarsys.capella.vp.ms.ui.excludeUndefined"
+              commandId="org.polarsys.capella.vp.ms.ui.excludeRemaining"
               style="push">
            <visibleWhen
                  checkEnabled="true">
            </visibleWhen>
         </command>
         <command
-              commandId="org.polarsys.capella.vp.ms.ui.includeUndefined"
+              commandId="org.polarsys.capella.vp.ms.ui.includeRemaining"
               style="push">
            <visibleWhen
                  checkEnabled="true">
            </visibleWhen>
         </command>
-        <separator
-              name="org.polarsys.capella.vp.ms.ui.separator2">
-        </separator>
      </menuContribution>
   </extension>
   <extension
@@ -266,12 +260,14 @@
            name="Change Expression ...">
      </command>
      <command
-           id="org.polarsys.capella.vp.ms.ui.excludeUndefined"
-           name="Exclude undefined">
+           defaultHandler="org.polarsys.capella.vp.ms.ui.AddRemainingHandler$Excluded"
+           id="org.polarsys.capella.vp.ms.ui.excludeRemaining"
+           name="Exclude remaining elements">
      </command>
      <command
-           id="org.polarsys.capella.vp.ms.ui.includeUndefined"
-           name="Include undefined">
+           defaultHandler="org.polarsys.capella.vp.ms.ui.AddRemainingHandler$Included"
+           id="org.polarsys.capella.vp.ms.ui.includeRemaining"
+           name="Include remaining elements">
      </command>
   </extension>
   <extension
@@ -298,40 +294,6 @@
                  </test>
               </iterate>
            </and>
-        </activeWhen>
-     </handler>
-     <handler
-           class="org.polarsys.capella.vp.ms.ui.IncludeExcludeUndefinedHandler"
-           commandId="org.polarsys.capella.vp.ms.ui.excludeUndefined">
-        <activeWhen>
-           <iterate>
-              <or>
-                 <test
-                       property="msdiagramproperties.target"
-                       value="CSConfiguration">
-                 </test>
-                 <instanceof
-                       value="org.polarsys.capella.vp.ms.CSConfiguration">
-                 </instanceof>
-              </or>
-           </iterate>
-        </activeWhen>
-     </handler>
-     <handler
-           class="org.polarsys.capella.vp.ms.ui.IncludeExcludeUndefinedHandler"
-           commandId="org.polarsys.capella.vp.ms.ui.includeUndefined">
-        <activeWhen>
-           <iterate>
-              <or>
-                 <instanceof
-                       value="org.polarsys.capella.vp.ms.CSConfiguration">
-                 </instanceof>
-                 <test
-                       property="msdiagramproperties.target"
-                       value="CSConfiguration">
-                 </test>
-              </or>
-           </iterate>
         </activeWhen>
      </handler>
   </extension>
