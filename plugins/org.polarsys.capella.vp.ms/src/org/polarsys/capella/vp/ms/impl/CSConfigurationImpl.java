@@ -20,8 +20,10 @@ import java.util.Deque;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.polarsys.capella.common.data.activity.InputPin;
@@ -351,9 +353,21 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
    * @generated NOT
    */
   public EList<ModelElement> getScope() {
-    Component parent = (Component) eContainer();
+
     EList<ModelElement> result = new UniqueEList<ModelElement>();
-    addComboBoxElements(result, parent);
+    if (eContainer() instanceof Component) {
+      Component parent = (Component) eContainer();
+      addComboBoxElements(result, parent);
+    } else if (eContainer() instanceof ComponentPkg) {
+      for (TreeIterator<EObject> it = eContainer().eAllContents(); it.hasNext();) {
+        EObject next = it.next();
+        if (next instanceof Component) {
+          it.prune();
+          addComboBoxElements(result, (Component) next);
+          result.add((ModelElement) next);
+        }
+      }
+    }
     return result;
   }
 
@@ -381,6 +395,7 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
     }
   }
 
+  
   private void addComboBoxElements(Collection<ModelElement> result, Component parent) {
 
     for (Feature f : parent.getOwnedFeatures()) {

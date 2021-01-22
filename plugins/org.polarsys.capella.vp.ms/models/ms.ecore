@@ -3,10 +3,10 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ms" nsURI="http://www.polarsys.org/capella/ms/0.11" nsPrefix="ms">
   <eClassifiers xsi:type="ecore:EClass" name="CSConfiguration" eSuperTypes="../../org.polarsys.capella.core.data.gen/model/CapellaCore.ecore#//NamedElement platform:/plugin/org.polarsys.kitalpha.emde/model/eMDE.ecore#//ElementExtension">
     <eAnnotations source="http://www.polarsys.org/kitalpha/emde/1.0.0/constraint">
-      <details key="ExtendedElement" value=" http://www.polarsys.org/capella/core/cs/1.4.0#//Component"/>
+      <details key="ExtendedElement" value=" http://www.polarsys.org/capella/core/cs/1.4.0#//Component http://www.polarsys.org/capella/core/cs/1.4.0#//ComponentPkg"/>
     </eAnnotations>
     <eAnnotations source="http://www.polarsys.org/kitalpha/emde/1.0.0/constraintMapping">
-      <details key="Mapping" value="platform:/plugin/org.polarsys.capella.core.data.gen/model/CompositeStructure.ecore#//Component"/>
+      <details key="Mapping" value="platform:/plugin/org.polarsys.capella.core.data.gen/model/CompositeStructure.ecore#//Component platform:/plugin/org.polarsys.capella.core.data.gen/model/CompositeStructure.ecore#//ComponentPkg"/>
     </eAnnotations>
     <eOperations name="getScope" upperBound="-1" eType="ecore:EClass ../../org.polarsys.capella.common.data.core.gen/model/ModellingCore.ecore#//ModelElement"/>
     <eOperations name="getScope" upperBound="-1">

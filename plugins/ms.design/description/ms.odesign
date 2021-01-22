@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:description_2="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:description_3="http://www.eclipse.org/sirius/diagram/sequence/description/2.0.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" name="ms" version="12.0.0.2017041100">
   <ownedViewpoints name="ms">
-    <ownedRepresentations xsi:type="description_1:CrossTableDescription" name="MS_Function_Configuration" label="Configuration Elements" domainClass="cs.Component">
-      <ownedLineMappings name="MS_F_C_ComponentsRoot" domainClass="Component" semanticCandidatesExpression="service:table.msComponentRoot(root)" headerLabelExpression="feature:name">
+    <ownedRepresentations xsi:type="description_1:CrossTableDescription" name="MS_Function_Configuration" label="Configuration Elements" preconditionExpression="service:msConfigurationElementsTablePrecondition" domainClass="EObject">
+      <ownedLineMappings name="MS_F_C_ComponentsRoot" domainClass="EObject" semanticCandidatesExpression="service:table.msComponentRoot(root)" headerLabelExpression="feature:name">
         <ownedSubLines name="MS_F_C_Functions" reusedInMappings="//@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_ComponentsRoot']/@ownedSubLines[name='MS_F_C_ComponentsRecurse']" domainClass="AbstractFunction" semanticCandidatesExpression="service:table.msAllocatedFunctions(container)" headerLabelExpression="feature:name">
           <ownedSubLines name="MS_F_C_Function_Inputs" domainClass="FunctionPort" semanticCandidatesExpression="service:table.msInputs(container)">
             <delete name="No_Delete">
@@ -62,7 +62,7 @@
           <variables name="root" documentation="The semantic root element of the table."/>
         </delete>
       </ownedLineMappings>
-      <ownedColumnMappings name="MS_F_C_Configurations" headerLabelExpression="feature:name" domainClass="ms.CSConfiguration" semanticCandidatesExpression="service:getOwnedConfigurationsFromType">
+      <ownedColumnMappings name="MS_F_C_Configurations" headerLabelExpression="feature:name" domainClass="ms.CSConfiguration" semanticCandidatesExpression="service:getOwnedConfigurations">
         <delete name="No_Delete">
           <variables name="element" documentation="The currently edited element."/>
           <variables name="root" documentation="The semantic element corresponding to the current table."/>

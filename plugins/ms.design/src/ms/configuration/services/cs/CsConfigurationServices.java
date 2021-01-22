@@ -105,6 +105,7 @@ import org.polarsys.capella.vp.ms.provider.MsEditPlugin;
 import org.polarsys.capella.vp.ms.ui.preferences.MsPreferenceConstants;
 //import org.polarsys.capella.vp.ms.ui.MsUICommandHandler;
 import org.polarsys.kitalpha.emde.model.ElementExtension;
+import org.polarsys.kitalpha.emde.model.ExtensibleElement;
 
 import com.google.common.base.Predicates;
 
@@ -145,6 +146,10 @@ public class CsConfigurationServices {
 
   private boolean isWizardCancelled(Object selection) {
     return !(selection instanceof Object[]);
+  }
+
+  public boolean msConfigurationElementsTablePrecondition(EObject element) {
+    return element instanceof ComponentPkg || element instanceof Component;
   }
 
   public EObject msShowHideScenarioConfigurationsTool(Scenario sc, SequenceDDiagram diagram, Object selection) {
@@ -257,21 +262,6 @@ public class CsConfigurationServices {
         .getChoiceOfValues(source).contains(target);
   }
 
-  /**
-   * Find all {@link Configuration}s owned by the type of a given {@link Part} .
-   *
-   * @param ele
-   *          the {@link Part}
-   * @return the owned {@link Configuration}s
-   */
-  public Collection<CSConfiguration> getOwnedConfigurations(EObject ele) {
-    if (ele instanceof Component) {
-      return getOwnedConfigurations((Component) ele);
-    } else if (ele instanceof Part) {
-      return getOwnedConfigurations(((Part) ele).getType());
-    }
-    return Collections.emptyList();
-  }
 
   public Collection<EObject> getIrregularEObject(EObject ele) {
     // TODO Auto-generated method stub
@@ -380,30 +370,21 @@ public class CsConfigurationServices {
     return objectsIrregularList;
   }
 
-  public Collection<CSConfiguration> getOwnedConfigurations(Component component) {
+
+  public Collection<CSConfiguration> getOwnedConfigurations(EObject ele) {
     Collection<CSConfiguration> result = new ArrayList<CSConfiguration>();
-    for (ElementExtension extension : component.getOwnedExtensions()) {
-      if (extension instanceof CSConfiguration) {
-        result.add((CSConfiguration) extension);
-      }
+    ExtensibleElement e = null;
+    if (ele instanceof Part) {
+      e = ((Part) ele).getType();
+    } else if (ele instanceof ExtensibleElement) {
+      e = (ExtensibleElement) ele;
     }
-    return result;
-  }
-
-  public List<EObject> getOwnedConfigurationsFromType(EObject ele) {
-    List<EObject> result = new ArrayList<EObject>();
-    if (ele instanceof Component) {
-      Component cmp = ((Component) ele);
-
-      EList<ElementExtension> extensions = cmp.getOwnedExtensions();
-      ArrayList<CSConfiguration> configurations = new ArrayList<>();
-      for (ElementExtension extension : extensions) {
+    if (e != null) {
+      for (ElementExtension extension : e.getOwnedExtensions()) {
         if (extension instanceof CSConfiguration) {
-          configurations.add((CSConfiguration) extension);
+          result.add((CSConfiguration) extension);
         }
       }
-
-      result.addAll(configurations);
     }
     return result;
   }
@@ -840,6 +821,13 @@ public class CsConfigurationServices {
     return Collections.emptyList();
   }
 
+  public Collection<ComponentPkg> msComponentRoot(DTable table, ComponentPkg pkg){
+    if (isShowComponents(table)) {
+      return Collections.singletonList(pkg);
+    }
+    return Collections.emptyList();
+  }
+  
   public Collection<Component> msComponentRoot(DTable table, Component component) {
     if (isShowComponents(table)) {
       return Collections.singletonList(component);
@@ -1004,6 +992,8 @@ public class CsConfigurationServices {
 
   /**
    * Does any of the components in the hierarchy satisfy a given predicate?
+   * Can be used for example to only show Function Packages if there's
+   * at least one, possibly deeply nested, function inside.
    * @param e
    * @param predicate
    * @return

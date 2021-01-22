@@ -662,9 +662,9 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
    */
   protected void createConstraintAnnotations() {
     String source = "http://www.polarsys.org/kitalpha/emde/1.0.0/constraint"; //$NON-NLS-1$
-    addAnnotation(csConfigurationEClass, source,
-        new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/cs/1.4.0#//Component" //$NON-NLS-1$ //$NON-NLS-2$
-        });
+    addAnnotation(csConfigurationEClass, source, new String[] { "ExtendedElement", //$NON-NLS-1$
+        " http://www.polarsys.org/capella/core/cs/1.4.0#//Component http://www.polarsys.org/capella/core/cs/1.4.0#//ComponentPkg" //$NON-NLS-1$
+    });
     addAnnotation(situationEClass, source,
         new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/cs/1.4.0#//Component" //$NON-NLS-1$ //$NON-NLS-2$
         });
@@ -679,7 +679,7 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
   protected void createConstraintMappingAnnotations() {
     String source = "http://www.polarsys.org/kitalpha/emde/1.0.0/constraintMapping"; //$NON-NLS-1$
     addAnnotation(csConfigurationEClass, source, new String[] { "Mapping", //$NON-NLS-1$
-        "platform:/plugin/org.polarsys.capella.core.data.gen/model/CompositeStructure.ecore#//Component" //$NON-NLS-1$
+        "platform:/plugin/org.polarsys.capella.core.data.gen/model/CompositeStructure.ecore#//Component platform:/plugin/org.polarsys.capella.core.data.gen/model/CompositeStructure.ecore#//ComponentPkg" //$NON-NLS-1$
     });
     addAnnotation(situationEClass, source, new String[] { "Mapping", //$NON-NLS-1$
         " platform:/plugin/org.polarsys.capella.core.data.gen/model/CompositeStructure.ecore#//Component" //$NON-NLS-1$
