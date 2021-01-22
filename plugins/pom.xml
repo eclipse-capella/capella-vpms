@@ -36,7 +36,6 @@
     <module>org.polarsys.capella.vp.ms.ui.css</module>
     <module>org.polarsys.capella.vp.ms.expression</module>
     <module>org.polarsys.capella.vp.ms.expression.ag</module>
-    <module>org.polarsys.capella.vp.ms.expression.tests</module>
     <module>org.polarsys.capella.vp.ms.transition</module>
     <module>org.polarsys.capella.vp.ms.tests</module>
   </modules>
