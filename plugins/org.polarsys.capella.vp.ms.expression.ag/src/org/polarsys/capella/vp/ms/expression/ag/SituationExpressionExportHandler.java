@@ -19,7 +19,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -29,14 +31,20 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.sirius.table.metamodel.table.DColumn;
+import org.eclipse.sirius.table.metamodel.table.DLine;
 import org.eclipse.sirius.table.metamodel.table.DTable;
 import org.eclipse.sirius.table.ui.tools.api.editor.DTableEditor;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.polarsys.capella.core.data.capellacommon.StateMachine;
 import org.polarsys.capella.vp.ms.Situation;
+
+import com.google.common.collect.Ordering;
 
 public class SituationExpressionExportHandler extends AbstractHandler {
 
@@ -54,6 +62,18 @@ public class SituationExpressionExportHandler extends AbstractHandler {
       }
     }
 
+    // state machine columns should have same order as they appear in the table
+    List<StateMachine> sm = new ArrayList<>();
+    
+    for (TreeIterator<EObject> it = table.eAllContents(); it.hasNext();) {
+      EObject next = it.next();
+      if (next instanceof DLine && ((DLine) next).getTarget() instanceof StateMachine) {
+        sm.add((StateMachine) ((DLine)next).getTarget());
+      }
+    }
+    
+    Comparator<StateMachine> columnOrder = Ordering.explicit(sm);
+
     Session session = SessionManager.INSTANCE.getSession(table.getTarget());
     URI sessionURI = session.getSessionResource().getURI();
 
@@ -67,7 +87,7 @@ public class SituationExpressionExportHandler extends AbstractHandler {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 
     try {
-      exporter.export(toExport, bytes);
+      exporter.export(toExport, columnOrder, bytes);
       ByteArrayInputStream inbb = new ByteArrayInputStream(bytes.toByteArray());
       file.create(inbb, true, new NullProgressMonitor());
     } catch (IOException | CoreException e) {

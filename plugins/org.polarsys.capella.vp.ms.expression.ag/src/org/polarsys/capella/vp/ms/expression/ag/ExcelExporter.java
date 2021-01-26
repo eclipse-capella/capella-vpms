@@ -69,11 +69,9 @@ public class ExcelExporter extends MsSwitch<Object> {
     return null;
   }
 
-  private void finish(OutputStream out) throws IOException {
+  private void finish(OutputStream out, Comparator<StateMachine> columnOrder) throws IOException {
 
-    // now that we know all the state machines in the table,
-    // we can sort columns by component name / statemachine name 
-    statemachines.sort(Comparator.comparing(headers));
+    statemachines.sort(columnOrder);
 
     Workbook wb = new XSSFWorkbook();  // or new XSSFWorkbook();
 
@@ -124,11 +122,11 @@ public class ExcelExporter extends MsSwitch<Object> {
    * @param out
    * @throws IOException
    */
-  public void export(Collection<? extends Situation> situations, OutputStream out) throws IOException {
+  public void export(Collection<? extends Situation> situations, Comparator<StateMachine> columnOrder, OutputStream out) throws IOException {
     for (Situation s : situations) {
       export(s);
     }
-    finish(out);
+    finish(out, columnOrder);
   }
 
   private ExcelExporter export(Situation situation) {
