@@ -825,13 +825,13 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
 
     initEClass(inStateExpressionEClass, InStateExpression.class, "InStateExpression", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
         IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getInStateExpression_State(), theCapellacommonPackage.getAbstractState(), null, "state", null, 0, 1, //$NON-NLS-1$
+    initEReference(getInStateExpression_State(), theCapellacommonPackage.getAbstractState(), null, "state", null, 1, 1, //$NON-NLS-1$
         InStateExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
         !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(inSituationExpressionEClass, InSituationExpression.class, "InSituationExpression", !IS_ABSTRACT, //$NON-NLS-1$
         !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getInSituationExpression_Situation(), this.getSituation(), null, "situation", null, 0, 1, //$NON-NLS-1$
+    initEReference(getInSituationExpression_Situation(), this.getSituation(), null, "situation", null, 1, 1, //$NON-NLS-1$
         InSituationExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
         !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

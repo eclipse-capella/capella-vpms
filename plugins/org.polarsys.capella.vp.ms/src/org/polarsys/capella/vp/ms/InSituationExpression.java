@@ -44,7 +44,7 @@ public interface InSituationExpression extends BooleanExpression {
    * @return the value of the '<em>Situation</em>' reference.
    * @see #setSituation(Situation)
    * @see org.polarsys.capella.vp.ms.MsPackage#getInSituationExpression_Situation()
-   * @model
+   * @model required="true"
    * @generated
    */
 

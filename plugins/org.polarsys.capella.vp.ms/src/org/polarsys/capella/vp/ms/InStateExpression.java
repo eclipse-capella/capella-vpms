@@ -45,7 +45,7 @@ public interface InStateExpression extends BooleanExpression {
    * @return the value of the '<em>State</em>' reference.
    * @see #setState(AbstractState)
    * @see org.polarsys.capella.vp.ms.MsPackage#getInStateExpression_State()
-   * @model
+   * @model required="true"
    * @generated
    */
 
