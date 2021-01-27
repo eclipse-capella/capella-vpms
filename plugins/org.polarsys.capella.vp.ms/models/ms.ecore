@@ -51,10 +51,11 @@
         eType="#//BooleanExpression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InStateExpression" eSuperTypes="#//BooleanExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="ecore:EClass ../../org.polarsys.capella.core.data.gen/model/CapellaCommon.ecore#//AbstractState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" lowerBound="1" eType="ecore:EClass ../../org.polarsys.capella.core.data.gen/model/CapellaCommon.ecore#//AbstractState"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InSituationExpression" eSuperTypes="#//BooleanExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="situation" eType="#//Situation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="situation" lowerBound="1"
+        eType="#//Situation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="kind_Type">
     <eLiterals name="Atomic" literal="Atomic"/>
