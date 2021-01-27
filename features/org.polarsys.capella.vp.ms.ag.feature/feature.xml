@@ -22,7 +22,7 @@
          version="0.0.0"/>
 
    <requires>
-      <import feature="org.polarsys.capella.vp.ms.feature" version="0.16.1.qualifier"/>
+      <import feature="org.polarsys.capella.vp.ms.feature" version="0.17.0.qualifier"/>
    </requires>
 
    <plugin
