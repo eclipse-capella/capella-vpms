@@ -160,6 +160,14 @@
           <mask mask="{0}"/>
         </create>
       </intersection>
+      <createColumn name="MS_M_C_CreateConfiguration" label="New Configuration" forceRefresh="true" mapping="//@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_StateMachine_Configuration']/@ownedColumnMappings.0">
+        <variables name="root" documentation="The semantic root element of the table."/>
+        <variables name="element" documentation="The semantic currently edited element."/>
+        <variables name="container" documentation="The semantic element corresponding to the view container."/>
+        <firstModelOperation xsi:type="tool:CreateInstance" typeName="CSConfiguration" referenceName="ownedExtensions">
+          <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:msCreationService"/>
+        </firstModelOperation>
+      </createColumn>
     </ownedRepresentations>
     <ownedRepresentations xsi:type="description_1:CrossTableDescription" name="Situation Expressions" domainClass="cs.Component">
       <metamodel href="../../org.polarsys.capella.core.data.gen/model/CompositeStructure.ecore#/"/>
