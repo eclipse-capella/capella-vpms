@@ -1,5 +1,15 @@
 .vpms-excluded {
-	background-color: rgb(220, 220, 220);
-	color: red;
-	stroke: red
+	foreground-color: Tomato;
+	background-color: Tomato;
+	border-color: Tomato;
+	edge-color: Tomato;
+	label-color: black;
+}
+
+.vpms-undefined {
+	foreground-color: WhiteSmoke;
+	background-color: WhiteSmoke;
+	border-color: grey;
+	label-color: black;
+	edge-color: grey;
 }

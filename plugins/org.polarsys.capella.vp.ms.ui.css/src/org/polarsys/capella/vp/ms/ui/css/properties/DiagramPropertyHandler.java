@@ -15,14 +15,9 @@ package org.polarsys.capella.vp.ms.ui.css.properties;
 import org.eclipse.e4.ui.css.core.dom.properties.ICSSPropertyHandler;
 import org.eclipse.e4.ui.css.core.engine.CSSEngine;
 import org.eclipse.sirius.diagram.BorderedStyle;
-import org.eclipse.sirius.diagram.DEdge;
-import org.eclipse.sirius.diagram.DNode;
-import org.eclipse.sirius.diagram.DNodeContainer;
 import org.eclipse.sirius.diagram.EdgeStyle;
 import org.eclipse.sirius.diagram.FlatContainerStyle;
-import org.eclipse.sirius.diagram.NodeStyle;
 import org.eclipse.sirius.diagram.Square;
-import org.eclipse.sirius.diagram.tools.internal.validation.description.constraints.RequiredEdgeStyleDescriptionSizeExpressionConstraint;
 import org.eclipse.sirius.viewpoint.BasicLabelStyle;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.sirius.viewpoint.DStylizable;
@@ -49,27 +44,51 @@ public class DiagramPropertyHandler implements ICSSPropertyHandler {
         }
       }
     }
-    
-    if ("stroke".equals(property)) {
+
+    if ("foreground-color".equals(property)) {
+      DSemanticDecoratorElement de = (DSemanticDecoratorElement) element;
+      DSemanticDecorator widget = (DSemanticDecorator) de.getNativeWidget();
+      if (widget instanceof DStylizable) {
+        Style style = ((DStylizable) widget).getStyle();
+        if (style instanceof Square) {
+          ((Square) style).setColor((RGBValues) engine.convert(value, RGBValues.class, null));
+        } else if (style instanceof FlatContainerStyle) {
+          ((FlatContainerStyle)style).setForegroundColor((RGBValues) engine.convert(value, RGBValues.class, null));
+        }
+      }
+    }
+
+    if ("border-color".equals(property)) {
       DSemanticDecoratorElement de = (DSemanticDecoratorElement) element;
       DSemanticDecorator widget = (DSemanticDecorator) de.getNativeWidget();
       if (widget instanceof DStylizable) {
         Style style = ((DStylizable) widget).getStyle();
         if (style instanceof BorderedStyle) {
           ((BorderedStyle) style).setBorderColor((RGBValues) engine.convert(value, RGBValues.class, null));
-        } else if (style instanceof EdgeStyle) {
+        }
+      }
+    }
+
+    if ("edge-color".equals(property)) {
+      DSemanticDecoratorElement de = (DSemanticDecoratorElement) element;
+      DSemanticDecorator widget = (DSemanticDecorator) de.getNativeWidget();
+      if (widget instanceof DStylizable) {
+        Style style = ((DStylizable) widget).getStyle();
+        if (style instanceof EdgeStyle) {
           ((EdgeStyle) style).setStrokeColor((RGBValues) engine.convert(value, RGBValues.class, null));
         }
       }
     }
 
-    if ("color".equals(property)) {
+    if ("label-color".equals(property)) {
       DSemanticDecoratorElement de = (DSemanticDecoratorElement) element;
       DSemanticDecorator widget = (DSemanticDecorator) de.getNativeWidget();
       if (widget instanceof DStylizable) {
         Style style = ((DStylizable) widget).getStyle();
         if (style instanceof BasicLabelStyle) {
           ((BasicLabelStyle) style).setLabelColor((RGBValues) engine.convert(value, RGBValues.class, null));
+        } else if (style instanceof FlatContainerStyle) {
+          ((FlatContainerStyle) style).setLabelColor((RGBValues) engine.convert(value, RGBValues.class, null));
         }
       }      
     }

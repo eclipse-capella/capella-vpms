@@ -80,7 +80,6 @@ public class CSSRefreshExtension implements IRefreshExtensionProvider, IRefreshE
           if (cssURL != null) {
             try (InputStream is = cssURL.openStream()){
               StyleSheet ss = engine.parseStyleSheet(is);
-              System.out.println(ss);
             }
           }
         } catch (MalformedURLException e) {

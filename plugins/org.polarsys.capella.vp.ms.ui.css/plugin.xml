@@ -32,10 +32,16 @@
                name="background-color">
          </property-name>
          <property-name
-               name="stroke">
+               name="foreground-color">
          </property-name>
          <property-name
-               name="color">
+               name="edge-color">
+         </property-name>
+         <property-name
+               name="label-color">
+         </property-name>
+         <property-name
+               name="border-color">
          </property-name>
       </handler>
    </extension>

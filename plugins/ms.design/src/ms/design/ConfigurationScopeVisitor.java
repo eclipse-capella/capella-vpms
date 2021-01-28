@@ -106,14 +106,23 @@ public class ConfigurationScopeVisitor implements ScopeVisitor<Collection<CSConf
         CSConfiguration c = it.next();
         // adding a class that includes the configuration name allows
         // users to apply styles to a concrete configuration
-        if (c.getIncluded().contains(semantic)) {
+
+        boolean included = c.getIncluded().contains(semantic);
+        boolean excluded = c.getExcluded().contains(semantic);
+
+        if (included) {
             style.addCSSClass("vpms-included");
             style.addCSSClass("vpms-included-" + c.getName());
         }
-        if (c.getExcluded().contains(semantic)) { 
+        if (excluded) { 
             style.addCSSClass("vpms-excluded");
             style.addCSSClass("vpms-excluded-" + c.getName());
         }
+        if (!included && !excluded) {
+          style.addCSSClass("vpms-undefined");
+          style.addCSSClass("vpms-undefined-" + c.getName());
+        }
+
       }
     }
   }

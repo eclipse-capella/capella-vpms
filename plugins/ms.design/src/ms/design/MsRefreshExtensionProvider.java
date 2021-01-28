@@ -16,14 +16,12 @@ import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.business.api.refresh.IRefreshExtension;
 import org.eclipse.sirius.diagram.business.api.refresh.IRefreshExtensionProvider;
 import org.polarsys.capella.core.diagram.helpers.naming.DiagramDescriptionConstants;
-import org.polarsys.capella.vp.ms.ui.css.CSSRefreshExtension;
 
 import ms.configuration.services.cs.CsConfigurationServices;
 import ms.configuration.services.cs.DiagramConstants;
 
 public class MsRefreshExtensionProvider implements IRefreshExtensionProvider {
 
-  private CSSRefreshExtension css;
   private AbstractMsRefreshExtension scenarioRefresh = new ScenarioMsRefreshExtension();
   private AbstractMsRefreshExtension interfaceRefresh = new InterfaceDiagramMsRefreshExtension();
   private AbstractMsRefreshExtension defaultRefresh = new DefaultMsRefreshExtension();
