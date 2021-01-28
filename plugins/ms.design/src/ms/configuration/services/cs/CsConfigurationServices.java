@@ -27,7 +27,6 @@ import java.util.stream.Stream;
 import javax.security.auth.login.Configuration;
 
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -561,8 +560,8 @@ public class CsConfigurationServices {
   public Collection<CSConfiguration> getSelectableConfigurations(DSemanticDiagram diagram){
     Collection<CSConfiguration> result = new ArrayList<CSConfiguration>();
     EObject c = diagram.getTarget();
-    while (c instanceof Component) {
-      result.addAll(getOwnedConfigurations((Component)c));
+    while (c instanceof Component || c instanceof ComponentPkg) {
+      result.addAll(getOwnedConfigurations(c));
       c = c.eContainer();
     }
     return result;
@@ -667,11 +666,13 @@ public class CsConfigurationServices {
    * @return
    */
   public CSConfiguration createConfiguration(EObject context) {
-    Component cmp = null;
+    ExtensibleElement cmp = null;
     if (context instanceof Component) {
       cmp = (Component) context;
     } else if (context instanceof Part && ((Part) context).getType() instanceof Component) {
       cmp = (Component) ((Part) context).getType();
+    } else if (context instanceof ComponentPkg) {
+      cmp = (ComponentPkg) (context);
     } else {
       BlockArchitecture ba = BlockArchitectureExt.getRootBlockArchitecture(context);
       Iterator<Component> roots = BlockArchitectureExt.getRootComponents(ba).iterator();
