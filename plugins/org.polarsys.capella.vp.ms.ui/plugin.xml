@@ -77,11 +77,6 @@
      </menuContribution>
      <menuContribution
            allPopups="false"
-           class="org.polarsys.capella.vp.ms.ui.MsUITabbarContributionFactory"
-           locationURI="toolbar:org.eclipse.sirius.diagram.ui.tabbar?after=additions">
-     </menuContribution>
-     <menuContribution
-           allPopups="false"
            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
         <command
               commandId="org.polarsys.capella.vp.ms.ui.excludeRemaining"
