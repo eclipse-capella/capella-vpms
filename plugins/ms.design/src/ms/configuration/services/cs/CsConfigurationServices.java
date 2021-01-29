@@ -727,11 +727,11 @@ public class CsConfigurationServices {
   public String msCrossTableLabel(CSConfiguration c, EObject element) {    
     if (c.getIncluded().contains(element)) {
       if (c.getExcluded().contains(element)) {
-        return "e, i";
+        return "E, I";
       }
-      return "i";
+      return "I";
     } else if (c.getExcluded().contains(element)) {
-      return "e";
+      return "E";
     }
     return "";
   }

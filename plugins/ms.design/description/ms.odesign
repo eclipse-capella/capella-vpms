@@ -77,9 +77,17 @@
           <variables name="columnSemantic" documentation="The semantic element corresponding to the column (only available for Intersection Mapping)."/>
           <variables name="root" documentation="The semantic element of the table."/>
           <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:columnSemantic">
-            <subModelOperations xsi:type="tool:If" conditionExpression="&lt;%$0 == &quot;&quot; %>">
+            <subModelOperations xsi:type="tool:If" conditionExpression="aql:arg0 = ''">
               <subModelOperations xsi:type="tool:Unset" featureName="included" elementExpression="var:lineSemantic"/>
               <subModelOperations xsi:type="tool:Unset" featureName="excluded" elementExpression="var:lineSemantic"/>
+            </subModelOperations>
+            <subModelOperations xsi:type="tool:If" conditionExpression="aql:arg0 = 'e' or arg0 = 'E'">
+              <subModelOperations xsi:type="tool:Unset" featureName="included" elementExpression="var:lineSemantic"/>
+              <subModelOperations xsi:type="tool:SetValue" featureName="excluded" valueExpression="var:lineSemantic"/>
+            </subModelOperations>
+            <subModelOperations xsi:type="tool:If" conditionExpression="aql:arg0 = 'i' or arg0 = 'I'">
+              <subModelOperations xsi:type="tool:Unset" featureName="excluded" elementExpression="var:lineSemantic"/>
+              <subModelOperations xsi:type="tool:SetValue" featureName="included" valueExpression="var:lineSemantic"/>
             </subModelOperations>
           </firstModelOperation>
           <mask mask="{0}"/>
@@ -89,10 +97,10 @@
           <variables name="columnSemantic" documentation="The semantic element corresponding to the column."/>
           <variables name="root" documentation="The semantic root element of the table."/>
           <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:columnSemantic">
-            <subModelOperations xsi:type="tool:If" conditionExpression="&lt;%$0 == &quot;i&quot; || $0 == &quot;I&quot;%>">
+            <subModelOperations xsi:type="tool:If" conditionExpression="aql:arg0 = 'i' or arg0 = 'I'">
               <subModelOperations xsi:type="tool:SetValue" featureName="included" valueExpression="var:lineSemantic"/>
             </subModelOperations>
-            <subModelOperations xsi:type="tool:If" conditionExpression="&lt;%$0 == &quot;e&quot; || $0 == &quot;E&quot;%>">
+            <subModelOperations xsi:type="tool:If" conditionExpression="aql:arg0 = 'e' or arg0 = 'E'">
               <subModelOperations xsi:type="tool:SetValue" featureName="excluded" valueExpression="var:lineSemantic"/>
             </subModelOperations>
           </firstModelOperation>
