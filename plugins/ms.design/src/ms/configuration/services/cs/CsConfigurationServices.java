@@ -81,6 +81,7 @@ import org.polarsys.capella.core.data.cs.ComponentPkg;
 import org.polarsys.capella.core.data.cs.CsPackage;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.core.data.cs.PhysicalPort;
+import org.polarsys.capella.core.data.ctx.SystemComponentPkg;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
 import org.polarsys.capella.core.data.fa.FaPackage;
 import org.polarsys.capella.core.data.interaction.InstanceRole;
@@ -88,6 +89,8 @@ import org.polarsys.capella.core.data.interaction.InteractionPackage;
 import org.polarsys.capella.core.data.interaction.Scenario;
 import org.polarsys.capella.core.data.la.LogicalComponent;
 import org.polarsys.capella.core.data.la.LogicalComponentPkg;
+import org.polarsys.capella.core.data.oa.Entity;
+import org.polarsys.capella.core.data.oa.EntityPkg;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.core.data.pa.PhysicalComponentPkg;
 import org.polarsys.capella.core.linkedtext.ui.CapellaEmbeddedLinkedTextEditorInput;
@@ -127,7 +130,7 @@ public class CsConfigurationServices {
       return t.getOwnedStateMachines().size() > 0;
     }
   };
-  
+
   protected List<CSConfiguration> configListFiltered = new ArrayList<CSConfiguration>();
   protected List<CSConfiguration> configList = new ArrayList<CSConfiguration>();
 
@@ -675,10 +678,7 @@ public class CsConfigurationServices {
       cmp = (ComponentPkg) (context);
     } else {
       BlockArchitecture ba = BlockArchitectureExt.getRootBlockArchitecture(context);
-      Iterator<Component> roots = BlockArchitectureExt.getRootComponents(ba).iterator();
-      if (roots.hasNext()) {
-        cmp = roots.next();
-      }
+      cmp = BlockArchitectureExt.getComponentPkg(ba);
     }
 
     if (cmp != null) {
@@ -796,18 +796,31 @@ public class CsConfigurationServices {
     return Collections.emptyList();
   }
 
-  public Collection<EObject> msCrossTableComponentLines(LogicalComponent c){
-    return c.getOwnedLogicalComponents().stream().filter(child -> componentHierarchyWithPredicate(child, Predicates.alwaysTrue())).collect(Collectors.toList());
+  public Collection<? extends EObject> msCrossTableComponentLines(LogicalComponent c){
+    return c.getOwnedLogicalComponents();
   }
 
-  public Collection<EObject> msCrossTableComponentLines(LogicalComponentPkg p) {
-    return p.getOwnedLogicalComponents().stream().filter(child -> componentHierarchyWithPredicate(child, Predicates.alwaysTrue())).collect(Collectors.toList());
+  public Collection<? extends EObject> msCrossTableComponentLines(LogicalComponentPkg p) {
+    return p.getOwnedLogicalComponents();
   }
 
-  public Collection<EObject> msCrossTableComponentLines(PhysicalComponentPkg p){
-    return p.getOwnedPhysicalComponents().stream().filter(child -> componentHierarchyWithPredicate(child, Predicates.alwaysTrue())).collect(Collectors.toList());
+  public Collection<? extends EObject> msCrossTableComponentLines(PhysicalComponentPkg p){
+    return p.getOwnedPhysicalComponents();
   }
 
+  public Collection<? extends EObject> msCrossTableComponentLines(SystemComponentPkg p){
+    return p.getOwnedSystemComponents();
+  }
+
+  public Collection<? extends EObject> msCrossTableComponentLines(Entity e){
+    return e.getOwnedEntities();
+  }
+  
+  public Collection<? extends EObject> msCrossTableComponentLines(EntityPkg p){
+    return p.getOwnedEntities();
+  }
+
+  
   public Collection<? extends EObject> msContainedComponentPorts(DTable table, Component component) {
     if (isShowPorts(table)) {
       return component.getContainedComponentPorts();
