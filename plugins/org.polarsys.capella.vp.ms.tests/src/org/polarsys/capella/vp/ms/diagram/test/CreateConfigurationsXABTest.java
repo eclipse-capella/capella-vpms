@@ -1,6 +1,4 @@
 package org.polarsys.capella.vp.ms.diagram.test;
-import java.util.Arrays;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.notation.View;
@@ -19,12 +17,11 @@ import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditPart;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
 import org.polarsys.capella.core.data.cs.Part;
-import org.polarsys.capella.core.platform.sirius.ui.perspective.CapellaPerspective;
 import org.polarsys.capella.vp.ms.CSConfiguration;
 
 public class CreateConfigurationsXABTest extends AbstractSiriusSwtBotGefTestCase {
 
-  private static final String DATA_UNIT_DIR = "model/MSDiagramTest1/";
+  private static final String DATA_UNIT_DIR = "model/MsDiagramTest1/";
   private static final String MODEL = "MsDiagramTest1.melodymodeller";
   private static final String SESSION_FILE = "MsDiagramTest1.aird";
   private static final String AFM_FILE = "MsDiagramTest1.afm";
