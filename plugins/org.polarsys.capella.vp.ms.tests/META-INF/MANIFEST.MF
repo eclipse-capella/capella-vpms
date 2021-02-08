@@ -22,5 +22,6 @@ Require-Bundle: org.antlr.runtime;bundle-version="4.3.0",
  org.eclipse.sirius.tests.junit;bundle-version="6.3.3",
  org.eclipse.sirius.tests.junit.support;bundle-version="6.3.3",
  org.polarsys.capella.core.platform.sirius.ui.perspective
-Export-Package: org.polarsys.capella.vp.ms.expression.test,
+Export-Package: org.polarsys.capella.vp.ms.diagram.test,
+ org.polarsys.capella.vp.ms.expression.test,
  org.polarsys.capella.vp.ms.transition.test
