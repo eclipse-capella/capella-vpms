@@ -304,7 +304,37 @@ public class CSConfigurationItemProvider extends NamedElementItemProvider implem
     // begin-extension-code
     {
       CommandParameter commandParameter = createChildParameter(
+          EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createFSMType());
+      if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
+        newChildDescriptors.add(commandParameter);
+      }
+    }
+    // end-extension-code
+
+    // begin-extension-code
+    {
+      CommandParameter commandParameter = createChildParameter(
           EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createSituation());
+      if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
+        newChildDescriptors.add(commandParameter);
+      }
+    }
+    // end-extension-code
+
+    // begin-extension-code
+    {
+      CommandParameter commandParameter = createChildParameter(
+          EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createComparison());
+      if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
+        newChildDescriptors.add(commandParameter);
+      }
+    }
+    // end-extension-code
+
+    // begin-extension-code
+    {
+      CommandParameter commandParameter = createChildParameter(
+          EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createResult());
       if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
         newChildDescriptors.add(commandParameter);
       }

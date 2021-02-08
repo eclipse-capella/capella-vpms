@@ -126,6 +126,29 @@ public class MsItemProviderAdapterFactory extends MsAdapterFactory
   }
 
   /**
+   * This keeps track of the one adapter used for all {@link org.polarsys.capella.vp.ms.FSMType} instances. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  protected FSMTypeItemProvider fsmTypeItemProvider;
+
+  /**
+   * This creates an adapter for a {@link org.polarsys.capella.vp.ms.FSMType}. <!-- begin-user-doc --> <!-- end-user-doc
+   * -->
+   * 
+   * @generated
+   */
+  @Override
+  public Adapter createFSMTypeAdapter() {
+    if (fsmTypeItemProvider == null) {
+      fsmTypeItemProvider = new FSMTypeItemProvider(this);
+    }
+
+    return fsmTypeItemProvider;
+  }
+
+  /**
    * This keeps track of the one adapter used for all {@link org.polarsys.capella.vp.ms.ms.Situation} instances. <!--
    * begin-user-doc --> <!-- end-user-doc -->
    * 
@@ -264,6 +287,52 @@ public class MsItemProviderAdapterFactory extends MsAdapterFactory
   }
 
   /**
+   * This keeps track of the one adapter used for all {@link org.polarsys.capella.vp.ms.Comparison} instances. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  protected ComparisonItemProvider comparisonItemProvider;
+
+  /**
+   * This creates an adapter for a {@link org.polarsys.capella.vp.ms.Comparison}. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public Adapter createComparisonAdapter() {
+    if (comparisonItemProvider == null) {
+      comparisonItemProvider = new ComparisonItemProvider(this);
+    }
+
+    return comparisonItemProvider;
+  }
+
+  /**
+   * This keeps track of the one adapter used for all {@link org.polarsys.capella.vp.ms.Result} instances. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  protected ResultItemProvider resultItemProvider;
+
+  /**
+   * This creates an adapter for a {@link org.polarsys.capella.vp.ms.Result}. <!-- begin-user-doc --> <!-- end-user-doc
+   * -->
+   * 
+   * @generated
+   */
+  @Override
+  public Adapter createResultAdapter() {
+    if (resultItemProvider == null) {
+      resultItemProvider = new ResultItemProvider(this);
+    }
+
+    return resultItemProvider;
+  }
+
+  /**
    * This returns the root adapter factory that contains this factory. <!-- begin-user-doc --> <!-- end-user-doc -->
    * 
    * @generated
@@ -392,6 +461,8 @@ public class MsItemProviderAdapterFactory extends MsAdapterFactory
   public void dispose() {
     if (csConfigurationItemProvider != null)
       csConfigurationItemProvider.dispose();
+    if (fsmTypeItemProvider != null)
+      fsmTypeItemProvider.dispose();
     if (situationItemProvider != null)
       situationItemProvider.dispose();
     if (inStateExpressionItemProvider != null)
@@ -404,6 +475,10 @@ public class MsItemProviderAdapterFactory extends MsAdapterFactory
       orOperationItemProvider.dispose();
     if (notOperationItemProvider != null)
       notOperationItemProvider.dispose();
+    if (comparisonItemProvider != null)
+      comparisonItemProvider.dispose();
+    if (resultItemProvider != null)
+      resultItemProvider.dispose();
   }
 
   /**
@@ -471,7 +546,37 @@ public class MsItemProviderAdapterFactory extends MsAdapterFactory
         // begin-extension-code
         {
           CommandParameter commandParameter = createChildParameter(
+              EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createFSMType());
+          if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
+            newChildDescriptors.add(commandParameter);
+          }
+        }
+        // end-extension-code
+
+        // begin-extension-code
+        {
+          CommandParameter commandParameter = createChildParameter(
               EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createSituation());
+          if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
+            newChildDescriptors.add(commandParameter);
+          }
+        }
+        // end-extension-code
+
+        // begin-extension-code
+        {
+          CommandParameter commandParameter = createChildParameter(
+              EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createComparison());
+          if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
+            newChildDescriptors.add(commandParameter);
+          }
+        }
+        // end-extension-code
+
+        // begin-extension-code
+        {
+          CommandParameter commandParameter = createChildParameter(
+              EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createResult());
           if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
             newChildDescriptors.add(commandParameter);
           }

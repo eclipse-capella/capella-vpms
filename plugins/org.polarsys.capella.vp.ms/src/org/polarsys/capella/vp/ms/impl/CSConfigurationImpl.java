@@ -47,7 +47,6 @@ import org.polarsys.capella.core.data.fa.ComponentPort;
 import org.polarsys.capella.core.data.fa.FunctionInputPort;
 import org.polarsys.capella.core.data.fa.FunctionOutputPort;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
-import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.core.data.interaction.InstanceRole;
 import org.polarsys.capella.core.data.interaction.Scenario;
 import org.polarsys.capella.core.data.la.LogicalComponent;
@@ -402,7 +401,6 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
     }
   }
 
-  
   private void addComboBoxElements(Collection<ModelElement> result, Component parent) {
 
     for (Feature f : parent.getOwnedFeatures()) {
@@ -465,7 +463,7 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
       }
 
       for (ActivityEdge edge : allocated.getIncoming()) {
-        if (result.contains(edge.getSource())){
+        if (result.contains(edge.getSource())) {
           result.add(edge);
         }
       }
@@ -515,20 +513,19 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
     if (parent instanceof InformationsExchanger) {
       for (AbstractInformationFlow f : ((InformationsExchanger) parent).getOutgoingInformationFlows()) {
         if (f instanceof CommunicationMean) {
-          if (result.contains(((CommunicationMean) f).getTarget())){
+          if (result.contains(((CommunicationMean) f).getTarget())) {
             result.add(f);
           }
         }
       }
       for (AbstractInformationFlow f : ((InformationsExchanger) parent).getIncomingInformationFlows()) {
         if (f instanceof CommunicationMean) {
-          if (result.contains(((CommunicationMean) f).getSource())){
+          if (result.contains(((CommunicationMean) f).getSource())) {
             result.add(f);
           }
         }
       }
     }
-
 
   }
 

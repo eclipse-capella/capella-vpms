@@ -27,11 +27,14 @@ import org.polarsys.capella.vp.ms.AndOperation;
 import org.polarsys.capella.vp.ms.BooleanExpression;
 import org.polarsys.capella.vp.ms.BooleanOperation;
 import org.polarsys.capella.vp.ms.CSConfiguration;
+import org.polarsys.capella.vp.ms.Comparison;
+import org.polarsys.capella.vp.ms.FSMType;
 import org.polarsys.capella.vp.ms.InSituationExpression;
 import org.polarsys.capella.vp.ms.InStateExpression;
 import org.polarsys.capella.vp.ms.MsPackage;
 import org.polarsys.capella.vp.ms.NotOperation;
 import org.polarsys.capella.vp.ms.OrOperation;
+import org.polarsys.capella.vp.ms.Result;
 import org.polarsys.capella.vp.ms.Situation;
 import org.polarsys.kitalpha.emde.model.Element;
 import org.polarsys.kitalpha.emde.model.ElementExtension;
@@ -109,6 +112,31 @@ public class MsSwitch<T> extends Switch<T> {
         result = caseExtensibleElement(csConfiguration);
       if (result == null)
         result = caseElement(csConfiguration);
+      if (result == null)
+        result = defaultCase(theEObject);
+      return result;
+    }
+    case MsPackage.FSM_TYPE: {
+      FSMType fsmType = (FSMType) theEObject;
+      T result = caseFSMType(fsmType);
+      if (result == null)
+        result = caseNamedElement(fsmType);
+      if (result == null)
+        result = caseElementExtension(fsmType);
+      if (result == null)
+        result = caseAbstractNamedElement(fsmType);
+      if (result == null)
+        result = caseCapellaElement(fsmType);
+      if (result == null)
+        result = caseTraceableElement(fsmType);
+      if (result == null)
+        result = casePublishableElement(fsmType);
+      if (result == null)
+        result = caseModelElement(fsmType);
+      if (result == null)
+        result = caseExtensibleElement(fsmType);
+      if (result == null)
+        result = caseElement(fsmType);
       if (result == null)
         result = defaultCase(theEObject);
       return result;
@@ -289,6 +317,56 @@ public class MsSwitch<T> extends Switch<T> {
         result = defaultCase(theEObject);
       return result;
     }
+    case MsPackage.COMPARISON: {
+      Comparison comparison = (Comparison) theEObject;
+      T result = caseComparison(comparison);
+      if (result == null)
+        result = caseNamedElement(comparison);
+      if (result == null)
+        result = caseElementExtension(comparison);
+      if (result == null)
+        result = caseAbstractNamedElement(comparison);
+      if (result == null)
+        result = caseCapellaElement(comparison);
+      if (result == null)
+        result = caseTraceableElement(comparison);
+      if (result == null)
+        result = casePublishableElement(comparison);
+      if (result == null)
+        result = caseModelElement(comparison);
+      if (result == null)
+        result = caseExtensibleElement(comparison);
+      if (result == null)
+        result = caseElement(comparison);
+      if (result == null)
+        result = defaultCase(theEObject);
+      return result;
+    }
+    case MsPackage.RESULT: {
+      Result result = (Result) theEObject;
+      T theResult = caseResult(result);
+      if (theResult == null)
+        theResult = caseNamedElement(result);
+      if (theResult == null)
+        theResult = caseElementExtension(result);
+      if (theResult == null)
+        theResult = caseAbstractNamedElement(result);
+      if (theResult == null)
+        theResult = caseCapellaElement(result);
+      if (theResult == null)
+        theResult = caseTraceableElement(result);
+      if (theResult == null)
+        theResult = casePublishableElement(result);
+      if (theResult == null)
+        theResult = caseModelElement(result);
+      if (theResult == null)
+        theResult = caseExtensibleElement(result);
+      if (theResult == null)
+        theResult = caseElement(result);
+      if (theResult == null)
+        theResult = defaultCase(theEObject);
+      return theResult;
+    }
     default:
       return defaultCase(theEObject);
     }
@@ -305,6 +383,20 @@ public class MsSwitch<T> extends Switch<T> {
    * @generated
    */
   public T caseCSConfiguration(CSConfiguration object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>FSM Type</em>'. <!-- begin-user-doc --> This
+   * implementation returns null; returning a non-null result will terminate the switch. <!-- end-user-doc -->
+   * 
+   * @param object
+   *          the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>FSM Type</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFSMType(FSMType object) {
     return null;
   }
 
@@ -418,6 +510,34 @@ public class MsSwitch<T> extends Switch<T> {
    * @generated
    */
   public T caseNotOperation(NotOperation object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Comparison</em>'. <!-- begin-user-doc --> This
+   * implementation returns null; returning a non-null result will terminate the switch. <!-- end-user-doc -->
+   * 
+   * @param object
+   *          the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Comparison</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseComparison(Comparison object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Result</em>'. <!-- begin-user-doc --> This
+   * implementation returns null; returning a non-null result will terminate the switch. <!-- end-user-doc -->
+   * 
+   * @param object
+   *          the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Result</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseResult(Result object) {
     return null;
   }
 

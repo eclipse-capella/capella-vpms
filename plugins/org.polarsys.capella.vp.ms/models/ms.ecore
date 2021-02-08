@@ -35,6 +35,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="compareTo" upperBound="-1"
         eType="#//CSConfiguration"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FSMType" eSuperTypes="../../org.polarsys.capella.core.data.gen/model/CapellaCore.ecore#//NamedElement platform:/plugin/org.polarsys.kitalpha.emde/model/eMDE.ecore#//ElementExtension">
+    <eAnnotations source="http://www.polarsys.org/kitalpha/emde/1.0.0/constraint">
+      <details key="ExtendedElement" value=" http://www.polarsys.org/capella/core/common/1.4.0#//StateMachine"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.polarsys.org/kitalpha/emde/1.0.0/constraintMapping">
+      <details key="Mapping" value=" platform:/plugin/org.polarsys.capella.core.data.gen/model/CapellaCommon.ecore#//StateMachine"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ms" eType="#//ms_Type"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Situation" eSuperTypes="../../org.polarsys.capella.core.data.gen/model/CapellaCore.ecore#//NamedElement platform:/plugin/org.polarsys.kitalpha.emde/model/eMDE.ecore#//ElementExtension">
     <eAnnotations source="http://www.polarsys.org/kitalpha/emde/1.0.0/constraint">
       <details key="ExtendedElement" value=" http://www.polarsys.org/capella/core/cs/1.4.0#//Component"/>
@@ -66,7 +75,30 @@
     <eLiterals name="subcomponents" value="1" literal="subcomponents"/>
     <eLiterals name="full" value="2" literal="full"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ms_Type">
+    <eLiterals name="mixed" literal="mixed"/>
+    <eLiterals name="state" value="1" literal="state"/>
+    <eLiterals name="mode" value="2" literal="mode"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AndOperation" eSuperTypes="#//BooleanOperation"/>
   <eClassifiers xsi:type="ecore:EClass" name="OrOperation" eSuperTypes="#//BooleanOperation"/>
   <eClassifiers xsi:type="ecore:EClass" name="NotOperation" eSuperTypes="#//BooleanOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Comparison" eSuperTypes="../../org.polarsys.capella.core.data.gen/model/CapellaCore.ecore#//NamedElement platform:/plugin/org.polarsys.kitalpha.emde/model/eMDE.ecore#//ElementExtension">
+    <eAnnotations source="http://www.polarsys.org/kitalpha/emde/1.0.0/constraint">
+      <details key="ExtendedElement" value=" http://www.polarsys.org/capella/core/cs/1.4.0#//Component"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.polarsys.org/kitalpha/emde/1.0.0/constraintMapping">
+      <details key="Mapping" value=" platform:/plugin/org.polarsys.capella.core.data.gen/model/CompositeStructure.ecore#//Component"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configuration1" upperBound="-1"
+        eType="#//CSConfiguration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Situation" upperBound="-1"
+        eType="#//Situation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configuration2" upperBound="-1"
+        eType="#//CSConfiguration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Result" eSuperTypes="../../org.polarsys.capella.core.data.gen/model/CapellaCore.ecore#//NamedElement platform:/plugin/org.polarsys.kitalpha.emde/model/eMDE.ecore#//ElementExtension">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Situation" upperBound="-1"
+        eType="#//Situation"/>
+  </eClassifiers>
 </ecore:EPackage>

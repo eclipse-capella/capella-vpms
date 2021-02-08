@@ -26,7 +26,6 @@ public class MsMigrationContribution extends AbstractMigrationContribution {
     return super.getFeature(object, prefix, name, isElement);
   }
 
-
   @Override
   public void postMigrationExecute(ExecutionManager executionManager, ResourceSet resourceSet,
       MigrationContext context) {
@@ -46,7 +45,7 @@ public class MsMigrationContribution extends AbstractMigrationContribution {
   public boolean ignoreUnknownFeature(String prefix, String name, boolean isElement, EObject peekObject, String value,
       XMLResource resource, MigrationContext context) {
     if (peekObject instanceof CSConfiguration && "selector".equals(name)) {
-      if ("exclusion".equals(value)) { 
+      if ("exclusion".equals(value)) {
         exclusionConfigs.add((CSConfiguration) peekObject);
       }
       return true;

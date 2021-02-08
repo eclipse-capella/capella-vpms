@@ -337,6 +337,219 @@ public interface MsPackage extends EPackage {
   int CS_CONFIGURATION_FEATURE_COUNT = CapellacorePackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
 
   /**
+   * The meta object id for the '{@link org.polarsys.capella.vp.ms.impl.FSMTypeImpl <em>FSM Type</em>}' class. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @see org.polarsys.capella.vp.ms.impl.FSMTypeImpl
+   * @see org.polarsys.capella.vp.ms.impl.MsPackageImpl#getFSMType()
+   * @generated
+   */
+  int FSM_TYPE = 1;
+
+  /**
+   * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__OWNED_EXTENSIONS = CapellacorePackage.NAMED_ELEMENT__OWNED_EXTENSIONS;
+
+  /**
+   * The feature id for the '<em><b>Id</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__ID = CapellacorePackage.NAMED_ELEMENT__ID;
+
+  /**
+   * The feature id for the '<em><b>Sid</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__SID = CapellacorePackage.NAMED_ELEMENT__SID;
+
+  /**
+   * The feature id for the '<em><b>Constraints</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__CONSTRAINTS = CapellacorePackage.NAMED_ELEMENT__CONSTRAINTS;
+
+  /**
+   * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__OWNED_CONSTRAINTS = CapellacorePackage.NAMED_ELEMENT__OWNED_CONSTRAINTS;
+
+  /**
+   * The feature id for the '<em><b>Owned Migrated Elements</b></em>' containment reference list. <!-- begin-user-doc
+   * --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__OWNED_MIGRATED_ELEMENTS = CapellacorePackage.NAMED_ELEMENT__OWNED_MIGRATED_ELEMENTS;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__NAME = CapellacorePackage.NAMED_ELEMENT__NAME;
+
+  /**
+   * The feature id for the '<em><b>Incoming Traces</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc
+   * -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__INCOMING_TRACES = CapellacorePackage.NAMED_ELEMENT__INCOMING_TRACES;
+
+  /**
+   * The feature id for the '<em><b>Outgoing Traces</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc
+   * -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__OUTGOING_TRACES = CapellacorePackage.NAMED_ELEMENT__OUTGOING_TRACES;
+
+  /**
+   * The feature id for the '<em><b>Visible In Doc</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__VISIBLE_IN_DOC = CapellacorePackage.NAMED_ELEMENT__VISIBLE_IN_DOC;
+
+  /**
+   * The feature id for the '<em><b>Visible In LM</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__VISIBLE_IN_LM = CapellacorePackage.NAMED_ELEMENT__VISIBLE_IN_LM;
+
+  /**
+   * The feature id for the '<em><b>Summary</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__SUMMARY = CapellacorePackage.NAMED_ELEMENT__SUMMARY;
+
+  /**
+   * The feature id for the '<em><b>Description</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__DESCRIPTION = CapellacorePackage.NAMED_ELEMENT__DESCRIPTION;
+
+  /**
+   * The feature id for the '<em><b>Review</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__REVIEW = CapellacorePackage.NAMED_ELEMENT__REVIEW;
+
+  /**
+   * The feature id for the '<em><b>Owned Property Values</b></em>' containment reference list. <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__OWNED_PROPERTY_VALUES = CapellacorePackage.NAMED_ELEMENT__OWNED_PROPERTY_VALUES;
+
+  /**
+   * The feature id for the '<em><b>Owned Enumeration Property Types</b></em>' containment reference list. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__OWNED_ENUMERATION_PROPERTY_TYPES = CapellacorePackage.NAMED_ELEMENT__OWNED_ENUMERATION_PROPERTY_TYPES;
+
+  /**
+   * The feature id for the '<em><b>Applied Property Values</b></em>' reference list. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__APPLIED_PROPERTY_VALUES = CapellacorePackage.NAMED_ELEMENT__APPLIED_PROPERTY_VALUES;
+
+  /**
+   * The feature id for the '<em><b>Owned Property Value Groups</b></em>' containment reference list. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__OWNED_PROPERTY_VALUE_GROUPS = CapellacorePackage.NAMED_ELEMENT__OWNED_PROPERTY_VALUE_GROUPS;
+
+  /**
+   * The feature id for the '<em><b>Applied Property Value Groups</b></em>' reference list. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__APPLIED_PROPERTY_VALUE_GROUPS = CapellacorePackage.NAMED_ELEMENT__APPLIED_PROPERTY_VALUE_GROUPS;
+
+  /**
+   * The feature id for the '<em><b>Status</b></em>' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__STATUS = CapellacorePackage.NAMED_ELEMENT__STATUS;
+
+  /**
+   * The feature id for the '<em><b>Features</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__FEATURES = CapellacorePackage.NAMED_ELEMENT__FEATURES;
+
+  /**
+   * The feature id for the '<em><b>Applied Requirements</b></em>' reference list. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__APPLIED_REQUIREMENTS = CapellacorePackage.NAMED_ELEMENT__APPLIED_REQUIREMENTS;
+
+  /**
+   * The feature id for the '<em><b>Ms</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE__MS = CapellacorePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>FSM Type</em>' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int FSM_TYPE_FEATURE_COUNT = CapellacorePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.polarsys.capella.vp.ms.impl.SituationImpl <em>Situation</em>}' class. <!--
    * begin-user-doc --> <!-- end-user-doc -->
    * 
@@ -344,7 +557,7 @@ public interface MsPackage extends EPackage {
    * @see org.polarsys.capella.vp.ms.impl.MsPackageImpl#getSituation()
    * @generated
    */
-  int SITUATION = 1;
+  int SITUATION = 2;
 
   /**
    * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list. <!-- begin-user-doc --> <!--
@@ -558,7 +771,7 @@ public interface MsPackage extends EPackage {
    * @see org.polarsys.capella.vp.ms.impl.MsPackageImpl#getBooleanExpression()
    * @generated
    */
-  int BOOLEAN_EXPRESSION = 2;
+  int BOOLEAN_EXPRESSION = 3;
 
   /**
    * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list. <!-- begin-user-doc --> <!--
@@ -756,7 +969,7 @@ public interface MsPackage extends EPackage {
    * @see org.polarsys.capella.vp.ms.impl.MsPackageImpl#getBooleanOperation()
    * @generated
    */
-  int BOOLEAN_OPERATION = 3;
+  int BOOLEAN_OPERATION = 4;
 
   /**
    * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list. <!-- begin-user-doc --> <!--
@@ -963,7 +1176,7 @@ public interface MsPackage extends EPackage {
    * @see org.polarsys.capella.vp.ms.impl.MsPackageImpl#getInStateExpression()
    * @generated
    */
-  int IN_STATE_EXPRESSION = 4;
+  int IN_STATE_EXPRESSION = 5;
 
   /**
    * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list. <!-- begin-user-doc --> <!--
@@ -1169,7 +1382,7 @@ public interface MsPackage extends EPackage {
    * @see org.polarsys.capella.vp.ms.impl.MsPackageImpl#getInSituationExpression()
    * @generated
    */
-  int IN_SITUATION_EXPRESSION = 5;
+  int IN_SITUATION_EXPRESSION = 6;
 
   /**
    * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list. <!-- begin-user-doc --> <!--
@@ -1375,7 +1588,7 @@ public interface MsPackage extends EPackage {
    * @see org.polarsys.capella.vp.ms.impl.MsPackageImpl#getAndOperation()
    * @generated
    */
-  int AND_OPERATION = 6;
+  int AND_OPERATION = 7;
 
   /**
    * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list. <!-- begin-user-doc --> <!--
@@ -1582,7 +1795,7 @@ public interface MsPackage extends EPackage {
    * @see org.polarsys.capella.vp.ms.impl.MsPackageImpl#getOrOperation()
    * @generated
    */
-  int OR_OPERATION = 7;
+  int OR_OPERATION = 8;
 
   /**
    * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list. <!-- begin-user-doc --> <!--
@@ -1789,7 +2002,7 @@ public interface MsPackage extends EPackage {
    * @see org.polarsys.capella.vp.ms.impl.MsPackageImpl#getNotOperation()
    * @generated
    */
-  int NOT_OPERATION = 8;
+  int NOT_OPERATION = 9;
 
   /**
    * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list. <!-- begin-user-doc --> <!--
@@ -1989,6 +2202,450 @@ public interface MsPackage extends EPackage {
   int NOT_OPERATION_FEATURE_COUNT = BOOLEAN_OPERATION_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link org.polarsys.capella.vp.ms.impl.ComparisonImpl <em>Comparison</em>}' class. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @see org.polarsys.capella.vp.ms.impl.ComparisonImpl
+   * @see org.polarsys.capella.vp.ms.impl.MsPackageImpl#getComparison()
+   * @generated
+   */
+  int COMPARISON = 10;
+
+  /**
+   * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__OWNED_EXTENSIONS = CapellacorePackage.NAMED_ELEMENT__OWNED_EXTENSIONS;
+
+  /**
+   * The feature id for the '<em><b>Id</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__ID = CapellacorePackage.NAMED_ELEMENT__ID;
+
+  /**
+   * The feature id for the '<em><b>Sid</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__SID = CapellacorePackage.NAMED_ELEMENT__SID;
+
+  /**
+   * The feature id for the '<em><b>Constraints</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__CONSTRAINTS = CapellacorePackage.NAMED_ELEMENT__CONSTRAINTS;
+
+  /**
+   * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__OWNED_CONSTRAINTS = CapellacorePackage.NAMED_ELEMENT__OWNED_CONSTRAINTS;
+
+  /**
+   * The feature id for the '<em><b>Owned Migrated Elements</b></em>' containment reference list. <!-- begin-user-doc
+   * --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__OWNED_MIGRATED_ELEMENTS = CapellacorePackage.NAMED_ELEMENT__OWNED_MIGRATED_ELEMENTS;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__NAME = CapellacorePackage.NAMED_ELEMENT__NAME;
+
+  /**
+   * The feature id for the '<em><b>Incoming Traces</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc
+   * -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__INCOMING_TRACES = CapellacorePackage.NAMED_ELEMENT__INCOMING_TRACES;
+
+  /**
+   * The feature id for the '<em><b>Outgoing Traces</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc
+   * -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__OUTGOING_TRACES = CapellacorePackage.NAMED_ELEMENT__OUTGOING_TRACES;
+
+  /**
+   * The feature id for the '<em><b>Visible In Doc</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__VISIBLE_IN_DOC = CapellacorePackage.NAMED_ELEMENT__VISIBLE_IN_DOC;
+
+  /**
+   * The feature id for the '<em><b>Visible In LM</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__VISIBLE_IN_LM = CapellacorePackage.NAMED_ELEMENT__VISIBLE_IN_LM;
+
+  /**
+   * The feature id for the '<em><b>Summary</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__SUMMARY = CapellacorePackage.NAMED_ELEMENT__SUMMARY;
+
+  /**
+   * The feature id for the '<em><b>Description</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__DESCRIPTION = CapellacorePackage.NAMED_ELEMENT__DESCRIPTION;
+
+  /**
+   * The feature id for the '<em><b>Review</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__REVIEW = CapellacorePackage.NAMED_ELEMENT__REVIEW;
+
+  /**
+   * The feature id for the '<em><b>Owned Property Values</b></em>' containment reference list. <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__OWNED_PROPERTY_VALUES = CapellacorePackage.NAMED_ELEMENT__OWNED_PROPERTY_VALUES;
+
+  /**
+   * The feature id for the '<em><b>Owned Enumeration Property Types</b></em>' containment reference list. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__OWNED_ENUMERATION_PROPERTY_TYPES = CapellacorePackage.NAMED_ELEMENT__OWNED_ENUMERATION_PROPERTY_TYPES;
+
+  /**
+   * The feature id for the '<em><b>Applied Property Values</b></em>' reference list. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__APPLIED_PROPERTY_VALUES = CapellacorePackage.NAMED_ELEMENT__APPLIED_PROPERTY_VALUES;
+
+  /**
+   * The feature id for the '<em><b>Owned Property Value Groups</b></em>' containment reference list. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__OWNED_PROPERTY_VALUE_GROUPS = CapellacorePackage.NAMED_ELEMENT__OWNED_PROPERTY_VALUE_GROUPS;
+
+  /**
+   * The feature id for the '<em><b>Applied Property Value Groups</b></em>' reference list. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__APPLIED_PROPERTY_VALUE_GROUPS = CapellacorePackage.NAMED_ELEMENT__APPLIED_PROPERTY_VALUE_GROUPS;
+
+  /**
+   * The feature id for the '<em><b>Status</b></em>' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__STATUS = CapellacorePackage.NAMED_ELEMENT__STATUS;
+
+  /**
+   * The feature id for the '<em><b>Features</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__FEATURES = CapellacorePackage.NAMED_ELEMENT__FEATURES;
+
+  /**
+   * The feature id for the '<em><b>Applied Requirements</b></em>' reference list. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__APPLIED_REQUIREMENTS = CapellacorePackage.NAMED_ELEMENT__APPLIED_REQUIREMENTS;
+
+  /**
+   * The feature id for the '<em><b>Configuration1</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc
+   * -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__CONFIGURATION1 = CapellacorePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Situation</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__SITUATION = CapellacorePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Configuration2</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc
+   * -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON__CONFIGURATION2 = CapellacorePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Comparison</em>' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int COMPARISON_FEATURE_COUNT = CapellacorePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.polarsys.capella.vp.ms.impl.ResultImpl <em>Result</em>}' class. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @see org.polarsys.capella.vp.ms.impl.ResultImpl
+   * @see org.polarsys.capella.vp.ms.impl.MsPackageImpl#getResult()
+   * @generated
+   */
+  int RESULT = 11;
+
+  /**
+   * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__OWNED_EXTENSIONS = CapellacorePackage.NAMED_ELEMENT__OWNED_EXTENSIONS;
+
+  /**
+   * The feature id for the '<em><b>Id</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__ID = CapellacorePackage.NAMED_ELEMENT__ID;
+
+  /**
+   * The feature id for the '<em><b>Sid</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__SID = CapellacorePackage.NAMED_ELEMENT__SID;
+
+  /**
+   * The feature id for the '<em><b>Constraints</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__CONSTRAINTS = CapellacorePackage.NAMED_ELEMENT__CONSTRAINTS;
+
+  /**
+   * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__OWNED_CONSTRAINTS = CapellacorePackage.NAMED_ELEMENT__OWNED_CONSTRAINTS;
+
+  /**
+   * The feature id for the '<em><b>Owned Migrated Elements</b></em>' containment reference list. <!-- begin-user-doc
+   * --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__OWNED_MIGRATED_ELEMENTS = CapellacorePackage.NAMED_ELEMENT__OWNED_MIGRATED_ELEMENTS;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__NAME = CapellacorePackage.NAMED_ELEMENT__NAME;
+
+  /**
+   * The feature id for the '<em><b>Incoming Traces</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc
+   * -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__INCOMING_TRACES = CapellacorePackage.NAMED_ELEMENT__INCOMING_TRACES;
+
+  /**
+   * The feature id for the '<em><b>Outgoing Traces</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc
+   * -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__OUTGOING_TRACES = CapellacorePackage.NAMED_ELEMENT__OUTGOING_TRACES;
+
+  /**
+   * The feature id for the '<em><b>Visible In Doc</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__VISIBLE_IN_DOC = CapellacorePackage.NAMED_ELEMENT__VISIBLE_IN_DOC;
+
+  /**
+   * The feature id for the '<em><b>Visible In LM</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__VISIBLE_IN_LM = CapellacorePackage.NAMED_ELEMENT__VISIBLE_IN_LM;
+
+  /**
+   * The feature id for the '<em><b>Summary</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__SUMMARY = CapellacorePackage.NAMED_ELEMENT__SUMMARY;
+
+  /**
+   * The feature id for the '<em><b>Description</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__DESCRIPTION = CapellacorePackage.NAMED_ELEMENT__DESCRIPTION;
+
+  /**
+   * The feature id for the '<em><b>Review</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__REVIEW = CapellacorePackage.NAMED_ELEMENT__REVIEW;
+
+  /**
+   * The feature id for the '<em><b>Owned Property Values</b></em>' containment reference list. <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__OWNED_PROPERTY_VALUES = CapellacorePackage.NAMED_ELEMENT__OWNED_PROPERTY_VALUES;
+
+  /**
+   * The feature id for the '<em><b>Owned Enumeration Property Types</b></em>' containment reference list. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__OWNED_ENUMERATION_PROPERTY_TYPES = CapellacorePackage.NAMED_ELEMENT__OWNED_ENUMERATION_PROPERTY_TYPES;
+
+  /**
+   * The feature id for the '<em><b>Applied Property Values</b></em>' reference list. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__APPLIED_PROPERTY_VALUES = CapellacorePackage.NAMED_ELEMENT__APPLIED_PROPERTY_VALUES;
+
+  /**
+   * The feature id for the '<em><b>Owned Property Value Groups</b></em>' containment reference list. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__OWNED_PROPERTY_VALUE_GROUPS = CapellacorePackage.NAMED_ELEMENT__OWNED_PROPERTY_VALUE_GROUPS;
+
+  /**
+   * The feature id for the '<em><b>Applied Property Value Groups</b></em>' reference list. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__APPLIED_PROPERTY_VALUE_GROUPS = CapellacorePackage.NAMED_ELEMENT__APPLIED_PROPERTY_VALUE_GROUPS;
+
+  /**
+   * The feature id for the '<em><b>Status</b></em>' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__STATUS = CapellacorePackage.NAMED_ELEMENT__STATUS;
+
+  /**
+   * The feature id for the '<em><b>Features</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__FEATURES = CapellacorePackage.NAMED_ELEMENT__FEATURES;
+
+  /**
+   * The feature id for the '<em><b>Applied Requirements</b></em>' reference list. <!-- begin-user-doc --> <!--
+   * end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__APPLIED_REQUIREMENTS = CapellacorePackage.NAMED_ELEMENT__APPLIED_REQUIREMENTS;
+
+  /**
+   * The feature id for the '<em><b>Situation</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT__SITUATION = CapellacorePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Result</em>' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   * @ordered
+   */
+  int RESULT_FEATURE_COUNT = CapellacorePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.polarsys.capella.vp.ms.kind_Type <em>kind Type</em>}' enum. <!--
    * begin-user-doc --> <!-- end-user-doc -->
    * 
@@ -1996,7 +2653,7 @@ public interface MsPackage extends EPackage {
    * @see org.polarsys.capella.vp.ms.impl.MsPackageImpl#getkind_Type()
    * @generated
    */
-  int KIND_TYPE = 9;
+  int KIND_TYPE = 12;
 
   /**
    * The meta object id for the '{@link org.polarsys.capella.vp.ms.access_Type <em>access Type</em>}' enum. <!--
@@ -2006,7 +2663,17 @@ public interface MsPackage extends EPackage {
    * @see org.polarsys.capella.vp.ms.impl.MsPackageImpl#getaccess_Type()
    * @generated
    */
-  int ACCESS_TYPE = 10;
+  int ACCESS_TYPE = 13;
+
+  /**
+   * The meta object id for the '{@link org.polarsys.capella.vp.ms.ms_Type <em>ms Type</em>}' enum. <!-- begin-user-doc
+   * --> <!-- end-user-doc -->
+   * 
+   * @see org.polarsys.capella.vp.ms.ms_Type
+   * @see org.polarsys.capella.vp.ms.impl.MsPackageImpl#getms_Type()
+   * @generated
+   */
+  int MS_TYPE = 14;
 
   /**
    * Returns the meta object for class '{@link org.polarsys.capella.vp.ms.CSConfiguration <em>CS Configuration</em>}'.
@@ -2106,6 +2773,27 @@ public interface MsPackage extends EPackage {
    * @generated
    */
   EReference getCSConfiguration_CompareTo();
+
+  /**
+   * Returns the meta object for class '{@link org.polarsys.capella.vp.ms.FSMType <em>FSM Type</em>}'. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @return the meta object for class '<em>FSM Type</em>'.
+   * @see org.polarsys.capella.vp.ms.FSMType
+   * @generated
+   */
+  EClass getFSMType();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.polarsys.capella.vp.ms.FSMType#getMs <em>Ms</em>}'. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @return the meta object for the attribute '<em>Ms</em>'.
+   * @see org.polarsys.capella.vp.ms.FSMType#getMs()
+   * @see #getFSMType()
+   * @generated
+   */
+  EAttribute getFSMType_Ms();
 
   /**
    * Returns the meta object for class '{@link org.polarsys.capella.vp.ms.Situation <em>Situation</em>}'. <!--
@@ -2233,6 +2921,70 @@ public interface MsPackage extends EPackage {
   EClass getNotOperation();
 
   /**
+   * Returns the meta object for class '{@link org.polarsys.capella.vp.ms.Comparison <em>Comparison</em>}'. <!--
+   * begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @return the meta object for class '<em>Comparison</em>'.
+   * @see org.polarsys.capella.vp.ms.Comparison
+   * @generated
+   */
+  EClass getComparison();
+
+  /**
+   * Returns the meta object for the reference list '{@link org.polarsys.capella.vp.ms.Comparison#getConfiguration1
+   * <em>Configuration1</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @return the meta object for the reference list '<em>Configuration1</em>'.
+   * @see org.polarsys.capella.vp.ms.Comparison#getConfiguration1()
+   * @see #getComparison()
+   * @generated
+   */
+  EReference getComparison_Configuration1();
+
+  /**
+   * Returns the meta object for the reference list '{@link org.polarsys.capella.vp.ms.Comparison#getSituation
+   * <em>Situation</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @return the meta object for the reference list '<em>Situation</em>'.
+   * @see org.polarsys.capella.vp.ms.Comparison#getSituation()
+   * @see #getComparison()
+   * @generated
+   */
+  EReference getComparison_Situation();
+
+  /**
+   * Returns the meta object for the reference list '{@link org.polarsys.capella.vp.ms.Comparison#getConfiguration2
+   * <em>Configuration2</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @return the meta object for the reference list '<em>Configuration2</em>'.
+   * @see org.polarsys.capella.vp.ms.Comparison#getConfiguration2()
+   * @see #getComparison()
+   * @generated
+   */
+  EReference getComparison_Configuration2();
+
+  /**
+   * Returns the meta object for class '{@link org.polarsys.capella.vp.ms.Result <em>Result</em>}'. <!-- begin-user-doc
+   * --> <!-- end-user-doc -->
+   * 
+   * @return the meta object for class '<em>Result</em>'.
+   * @see org.polarsys.capella.vp.ms.Result
+   * @generated
+   */
+  EClass getResult();
+
+  /**
+   * Returns the meta object for the reference list '{@link org.polarsys.capella.vp.ms.Result#getSituation
+   * <em>Situation</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @return the meta object for the reference list '<em>Situation</em>'.
+   * @see org.polarsys.capella.vp.ms.Result#getSituation()
+   * @see #getResult()
+   * @generated
+   */
+  EReference getResult_Situation();
+
+  /**
    * Returns the meta object for enum '{@link org.polarsys.capella.vp.ms.kind_Type <em>kind Type</em>}'. <!--
    * begin-user-doc --> <!-- end-user-doc -->
    * 
@@ -2251,6 +3003,16 @@ public interface MsPackage extends EPackage {
    * @generated
    */
   EEnum getaccess_Type();
+
+  /**
+   * Returns the meta object for enum '{@link org.polarsys.capella.vp.ms.ms_Type <em>ms Type</em>}'. <!-- begin-user-doc
+   * --> <!-- end-user-doc -->
+   * 
+   * @return the meta object for enum '<em>ms Type</em>'.
+   * @see org.polarsys.capella.vp.ms.ms_Type
+   * @generated
+   */
+  EEnum getms_Type();
 
   /**
    * Returns the factory that creates the instances of the model. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -2347,6 +3109,24 @@ public interface MsPackage extends EPackage {
      * @generated
      */
     EReference CS_CONFIGURATION__COMPARE_TO = eINSTANCE.getCSConfiguration_CompareTo();
+
+    /**
+     * The meta object literal for the '{@link org.polarsys.capella.vp.ms.impl.FSMTypeImpl <em>FSM Type</em>}' class.
+     * <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @see org.polarsys.capella.vp.ms.impl.FSMTypeImpl
+     * @see org.polarsys.capella.vp.ms.impl.MsPackageImpl#getFSMType()
+     * @generated
+     */
+    EClass FSM_TYPE = eINSTANCE.getFSMType();
+
+    /**
+     * The meta object literal for the '<em><b>Ms</b></em>' attribute feature. <!-- begin-user-doc --> <!-- end-user-doc
+     * -->
+     * 
+     * @generated
+     */
+    EAttribute FSM_TYPE__MS = eINSTANCE.getFSMType_Ms();
 
     /**
      * The meta object literal for the '{@link org.polarsys.capella.vp.ms.impl.SituationImpl <em>Situation</em>}' class.
@@ -2461,6 +3241,58 @@ public interface MsPackage extends EPackage {
     EClass NOT_OPERATION = eINSTANCE.getNotOperation();
 
     /**
+     * The meta object literal for the '{@link org.polarsys.capella.vp.ms.impl.ComparisonImpl <em>Comparison</em>}'
+     * class. <!-- begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @see org.polarsys.capella.vp.ms.impl.ComparisonImpl
+     * @see org.polarsys.capella.vp.ms.impl.MsPackageImpl#getComparison()
+     * @generated
+     */
+    EClass COMPARISON = eINSTANCE.getComparison();
+
+    /**
+     * The meta object literal for the '<em><b>Configuration1</b></em>' reference list feature. <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * 
+     * @generated
+     */
+    EReference COMPARISON__CONFIGURATION1 = eINSTANCE.getComparison_Configuration1();
+
+    /**
+     * The meta object literal for the '<em><b>Situation</b></em>' reference list feature. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @generated
+     */
+    EReference COMPARISON__SITUATION = eINSTANCE.getComparison_Situation();
+
+    /**
+     * The meta object literal for the '<em><b>Configuration2</b></em>' reference list feature. <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * 
+     * @generated
+     */
+    EReference COMPARISON__CONFIGURATION2 = eINSTANCE.getComparison_Configuration2();
+
+    /**
+     * The meta object literal for the '{@link org.polarsys.capella.vp.ms.impl.ResultImpl <em>Result</em>}' class. <!--
+     * begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @see org.polarsys.capella.vp.ms.impl.ResultImpl
+     * @see org.polarsys.capella.vp.ms.impl.MsPackageImpl#getResult()
+     * @generated
+     */
+    EClass RESULT = eINSTANCE.getResult();
+
+    /**
+     * The meta object literal for the '<em><b>Situation</b></em>' reference list feature. <!-- begin-user-doc --> <!--
+     * end-user-doc -->
+     * 
+     * @generated
+     */
+    EReference RESULT__SITUATION = eINSTANCE.getResult_Situation();
+
+    /**
      * The meta object literal for the '{@link org.polarsys.capella.vp.ms.kind_Type <em>kind Type</em>}' enum. <!--
      * begin-user-doc --> <!-- end-user-doc -->
      * 
@@ -2479,6 +3311,16 @@ public interface MsPackage extends EPackage {
      * @generated
      */
     EEnum ACCESS_TYPE = eINSTANCE.getaccess_Type();
+
+    /**
+     * The meta object literal for the '{@link org.polarsys.capella.vp.ms.ms_Type <em>ms Type</em>}' enum. <!--
+     * begin-user-doc --> <!-- end-user-doc -->
+     * 
+     * @see org.polarsys.capella.vp.ms.ms_Type
+     * @see org.polarsys.capella.vp.ms.impl.MsPackageImpl#getms_Type()
+     * @generated
+     */
+    EEnum MS_TYPE = eINSTANCE.getms_Type();
 
   }
 

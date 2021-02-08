@@ -42,15 +42,19 @@ import org.polarsys.capella.vp.ms.AndOperation;
 import org.polarsys.capella.vp.ms.BooleanExpression;
 import org.polarsys.capella.vp.ms.BooleanOperation;
 import org.polarsys.capella.vp.ms.CSConfiguration;
+import org.polarsys.capella.vp.ms.Comparison;
+import org.polarsys.capella.vp.ms.FSMType;
 import org.polarsys.capella.vp.ms.InSituationExpression;
 import org.polarsys.capella.vp.ms.InStateExpression;
 import org.polarsys.capella.vp.ms.MsFactory;
 import org.polarsys.capella.vp.ms.MsPackage;
 import org.polarsys.capella.vp.ms.NotOperation;
 import org.polarsys.capella.vp.ms.OrOperation;
+import org.polarsys.capella.vp.ms.Result;
 import org.polarsys.capella.vp.ms.Situation;
 import org.polarsys.capella.vp.ms.access_Type;
 import org.polarsys.capella.vp.ms.kind_Type;
+import org.polarsys.capella.vp.ms.ms_Type;
 import org.polarsys.kitalpha.emde.model.EmdePackage;
 
 /**
@@ -65,6 +69,13 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
    * @generated
    */
   private EClass csConfigurationEClass = null;
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  private EClass fsmTypeEClass = null;
 
   /**
    * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -127,6 +138,20 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
    * 
    * @generated
    */
+  private EClass comparisonEClass = null;
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  private EClass resultEClass = null;
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
   private EEnum kind_TypeEEnum = null;
 
   /**
@@ -135,6 +160,13 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
    * @generated
    */
   private EEnum access_TypeEEnum = null;
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  private EEnum ms_TypeEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
@@ -312,6 +344,26 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
    * @generated
    */
   @Override
+  public EClass getFSMType() {
+    return fsmTypeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public EAttribute getFSMType_Ms() {
+    return (EAttribute) fsmTypeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
   public EClass getSituation() {
     return situationEClass;
   }
@@ -432,6 +484,66 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
    * @generated
    */
   @Override
+  public EClass getComparison() {
+    return comparisonEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public EReference getComparison_Configuration1() {
+    return (EReference) comparisonEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public EReference getComparison_Situation() {
+    return (EReference) comparisonEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public EReference getComparison_Configuration2() {
+    return (EReference) comparisonEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public EClass getResult() {
+    return resultEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public EReference getResult_Situation() {
+    return (EReference) resultEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
   public EEnum getkind_Type() {
     return kind_TypeEEnum;
   }
@@ -444,6 +556,16 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
   @Override
   public EEnum getaccess_Type() {
     return access_TypeEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * 
+   * @generated
+   */
+  @Override
+  public EEnum getms_Type() {
+    return ms_TypeEEnum;
   }
 
   /**
@@ -485,6 +607,9 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
     createEReference(csConfigurationEClass, CS_CONFIGURATION__CONTEXT);
     createEReference(csConfigurationEClass, CS_CONFIGURATION__COMPARE_TO);
 
+    fsmTypeEClass = createEClass(FSM_TYPE);
+    createEAttribute(fsmTypeEClass, FSM_TYPE__MS);
+
     situationEClass = createEClass(SITUATION);
     createEReference(situationEClass, SITUATION__EXPRESSION);
 
@@ -505,9 +630,18 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
 
     notOperationEClass = createEClass(NOT_OPERATION);
 
+    comparisonEClass = createEClass(COMPARISON);
+    createEReference(comparisonEClass, COMPARISON__CONFIGURATION1);
+    createEReference(comparisonEClass, COMPARISON__SITUATION);
+    createEReference(comparisonEClass, COMPARISON__CONFIGURATION2);
+
+    resultEClass = createEClass(RESULT);
+    createEReference(resultEClass, RESULT__SITUATION);
+
     // Create enums
     kind_TypeEEnum = createEEnum(KIND_TYPE);
     access_TypeEEnum = createEEnum(ACCESS_TYPE);
+    ms_TypeEEnum = createEEnum(MS_TYPE);
   }
 
   /**
@@ -549,6 +683,8 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
     // Add supertypes to classes
     csConfigurationEClass.getESuperTypes().add(theCapellacorePackage.getNamedElement());
     csConfigurationEClass.getESuperTypes().add(theEmdePackage.getElementExtension());
+    fsmTypeEClass.getESuperTypes().add(theCapellacorePackage.getNamedElement());
+    fsmTypeEClass.getESuperTypes().add(theEmdePackage.getElementExtension());
     situationEClass.getESuperTypes().add(theCapellacorePackage.getNamedElement());
     situationEClass.getESuperTypes().add(theEmdePackage.getElementExtension());
     booleanExpressionEClass.getESuperTypes().add(theCapellacorePackage.getCapellaElement());
@@ -558,6 +694,10 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
     andOperationEClass.getESuperTypes().add(this.getBooleanOperation());
     orOperationEClass.getESuperTypes().add(this.getBooleanOperation());
     notOperationEClass.getESuperTypes().add(this.getBooleanOperation());
+    comparisonEClass.getESuperTypes().add(theCapellacorePackage.getNamedElement());
+    comparisonEClass.getESuperTypes().add(theEmdePackage.getElementExtension());
+    resultEClass.getESuperTypes().add(theCapellacorePackage.getNamedElement());
+    resultEClass.getESuperTypes().add(theEmdePackage.getElementExtension());
 
     // Initialize classes and features; add operations and parameters
     initEClass(csConfigurationEClass, CSConfiguration.class, "CSConfiguration", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
@@ -599,6 +739,10 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
     g1 = createEGenericType(t1);
     initEOperation(op, g1);
 
+    initEClass(fsmTypeEClass, FSMType.class, "FSMType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEAttribute(getFSMType_Ms(), this.getms_Type(), "ms", null, 0, 1, FSMType.class, !IS_TRANSIENT, !IS_VOLATILE, //$NON-NLS-1$
+        IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(situationEClass, Situation.class, "Situation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
     initEReference(getSituation_Expression(), this.getBooleanExpression(), null, "expression", null, 0, 1, //$NON-NLS-1$
         Situation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
@@ -634,6 +778,23 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
     initEClass(notOperationEClass, NotOperation.class, "NotOperation", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
         IS_GENERATED_INSTANCE_CLASS);
 
+    initEClass(comparisonEClass, Comparison.class, "Comparison", !IS_ABSTRACT, !IS_INTERFACE, //$NON-NLS-1$
+        IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getComparison_Configuration1(), this.getCSConfiguration(), null, "configuration1", null, 0, -1, //$NON-NLS-1$
+        Comparison.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+        IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getComparison_Situation(), this.getSituation(), null, "Situation", null, 0, -1, Comparison.class, //$NON-NLS-1$
+        !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+        !IS_DERIVED, IS_ORDERED);
+    initEReference(getComparison_Configuration2(), this.getCSConfiguration(), null, "configuration2", null, 0, -1, //$NON-NLS-1$
+        Comparison.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+        IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(resultEClass, Result.class, "Result", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+    initEReference(getResult_Situation(), this.getSituation(), null, "Situation", null, 0, -1, Result.class, //$NON-NLS-1$
+        !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+        !IS_DERIVED, IS_ORDERED);
+
     // Initialize enums and add enum literals
     initEEnum(kind_TypeEEnum, kind_Type.class, "kind_Type"); //$NON-NLS-1$
     addEEnumLiteral(kind_TypeEEnum, kind_Type.ATOMIC);
@@ -643,6 +804,11 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
     addEEnumLiteral(access_TypeEEnum, access_Type.FLAT);
     addEEnumLiteral(access_TypeEEnum, access_Type.SUBCOMPONENTS);
     addEEnumLiteral(access_TypeEEnum, access_Type.FULL);
+
+    initEEnum(ms_TypeEEnum, ms_Type.class, "ms_Type"); //$NON-NLS-1$
+    addEEnumLiteral(ms_TypeEEnum, ms_Type.MIXED);
+    addEEnumLiteral(ms_TypeEEnum, ms_Type.STATE);
+    addEEnumLiteral(ms_TypeEEnum, ms_Type.MODE);
 
     // Create resource
     createResource(eNS_URI);
@@ -665,7 +831,13 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
     addAnnotation(csConfigurationEClass, source, new String[] { "ExtendedElement", //$NON-NLS-1$
         " http://www.polarsys.org/capella/core/cs/1.4.0#//Component http://www.polarsys.org/capella/core/cs/1.4.0#//ComponentPkg" //$NON-NLS-1$
     });
+    addAnnotation(fsmTypeEClass, source,
+        new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/common/1.4.0#//StateMachine" //$NON-NLS-1$ //$NON-NLS-2$
+        });
     addAnnotation(situationEClass, source,
+        new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/cs/1.4.0#//Component" //$NON-NLS-1$ //$NON-NLS-2$
+        });
+    addAnnotation(comparisonEClass, source,
         new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/cs/1.4.0#//Component" //$NON-NLS-1$ //$NON-NLS-2$
         });
   }
@@ -681,7 +853,13 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
     addAnnotation(csConfigurationEClass, source, new String[] { "Mapping", //$NON-NLS-1$
         "platform:/plugin/org.polarsys.capella.core.data.gen/model/CompositeStructure.ecore#//Component platform:/plugin/org.polarsys.capella.core.data.gen/model/CompositeStructure.ecore#//ComponentPkg" //$NON-NLS-1$
     });
+    addAnnotation(fsmTypeEClass, source, new String[] { "Mapping", //$NON-NLS-1$
+        " platform:/plugin/org.polarsys.capella.core.data.gen/model/CapellaCommon.ecore#//StateMachine" //$NON-NLS-1$
+    });
     addAnnotation(situationEClass, source, new String[] { "Mapping", //$NON-NLS-1$
+        " platform:/plugin/org.polarsys.capella.core.data.gen/model/CompositeStructure.ecore#//Component" //$NON-NLS-1$
+    });
+    addAnnotation(comparisonEClass, source, new String[] { "Mapping", //$NON-NLS-1$
         " platform:/plugin/org.polarsys.capella.core.data.gen/model/CompositeStructure.ecore#//Component" //$NON-NLS-1$
     });
   }
