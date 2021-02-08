@@ -49,7 +49,7 @@
 						</dependency>
 					</dependencies>
 					<useUIHarness>true</useUIHarness>
-					<useUIThread>true</useUIThread>
+					<useUIThread>false</useUIThread>
 				</configuration>
 			</plugin>
 		</plugins>
