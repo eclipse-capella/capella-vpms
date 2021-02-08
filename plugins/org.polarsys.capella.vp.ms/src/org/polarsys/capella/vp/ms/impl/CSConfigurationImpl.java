@@ -36,12 +36,15 @@ import org.polarsys.capella.core.data.capellacore.impl.NamedElementImpl;
 import org.polarsys.capella.core.data.cs.Component;
 import org.polarsys.capella.core.data.cs.ComponentPkg;
 import org.polarsys.capella.core.data.cs.Part;
+import org.polarsys.capella.core.data.cs.PhysicalLink;
 import org.polarsys.capella.core.data.cs.PhysicalPort;
 import org.polarsys.capella.core.data.fa.AbstractFunction;
+import org.polarsys.capella.core.data.fa.ComponentExchange;
 import org.polarsys.capella.core.data.fa.ComponentPort;
 import org.polarsys.capella.core.data.fa.FunctionInputPort;
 import org.polarsys.capella.core.data.fa.FunctionOutputPort;
 import org.polarsys.capella.core.data.fa.FunctionalChain;
+import org.polarsys.capella.core.data.fa.FunctionalExchange;
 import org.polarsys.capella.core.data.interaction.InstanceRole;
 import org.polarsys.capella.core.data.interaction.Scenario;
 import org.polarsys.capella.core.data.la.LogicalComponent;
@@ -448,14 +451,22 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
       for (InputPin in : allocated.getInputs()) {
         if (in instanceof FunctionInputPort) {
           result.add(in);
-          result.addAll(((FunctionInputPort) in).getIncomingFunctionalExchanges());
+          for (FunctionalExchange e : ((FunctionInputPort) in).getIncomingFunctionalExchanges()) {
+            if (result.contains(e.getSourceFunctionOutputPort())) {
+              result.add(e);
+            }
+          }
         }
       }
 
       for (OutputPin out : allocated.getOutputs()) {
         if (out instanceof FunctionOutputPort) {
           result.add(out);
-          result.addAll(((FunctionOutputPort) out).getOutgoingFunctionalExchanges());
+          for (FunctionalExchange e : ((FunctionOutputPort) out).getOutgoingFunctionalExchanges()) {
+            if (result.contains(e.getTargetFunctionInputPort())) {
+              result.add(e);
+            }
+          }
         }
       }
       for (FunctionalChain chain : allocated.getInvolvingFunctionalChains()) {
@@ -465,12 +476,33 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
 
     for (ComponentPort cp : parent.getContainedComponentPorts()) {
       result.add(cp);
-      result.addAll(cp.getComponentExchanges());
+
+      for (ComponentExchange e : cp.getComponentExchanges()) {
+        if (cp == e.getSourcePort()) {
+          if (result.contains(e.getTargetPort())) {
+            result.add(e);
+          }
+        } else if (cp == e.getTargetPort()) {
+          if (result.contains(e.getSourcePort())) {
+            result.add(e);
+          }
+        }
+      }
     }
 
     for (PhysicalPort pp : parent.getContainedPhysicalPorts()) {
       result.add(pp);
-      result.addAll(pp.getInvolvedLinks());
+      for (PhysicalLink l : pp.getInvolvedLinks()) {
+        if (pp == l.getSourcePhysicalPort()) {
+          if (result.contains(l.getTargetPhysicalPort())) {
+            result.add(l);
+          }
+        } else if (pp == l.getTargetPhysicalPort()) {
+          if (result.contains(l.getSourcePhysicalPort())) {
+            result.add(l);
+          }
+        }
+      }
     }
   }
 
