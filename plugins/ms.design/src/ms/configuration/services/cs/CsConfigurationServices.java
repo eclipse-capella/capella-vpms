@@ -122,6 +122,10 @@ public class CsConfigurationServices {
   public static final String DANNOTATION_DETAIL_SHOW_FUNCTIONAL_CHAINS = "showFunctionalChains"; //$NON-NLS-1$
   public static final String DANNOTATION_DETAIL_SHOW_SCENARIOS = "showScenarios"; //$NON-NLS-1$
 
+  public static final String DANNOTATION_DETAIL_SHOW_FUNCTIONAL_EXCHANGES = "showFunctionalExchanges"; //$NON-NLS-1$
+  public static final String DANNOTATION_DETAIL_SHOW_COMPONENT_EXCHANGES = "showComponentExchanges"; //$NON-NLS-1$
+  public static final String DANNOTATION_DETAIL_SHOW_PHYSICAL_LINKS = "showPhysicalLinks"; //$NON-NLS-1$
+
   private static final String CONFIGURATIONS_LAYER_LABEL = Messages.CsConfigurationServices_Configurations_Layer_Name;
   
   private static final Predicate<Component> HAS_STATEMACHINE = new Predicate<Component>() {
@@ -736,18 +740,42 @@ public class CsConfigurationServices {
     return "";
   }
 
-  public Collection<?> msCrossTableFunctionalChains(DTable table, Component component) {
-    return msCrossTableElements(table, component, FaPackage.Literals.FUNCTIONAL_CHAIN);
-  }
-
-  public Collection<?> msCrossTableScenarios(DTable table, Component component) {
-    return msCrossTableElements(table, component, InteractionPackage.Literals.SCENARIO);
-  }
-
-  private Collection<?> msCrossTableElements(DTable table, Component component, EClass clazz){
-    if (!isShowScenarios(table)) {
-      return Collections.emptyList();
+  public Collection<?> msCrossTableFunctionalChains(DTable table, EObject component) {
+    if (isShowFunctionalChains(table)) {
+      return msCrossTableElements(table, component, FaPackage.Literals.FUNCTIONAL_CHAIN);
     }
+    return Collections.emptyList();
+  }
+  
+  public Collection<?> msCrossTableFunctionalExchanges(DTable table, EObject component){
+    if (isShowFunctionalExchanges(table)) {
+      return msCrossTableElements(table, component, FaPackage.Literals.FUNCTIONAL_EXCHANGE);
+    }
+    return Collections.emptyList();
+  }
+
+  public Collection<?> msCrossTableComponentExchanges(DTable table, EObject component){
+    if (isShowComponentExchanges(table)) {
+      return msCrossTableElements(table, component, FaPackage.Literals.COMPONENT_EXCHANGE);
+    } 
+    return Collections.emptyList();
+  }
+  
+  public Collection<?> msCrossTablePhysicalLinks(DTable table, EObject component){
+    if (isShowPhysicalLinks(table)) {
+      return msCrossTableElements(table, component, CsPackage.Literals.PHYSICAL_LINK);
+    }
+    return Collections.emptyList();
+  }
+
+  public Collection<?> msCrossTableScenarios(DTable table, EObject component) {
+    if (isShowScenarios(table)) {
+      return msCrossTableElements(table, component, InteractionPackage.Literals.SCENARIO);
+    }
+    return Collections.emptyList();
+  }
+
+  private Collection<?> msCrossTableElements(DTable table, EObject component, EClass clazz){
 
     if (getOwnedConfigurations(component).isEmpty()) {
       return Collections.emptyList(); // FIXME, thats' a small hack
@@ -861,6 +889,31 @@ public class CsConfigurationServices {
     setAnnotationDetail(table, DANNOTATION_DETAIL_SHOW_COMPONENTS, b);
   }
 
+  public static boolean isShowFunctionalExchanges(DTable table) {
+    return isAnnotationDetailSet(table, DANNOTATION_DETAIL_SHOW_FUNCTIONAL_EXCHANGES, true);
+  }
+  
+  public static void setShowFunctionalExchanges(DTable table, boolean b) {
+    setAnnotationDetail(table, DANNOTATION_DETAIL_SHOW_FUNCTIONAL_EXCHANGES, b);
+  }
+  
+  public static boolean isShowComponentExchanges(DTable table) {
+    return isAnnotationDetailSet(table, DANNOTATION_DETAIL_SHOW_COMPONENT_EXCHANGES, true);
+  }
+  
+  public static void setShowComponentExchanges(DTable table, boolean b) {
+    setAnnotationDetail(table, DANNOTATION_DETAIL_SHOW_COMPONENT_EXCHANGES, b);
+  }
+  
+  public static boolean isShowPhysicalLinks(DTable table) {
+    return isAnnotationDetailSet(table, DANNOTATION_DETAIL_SHOW_PHYSICAL_LINKS, true);
+  }
+  
+  public static void setShowPhysicalLinks(DTable table, boolean b) {
+    setAnnotationDetail(table, DANNOTATION_DETAIL_SHOW_PHYSICAL_LINKS, b);
+  }
+  
+  
   public static boolean isShowComponents(DTable table) {
     return isAnnotationDetailSet(table, DANNOTATION_DETAIL_SHOW_COMPONENTS, true);
   }

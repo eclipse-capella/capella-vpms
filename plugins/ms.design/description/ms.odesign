@@ -62,13 +62,31 @@
           <variables name="root" documentation="The semantic root element of the table."/>
         </delete>
       </ownedLineMappings>
+      <ownedLineMappings name="MS_F_C_FunctionalExchanges" domainClass="FunctionalExchange" semanticCandidatesExpression="service:table.msCrossTableFunctionalExchanges(container)">
+        <delete name="No_Delete">
+          <variables name="element" documentation="The semantic currently edited element."/>
+          <variables name="root" documentation="The semantic root element of the table."/>
+        </delete>
+      </ownedLineMappings>
+      <ownedLineMappings name="MS_F_C_ComponentExchanges" domainClass="ComponentExchange" semanticCandidatesExpression="service:table.msCrossTableComponentExchanges(container)">
+        <delete name="No_Delete">
+          <variables name="element" documentation="The semantic currently edited element."/>
+          <variables name="root" documentation="The semantic root element of the table."/>
+        </delete>
+      </ownedLineMappings>
+      <ownedLineMappings name="MS_F_C_PhysicalLinks" domainClass="PhysicalLink" semanticCandidatesExpression="service:table.msCrossTablePhysicalLinks(container)">
+        <delete name="No_Delete">
+          <variables name="element" documentation="The semantic currently edited element."/>
+          <variables name="root" documentation="The semantic root element of the table."/>
+        </delete>
+      </ownedLineMappings>
       <ownedColumnMappings name="MS_F_C_Configurations" headerLabelExpression="feature:name" domainClass="ms.CSConfiguration" semanticCandidatesExpression="service:getOwnedConfigurations">
         <delete name="No_Delete">
           <variables name="element" documentation="The currently edited element."/>
           <variables name="root" documentation="The semantic element corresponding to the current table."/>
         </delete>
       </ownedColumnMappings>
-      <intersection name="MS_F_C_AvailableFunctionInConfiguration" lineMapping="//@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_ComponentsRoot']/@ownedSubLines[name='MS_F_C_Functions'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_ComponentsRoot']/@ownedSubLines[name='MS_F_C_Component_PhysicalPorts'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_ComponentsRoot']/@ownedSubLines[name='MS_F_C_Component_Ports'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_ComponentsRoot']/@ownedSubLines[name='MS_F_C_ComponentsRecurse'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_ComponentsRoot']/@ownedSubLines[name='MS_F_C_Functions']/@ownedSubLines[name='MS_F_C_Function_Inputs'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_ComponentsRoot']/@ownedSubLines[name='MS_F_C_Functions']/@ownedSubLines[name='MS_F_C_Function_Outputs'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_FunctionalChains'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_Scenarios']" columnMapping="//@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedColumnMappings.0" labelExpression="service:columnSemantic.msCrossTableLabel(lineSemantic)" columnFinderExpression="service:getConfigurationFromElement">
+      <intersection name="MS_F_C_AvailableFunctionInConfiguration" lineMapping="//@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_ComponentsRoot']/@ownedSubLines[name='MS_F_C_Functions'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_ComponentsRoot']/@ownedSubLines[name='MS_F_C_Component_PhysicalPorts'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_ComponentsRoot']/@ownedSubLines[name='MS_F_C_Component_Ports'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_ComponentsRoot']/@ownedSubLines[name='MS_F_C_ComponentsRecurse'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_ComponentsRoot']/@ownedSubLines[name='MS_F_C_Functions']/@ownedSubLines[name='MS_F_C_Function_Inputs'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_ComponentsRoot']/@ownedSubLines[name='MS_F_C_Functions']/@ownedSubLines[name='MS_F_C_Function_Outputs'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_FunctionalChains'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_Scenarios'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_ComponentExchanges'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_FunctionalExchanges'] //@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedLineMappings[name='MS_F_C_PhysicalLinks']" columnMapping="//@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_Function_Configuration']/@ownedColumnMappings.0" labelExpression="service:columnSemantic.msCrossTableLabel(lineSemantic)" columnFinderExpression="service:getConfigurationFromElement">
         <directEdit>
           <variables name="table" documentation="The current DTable."/>
           <variables name="line" documentation="The DLine of the current DCell."/>

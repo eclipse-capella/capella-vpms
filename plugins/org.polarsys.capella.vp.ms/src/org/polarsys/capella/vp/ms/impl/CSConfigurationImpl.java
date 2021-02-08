@@ -26,9 +26,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.polarsys.capella.common.data.activity.ActivityEdge;
 import org.polarsys.capella.common.data.activity.InputPin;
 import org.polarsys.capella.common.data.activity.OutputPin;
+import org.polarsys.capella.common.data.modellingcore.AbstractInformationFlow;
 import org.polarsys.capella.common.data.modellingcore.AbstractType;
+import org.polarsys.capella.common.data.modellingcore.InformationsExchanger;
 import org.polarsys.capella.common.data.modellingcore.ModelElement;
 import org.polarsys.capella.core.data.capellacommon.AbstractState;
 import org.polarsys.capella.core.data.capellacore.Feature;
@@ -49,6 +52,7 @@ import org.polarsys.capella.core.data.interaction.InstanceRole;
 import org.polarsys.capella.core.data.interaction.Scenario;
 import org.polarsys.capella.core.data.la.LogicalComponent;
 import org.polarsys.capella.core.data.la.LogicalComponentPkg;
+import org.polarsys.capella.core.data.oa.CommunicationMean;
 import org.polarsys.capella.core.data.pa.PhysicalComponent;
 import org.polarsys.capella.core.data.pa.PhysicalComponentPkg;
 import org.polarsys.capella.vp.ms.CSConfiguration;
@@ -451,24 +455,27 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
       for (InputPin in : allocated.getInputs()) {
         if (in instanceof FunctionInputPort) {
           result.add(in);
-          for (FunctionalExchange e : ((FunctionInputPort) in).getIncomingFunctionalExchanges()) {
-            if (result.contains(e.getSourceFunctionOutputPort())) {
-              result.add(e);
-            }
-          }
         }
       }
 
       for (OutputPin out : allocated.getOutputs()) {
         if (out instanceof FunctionOutputPort) {
           result.add(out);
-          for (FunctionalExchange e : ((FunctionOutputPort) out).getOutgoingFunctionalExchanges()) {
-            if (result.contains(e.getTargetFunctionInputPort())) {
-              result.add(e);
-            }
-          }
         }
       }
+
+      for (ActivityEdge edge : allocated.getIncoming()) {
+        if (result.contains(edge.getSource())){
+          result.add(edge);
+        }
+      }
+
+      for (ActivityEdge edge : allocated.getOutgoing()) {
+        if (result.contains(edge.getTarget())) {
+          result.add(edge);
+        }
+      }
+
       for (FunctionalChain chain : allocated.getInvolvingFunctionalChains()) {
         result.add(chain);
       }
@@ -504,6 +511,25 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
         }
       }
     }
+
+    if (parent instanceof InformationsExchanger) {
+      for (AbstractInformationFlow f : ((InformationsExchanger) parent).getOutgoingInformationFlows()) {
+        if (f instanceof CommunicationMean) {
+          if (result.contains(((CommunicationMean) f).getTarget())){
+            result.add(f);
+          }
+        }
+      }
+      for (AbstractInformationFlow f : ((InformationsExchanger) parent).getIncomingInformationFlows()) {
+        if (f instanceof CommunicationMean) {
+          if (result.contains(((CommunicationMean) f).getSource())){
+            result.add(f);
+          }
+        }
+      }
+    }
+
+
   }
 
   /**

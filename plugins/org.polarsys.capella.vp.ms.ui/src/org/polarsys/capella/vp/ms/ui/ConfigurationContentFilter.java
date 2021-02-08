@@ -91,7 +91,7 @@ public class ConfigurationContentFilter extends CompoundContributionItem impleme
       return NO_ITEMS;
     }
 
-    IContributionItem[] items = new IContributionItem[5];
+    IContributionItem[] items = new IContributionItem[8];
 
     items[0] = makeItem(Messages.ConfigurationContentFilter_showPorts, new Predicate<DTable>() {
       @Override
@@ -154,6 +154,45 @@ public class ConfigurationContentFilter extends CompoundContributionItem impleme
       @Override
       public Object apply(Boolean b) {
         CsConfigurationServices.setShowScenarios(table, b);
+        return null;
+      }
+    });
+
+    items[5] = makeItem(Messages.ConfigurationContentFilter_showFunctionalExchanges, new Predicate<DTable>() {
+      @Override
+      public boolean apply(DTable t) {
+        return CsConfigurationServices.isShowFunctionalExchanges(t);
+      }
+    }, new Function<Boolean, Object>(){
+      @Override
+      public Object apply(Boolean b) {
+        CsConfigurationServices.setShowFunctionalExchanges(table, b);
+        return null;
+      }
+    });
+
+    items[6] = makeItem(Messages.ConfigurationContentFilter_showComponentExchanges, new Predicate<DTable>() {
+      @Override
+      public boolean apply(DTable t) {
+        return CsConfigurationServices.isShowComponentExchanges(t);
+      }
+    }, new Function<Boolean, Object>(){
+      @Override
+      public Object apply(Boolean b) {
+        CsConfigurationServices.setShowComponentExchanges(table, b);
+        return null;
+      }
+    });
+
+    items[7] = makeItem(Messages.ConfigurationContentFilter_showPhysicalLinks, new Predicate<DTable>() {
+      @Override
+      public boolean apply(DTable t) {
+        return CsConfigurationServices.isShowPhysicalLinks(t);
+      }
+    }, new Function<Boolean, Object>(){
+      @Override
+      public Object apply(Boolean b) {
+        CsConfigurationServices.setShowPhysicalLinks(table, b);
         return null;
       }
     });

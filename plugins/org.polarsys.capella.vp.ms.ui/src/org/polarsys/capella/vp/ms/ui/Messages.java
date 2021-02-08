@@ -21,6 +21,9 @@ public class Messages extends NLS {
   public static String ConfigurationContentFilter_showFunctions;
   public static String ConfigurationContentFilter_showPorts;
   public static String ConfigurationContentFilter_showScenarios;
+  public static String ConfigurationContentFilter_showFunctionalExchanges;
+  public static String ConfigurationContentFilter_showComponentExchanges;
+  public static String ConfigurationContentFilter_showPhysicalLinks;
 
   static {
     // initialize resource bundle
