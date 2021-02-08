@@ -17,3 +17,7 @@ with source, requirements
 location m2doc "https://s3-eu-west-1.amazonaws.com/obeo-networkaggregation-releases/capella-extensions/1.4.2/full" {
 	org.apache.poi.feature.feature.group
 }
+
+location sirius "https://download.eclipse.org/sirius/updates/releases/6.3.3/2019-06/" {
+	org.eclipse.sirius.tests.feature.group
+}
