@@ -522,7 +522,7 @@ public class MsItemProviderAdapterFactory extends MsAdapterFactory
       /**
        * <!-- begin-user-doc --> <!-- end-user-doc -->
        * 
-       * @generated
+       * @generated NOT
        */
       @Override
       public Object caseExtensibleElement(ExtensibleElement object) {
@@ -563,24 +563,25 @@ public class MsItemProviderAdapterFactory extends MsAdapterFactory
         }
         // end-extension-code
 
+        // Temporarily disable creation for these unused objects
         // begin-extension-code
-        {
-          CommandParameter commandParameter = createChildParameter(
-              EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createComparison());
-          if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
-            newChildDescriptors.add(commandParameter);
-          }
-        }
+//        {
+//          CommandParameter commandParameter = createChildParameter(
+//              EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createComparison());
+//          if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
+//            newChildDescriptors.add(commandParameter);
+//          }
+//        }
         // end-extension-code
 
         // begin-extension-code
-        {
-          CommandParameter commandParameter = createChildParameter(
-              EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createResult());
-          if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
-            newChildDescriptors.add(commandParameter);
-          }
-        }
+//        {
+//          CommandParameter commandParameter = createChildParameter(
+//              EmdePackage.Literals.EXTENSIBLE_ELEMENT__OWNED_EXTENSIONS, MsFactory.eINSTANCE.createResult());
+//          if (NewChildDescriptorHelper.isValidCommand(object, commandParameter)) {
+//            newChildDescriptors.add(commandParameter);
+//          }
+//        }
         // end-extension-code
 
         return null;
