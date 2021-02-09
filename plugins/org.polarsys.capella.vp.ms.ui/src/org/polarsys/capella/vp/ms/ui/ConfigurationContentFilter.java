@@ -16,6 +16,8 @@ import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.action.ContributionItem;
 import org.eclipse.jface.action.IContributionItem;
+import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.sirius.table.metamodel.table.DTable;
 import org.eclipse.sirius.table.ui.tools.api.editor.DTableEditor;
 import org.eclipse.sirius.table.ui.tools.internal.editor.AbstractDTableEditor;
@@ -84,6 +86,10 @@ public class ConfigurationContentFilter extends CompoundContributionItem impleme
   @Override
   protected IContributionItem[] getContributionItems() {
 
+    if (!(partService.getActivePart() instanceof DTableEditor)) {
+      return NO_ITEMS;
+    }
+
     final DTableEditor editor = (DTableEditor) partService.getActivePart();
     final DTable table = (DTable) (((SessionEditorInput) editor.getEditorInput())).getInput();
 
@@ -92,6 +98,7 @@ public class ConfigurationContentFilter extends CompoundContributionItem impleme
     }
 
     IContributionItem[] items = new IContributionItem[8];
+
 
     items[0] = makeItem(Messages.ConfigurationContentFilter_showPorts, new Predicate<DTable>() {
       @Override
@@ -197,7 +204,11 @@ public class ConfigurationContentFilter extends CompoundContributionItem impleme
       }
     });
 
-    return items;
+    MenuManager manager = new MenuManager("Filter Lines By Class");
+    for (int i = 0; i < items.length; i++) {
+      manager.add(items[i]);
+    }
+    return new IContributionItem[] { new Separator(), manager };
 
   }
 

@@ -62,10 +62,6 @@
      <menuContribution
            allPopups="false"
            locationURI="popup:org.eclipse.sirius.table.ui.CrossTableEditorID?after=additions">
-        <dynamic
-              class="org.polarsys.capella.vp.ms.ui.ConfigurationContentFilter"
-              id="org.polarsys.capella.vp.ms.ui.configurationContentFilter">
-        </dynamic>
         <command
               commandId="org.polarsys.capella.vp.ms.ui.editSituationExpression"
               label="Change Expression ..."
@@ -92,6 +88,14 @@
                  checkEnabled="true">
            </visibleWhen>
         </command>
+     </menuContribution>
+     <menuContribution
+           allPopups="false"
+           locationURI="popup:popup.hidereveal?after=additions">
+        <dynamic
+              class="org.polarsys.capella.vp.ms.ui.ConfigurationContentFilter"
+              id="org.polarsys.capella.vp.ms.ui.configurationContentFilter">
+        </dynamic>
      </menuContribution>
   </extension>
   <extension
