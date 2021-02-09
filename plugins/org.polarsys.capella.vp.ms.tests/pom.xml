@@ -32,6 +32,12 @@
 								<id>org.polarsys.capella.vp.ms.feature</id>
 								<versionRange>0.0.0</versionRange>
 							</requirement>
+							<!--  https://wiki.eclipse.org/Tycho/FAQ#How_do_I_install_the_org.eclipse.osgi.compatibility.state_fragment.3F -->
+					        <requirement>
+          						<type>eclipse-plugin</type>
+          						<id>org.eclipse.osgi.compatibility.state</id>
+          						<versionRange>[1.1.0,2.0.0)</versionRange>
+        					</requirement>
 						</extraRequirements>
 					</dependency-resolution>
 				</configuration>
