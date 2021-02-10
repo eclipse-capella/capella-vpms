@@ -68,11 +68,30 @@ public class CSConfigurationSection extends NamedElementSection {
 
 
     includedField = new MultipleSemanticField(getReferencesGroup(),
-        MsEditPlugin.INSTANCE.getString("_UI_CSConfiguration_included_feature"), getWidgetFactory(), new ItemProviderFieldController()); //$NON-NLS-1$
+        MsEditPlugin.INSTANCE.getString("_UI_CSConfiguration_included_feature"), getWidgetFactory(), new ItemProviderFieldController() {
+      @Override
+      protected void doAddOperationInWriteOpenValues(EObject semanticElement, EStructuralFeature semanticFeature,
+          EObject object) {
+        super.doAddOperationInWriteOpenValues(semanticElement, semanticFeature, object);
+        doRemoveOperationInWriteOpenValues(semanticElement, MsPackage.Literals.CS_CONFIGURATION__EXCLUDED, object);
+        excludedField.loadData(semanticElement); // refresh hack...
+      }
+      
+      
+      
+    });
     includedField.setDisplayedInWizard(displayedInWizard);
-    
+
     excludedField = new MultipleSemanticField(getReferencesGroup(),
-        MsEditPlugin.INSTANCE.getString("_UI_CSConfiguration_excluded_feature"), getWidgetFactory(), new ItemProviderFieldController()); //$NON-NLS-1$
+        MsEditPlugin.INSTANCE.getString("_UI_CSConfiguration_excluded_feature"), getWidgetFactory(), new ItemProviderFieldController() {
+          @Override
+          protected void doAddOperationInWriteOpenValues(EObject semanticElement, EStructuralFeature semanticFeature,
+              EObject object) {
+            super.doAddOperationInWriteOpenValues(semanticElement, semanticFeature, object);
+            doRemoveOperationInWriteOpenValues(semanticElement, MsPackage.Literals.CS_CONFIGURATION__INCLUDED, object);
+            includedField.loadData(semanticElement); // refresh hack..
+          }
+    });
     excludedField.setDisplayedInWizard(displayedInWizard);
 
     childConfigurationsField = new MultipleSemanticField(getReferencesGroup(),
