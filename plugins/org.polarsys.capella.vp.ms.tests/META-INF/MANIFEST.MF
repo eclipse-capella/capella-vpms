@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.polarsys.capella.vp.ms.tests
-Bundle-Version: 0.17.0.qualifier
+Bundle-Version: 0.18.0.qualifier
 Bundle-Vendor: %providerName
 Automatic-Module-Name: org.polarsys.capella.vp.ms.tests
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.antlr.runtime;bundle-version="4.3.0",
  org.junit.jupiter.api;bundle-version="5.4.0",
  org.junit.jupiter.params;bundle-version="5.4.0",

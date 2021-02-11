@@ -17,7 +17,7 @@
 
 	<parent>
 	  <groupId>org.polarsys</groupId>
-	  <version>1.4.1-SNAPSHOT</version>
+	  <version>5.0.0-SNAPSHOT</version>
 	  <artifactId>capella-target-generator</artifactId>
 	  <relativePath>../capella-releng-parent/tp/capella-target-generator.xml</relativePath>
 	</parent>

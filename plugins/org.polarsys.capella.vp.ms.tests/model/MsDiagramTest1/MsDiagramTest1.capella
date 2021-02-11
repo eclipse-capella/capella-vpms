@@ -2,21 +2,21 @@
 
 <!--Capella_Version_null-->
 <org.polarsys.capella.core.data.capellamodeller:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:libraries="http://www.polarsys.org/capella/common/libraries/1.4.0"
-    xmlns:ms="http://www.polarsys.org/capella/ms/0.11" xmlns:org.polarsys.capella.core.data.capellacommon="http://www.polarsys.org/capella/core/common/1.4.0"
-    xmlns:org.polarsys.capella.core.data.capellacore="http://www.polarsys.org/capella/core/core/1.4.0"
-    xmlns:org.polarsys.capella.core.data.capellamodeller="http://www.polarsys.org/capella/core/modeller/1.4.0"
-    xmlns:org.polarsys.capella.core.data.cs="http://www.polarsys.org/capella/core/cs/1.4.0"
-    xmlns:org.polarsys.capella.core.data.ctx="http://www.polarsys.org/capella/core/ctx/1.4.0"
-    xmlns:org.polarsys.capella.core.data.epbs="http://www.polarsys.org/capella/core/epbs/1.4.0"
-    xmlns:org.polarsys.capella.core.data.fa="http://www.polarsys.org/capella/core/fa/1.4.0"
-    xmlns:org.polarsys.capella.core.data.information="http://www.polarsys.org/capella/core/information/1.4.0"
-    xmlns:org.polarsys.capella.core.data.information.datatype="http://www.polarsys.org/capella/core/information/datatype/1.4.0"
-    xmlns:org.polarsys.capella.core.data.information.datavalue="http://www.polarsys.org/capella/core/information/datavalue/1.4.0"
-    xmlns:org.polarsys.capella.core.data.la="http://www.polarsys.org/capella/core/la/1.4.0"
-    xmlns:org.polarsys.capella.core.data.oa="http://www.polarsys.org/capella/core/oa/1.4.0"
-    xmlns:org.polarsys.capella.core.data.pa="http://www.polarsys.org/capella/core/pa/1.4.0"
-    xmlns:org.polarsys.capella.core.data.pa.deployment="http://www.polarsys.org/capella/core/pa/deployment/1.4.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:libraries="http://www.polarsys.org/capella/common/libraries/5.0.0"
+    xmlns:ms="http://www.polarsys.org/capella/ms/0.11" xmlns:org.polarsys.capella.core.data.capellacommon="http://www.polarsys.org/capella/core/common/5.0.0"
+    xmlns:org.polarsys.capella.core.data.capellacore="http://www.polarsys.org/capella/core/core/5.0.0"
+    xmlns:org.polarsys.capella.core.data.capellamodeller="http://www.polarsys.org/capella/core/modeller/5.0.0"
+    xmlns:org.polarsys.capella.core.data.cs="http://www.polarsys.org/capella/core/cs/5.0.0"
+    xmlns:org.polarsys.capella.core.data.ctx="http://www.polarsys.org/capella/core/ctx/5.0.0"
+    xmlns:org.polarsys.capella.core.data.epbs="http://www.polarsys.org/capella/core/epbs/5.0.0"
+    xmlns:org.polarsys.capella.core.data.fa="http://www.polarsys.org/capella/core/fa/5.0.0"
+    xmlns:org.polarsys.capella.core.data.information="http://www.polarsys.org/capella/core/information/5.0.0"
+    xmlns:org.polarsys.capella.core.data.information.datatype="http://www.polarsys.org/capella/core/information/datatype/5.0.0"
+    xmlns:org.polarsys.capella.core.data.information.datavalue="http://www.polarsys.org/capella/core/information/datavalue/5.0.0"
+    xmlns:org.polarsys.capella.core.data.la="http://www.polarsys.org/capella/core/la/5.0.0"
+    xmlns:org.polarsys.capella.core.data.oa="http://www.polarsys.org/capella/core/oa/5.0.0"
+    xmlns:org.polarsys.capella.core.data.pa="http://www.polarsys.org/capella/core/pa/5.0.0"
+    xmlns:org.polarsys.capella.core.data.pa.deployment="http://www.polarsys.org/capella/core/pa/deployment/5.0.0"
     id="1be22647-75db-43b6-9b50-9dcff901a72d"
     name="MsDiagramTest1">
   <ownedExtensions xsi:type="libraries:ModelInformation" id="744b7d2d-1058-416a-9619-ed9386f5fcbb"/>
@@ -72,7 +72,7 @@
         <ownedEntities xsi:type="org.polarsys.capella.core.data.oa:Entity" id="b8cebc02-c1e2-49af-adff-aa9400cd2fbd"
             name="Component">
           <ownedExtensions xsi:type="ms:CSConfiguration" id="6332b417-5d2f-4d82-a8fe-e980eb7547cf"
-              name="Configuration 1" access="full"/>
+              name="Configuration 1"/>
           <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="d536db08-d0a0-4e39-bbdc-7e26af8de35a"
               name="NestedComponent" abstractType="#5aae4fc4-1cb3-4c2f-8db6-24edf76062da"/>
           <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="02d1d93b-68fc-4a50-93b7-76b456094b9a"
@@ -241,7 +241,7 @@
         <ownedSystemComponents xsi:type="org.polarsys.capella.core.data.ctx:SystemComponent"
             id="ba44265d-677e-4446-aded-150d6e87d43b" name="Component">
           <ownedExtensions xsi:type="ms:CSConfiguration" id="42f266ab-7516-46a9-8a12-b2a5ffb632d6"
-              name="Configuration 1" access="full"/>
+              name="Configuration 1"/>
           <ownedFunctionalAllocation xsi:type="org.polarsys.capella.core.data.fa:ComponentFunctionalAllocation"
               id="99248d66-b839-464f-99d0-dcfbdf239f94" targetElement="#18831a18-8bf8-4ed4-a03f-5bb354424490"
               sourceElement="#ba44265d-677e-4446-aded-150d6e87d43b"/>
@@ -254,7 +254,7 @@
         <ownedSystemComponents xsi:type="org.polarsys.capella.core.data.ctx:SystemComponent"
             id="17373f78-5bc4-4d49-82ae-67bdb3d6d948" name="SA 2" actor="true">
           <ownedExtensions xsi:type="ms:CSConfiguration" id="c60d4b76-4766-4d97-a361-b0b0a841407e"
-              name="Configuration 1" access="full"/>
+              name="Configuration 1"/>
           <ownedFunctionalAllocation xsi:type="org.polarsys.capella.core.data.fa:ComponentFunctionalAllocation"
               id="70ff0162-d5de-4beb-96e3-01ba1a866be1" targetElement="#a1813e75-2a68-4142-9131-54937ede1a4b"
               sourceElement="#17373f78-5bc4-4d49-82ae-67bdb3d6d948"/>
@@ -396,7 +396,7 @@
         <ownedPhysicalComponents xsi:type="org.polarsys.capella.core.data.pa:PhysicalComponent"
             id="b9d1de90-32fe-4c71-bbe9-dc4171202563" name="Physical System">
           <ownedExtensions xsi:type="ms:CSConfiguration" id="77a7d163-d82b-49c3-a5f8-e09efe398c73"
-              name="Configuration 1" access="full"/>
+              name="Configuration 1"/>
           <ownedFeatures xsi:type="org.polarsys.capella.core.data.cs:Part" id="949d1682-032d-424c-8a84-d0cf879af923"
               name="Component" abstractType="#9023aba4-69d7-4382-b152-7f2d3c450fd9">
             <ownedDeploymentLinks xsi:type="org.polarsys.capella.core.data.pa.deployment:PartDeploymentLink"

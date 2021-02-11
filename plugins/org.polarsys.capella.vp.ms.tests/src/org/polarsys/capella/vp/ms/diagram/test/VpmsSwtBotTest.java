@@ -20,7 +20,7 @@ import org.eclipse.sirius.tests.swtbot.support.utils.SWTBotUtils;
 public abstract class VpmsSwtBotTest extends AbstractSiriusSwtBotGefTestCase {
 
   private static final String DATA_UNIT_DIR = "model/MsDiagramTest1/";
-  private static final String MODEL = "MsDiagramTest1.melodymodeller";
+  private static final String MODEL = "MsDiagramTest1.capella";
   private static final String SESSION_FILE = "MsDiagramTest1.aird";
   private static final String AFM_FILE = "MsDiagramTest1.afm";
   private static final String FILE_DIR = "/";

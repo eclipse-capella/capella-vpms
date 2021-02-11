@@ -11,14 +11,14 @@
 target "Default Capella Addon"
 
 include "../capella-releng-parent/tp/capella-default-addon-target/capella-default-addon-target.targetplatform"
-include "https://git.eclipse.org/c/sirius/org.eclipse.sirius.git/plain/releng/org.eclipse.sirius.targets/modules/swtbot-2.8.tpd?h=v6.3.x"
+include "https://git.eclipse.org/c/sirius/org.eclipse.sirius.git/plain/releng/org.eclipse.sirius.targets/modules/swtbot-2.8.tpd?h=v6.4.0"
 
 with source, requirements
 
-location m2doc "https://s3-eu-west-1.amazonaws.com/obeo-networkaggregation-releases/capella-extensions/1.4.2/full" {
+location m2doc "https://s3-eu-west-1.amazonaws.com/obeo-networkaggregation-releases/capella-extensions/5.0.0/full" {
 	org.apache.poi.feature.feature.group
 }
 
-location sirius "https://download.eclipse.org/sirius/updates/releases/6.3.3/2019-06/" {
+location sirius "https://download.eclipse.org/sirius/updates/stable/6.4.0-S20201119-043506/2020-06" {
 	org.eclipse.sirius.tests.feature.group
 }
