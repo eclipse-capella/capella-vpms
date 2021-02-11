@@ -154,8 +154,8 @@ public interface CSConfiguration extends NamedElement, ElementExtension {
   void setKind(kind_Type value);
 
   /**
-   * Returns the value of the '<em><b>Access</b></em>' attribute. The literals are from the enumeration
-   * {@link org.polarsys.capella.vp.ms.access_Type}.
+   * Returns the value of the '<em><b>Access</b></em>' attribute. The default value is <code>"full"</code>. The literals
+   * are from the enumeration {@link org.polarsys.capella.vp.ms.access_Type}.
    * 
    * <!-- begin-user-doc -->
    * <p>
@@ -167,7 +167,7 @@ public interface CSConfiguration extends NamedElement, ElementExtension {
    * @see org.polarsys.capella.vp.ms.access_Type
    * @see #setAccess(access_Type)
    * @see org.polarsys.capella.vp.ms.MsPackage#getCSConfiguration_Access()
-   * @model
+   * @model default="full"
    * @generated
    */
 

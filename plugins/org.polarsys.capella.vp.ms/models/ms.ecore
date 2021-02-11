@@ -29,7 +29,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="childConfigurations" upperBound="-1"
         eType="#//CSConfiguration"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//kind_Type"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="access" eType="#//access_Type"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="access" eType="#//access_Type"
+        defaultValueLiteral="full"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="context" upperBound="-1"
         eType="#//Situation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="compareTo" upperBound="-1"

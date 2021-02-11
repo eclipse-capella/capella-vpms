@@ -18,7 +18,6 @@ import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.preference.RadioGroupFieldEditor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.polarsys.capella.vp.ms.access_Type;
@@ -34,13 +33,7 @@ public class MsPreferencePage extends FieldEditorPreferencePage implements IWork
   @Override
   protected void createFieldEditors() {
 
-    FieldEditor editor = new RadioGroupFieldEditor(MsPreferenceConstants.PREF_DEFAULT_CONFIGURATION_ACCESS,
-        Messages.InitializeConfigurationAccessDialog_label, 1, InitializeConfigurationAccessDialog.labelsAndValues,
-        getFieldEditorParent(), false);
-    editor.fillIntoGrid(getFieldEditorParent(), 1);
-    addField(editor);
-  
-    editor = new BooleanFieldEditor(MsPreferenceConstants.PREF_DEFAULT_CONSISTEN_INCLUDE_REQUIRED, "Consistent element inclusion", getFieldEditorParent());
+    FieldEditor editor = new BooleanFieldEditor(MsPreferenceConstants.PREF_DEFAULT_CONSISTEN_INCLUDE_REQUIRED, "Consistent element inclusion", getFieldEditorParent());
     editor.fillIntoGrid(getFieldEditorParent(), 1);
     addField(editor);
 

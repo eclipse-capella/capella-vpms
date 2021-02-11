@@ -149,7 +149,7 @@ public class CSConfigurationImpl extends NamedElementImpl implements CSConfigura
    * @generated
    * @ordered
    */
-  protected static final access_Type ACCESS_EDEFAULT = access_Type.FLAT;
+  protected static final access_Type ACCESS_EDEFAULT = access_Type.FULL;
 
   /**
    * The cached value of the '{@link #getAccess() <em>Access</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc

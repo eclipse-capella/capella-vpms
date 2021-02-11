@@ -716,7 +716,7 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
         IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getCSConfiguration_Kind(), this.getkind_Type(), "kind", null, 0, 1, CSConfiguration.class, //$NON-NLS-1$
         !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getCSConfiguration_Access(), this.getaccess_Type(), "access", null, 0, 1, CSConfiguration.class, //$NON-NLS-1$
+    initEAttribute(getCSConfiguration_Access(), this.getaccess_Type(), "access", "full", 0, 1, CSConfiguration.class, //$NON-NLS-1$ //$NON-NLS-2$
         !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getCSConfiguration_Context(), this.getSituation(), null, "context", null, 0, -1, //$NON-NLS-1$
         CSConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
