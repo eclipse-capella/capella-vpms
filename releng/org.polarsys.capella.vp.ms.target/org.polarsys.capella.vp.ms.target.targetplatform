@@ -11,7 +11,8 @@
 target "Default Capella Addon"
 
 include "../capella-releng-parent/tp/capella-default-addon-target/capella-default-addon-target.targetplatform"
-include "https://git.eclipse.org/c/sirius/org.eclipse.sirius.git/plain/releng/org.eclipse.sirius.targets/modules/swtbot-2.8.tpd?h=v6.4.0"
+include "https://git.eclipse.org/c/sirius/org.eclipse.sirius.git/plain/releng/org.eclipse.sirius.targets/modules/swtbot-3.0.tpd?h=v6.4.0"
+include "https://git.eclipse.org/c/sirius/org.eclipse.sirius.git/plain/releng/org.eclipse.sirius.targets/modules/orbit.tpd?h=v6.4.0"
 
 with source, requirements
 
