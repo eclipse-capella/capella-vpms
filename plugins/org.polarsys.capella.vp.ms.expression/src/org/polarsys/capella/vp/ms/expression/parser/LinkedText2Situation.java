@@ -33,17 +33,11 @@ import org.polarsys.capella.vp.ms.util.MsSwitch;
 public class LinkedText2Situation {
 
   public enum Token {
-    AND("AND"),
-    OR("OR"),
-    NOT("NOT"),
-    PAREN_O("("),
-    PAREN_C(")"),
-    HYPERLINK(null),
-    EOS(null),
-    ERROR(null);
+    AND("AND"), OR("OR"), NOT("NOT"), PAREN_O("("), PAREN_C(")"), HYPERLINK(null), EOS(null), ERROR(null);
 
     String literal;
-    Token(String literal){
+
+    Token(String literal) {
       this.literal = literal;
     }
 
@@ -53,13 +47,10 @@ public class LinkedText2Situation {
 
   }
 
-  
-  
   /**
-   * Provides a method {@link #split()} to split the boolean expression
-   * that defines a {@link Situation} into subexpressions to allow displaying them in a 
-   * SituationExpression table, and a method {@link #merge()} to merge the subexpressions
-   * back into one. 
+   * Provides a method {@link #split()} to split the boolean expression that defines a {@link Situation} into
+   * subexpressions to allow displaying them in a SituationExpression table, and a method {@link #merge()} to merge the
+   * subexpressions back into one.
    */
   @SuppressWarnings("serial")
   public static class SplitExpression extends LinkedHashMap<StateMachine, BooleanExpression> {
@@ -80,8 +71,7 @@ public class LinkedText2Situation {
     }
 
     /**
-     * Merge the per-statemachine expressions back into the original
-     * expression.
+     * Merge the per-statemachine expressions back into the original expression.
      * 
      * @return the merged expression.
      */
@@ -93,7 +83,7 @@ public class LinkedText2Situation {
         expression = MsFactory.eINSTANCE.createAndOperation();
       } else {
         expression.getChildren().clear();
-      } 
+      }
       expression.getChildren().addAll(values());
       return expression;
     }
@@ -107,15 +97,18 @@ public class LinkedText2Situation {
         for (BooleanExpression child : ((AndOperation) expression).getChildren()) {
           Set<StateMachine> childReferencedStateMachines = counter.doSwitch(child);
           switch (childReferencedStateMachines.size()) {
-            case 0: throw new IllegalArgumentException("Found no statemachine references in subexpression");
-            case 1: {
-              StateMachine sm = childReferencedStateMachines.iterator().next();
-              if (put(sm, child) != null) {                
-                throw new IllegalArgumentException("Found references to " + sm.getName() + " in more than one subexpressions");
-              }
-              break;
+          case 0:
+            throw new IllegalArgumentException("Found no statemachine references in subexpression");
+          case 1: {
+            StateMachine sm = childReferencedStateMachines.iterator().next();
+            if (put(sm, child) != null) {
+              throw new IllegalArgumentException(
+                  "Found references to " + sm.getName() + " in more than one subexpressions");
             }
-            default: throw new IllegalArgumentException("Found reference to more than one statemachine in a subexpression");
+            break;
+          }
+          default:
+            throw new IllegalArgumentException("Found reference to more than one statemachine in a subexpression");
           }
         }
       }
@@ -132,20 +125,20 @@ public class LinkedText2Situation {
         }
         return result;
       }
-  
+
       @Override
       public Set<StateMachine> caseInStateExpression(InStateExpression object) {
-        StateMachine sm = (StateMachine) EcoreUtil2.getFirstContainer(object.getState(), CapellacommonPackage.Literals.STATE_MACHINE);
+        StateMachine sm = (StateMachine) EcoreUtil2.getFirstContainer(object.getState(),
+            CapellacommonPackage.Literals.STATE_MACHINE);
         return Collections.singleton(sm);
       }
-  
+
       @Override
       public Set<StateMachine> caseInSituationExpression(InSituationExpression object) {
         return doSwitch(object.getSituation().getExpression());
       }
-  
+
     }
   }
-  
-  
+
 }

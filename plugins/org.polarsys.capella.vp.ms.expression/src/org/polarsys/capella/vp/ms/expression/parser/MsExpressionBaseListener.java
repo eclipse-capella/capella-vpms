@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2021 THALES GLOBAL SERVICES.
  *  
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -10,94 +10,147 @@
  * Contributors:
  *    Thales - initial API and implementation
  *******************************************************************************/
-// Generated from MsExpression.g4 by ANTLR 4.3
+// Generated from grammar/MsExpression.g4 by ANTLR 4.7.2
 package org.polarsys.capella.vp.ms.expression.parser;
 
 import org.antlr.v4.runtime.ParserRuleContext;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 /**
- * This class provides an empty implementation of {@link MsExpressionListener},
- * which can be extended to create a listener which only needs to handle a subset
- * of the available methods.
+ * This class provides an empty implementation of {@link MsExpressionListener}, which can be extended to create a
+ * listener which only needs to handle a subset of the available methods.
  */
 public class MsExpressionBaseListener implements MsExpressionListener {
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterNotExpr(@NotNull MsExpressionParser.NotExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitNotExpr(@NotNull MsExpressionParser.NotExprContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>
+   * The default implementation does nothing.
+   * </p>
+   */
+  @Override
+  public void enterOrExpr(MsExpressionParser.OrExprContext ctx) {
+  }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterOrExpr(@NotNull MsExpressionParser.OrExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitOrExpr(@NotNull MsExpressionParser.OrExprContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>
+   * The default implementation does nothing.
+   * </p>
+   */
+  @Override
+  public void exitOrExpr(MsExpressionParser.OrExprContext ctx) {
+  }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterHref(@NotNull MsExpressionParser.HrefContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitHref(@NotNull MsExpressionParser.HrefContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>
+   * The default implementation does nothing.
+   * </p>
+   */
+  @Override
+  public void enterAndExpr(MsExpressionParser.AndExprContext ctx) {
+  }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAndExpr(@NotNull MsExpressionParser.AndExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAndExpr(@NotNull MsExpressionParser.AndExprContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>
+   * The default implementation does nothing.
+   * </p>
+   */
+  @Override
+  public void exitAndExpr(MsExpressionParser.AndExprContext ctx) {
+  }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterEveryRule(@NotNull ParserRuleContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitEveryRule(@NotNull ParserRuleContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void visitTerminal(@NotNull TerminalNode node) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void visitErrorNode(@NotNull ErrorNode node) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>
+   * The default implementation does nothing.
+   * </p>
+   */
+  @Override
+  public void enterNotExpr(MsExpressionParser.NotExprContext ctx) {
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>
+   * The default implementation does nothing.
+   * </p>
+   */
+  @Override
+  public void exitNotExpr(MsExpressionParser.NotExprContext ctx) {
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>
+   * The default implementation does nothing.
+   * </p>
+   */
+  @Override
+  public void enterHref(MsExpressionParser.HrefContext ctx) {
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>
+   * The default implementation does nothing.
+   * </p>
+   */
+  @Override
+  public void exitHref(MsExpressionParser.HrefContext ctx) {
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>
+   * The default implementation does nothing.
+   * </p>
+   */
+  @Override
+  public void enterEveryRule(ParserRuleContext ctx) {
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>
+   * The default implementation does nothing.
+   * </p>
+   */
+  @Override
+  public void exitEveryRule(ParserRuleContext ctx) {
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>
+   * The default implementation does nothing.
+   * </p>
+   */
+  @Override
+  public void visitTerminal(TerminalNode node) {
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * <p>
+   * The default implementation does nothing.
+   * </p>
+   */
+  @Override
+  public void visitErrorNode(ErrorNode node) {
+  }
 }

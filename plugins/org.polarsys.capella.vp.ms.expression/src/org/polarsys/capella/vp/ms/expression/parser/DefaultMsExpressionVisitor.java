@@ -32,8 +32,8 @@ import org.polarsys.capella.vp.ms.expression.parser.MsExpressionParser.OrExprCon
 public class DefaultMsExpressionVisitor extends MsExpressionBaseVisitor<BooleanExpression> {
 
   private final Function<String, EObject> resolver;
-  
-  public DefaultMsExpressionVisitor(Function<String, EObject> resolver){
+
+  public DefaultMsExpressionVisitor(Function<String, EObject> resolver) {
     this.resolver = resolver;
   }
 
@@ -89,7 +89,7 @@ public class DefaultMsExpressionVisitor extends MsExpressionBaseVisitor<BooleanE
       }
       return result;
     } else {
-      return visit (ctx.notExpr(0));
+      return visit(ctx.notExpr(0));
     }
   }
 

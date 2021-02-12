@@ -36,55 +36,56 @@ public class MsExpressionUnparser extends MsSwitch<String> {
 
   private Mode mode;
   private StateMachine defaultStateMachine;
-  
+
   public static enum Mode {
     /**
      * Formats InStateExpressions suitable for linked text display
      */
     HYPERLINK,
-    
+
     /**
      * Formats InStateExpressions to the simple name of the state
      */
     NAME,
-    
+
     /**
-     * Formats InStateExpressions to &lt;StateMachineName>.&lt;StateName> 
+     * Formats InStateExpressions to &lt;StateMachineName>.&lt;StateName>
      */
     QNAME
   }
-  
+
   public MsExpressionUnparser(Mode mode) {
     this.mode = mode;
   }
-  
+
   /**
-   * Set the default state machine, which has the following effect: 
-   * If mode is QNAME, and the owning state machine of a state is the default
-   * state machine, mode switches back to NAME, omitting the name of the state machine
-   * for that state. Probably only useful for tests.
+   * Set the default state machine, which has the following effect: If mode is QNAME, and the owning state machine of a
+   * state is the default state machine, mode switches back to NAME, omitting the name of the state machine for that
+   * state. Probably only useful for tests.
    * 
    * @param sm
    */
   public void setDefaultStatemachine(StateMachine sm) {
     this.defaultStateMachine = sm;
   }
-  
+
   public String unparse(BooleanExpression expression) {
     root = expression;
     return doSwitch(expression);
   }
-  
+
   private String getHref(EObject e) {
-    return "<a href=\"" + EcoreUtil.getID(e) + "\"/>"; // FIXME linkedtext should offer a helper for this  
+    return "<a href=\"" + EcoreUtil.getID(e) + "\"/>"; // FIXME linkedtext should offer a helper for this
   }
 
   @Override
   public String caseInStateExpression(InStateExpression object) {
     switch (mode) {
-    case HYPERLINK : return getHref(object.getState());
-    case NAME : return object.getState().getName();
-    case QNAME : {
+    case HYPERLINK:
+      return getHref(object.getState());
+    case NAME:
+      return object.getState().getName();
+    case QNAME: {
       AbstractState s = object.getState();
       StateMachine sm = (StateMachine) EcoreUtil2.getFirstContainer(s, CapellacommonPackage.Literals.STATE_MACHINE);
       if (sm == defaultStateMachine) {
@@ -104,7 +105,7 @@ public class MsExpressionUnparser extends MsSwitch<String> {
 
   @Override
   public String caseAndOperation(AndOperation object) {
-    Collection<String> childText = new ArrayList<String>(); 
+    Collection<String> childText = new ArrayList<String>();
     for (BooleanExpression child : object.getChildren()) {
       childText.add(doSwitch(child));
     }
@@ -117,12 +118,13 @@ public class MsExpressionUnparser extends MsSwitch<String> {
 
   @Override
   public String caseOrOperation(OrOperation object) {
-    Collection<String> childText = new ArrayList<String>(); 
+    Collection<String> childText = new ArrayList<String>();
     for (BooleanExpression child : object.getChildren()) {
       childText.add(doSwitch(child));
     }
     String result = String.join(" OR ", childText);
-    if (object != root && (object.eContainer().eClass() == MsPackage.Literals.AND_OPERATION || object.eContainer().eClass() == MsPackage.Literals.NOT_OPERATION)) {
+    if (object != root && (object.eContainer().eClass() == MsPackage.Literals.AND_OPERATION
+        || object.eContainer().eClass() == MsPackage.Literals.NOT_OPERATION)) {
       result = "(" + result + ")";
     }
     return result;
