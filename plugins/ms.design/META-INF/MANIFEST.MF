@@ -4,7 +4,7 @@ Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-SymbolicName: ms.design;singleton:=true
 Bundle-Localization: plugin
-Bundle-Version: 0.17.0.qualifier
+Bundle-Version: 0.18.0.qualifier
 Bundle-Activator: ms.design.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -32,6 +32,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.e4.ui.css.core;bundle-version="0.12.700",
  org.w3c.css.sac;bundle-version="1.3.1"
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: ms.configuration.services.cs,
  ms.design
