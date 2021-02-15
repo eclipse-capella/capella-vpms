@@ -1,4 +1,4 @@
 [submodule "releng/capella-releng-parent"]
 	path = releng/capella-releng-parent
 	url = https://github.com/eclipse/capella-releng-parent.git
-	branch = v1.4.x
+	branch = v5.0.x
