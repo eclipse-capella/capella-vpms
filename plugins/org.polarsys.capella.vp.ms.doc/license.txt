@@ -1,0 +1,38 @@
+These followings icons are made available under the terms of the Eclipse Public License v2.0
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v20.html
+
+
+./html/activated.png
+./html/activation.png
+./html/change_expression_dialog.png
+./html/configuration_elements.png
+./html/example1.png
+./html/example10.png
+./html/example11.png
+./html/example12.png
+./html/example13.png
+./html/example14.png
+./html/example15.png
+./html/example16.png
+./html/example17.png
+./html/example2.png
+./html/example3.png
+./html/example4.png
+./html/example5.png
+./html/example6.png
+./html/example7.png
+./html/example8.png
+./html/example9.png
+./html/expression_format.png
+./html/filter_lines_by_class.png
+./html/layer.png
+./html/modesstatesandatomicconfig.png
+./html/mode_and_configuration.png
+./html/overallprocess.png
+./html/palette.png
+./html/showview.png
+./html/showview2.png
+./html/situation.png
+./html/situation_expression_table.png
+./html/viewpointmanager.png
