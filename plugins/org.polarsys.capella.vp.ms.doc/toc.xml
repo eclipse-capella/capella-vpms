@@ -21,6 +21,9 @@
    <topic href="html/activation.html" label="Viewpoint activation">
       <anchor id="Activation"/>
    </topic>
+   <topic href="html/diagrams.html" label="Diagrams and Layers">
+      <anchor id="Diagrams"/>
+   </topic>
    <topic href="html/configurations.html" label="Working with Configurations">
       <anchor id="Configurations"/>
    </topic>
