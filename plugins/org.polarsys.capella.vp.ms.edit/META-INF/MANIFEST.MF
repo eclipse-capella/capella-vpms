@@ -8,7 +8,7 @@ Bundle-ClassPath: .
 Bundle-Activator: org.polarsys.capella.vp.ms.provider.MsEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.polarsys.capella.vp.ms.provider
 Require-Bundle: org.eclipse.core.runtime,
  org.polarsys.capella.vp.ms;visibility:=reexport,

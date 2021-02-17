@@ -8,7 +8,7 @@ Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.polarsys.capella.vp.ms.edit
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: org.polarsys.capella.vp.ms.ui.preferences
 Bundle-ActivationPolicy: lazy
 Export-Package: org.polarsys.capella.vp.ms.ui.preferences
