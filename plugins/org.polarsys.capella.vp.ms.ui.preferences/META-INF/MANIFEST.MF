@@ -12,3 +12,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: org.polarsys.capella.vp.ms.ui.preferences
 Bundle-ActivationPolicy: lazy
 Export-Package: org.polarsys.capella.vp.ms.ui.preferences
+Bundle-Localization: plugin

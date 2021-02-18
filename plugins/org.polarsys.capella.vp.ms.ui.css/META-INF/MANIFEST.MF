@@ -18,3 +18,4 @@ Export-Package: org.polarsys.capella.vp.ms.ui.css,
  org.polarsys.capella.vp.ms.ui.css.helpers,
  org.polarsys.capella.vp.ms.ui.css.properties
 Bundle-Vendor: %providerName
+Bundle-Localization: plugin

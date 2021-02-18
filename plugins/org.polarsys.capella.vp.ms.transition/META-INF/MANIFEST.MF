@@ -12,3 +12,4 @@ Require-Bundle: org.polarsys.capella.common.transition;bundle-version="1.4.0",
  org.polarsys.capella.vp.ms.expression
 Export-Package: org.polarsys.capella.vp.ms.transition
 Bundle-Vendor: %providerName
+Bundle-Localization: plugin

@@ -26,3 +26,4 @@ Require-Bundle: org.antlr.runtime;bundle-version="4.7.2",
 Export-Package: org.polarsys.capella.vp.ms.diagram.test,
  org.polarsys.capella.vp.ms.expression.test,
  org.polarsys.capella.vp.ms.transition.test
+Bundle-Localization: plugin
