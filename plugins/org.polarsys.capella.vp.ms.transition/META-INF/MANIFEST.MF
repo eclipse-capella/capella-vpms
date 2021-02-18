@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Modes & States Addon Transition
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.polarsys.capella.vp.ms.transition;singleton:=true
 Bundle-Version: 0.18.0.qualifier
 Automatic-Module-Name: org.polarsys.capella.vp.ms.transition
@@ -11,3 +11,4 @@ Require-Bundle: org.polarsys.capella.common.transition;bundle-version="1.4.0",
  org.polarsys.capella.vp.ms;bundle-version="0.10.0",
  org.polarsys.capella.vp.ms.expression
 Export-Package: org.polarsys.capella.vp.ms.transition
+Bundle-Vendor: %providerName
