@@ -561,10 +561,10 @@
             <viewVariable name="containerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:container.createConfiguration">
-                <subModelOperations xsi:type="tool:If" conditionExpression="&lt;% $containerView == $diagram%>">
+                <subModelOperations xsi:type="tool:If" conditionExpression="aql:containerView=diagram">
                   <subModelOperations xsi:type="tool_1:CreateView" mapping="//@ownedViewpoints[name='ms']/@ownedRepresentationExtensions[name='SAConfigurations']/@layers[name='SAB_Layer_Configuration']/@nodeMappings[name='SAB_Layer_ConfigurationNode']" containerViewExpression="var:diagram"/>
                 </subModelOperations>
-                <subModelOperations xsi:type="tool:If" conditionExpression="&lt;% $containerView != $diagram %>">
+                <subModelOperations xsi:type="tool:If" conditionExpression="aql:containerView&lt;>diagram">
                   <subModelOperations xsi:type="tool_1:CreateView" mapping="//@ownedViewpoints[name='ms']/@ownedRepresentationExtensions[name='SAConfigurations']/@layers[name='SAB_Layer_Configuration']/@containerMappings[name='SAB_Layer_Configuration_SAB_Actors']/@borderedNodeMappings[name='SAB_Layer_Configuration_SAB_Configuration']" containerViewExpression="var:containerView"/>
                 </subModelOperations>
               </firstModelOperations>
@@ -582,15 +582,15 @@
                   <parameters name="resultVariable" value="selection"/>
                   <parameters name="wizardMessage" value="select Configuration to show their avalaible Functions"/>
                 </subModelOperations>
-                <subModelOperations xsi:type="tool:If" conditionExpression="&lt;% ! ($selection == &quot;WIZARD_CANCELED&quot;) %>">
-                  <subModelOperations xsi:type="tool:For" expression="&lt;%$elementView.getNotSelectedConfigurations($selection)%>" iteratorName="notSelectedConfiguration">
+                <subModelOperations xsi:type="tool:If" conditionExpression="aql:selection&lt;>'WIZARD_CANCELED'">
+                  <subModelOperations xsi:type="tool:For" expression="service:elementView.getNotSelectedConfigurations(selection)" iteratorName="notSelectedConfiguration">
                     <subModelOperations xsi:type="tool:DeleteView"/>
                   </subModelOperations>
                   <subModelOperations xsi:type="tool:For" expression="var:selection" iteratorName="selectedConfiguration">
-                    <subModelOperations xsi:type="tool:If" conditionExpression="&lt;%$elementView == $diagram%>">
+                    <subModelOperations xsi:type="tool:If" conditionExpression="aql:elementView=diagram">
                       <subModelOperations xsi:type="tool_1:CreateView" mapping="//@ownedViewpoints[name='ms']/@ownedRepresentationExtensions[name='SAConfigurations']/@layers[name='SAB_Layer_Configuration']/@nodeMappings[name='SAB_Layer_ConfigurationNode']" containerViewExpression="var:diagram" variableName="createdViewConfiguration"/>
                     </subModelOperations>
-                    <subModelOperations xsi:type="tool:If" conditionExpression="&lt;%$elementView != $diagram%>">
+                    <subModelOperations xsi:type="tool:If" conditionExpression="aql:elementView&lt;>diagram">
                       <subModelOperations xsi:type="tool_1:CreateView" mapping="//@ownedViewpoints[name='ms']/@ownedRepresentationExtensions[name='SAConfigurations']/@layers[name='SAB_Layer_Configuration']/@containerMappings[name='SAB_Layer_Configuration_SAB_Actors']/@borderedNodeMappings[name='SAB_Layer_Configuration_SAB_Configuration']" containerViewExpression="var:elementView" variableName="createdViewConfiguration"/>
                     </subModelOperations>
                   </subModelOperations>
