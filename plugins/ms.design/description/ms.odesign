@@ -137,7 +137,7 @@
     <ownedRepresentations xsi:type="description_1:CrossTableDescription" name="MS_StateMachine_Configuration" label="Mode and Configuration" domainClass="Component">
       <ownedLineMappings name="Components" domainClass="Component" semanticCandidatesExpression="var:self" headerLabelExpression="feature:name">
         <ownedSubLines name="StateMachines" domainClass="StateMachine" semanticCandidatesExpression="feature:ownedStateMachines" headerLabelExpression="feature:name">
-          <ownedSubLines name="Modes" reusedSubLines="//@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_StateMachine_Configuration']/@ownedLineMappings[name='Components']/@ownedSubLines[name='StateMachines']/@ownedSubLines[name='Modes']" reusedInMappings="//@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_StateMachine_Configuration']/@ownedLineMappings[name='Components']/@ownedSubLines[name='StateMachines']/@ownedSubLines[name='Modes']" domainClass="AbstractState" semanticCandidatesExpression="&lt;%self.ownedRegions.ownedStates%>" headerLabelExpression="feature:name">
+          <ownedSubLines name="Modes" reusedSubLines="//@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_StateMachine_Configuration']/@ownedLineMappings[name='Components']/@ownedSubLines[name='StateMachines']/@ownedSubLines[name='Modes']" reusedInMappings="//@ownedViewpoints[name='ms']/@ownedRepresentations[name='MS_StateMachine_Configuration']/@ownedLineMappings[name='Components']/@ownedSubLines[name='StateMachines']/@ownedSubLines[name='Modes']" domainClass="AbstractState" semanticCandidatesExpression="aql:self.ownedRegions.ownedStates" headerLabelExpression="feature:name">
             <delete name="no_delete">
               <variables name="element" documentation="The semantic currently edited element."/>
               <variables name="root" documentation="The semantic root element of the table."/>
@@ -168,7 +168,7 @@
           <variables name="columnSemantic" documentation="The semantic element corresponding to the column (only available for Intersection Mapping)."/>
           <variables name="root" documentation="The semantic root element of the table."/>
           <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:columnSemantic">
-            <subModelOperations xsi:type="tool:If" conditionExpression="&lt;%$0 == &quot;&quot; &amp;&amp; $columnSemantic.supportedModes.nContains($lineSemantic)%>">
+            <subModelOperations xsi:type="tool:If" conditionExpression="aql:arg0=''">
               <subModelOperations xsi:type="tool:Unset" featureName="supportedModes" elementExpression="var:lineSemantic"/>
             </subModelOperations>
           </firstModelOperation>
@@ -179,7 +179,7 @@
           <variables name="columnSemantic" documentation="The semantic element corresponding to the column."/>
           <variables name="root" documentation="The semantic root element of the table."/>
           <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:columnSemantic">
-            <subModelOperations xsi:type="tool:If" conditionExpression="&lt;%$0 == &quot;X&quot; || $0 == &quot;x&quot;%>">
+            <subModelOperations xsi:type="tool:If" conditionExpression="aql:arg0='X' or arg0='x'">
               <subModelOperations xsi:type="tool:SetValue" featureName="supportedModes" valueExpression="var:lineSemantic"/>
             </subModelOperations>
           </firstModelOperation>
