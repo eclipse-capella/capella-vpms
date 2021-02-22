@@ -884,8 +884,8 @@
                   <parameters name="resultVariable" value="selection"/>
                   <parameters name="wizardMessage" value="select Configuration to show their avalaible Functions"/>
                 </subModelOperations>
-                <subModelOperations xsi:type="tool:If" conditionExpression="&lt;% ! ($selection == &quot;WIZARD_CANCELED&quot;) %>">
-                  <subModelOperations xsi:type="tool:For" expression="&lt;%$elementView.getNotSelectedConfigurations($selection)%>" iteratorName="notSelectedConfiguration">
+                <subModelOperations xsi:type="tool:If" conditionExpression="aql:selection&lt;>'WIZARD_CANCELED'">
+                  <subModelOperations xsi:type="tool:For" expression="service:elementView.getNotSelectedConfigurations(selection)" iteratorName="notSelectedConfiguration">
                     <subModelOperations xsi:type="tool:DeleteView"/>
                   </subModelOperations>
                   <subModelOperations xsi:type="tool:For" expression="var:selection" iteratorName="selectedConfiguration">
@@ -932,8 +932,8 @@
                   <parameters name="resultVariable" value="selection"/>
                   <parameters name="wizardMessage" value="select Configuration to show their avalaible Functions"/>
                 </subModelOperations>
-                <subModelOperations xsi:type="tool:If" conditionExpression="&lt;% ! ($selection == &quot;WIZARD_CANCELED&quot;) %>">
-                  <subModelOperations xsi:type="tool:For" expression="&lt;%$elementView.getNotSelectedConfigurations($selection)%>" iteratorName="notSelectedConfiguration">
+                <subModelOperations xsi:type="tool:If" conditionExpression="aql:selection&lt;>WIZARD_CANCELED'">
+                  <subModelOperations xsi:type="tool:For" expression="service:elementView.getNotSelectedConfigurations(selection)" iteratorName="notSelectedConfiguration">
                     <subModelOperations xsi:type="tool:DeleteView"/>
                   </subModelOperations>
                   <subModelOperations xsi:type="tool:For" expression="var:selection" iteratorName="selectedConfiguration">
@@ -980,8 +980,8 @@
                   <parameters name="resultVariable" value="selection"/>
                   <parameters name="wizardMessage" value="select Configuration to show their avalaible Functions"/>
                 </subModelOperations>
-                <subModelOperations xsi:type="tool:If" conditionExpression="&lt;% ! ($selection == &quot;WIZARD_CANCELED&quot;) %>">
-                  <subModelOperations xsi:type="tool:For" expression="&lt;%$elementView.getNotSelectedConfigurations($selection)%>" iteratorName="notSelectedConfiguration">
+                <subModelOperations xsi:type="tool:If" conditionExpression="aql:selection&lt;>'WIZARD_CANCELED'">
+                  <subModelOperations xsi:type="tool:For" expression="service:elementView.getNotSelectedConfigurations(selection)" iteratorName="notSelectedConfiguration">
                     <subModelOperations xsi:type="tool:DeleteView"/>
                   </subModelOperations>
                   <subModelOperations xsi:type="tool:For" expression="var:selection" iteratorName="selectedConfiguration">
@@ -1028,8 +1028,8 @@
                   <parameters name="resultVariable" value="selection"/>
                   <parameters name="wizardMessage" value="select Configuration to show their avalaible Functions"/>
                 </subModelOperations>
-                <subModelOperations xsi:type="tool:If" conditionExpression="&lt;% ! ($selection == &quot;WIZARD_CANCELED&quot;) %>">
-                  <subModelOperations xsi:type="tool:For" expression="&lt;%$elementView.getNotSelectedConfigurations($selection)%>" iteratorName="notSelectedConfiguration">
+                <subModelOperations xsi:type="tool:If" conditionExpression="aql:selection&lt;>'WIZARD_CANCELED'">
+                  <subModelOperations xsi:type="tool:For" expression="service:elementView.getNotSelectedConfigurations(selection)" iteratorName="notSelectedConfiguration">
                     <subModelOperations xsi:type="tool:DeleteView"/>
                   </subModelOperations>
                   <subModelOperations xsi:type="tool:For" expression="var:selection" iteratorName="selectedConfiguration">
