@@ -399,7 +399,7 @@
             <containerView name="containerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
-                <subModelOperations xsi:type="tool:Unset" featureName="childConfigurations" elementExpression="&lt;%$elementView.targetNode.target%>"/>
+                <subModelOperations xsi:type="tool:Unset" featureName="childConfigurations" elementExpression="aql:elementView.targetNode.target"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
@@ -502,7 +502,7 @@
             <containerView name="containerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
-                <subModelOperations xsi:type="tool:Unset" featureName="childConfigurations" elementExpression="&lt;%$elementView.targetNode.target%>"/>
+                <subModelOperations xsi:type="tool:Unset" featureName="childConfigurations" elementExpression="aql:elementView.targetNode.target"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
@@ -634,7 +634,7 @@
           <reusedNodeMappings href="../../org.polarsys.capella.core.sirius.analysis/description/physical.odesign#//@ownedViewpoints[name='Physical%20Architecture']/@ownedRepresentations[name='Physical%20Architecture%20Blank']/@defaultLayer/@nodeMappings[name='PAB_PhysicalFunction']"/>
           <importedMapping href="../../org.polarsys.capella.core.sirius.analysis/description/physical.odesign#//@ownedViewpoints[name='Physical%20Architecture']/@ownedRepresentations[name='Physical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='PAB_PC']"/>
         </containerMappings>
-        <containerMappings xsi:type="description_2:ContainerMappingImport" name="PAB_Layer_Configuration_PAB_Deployment" preconditionExpression="&lt;%$containerView.filter(&quot;DNodeContainer&quot;).nSize() > 0 %>" deletionDescription="//@ownedViewpoints[name='ms']/@ownedRepresentationExtensions[name='PAConfigurations']/@layers[name='PAB_Layer_Configuration']/@toolSections.0/@ownedTools[name='delete%20configuration']" semanticCandidatesExpression="service:getDeployedComponents()" reusedContainerMappings="//@ownedViewpoints[name='ms']/@ownedRepresentationExtensions[name='PAConfigurations']/@layers[name='PAB_Layer_Configuration']/@containerMappings[name='PAB_Layer_Configuration_PAB_Component'] //@ownedViewpoints[name='ms']/@ownedRepresentationExtensions[name='PAConfigurations']/@layers[name='PAB_Layer_Configuration']/@containerMappings[name='PAB_Layer_Configuration_PAB_Deployment']">
+        <containerMappings xsi:type="description_2:ContainerMappingImport" name="PAB_Layer_Configuration_PAB_Deployment" preconditionExpression="aql:containerView->filter(diagram::DNodeContainer)->size() > 0" deletionDescription="//@ownedViewpoints[name='ms']/@ownedRepresentationExtensions[name='PAConfigurations']/@layers[name='PAB_Layer_Configuration']/@toolSections.0/@ownedTools[name='delete%20configuration']" semanticCandidatesExpression="service:getDeployedComponents()" semanticElements="service:getPartSemanticElements()" reusedContainerMappings="//@ownedViewpoints[name='ms']/@ownedRepresentationExtensions[name='PAConfigurations']/@layers[name='PAB_Layer_Configuration']/@containerMappings[name='PAB_Layer_Configuration_PAB_Component'] //@ownedViewpoints[name='ms']/@ownedRepresentationExtensions[name='PAConfigurations']/@layers[name='PAB_Layer_Configuration']/@containerMappings[name='PAB_Layer_Configuration_PAB_Deployment']">
           <reusedBorderedNodeMappings href="../../org.polarsys.capella.core.sirius.analysis/description/physical.odesign#//@ownedViewpoints[name='Physical%20Architecture']/@ownedRepresentations[name='Physical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='PAB_PC']/@borderedNodeMappings[name='PAB_Port']"/>
           <reusedBorderedNodeMappings href="../../org.polarsys.capella.core.sirius.analysis/description/physical.odesign#//@ownedViewpoints[name='Physical%20Architecture']/@ownedRepresentations[name='Physical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='PAB_PC']/@borderedNodeMappings[name='PAB_PhysicalCategory_Pin']"/>
           <reusedBorderedNodeMappings href="../../org.polarsys.capella.core.sirius.analysis/description/physical.odesign#//@ownedViewpoints[name='Physical%20Architecture']/@ownedRepresentations[name='Physical%20Architecture%20Blank']/@defaultLayer/@containerMappings[name='PAB_PC']/@borderedNodeMappings[name='PAB_ComponentCategory_Pin']"/>
@@ -793,7 +793,7 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
-        <containerMappings xsi:type="description_2:ContainerMappingImport" name="CDI_Layer_Configuration_CDI_Component" deletionDescription="//@ownedViewpoints[name='ms']/@ownedRepresentationExtensions[name='PAConfigurations']/@layers[name='PAB_Layer_Configuration']/@toolSections.0/@ownedTools[name='delete%20configuration']" semanticCandidatesExpression="&lt;% current %>" domainClass="Component">
+        <containerMappings xsi:type="description_2:ContainerMappingImport" name="CDI_Layer_Configuration_CDI_Component" deletionDescription="//@ownedViewpoints[name='ms']/@ownedRepresentationExtensions[name='PAConfigurations']/@layers[name='PAB_Layer_Configuration']/@toolSections.0/@ownedTools[name='delete%20configuration']" semanticCandidatesExpression="aql:self.eContainerOrSelf(cs::Component)" domainClass="Component">
           <borderedNodeMappings name="CDI_Layer_Configuration_CDI_Configuration" deletionDescription="//@ownedViewpoints[name='ms']/@ownedRepresentationExtensions[name='PAConfigurations']/@layers[name='PAB_Layer_Configuration']/@toolSections.0/@ownedTools[name='delete%20configuration']" semanticCandidatesExpression="service:getOwnedConfigurations" createElements="false" domainClass="ms.CSConfiguration">
             <labelDirectEdit href="../../org.polarsys.capella.core.sirius.analysis/description/physical.odesign#//@ownedViewpoints[name='Physical%20Architecture']/@ownedRepresentations[name='Physical%20Architecture%20Blank']/@defaultLayer/@toolSections.0/@ownedTools[name='edit%20name']"/>
             <style xsi:type="style:WorkspaceImageDescription" showIcon="false" sizeComputationExpression="-1" resizeKind="NSEW" workspacePath="/ms.design/images/Configuration.gif">
