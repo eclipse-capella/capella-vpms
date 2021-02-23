@@ -84,16 +84,11 @@ public class ScenarioMsRefreshExtension extends DefaultMsRefreshExtension {
         return super.getTarget(e);
       }
 
-      private void updateFunctionalExchangeStyle(DEdge edge, FunctionalExchange fe, Scope fipScope, Scope fopScope) {
-        updateExchangeStyle(edge, fipScope, fe.getTargetFunctionInputPort(), fopScope, fe.getSourceFunctionOutputPort());
-      }
-
-      private void updateExchangeStyle(DEdge edge, Scope inScope, EObject inScopeTarget, Scope outScope, EObject outScopeTarget) {
-
+      private void updateExchangeStyle(DEdge edge, EObject exchange, Scope fipScope, Scope fopScope) {
         CSSAdapter style = CSSAdapter.getAdapter(edge).clear();
-        updateStyle(style, outScopeTarget, getAllScopeConfigurations(outScope));
-        updateStyle(style, inScopeTarget, getAllScopeConfigurations(inScope));
-
+        Collection<CSConfiguration> applied = new ArrayList<>(getAllScopeConfigurations(fopScope));
+        applied.retainAll(getAllScopeConfigurations(fipScope));
+        updateStyle(style, exchange, applied);
         applyExecutionStyleFromEdge(edge, style);
       }
 
@@ -104,9 +99,6 @@ public class ScenarioMsRefreshExtension extends DefaultMsRefreshExtension {
         }
       }
 
-      private void updateComponentExchangeStyle(DEdge edge, ComponentExchange ce, Scope inScope, Scope outScope) {
-        updateExchangeStyle(edge, inScope, ce.getTargetPort(), outScope, ce.getSourcePort());
-      }
 
       private void updateEdgeStyle(AbstractDNodeScope thisScope, DEdge edge, boolean outgoing) {
         if (edge.getTarget() instanceof SequenceMessage) {
@@ -116,9 +108,9 @@ public class ScenarioMsRefreshExtension extends DefaultMsRefreshExtension {
             Scope in = outgoing ? opposite : thisScope;
             Scope out = outgoing ? thisScope : opposite;
             if (op instanceof FunctionalExchange) {
-              updateFunctionalExchangeStyle(edge, (FunctionalExchange) op, in, out);
+              updateExchangeStyle(edge, (FunctionalExchange) op, in, out);
             } else if (op instanceof ComponentExchange) {
-              updateComponentExchangeStyle(edge, (ComponentExchange) op, in, out);
+              updateExchangeStyle(edge, (ComponentExchange) op, in, out);
             } else if (op instanceof ExchangeItemAllocation) {
               updateExchangeItemAllocationStyle(edge, (ExchangeItemAllocation) op, in, out);
             }
