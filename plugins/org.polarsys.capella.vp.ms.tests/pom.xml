@@ -47,7 +47,6 @@
 				<artifactId>tycho-surefire-plugin</artifactId>
 				<version>${tycho-extras-version}</version>
 				<configuration>
-					<useJDK>BREE</useJDK>
 					<dependencies>
 						<!-- avoid CNFE in Surefire when looking for JUnitPlatformProvider -->
 						<dependency>
