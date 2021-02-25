@@ -213,6 +213,7 @@
               <with
                     variable="activeEditor">
                  <test
+                       forcePluginActivation="true"
                        property="msdiagramproperties.description"
                        value="Situation Expressions">
                  </test>
@@ -222,6 +223,7 @@
               </count>
               <iterate>
                  <test
+                       forcePluginActivation="true"
                        property="msdiagramproperties.lineId"
                        value="statemachines">
                  </test>

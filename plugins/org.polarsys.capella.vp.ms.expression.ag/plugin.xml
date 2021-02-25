@@ -30,6 +30,7 @@
            <with
                  variable="activeEditor">
               <test
+                    forcePluginActivation="true"
                     property="msdiagramproperties.description"
                     value="Situation Expressions">
               </test>
