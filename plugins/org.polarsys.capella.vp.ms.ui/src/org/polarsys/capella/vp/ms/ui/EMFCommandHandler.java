@@ -21,6 +21,9 @@ import org.eclipse.core.expressions.IEvaluationContext;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.gef.GraphicalEditPart;
+import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.polarsys.capella.common.helpers.TransactionHelper;
 
 public abstract class EMFCommandHandler extends AbstractHandler {
@@ -36,23 +39,45 @@ public abstract class EMFCommandHandler extends AbstractHandler {
     }
   }
 
-  protected boolean acceptSelectionElement(Object element) {
+  protected boolean acceptSelectionElement(Object element, Object evaluationContext) {
     return element instanceof EObject;
   }
 
+  @SuppressWarnings("unchecked")
+  protected <T> T adapt(Object element, Class<T> clazz) {
+    if (clazz.isInstance(element)) {
+      return (T) element;
+    } else if (element instanceof GraphicalEditPart) {
+      View view = (View) ((GraphicalEditPart) element).getModel();
+      element = view.getElement();
+      if (element instanceof DSemanticDecorator) {
+        EObject target = ((DSemanticDecorator) element).getTarget();
+        if (clazz.isInstance(target)){
+          return (T) target;
+        }
+      }
+    }
+    return null;
+  }
+  
   @Override
   public void setEnabled(Object evaluationContext) {
     Collection<?> sel = (Collection<?>) ((IEvaluationContext) evaluationContext).getDefaultVariable();
     for (Object o : sel) {
 
-      if (!acceptSelectionElement(o)) {
+      if (!acceptSelectionElement(o, evaluationContext)) {
         setBaseEnabled(false);
         return;
       }
 
+      EditingDomain csDomain = null;
       if (o instanceof EObject) {
-        EditingDomain csDomain = TransactionHelper.getEditingDomain((EObject)o);
-        if (csDomain == null) {
+        csDomain = TransactionHelper.getEditingDomain((EObject)o);
+      } else if (o instanceof GraphicalEditPart) {
+        View view = (View) ((GraphicalEditPart) o).getModel();
+        csDomain = TransactionHelper.getEditingDomain(view.getElement());
+      }
+      if (csDomain == null) {
           setBaseEnabled(false);
           return;
         }
@@ -63,13 +88,12 @@ public abstract class EMFCommandHandler extends AbstractHandler {
           setBaseEnabled(false);
           return;
         }
-      }
     }
-    command = createCommand(sel);
+    command = createCommand(sel, evaluationContext);
     setBaseEnabled(command.canExecute());
   }
 
-  protected abstract Command createCommand(Collection<?> selection);
+  protected abstract Command createCommand(Collection<?> selection, Object evaluationContext);
 
   @Override
   public Object execute(ExecutionEvent event) throws ExecutionException {
