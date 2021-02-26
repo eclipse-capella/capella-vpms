@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2017, 2021 THALES GLOBAL SERVICES.
  *  
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -506,10 +506,10 @@ public class CsConfigurationServices {
   // all configurations on the diagram canvas, but not those who are connected with an instance role
   private void getSelectedConfigurationsImpl(DSemanticDiagram diagram, Collection<CSConfiguration> result) {
     for (DDiagramElement de : diagram.getOwnedDiagramElements()) {
-      if (de.getTarget() instanceof CSConfiguration) {
+      if (de.getTarget() instanceof CSConfiguration && !(de instanceof DEdge)) {
         boolean include = true;
         if (de instanceof EdgeTarget) {
-          for (DEdge edge : ((DNode)de).getIncomingEdges()) {
+          for (DEdge edge : ((EdgeTarget)de).getIncomingEdges()) {
             if (edge.getSourceNode() instanceof DSemanticDecorator && ((DSemanticDecorator) edge.getSourceNode()).getTarget() instanceof InstanceRole) {
               include = false;
             }
