@@ -1,3 +1,23 @@
+/*
+vpms refresh adds the following css classes to diagram elements:
+
+vpms-excluded: element is excluded in at least one displayed configuration
+vpms-included: element is included in at least one displayed configuration
+vpms-undefined: element is undefined in at least one displayed configuration
+
+vpms-all-included: element is included in all displayed configurations
+vpms-all-excluded: element is excluded in all displayed configurations
+vpms-all-undefined: element is undefined in all displayed configurations
+
+vpms-included-<name>: element is included in configuration with name <name>
+vpms-excluded-<name>: element is excluded in configuration with name <name>
+vpms-undefined-<name>: element is undefined in configuration with name <name>
+
+For each element, only configurations that have the element in its scope are considered.
+
+*/
+
+
 .vpms-excluded {
 	foreground-color: Tomato;
 	background-color: Tomato;
@@ -6,28 +26,37 @@
 	label-color: black;
 }
 
-.vpms-undefined {
+.vpms-all-undefined {
 	foreground-color: WhiteSmoke;
 	background-color: WhiteSmoke;
 	border-color: black;
 	label-color: black;
 	edge-color: grey;
-	
 }
 
-FunctionInputPort.vpms-undefined {
+/* conflicts */
+.vpms-included.vpms-excluded {
+	foreground-color: Yellow;
+	background-color: Yellow;
+	border-color: black;
+	label-color: black;
+	edge-color: Yellow;
+}
+
+
+FunctionInputPort.vpms-all-undefined {
 	image: 'ms.design/images/FlowPort.gif';
 }
 
-FunctionOutputPort.vpms-undefined {
+FunctionOutputPort.vpms-all-undefined {
 	image: 'ms.design/images/FlowPort.gif';
 }
 
-ComponentPort.vpms-undefined {
+ComponentPort.vpms-all-undefined {
 	image: 'ms.design/images/FlowPort.gif';
 }
 
-PhysicalPort.vpms-undefined {
+PhysicalPort.vpms-all-undefined {
 	image: 'ms.design/images/FlowPort.gif';
 }
 
@@ -46,4 +75,21 @@ ComponentPort.vpms-excluded {
 PhysicalPort.vpms-excluded {
 	image: 'ms.design/images/FlowPort-red.gif';
 }
+
+FunctionInputPort.vpms-included.vpms-excluded {
+	image: 'ms.design/images/FlowPort-conflict.gif';
+}
+
+FunctionOutputPort.vpms-included.vpms-excluded {
+	image: 'ms.design/images/FlowPort-conflict.gif';
+}
+
+ComponentPort.vpms-included.vpms-excluded {
+	image: 'ms.design/images/FlowPort-conflict.gif';
+}
+
+PhysicalPort.vpms-included.vpms-excluded {
+	image: 'ms.design/images/FlowPort-conflict.gif';
+}
+
 

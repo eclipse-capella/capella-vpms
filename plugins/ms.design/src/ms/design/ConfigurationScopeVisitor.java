@@ -102,8 +102,15 @@ public class ConfigurationScopeVisitor implements ScopeVisitor<Collection<CSConf
 
   protected void updateStyle(CSSAdapter style, EObject semantic, Collection<CSConfiguration> appliedConfigurations) {
     if (semantic != null) {
+
+      boolean allIncluded = true;
+      boolean allExcluded = true;
+      boolean allUndefined = true;
+      boolean atLeastOneConfigApplied = false;
+
       for (Iterator<CSConfiguration> it = appliedConfigurations.iterator(); it.hasNext();) {
         CSConfiguration c = it.next();
+        atLeastOneConfigApplied = true;
         // adding a class that includes the configuration name allows
         // users to apply styles to a concrete configuration
 
@@ -113,16 +120,31 @@ public class ConfigurationScopeVisitor implements ScopeVisitor<Collection<CSConf
         if (included) {
             style.addCSSClass("vpms-included");
             style.addCSSClass("vpms-included-" + c.getName());
+            allExcluded = false;
+            allUndefined = false;
         }
         if (excluded) { 
             style.addCSSClass("vpms-excluded");
             style.addCSSClass("vpms-excluded-" + c.getName());
+            allIncluded = false;
+            allUndefined = false;
         }
         if (!included && !excluded) {
           style.addCSSClass("vpms-undefined");
           style.addCSSClass("vpms-undefined-" + c.getName());
         }
+      }
 
+      if (atLeastOneConfigApplied) {
+        if (allIncluded) {
+          style.addCSSClass("vpms-all-included");
+        }
+        if (allExcluded) {
+          style.addCSSClass("vpms-all-excluded");
+        }
+        if (allUndefined) {
+          style.addCSSClass("vpms-all-undefined");
+        }
       }
     }
   }
