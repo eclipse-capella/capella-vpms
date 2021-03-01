@@ -12,4 +12,38 @@
 	border-color: grey;
 	label-color: black;
 	edge-color: grey;
+	
 }
+
+FunctionInputPort.vpms-undefined {
+	image: 'ms.design/images/FlowPort.gif';
+}
+
+FunctionOutputPort.vpms-undefined {
+	image: 'ms.design/images/FlowPort.gif';
+}
+
+ComponentPort.vpms-undefined {
+	image: 'ms.design/images/FlowPort.gif';
+}
+
+PhysicalPort.vpms-undefined {
+	image: 'ms.design/images/FlowPort.gif';
+}
+
+FunctionInputPort.vpms-excluded {
+	image: 'ms.design/images/FlowPort-red.gif';
+}
+
+FunctionOutputPort.vpms-excluded {
+	image: 'ms.design/images/FlowPort-red.gif';
+}
+
+ComponentPort.vpms-excluded {
+	image: 'ms.design/images/FlowPort-red.gif';
+}
+
+PhysicalPort.vpms-excluded {
+	image: 'ms.design/images/FlowPort-red.gif';
+}
+
