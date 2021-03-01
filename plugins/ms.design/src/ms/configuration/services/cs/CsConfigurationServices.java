@@ -154,7 +154,7 @@ public class CsConfigurationServices {
   }
 
   private boolean isWizardCancelled(Object selection) {
-    return !(selection instanceof Object[]);
+    return "WIZARD_CANCELED".equals(selection);
   }
 
   public boolean msConfigurationElementsTablePrecondition(EObject element) {
@@ -179,7 +179,7 @@ public class CsConfigurationServices {
       Map<CSConfiguration, DNode> shown = getCurrentConfigNodeMap(diagram);
       IInterpreter interpreter = SiriusPlugin.getDefault().getInterpreterRegistry().getInterpreter(diagram);
 
-      for (Object o : (Object[]) selection) {
+      for (Object o : (Iterable) selection) {
 
         DNode node = shown.remove(o);
 
