@@ -1,7 +1,7 @@
 .vpms-excluded {
 	foreground-color: Tomato;
 	background-color: Tomato;
-	border-color: Tomato;
+	border-color: black;
 	edge-color: Tomato;
 	label-color: black;
 }
@@ -9,7 +9,7 @@
 .vpms-undefined {
 	foreground-color: WhiteSmoke;
 	background-color: WhiteSmoke;
-	border-color: grey;
+	border-color: black;
 	label-color: black;
 	edge-color: grey;
 	
