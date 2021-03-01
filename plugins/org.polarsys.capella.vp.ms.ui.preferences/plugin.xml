@@ -15,18 +15,9 @@
 
 <plugin>
   <extension
-        point="org.eclipse.ui.preferencePages">
-     <page
-           category="org.polarsys.capella.core.platform.sirius.ui.actions.Capella.page"
-           class="org.polarsys.capella.vp.ms.ui.preferences.MsPreferencePage"
-           id="org.polarsys.capella.vp.ms.ui.preferences.page"
-           name="Modes and States Preferences">
-     </page>
-  </extension>
-  <extension
         point="org.eclipse.core.runtime.preferences">
      <initializer
-           class="org.polarsys.capella.vp.ms.ui.preferences.MsPreferencePage$Initializer">
+           class="org.polarsys.capella.vp.ms.ui.preferences.Initializer">
      </initializer>
   </extension>
 </plugin>
