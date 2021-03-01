@@ -31,6 +31,7 @@ import org.eclipse.emf.common.util.UniqueEList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -50,11 +51,13 @@ import org.eclipse.sirius.diagram.EdgeTarget;
 import org.eclipse.sirius.diagram.business.internal.metamodel.description.extensions.INodeMappingExt;
 import org.eclipse.sirius.diagram.business.internal.metamodel.helper.EdgeMappingHelper;
 import org.eclipse.sirius.diagram.business.internal.metamodel.helper.NodeMappingHelper;
+import org.eclipse.sirius.diagram.description.DiagramElementMapping;
 import org.eclipse.sirius.diagram.description.EdgeMapping;
 import org.eclipse.sirius.diagram.description.Layer;
 import org.eclipse.sirius.diagram.description.NodeMapping;
 import org.eclipse.sirius.diagram.sequence.SequenceDDiagram;
 import org.eclipse.sirius.diagram.sequence.description.InstanceRoleMapping;
+import org.eclipse.sirius.ecore.extender.business.api.accessor.ModelAccessor;
 import org.eclipse.sirius.table.metamodel.table.DColumn;
 import org.eclipse.sirius.table.metamodel.table.DLine;
 import org.eclipse.sirius.table.metamodel.table.DTable;
@@ -877,12 +880,57 @@ public class CsConfigurationServices {
     return Collections.emptyList();
   }
 
-  public static boolean isShowChildConfigurationRelationships(DDiagram diagram) {
-    return isAnnotationDetailSet(diagram, DANNOTATION_DETAIL_SHOW_CHILD_RELATIONS, true);
-  }
 
-  public static void setShowChildConfigurationRelationships(DDiagram diagram, boolean b) {
-    setAnnotationDetail(diagram, DANNOTATION_DETAIL_SHOW_CHILD_RELATIONS, b);
+  private void createChildConfigurationEdge(DDiagram diagram, EdgeTarget source, EdgeTarget target) {
+    IInterpreter interpreter = SiriusPlugin.getDefault().getInterpreterRegistry().getInterpreter(diagram);
+    EdgeMapping edgeMapping = MsMappingConstants.getChildConfigurationMapping(diagram);
+    DEdge edge = new EdgeMappingHelper(interpreter).createEdge(edgeMapping, source, target, diagram, null);
+    diagram.getOwnedDiagramElements().add(edge);
+  }
+  
+  public void msToggleChildConfigurationEdges(DDiagramElement diagramElement) {
+    msToggleChildConfigurationEdges((DSemanticDiagram) diagramElement.getParentDiagram());
+  }
+  
+  /**
+   * Toggles child configurations edge visibility on diagrams.
+   * @param diagramElement
+   */
+  public void msToggleChildConfigurationEdges(DSemanticDiagram diagram) {
+    final Session session = SessionManager.INSTANCE.getSession(diagram.getTarget());
+    final ECrossReferenceAdapter xref = session != null ? session.getSemanticCrossReferencer() : null;
+    ModelAccessor accessor = SiriusPlugin.getDefault().getModelAccessorRegistry().getModelAccessor(diagram);
+    List<EObject> delete = new ArrayList<EObject>();
+    for (DDiagramElement e : diagram.getOwnedDiagramElements()) {
+      if (e instanceof DEdge && e.getTarget() instanceof CSConfiguration) {
+        delete.add(e);
+      }
+    }
+
+    if (delete.size() > 0) {
+      delete.forEach(e -> accessor.eDelete(e, xref));
+      return;
+    }    
+
+    Map<CSConfiguration, EdgeTarget> map = new HashMap<CSConfiguration, EdgeTarget>();
+    for (Iterator<EObject> it = diagram.eAllContents(); it.hasNext();) {
+      EObject next = it.next();
+      if (!(next instanceof DEdge) 
+          && next instanceof EdgeTarget
+          && next instanceof DSemanticDecorator 
+          && ((DSemanticDecorator) next).getTarget() instanceof CSConfiguration) {
+        map.put((CSConfiguration) ((DSemanticDecorator) next).getTarget(), (EdgeTarget) next);
+      }
+    }
+
+    for (Map.Entry<CSConfiguration, EdgeTarget> entry : map.entrySet()) {
+      for (CSConfiguration child : entry.getKey().getChildConfigurations()) { 
+        EdgeTarget target = map.get(child);
+        if (target != null) {
+          createChildConfigurationEdge(diagram, entry.getValue(), map.get(child));
+        }
+      }
+    }
   }
 
   public static void setShowComponents(DTable table, boolean b) {

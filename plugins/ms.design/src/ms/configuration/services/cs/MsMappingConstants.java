@@ -15,6 +15,7 @@ package ms.configuration.services.cs;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
+import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.description.DiagramElementMapping;
 import org.eclipse.sirius.diagram.description.EdgeMapping;
 import org.eclipse.sirius.diagram.description.NodeMapping;
@@ -41,7 +42,7 @@ public class MsMappingConstants {
     return (NodeMapping) getMapping(diagram, mappingURI);
   }
 
-  static DiagramElementMapping getMapping(SequenceDDiagram diagram, URI mappingURI) {
+  static DiagramElementMapping getMapping(DDiagram diagram, URI mappingURI) {
     Session session = SessionManager.INSTANCE.getSession(diagram);
     return (DiagramElementMapping) session.getTransactionalEditingDomain().getResourceSet().getEObject(mappingURI, false);
   }
@@ -54,6 +55,10 @@ public class MsMappingConstants {
       mappingURI = MsMappingConstants.ES_Edge_InstanceRole_Configuration;
     }
     return (EdgeMapping) getMapping(diagram, mappingURI);
+  }
+  
+  static EdgeMapping getChildConfigurationMapping(DDiagram diagram) {
+    return (EdgeMapping) getMapping(diagram, MS_Viewpoint.appendFragment("//@ownedViewpoints[name='ms']/@ownedRepresentationExtensions[name='LAConfigurations']/@layers[name='LAB_Layer_Configuration']/@edgeMappings[name='LAB_Layer_Configuration_ChildConfiguration_Edge']"));
   }
 
 }
