@@ -12,30 +12,63 @@
  *******************************************************************************/
 package org.polarsys.capella.core.data.common.statemachine.validation;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.validation.AbstractModelConstraint;
+import org.eclipse.emf.validation.EMFEventType;
 import org.eclipse.emf.validation.IValidationContext;
+import org.polarsys.capella.core.data.capellacommon.AbstractState;
 import org.polarsys.capella.core.data.capellacommon.FinalState;
 import org.polarsys.capella.core.data.capellacommon.Mode;
 import org.polarsys.capella.core.data.capellacommon.State;
+import org.polarsys.capella.core.data.capellacommon.StateTransition;
 
 public class MDCHK_State_Mode_OutTransition extends AbstractModelConstraint {
+
   /*
    * (non-Javadoc)
    * @see org.eclipse.emf.validation.AbstractModelConstraint#validate(org.eclipse.emf.validation.IValidationContext)
    */
   @Override
   public IStatus validate(IValidationContext ctx) {
-    if (ctx.getTarget() instanceof State && !(ctx.getTarget() instanceof FinalState)) {
-      State state = (State) ctx.getTarget();
-      if (state.getOutgoing().size() == 0) {
-        if (state instanceof Mode) {
-          return ctx.createFailureStatus(state.getName(), "Mode"); //$NON-NLS-1$
-        }
-        return ctx.createFailureStatus(state.getName(), "State"); //$NON-NLS-1$
-      }
+    if (ctx.getEventType() != EMFEventType.NULL) {
       return ctx.createSuccessStatus();
     }
-    return null;
+    State state = (State) ctx.getTarget();
+    if (state instanceof FinalState) {
+      return ctx.createSuccessStatus();
+    }
+    if (!hasOutgoing(state)) {
+      if (state instanceof Mode) {
+          return ctx.createFailureStatus(state.getName(), "Mode"); //$NON-NLS-1$
+      }
+      return ctx.createFailureStatus(state.getName(), "State"); //$NON-NLS-1$
+    }
+    return ctx.createSuccessStatus();
+  }
+
+  private boolean hasOutgoing(AbstractState s) {
+    
+    Collection<AbstractState> internalStates = new ArrayList<>();
+    internalStates.add(s);
+    
+    for (Iterator<EObject> it = s.eAllContents(); it.hasNext();) {
+      EObject next = it.next();
+      if (next instanceof AbstractState) {
+        internalStates.add((AbstractState) next);
+      }
+    }
+    for (AbstractState nestedState : internalStates) {
+      for (StateTransition t : nestedState.getOutgoing()) {
+        if (!internalStates.contains(t.getTarget())) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }

@@ -12,11 +12,19 @@
  *******************************************************************************/
 package org.polarsys.capella.core.data.common.statemachine.validation;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.validation.AbstractModelConstraint;
+import org.eclipse.emf.validation.EMFEventType;
 import org.eclipse.emf.validation.IValidationContext;
+import org.polarsys.capella.core.data.capellacommon.AbstractState;
 import org.polarsys.capella.core.data.capellacommon.Mode;
 import org.polarsys.capella.core.data.capellacommon.State;
+import org.polarsys.capella.core.data.capellacommon.StateTransition;
 
 public class MDCHK_State_Mode_InTransition extends AbstractModelConstraint {
   /*
@@ -25,16 +33,41 @@ public class MDCHK_State_Mode_InTransition extends AbstractModelConstraint {
    */
   @Override
   public IStatus validate(IValidationContext ctx) {
-    if (ctx.getTarget() instanceof State) {
-      State state = (State) ctx.getTarget();
-      if (state.getIncoming().size() == 0) {
-        if (state instanceof Mode) {
-          return ctx.createFailureStatus(state.getName(), "Mode"); //$NON-NLS-1$
-        }
-        return ctx.createFailureStatus(state.getName(), "State"); //$NON-NLS-1$
-      }
+    
+    if (ctx.getEventType() != EMFEventType.NULL) {
       return ctx.createSuccessStatus();
     }
-    return null;
+
+    State state = (State) ctx.getTarget();
+    if (!hasIncoming(state)) {
+      if (state instanceof Mode) {
+        return ctx.createFailureStatus(state.getName(), "Mode"); //$NON-NLS-1$
+      }
+      return ctx.createFailureStatus(state.getName(), "State"); //$NON-NLS-1$
+    }
+    return ctx.createSuccessStatus();
   }
+
+  private boolean hasIncoming(AbstractState s) {
+ 
+    Collection<AbstractState> internalStates = new ArrayList<>();
+    internalStates.add(s);
+
+    for (Iterator<EObject> it = s.eAllContents(); it.hasNext();) {
+      EObject next = it.next();
+      if (next instanceof AbstractState) {
+        internalStates.add((AbstractState) next);
+      }
+    }
+    // is there any nested state with an incoming transition that is not a nested transition?
+    for (AbstractState nestedState : internalStates) {
+      for (StateTransition t : nestedState.getIncoming()) {
+        if (!internalStates.contains(t.getSource())){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+ 
 }
