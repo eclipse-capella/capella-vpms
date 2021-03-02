@@ -36,11 +36,11 @@ For each element, only configurations that have the element in its scope are con
 
 /* conflicts */
 .vpms-included.vpms-excluded {
-	foreground-color: Yellow;
-	background-color: Yellow;
+	foreground-color: DarkViolet;
+	background-color: DarkViolet;
 	border-color: black;
 	label-color: black;
-	edge-color: Yellow;
+	edge-color: DarkViolet;
 }
 
 

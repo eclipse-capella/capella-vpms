@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8' ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<link rel="stylesheet" type="text/css" href="PLUGINS_ROOT/org.polarsys.capella.doc/html/styles.css" media="all" />
+	</head>
+	<body>
+		<h1 id="New_in_Version_0.17">New in Version 0.17</h1>
+		<p>
+			<b>IMPORTANT: Models that use an older version of this viewpoint must be migrated via 'Project-&gt;Migration-&gt;Migrate Project Toward Current Version' </b>
+		</p>
+		<h3 id="Configurations_can_now_include_and_exclude_elements">Configurations can now include and exclude elements</h3>
+		<p>A 
+			<i>Configuration</i> has now two references 
+			<i>included</i> and 
+			<i>excluded</i> to define included and excluded elements. The exclusion/inclusion attribute of Configurations has been removed.
+		</p>
+		<p>During migration, elements of Configurations of with the 
+			<i>exclusion</i> attribute set will be added to the 
+			<i>excluded</i> list. Elements of Configurations with the 
+			<i>inclusion</i> attribute set will be added to the 
+			<i>included</i> list.
+		</p>
+		<p>This new notion impacts the visualisation of Configurations in Diagrams: Included elements will have the default Capella style, elements that are not excluded nor included will be greyed out, and elements that
+			are excluded will appear in red. If multiple Configurations are shown on a diagram, elements that are included in one, and excluded in a different Configuration are shown in violet.</p>
+		<h3 id="Configurations_can_now_be_created_on_Component_Package_elements">Configurations can now be created on Component Package elements</h3>
+		<p>This makes it possible to add Configurations at the System Root Package which then have access to Actors and
+			Components.</p>
+		<h3 id="Other_Noteworthy_Changes">Other Noteworthy Changes</h3>
+		<ul>
+			<li>The Configuration Layer is now available on OAB diagrams</li>
+			<li>Removed Configuration Access Preference and set FULL to standard access level.</li>
+			<li>Show Child Configuration Edges filter is fixed</li>
+		</ul>
+	</body>
+</html>

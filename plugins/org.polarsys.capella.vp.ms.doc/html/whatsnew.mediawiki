@@ -1,0 +1,36 @@
+<!--
+  Copyright (c) 2018 THALES GLOBAL SERVICES.
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Public License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/legal/epl-v10.html
+
+  Contributors:
+       Thales - initial API and implementation
+-->
+
+
+= New in Version 0.17 =
+
+'''IMPORTANT: Models that use an older version of this viewpoint must be migrated via 'Project->Migration->Migrate Project Toward Current Version' '''
+
+=== Configurations can now include and exclude elements ===
+
+A ''Configuration'' has now two references ''included'' and ''excluded'' to define included and excluded elements. The exclusion/inclusion attribute of Configurations has been removed.
+
+During migration, elements of Configurations of with the ''exclusion'' attribute set will be added to the ''excluded'' list. Elements of Configurations with the ''inclusion'' attribute set will be added to the ''included'' list.
+
+This new notion impacts the visualisation of Configurations in Diagrams: Included elements will have the default Capella style, elements that are not excluded nor included will be greyed out, and elements that
+are excluded will appear in red. If multiple Configurations are shown on a diagram, elements that are included in one, and excluded in a different Configuration are shown in violet.
+
+
+=== Configurations can now be created on Component Package elements ===
+
+This makes it possible to add Configurations at the System Root Package which then have access to Actors and
+Components.
+
+=== Other Noteworthy Changes ===
+
+* The Configuration Layer is now available on OAB diagrams
+* Removed Configuration Access Preference and set FULL to standard access level.
+* Show Child Configuration Edges filter is fixed

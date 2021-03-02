@@ -6,8 +6,10 @@
 	</head>
 	<body>
 		<h1 id="Validation_Rules">Validation Rules</h1>
-		<p>The Modes &amp; States viewpoint does not include validation rules that help to ensure the consistency of configurations, e.g. that a configuration references only elements that are in its scope, or that a configuration only references configurations of subcomponents as its child configurations. Such rules will be delivered in a subsequent version.
-			However, the prototype includes several new validation rules related to State Machines:</p>
+		<p>
+			<b>ElementsMustBeInScope</b> - Included/Excluded elements must be in scope.
+			Elements that are referenced by a Configuration's excluded/included features must be the scope of the configuration.
+		</p>
 		<p>
 			<b>DWF_SM_16</b> - A Mode/State has at least one incoming transition.
 			When designing an FSM, it is important that all Mode/State has at least one incoming transition. In fact, if no such transition exists, the Mode/State is said unreachable.
