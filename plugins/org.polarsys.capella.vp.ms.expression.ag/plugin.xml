@@ -30,6 +30,7 @@
            <with
                  variable="activeEditor">
               <test
+                    forcePluginActivation="true"
                     property="msdiagramproperties.description"
                     value="Situation Expressions">
               </test>
@@ -50,5 +51,12 @@
          </visibleWhen>
       </command>
    </menuContribution>
+</extension>
+<extension
+      point="org.eclipse.help.toc">
+   <toc
+         file="toc.xml"
+         primary="false">
+   </toc>
 </extension>  
 </plugin>

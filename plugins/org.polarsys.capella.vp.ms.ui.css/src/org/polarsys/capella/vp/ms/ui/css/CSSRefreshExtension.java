@@ -14,18 +14,20 @@ package org.polarsys.capella.vp.ms.ui.css;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.e4.ui.css.core.engine.CSSErrorHandler;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.sirius.business.api.session.Session;
+import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.business.api.refresh.IRefreshExtension;
 import org.eclipse.sirius.diagram.business.api.refresh.IRefreshExtensionProvider;
@@ -61,6 +63,9 @@ public class CSSRefreshExtension implements IRefreshExtensionProvider, IRefreshE
   @Override
   public void postRefresh(DDiagram dDiagram) {
 
+    Session session = SessionManager.INSTANCE.getSession(dDiagram);
+    URI workspaceBaseURI = session.getSessionResource().getURI().trimSegments(1);
+    
     DiagramCSSEngine engine = new DiagramCSSEngine();
     engine.setErrorHandler(new CSSErrorHandler() {
       @Override
@@ -75,6 +80,9 @@ public class CSSRefreshExtension implements IRefreshExtensionProvider, IRefreshE
       URI resource = layer.eResource().getURI();
       if (seen.add(resource)) {
         URI cssURI = resource.trimFileExtension().appendFileExtension("css");
+        URI customCSSURI = workspaceBaseURI.appendSegment(cssURI.segment(cssURI.segmentCount() - 1));
+        String customCSSPlatformString = customCSSURI.toPlatformString(true);
+        IFile customCSSFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(customCSSPlatformString));
         try {
           URL cssURL = FileLocator.find(new URL(cssURI.toString()));
           if (cssURL != null) {
@@ -82,6 +90,16 @@ public class CSSRefreshExtension implements IRefreshExtensionProvider, IRefreshE
               StyleSheet ss = engine.parseStyleSheet(is);
             }
           }
+                    
+          if (customCSSFile.exists()) {     
+            try (InputStream is = customCSSFile.getContents()){
+              engine.parseStyleSheet(is);
+            } catch (CoreException e1) {
+              // TODO Auto-generated catch block
+              e1.printStackTrace();
+            }
+          }
+
         } catch (MalformedURLException e) {
         } catch (IOException e) {
           e.printStackTrace();

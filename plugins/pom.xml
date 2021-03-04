@@ -37,6 +37,7 @@
     <module>org.polarsys.capella.vp.ms.expression</module>
     <module>org.polarsys.capella.vp.ms.expression.ag</module>
     <module>org.polarsys.capella.vp.ms.transition</module>
+    <module>org.polarsys.capella.vp.ms.validation</module>
     <module>org.polarsys.capella.vp.ms.tests</module>
   </modules>
 </project>

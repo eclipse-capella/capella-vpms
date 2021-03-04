@@ -43,6 +43,9 @@
          <property-name
                name="border-color">
          </property-name>
+         <property-name
+               name="image">
+         </property-name>
       </handler>
    </extension>
    <extension

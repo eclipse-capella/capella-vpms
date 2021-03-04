@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: M&S Addon Validation Plugin
+Bundle-SymbolicName: org.polarsys.capella.vp.ms.validation;singleton:=true
+Bundle-Version: 0.17.0.qualifier
+Automatic-Module-Name: org.polarsys.capella.vp.ms.validation
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.eclipse.emf.validation;bundle-version="1.8.0",
+ org.polarsys.capella.core.validation;bundle-version="1.4.2",
+ org.polarsys.capella.vp.ms

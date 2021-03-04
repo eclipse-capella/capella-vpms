@@ -18,6 +18,7 @@ import org.eclipse.sirius.diagram.BorderedStyle;
 import org.eclipse.sirius.diagram.EdgeStyle;
 import org.eclipse.sirius.diagram.FlatContainerStyle;
 import org.eclipse.sirius.diagram.Square;
+import org.eclipse.sirius.diagram.WorkspaceImage;
 import org.eclipse.sirius.viewpoint.BasicLabelStyle;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.sirius.viewpoint.DStylizable;
@@ -91,6 +92,17 @@ public class DiagramPropertyHandler implements ICSSPropertyHandler {
           ((FlatContainerStyle) style).setLabelColor((RGBValues) engine.convert(value, RGBValues.class, null));
         }
       }      
+    }
+    
+    if ("image".equals(property)) {
+      DSemanticDecoratorElement de = (DSemanticDecoratorElement) element;
+      DSemanticDecorator widget = (DSemanticDecorator) de.getNativeWidget();
+      if (widget instanceof DStylizable) {
+        Style style = ((DStylizable) widget).getStyle();
+        if (style instanceof WorkspaceImage) {
+          ((WorkspaceImage) style).setWorkspacePath(value.getCssText());
+        }
+      }
     }
 
     return true; //?

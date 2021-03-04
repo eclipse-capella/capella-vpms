@@ -15,14 +15,14 @@
  -->
 
 <toc label="Capella Modes &amp; States Viewpoint">
+   <topic href="html/whatsnew.html" label="New in Version 0.17">
+      <anchor id="Whatsnew"/>
+   </topic>
    <topic href="html/introduction.html" label="Introduction">
       <anchor id="Introduction"/>
    </topic>
    <topic href="html/activation.html" label="Viewpoint activation">
       <anchor id="Activation"/>
-   </topic>
-   <topic href="html/diagrams.html" label="Diagrams and Layers">
-      <anchor id="Diagrams"/>
    </topic>
    <topic href="html/configurations.html" label="Working with Configurations">
       <anchor id="Configurations"/>
@@ -32,9 +32,6 @@
    </topic>
    <topic href="html/validationrules.html" label="Validation Rules">
       <anchor id="Validation Rules"/>
-   </topic>
-   <topic href="html/diagram_options.html" label="Diagram Layer Options">
-      <anchor id="DiagramLayerOptions"/>
    </topic>
    <topic href="html/obsolete.html" label="Deprecated/Obsolete Features">
       <anchor id="Obsolete"/>

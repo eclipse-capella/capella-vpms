@@ -2,13 +2,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<link rel="stylesheet" type="text/css" href="PLUGINS_ROOT/org.polarsys.capella.doc/html/styles.css" media="all" />
 	</head>
 	<body>
 		<h1 id="Working_with_Situations">Working with Situations</h1>
+		<p>A Situation is defined by a predicate over States of the System, e.g. Situation A is implied by System Component 1 in State B AND System Component 2 in State C or D. Situations and their associated predicate
+			can be created under Components:</p>
 		<p>
-			<b>
-				<i>SECTION TO BE COMPLETED</i>
-			</b> 
+			<img border="0" src="situation-tree.png"/>
 		</p>
+		<h1 id="Situation_Expressions">Situation Expressions</h1>
+		<p>
+			<i>Situation Expression</i> tables allow to textually edit the boolean expression of Situations: 
+		</p>
+		<p>
+			<img border="0" src="situation_expression_table.png"/>
+		</p>
+		<p>
+			<i>Situation Expression</i> tables can be created on Components. The columns of the table are the Situations owned by that component or its subcomponent. The rows of the table are the states/modes of the Component and its subcomponents.
+		</p>
+		<p>The cells in this table cannot be edited directly, but via the cell's context menu: 
+			<i>Change Expression..</i>. This will open a dialog where boolean expressions can be entered. The literals of the expression are entered by pressing Ctrl+Space, and selecting a State. The proposed States/Modes are the States of the Statemachine of the cell's row. The recognised keywords are 
+			<i>AND</i>, 
+			<i>OR</i>, 
+			<i>NOT</i>. Use parentheses '(' and ')' to override operator precedence:
+		</p>
+		<p>
+			<img border="0" src="change_expression_dialog.png"/>
+		</p>
+		<p>The complete expression for a Situation is then the combined AND of the subexpressions of each row:</p>
+		<p>
+			<img border="0" src="expression_format.png"/>
+		</p>
+		<p>Situations with expressions that do not adhere to this syntactic subset of expressions  will not be shown in the table.</p>
 	</body>
 </html>
