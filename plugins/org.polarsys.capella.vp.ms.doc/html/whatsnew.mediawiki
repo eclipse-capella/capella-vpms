@@ -34,3 +34,14 @@ Components.
 * The Configuration Layer is now available on OAB diagrams
 * Removed Configuration Access Preference and set FULL to standard access level.
 * Show Child Configuration Edges filter is fixed
+
+= New in Version 0.16 =
+
+== Situation Expression Tables ==
+
+Boolean Expressions for Situations can now be written textually in a new kind of table called 'Situation Expression Table'
+
+=== Other noteworthy changes === 
+
+* Improved validation rules for blocking and nonreachable States
+
