@@ -25,7 +25,7 @@
   <name>Capella Modes &amp; States Viewpoint</name>
   <artifactId>org.polarsys.capella.vp.ms-addon</artifactId>
   <packaging>pom</packaging>
-  <version>0.16.1-SNAPSHOT</version>
+  <version>0.16.2-SNAPSHOT</version>
 
   <properties>
     <tycho.scmUrl>scm:git:https://github.com/eclipse/capella-vpms</tycho.scmUrl>
