@@ -1,0 +1,21 @@
+<!--
+  Copyright (c) 2018 THALES GLOBAL SERVICES.
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Public License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/legal/epl-v10.html
+
+  Contributors:
+       Thales - initial API and implementation
+-->
+
+
+= New in Version 0.16 =
+
+== Situation Expression Tables ==
+
+Boolean Expressions for Situations can now be written textually in a new kind of table called 'Situation Expression Table'
+
+=== Other noteworthy changes === 
+
+* Improved validation rules for blocking and nonreachable States
