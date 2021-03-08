@@ -1,0 +1,40 @@
+/*
+ * Custom images for Contextual Component External Interfaces Diagrams
+ */
+
+ComponentPort[kind=STANDARD][providedInterfaces].vpms-all-undefined {
+	image: '/ms.design/images/vpms-rotating/StandardPort_provided.png';
+}
+
+ComponentPort[kind=STANDARD][requiredInterfaces].vpms-all-undefined {
+	image: '/ms.design/images/vpms-rotating/StandardPort_required.png';
+}
+
+ComponentPort[kind=STANDARD][providedInterfaces][requiredInterfaces].vpms-all-undefined {
+	image: '/ms.design/images/vpms-rotating/StandardPort_providedrequired.png';
+}
+
+ComponentPort[kind=STANDARD][providedInterfaces].vpms-excluded {
+	image: '/ms.design/images/vpms-rotating/StandardPort_provided-red.png';
+}
+
+ComponentPort[kind=STANDARD][requiredInterfaces].vpms-excluded {
+	image: '/ms.design/images/vpms-rotating/StandardPort_required-red.png';
+}
+
+ComponentPort[kind=STANDARD][providedInterfaces][requiredInterfaces].vpms-excluded {
+	image: '/ms.design/images/vpms-rotating/StandardPort_providedrequired-red.png';
+}
+
+ComponentPort[kind=STANDARD][providedInterfaces].vpms-excluded.vpms-included {
+	image: '/ms.design/images/vpms-rotating/StandardPort_provided-purple.png';
+}
+
+ComponentPort[kind=STANDARD][requiredInterfaces].vpms-excluded.vpms-included {
+	image: '/ms.design/images/vpms-rotating/StandardPort_required-purple.png';
+}
+
+ComponentPort[kind=STANDARD][providedInterfaces][requiredInterfaces].vpms-excluded.vpms-included {
+	image: '/ms.design/images/vpms-rotating/StandardPort_providedrequired-purple.png';
+}
+

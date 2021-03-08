@@ -2,28 +2,30 @@ These followings icons are made available under the
 terms of the Eclipse Public License 2.0 which is available at
 http://www.eclipse.org/legal/epl-2.0
 
-<icon file path> - <original eclipse plug-in> - <original file path>
-
-/images/Configuration.gif - org.polarsys.capella.vp.ms.edit - org.polarsys.capella.vp.ms.edit/icons/full/obj16/CSConfiguration.gif
-/images/FlowPort.gif - ms.design - ms.design/images/FlowPort.gif
-/images/FunctionInputPort.png - ms.design - ms.design/images/FunctionInputPort.png 
-/images/FunctionOutputPort.png - ms.design - ms.design/images/FunctionOutputPortPort.png
-/images/InFlowPort.png - ms.design - ms.design/images/InFlowPort.png
-/images/StandardPortSmall.png - ms.design - ms.design/images/StandardPortSmall.png
-/images/TransparentPort.png - ms.design - ms.design/images/TransparentPort.png
-/images/StandardPort_provided_east.png - ms.design - ms.design/images/StandardPort_provided_east.png
-/images/StandardPort_provided_north.png - ms.design - ms.design/images/StandardPort_provided_north.png
-/images/StandardPort_provided_south.png - ms.design - ms.design/images/StandardPort_provided_south.png 
-/images/StandardPort_provided_west.png - ms.design - ms.design/images/StandardPort_provided_west.png
-/images/StandardPort_provided.png - ms.design - ms.design/images/StandardPort_provided.png
-/images/StandardPort_providedrequired_east.png - ms.design - ms.design/images/StandardPort_providedrequired_east.png
-/images/StandardPort_providedrequired_north.png - ms.design - ms.design/images/StandardPort_providedrequired_north.png
-/images/StandardPort_providedrequired_south.png - ms.design - ms.design/images/StandardPort_providedrequired_south.png
-/images/StandardPort_providedrequired_west.png - ms.design - ms.design/images/StandardPort_providedrequired_west.png
-/images/StandardPort_providedrequired.png - ms.design - ms.design/images/StandardPort_providedrequired.png
-/images/StandardPort_required_east.png - ms.design - ms.design/images/StandardPort_required_east.png
-/images/StandardPort_required_north.png - ms.design - ms.design/images/StandardPort_required_north.png
-/images/StandardPort_required_south.png - ms.design - ms.design/images/StandardPort_required_south.png
-/images/StandardPort_required_west.png - ms.design - ms.design/images/StandardPort_required_west.png
-/images/StandardPort_required.png - ms.design - ms.design/images/StandardPort_required.png
-/images/FlowPort-red.gif - ms.design - ms.design/images/FlowPort-red.gif
+images/Configuration.gif
+images/FlowPort-purple.png
+images/FlowPort-red.png
+images/FlowPort.png
+images/StandardPortSmall.png
+images/TransparentPort.png
+images/vpms-rotating/FunctionInputPort-purple.png
+images/vpms-rotating/FunctionInputPort-red.png
+images/vpms-rotating/FunctionInputPort.png
+images/vpms-rotating/FunctionOutputPort-purple.png
+images/vpms-rotating/FunctionOutputPort-red.png
+images/vpms-rotating/FunctionOutputPort.png
+images/vpms-rotating/InFlowPort-purple.png
+images/vpms-rotating/InFlowPort-red.png
+images/vpms-rotating/InFlowPort.png
+images/vpms-rotating/OutFlowPort-purple.png
+images/vpms-rotating/OutFlowPort-red.png
+images/vpms-rotating/OutFlowPort.png
+images/vpms-rotating/StandardPort_provided-purple.png
+images/vpms-rotating/StandardPort_provided-red.png
+images/vpms-rotating/StandardPort_provided.png
+images/vpms-rotating/StandardPort_providedrequired-purple.png
+images/vpms-rotating/StandardPort_providedrequired-red.png
+images/vpms-rotating/StandardPort_providedrequired.png
+images/vpms-rotating/StandardPort_required-purple.png
+images/vpms-rotating/StandardPort_required-red.png
+images/vpms-rotating/StandardPort_required.png

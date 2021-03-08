@@ -29,4 +29,13 @@
            providerClass="ms.design.MsRefreshExtensionProvider">
      </refreshExtensionProvider>
   </extension>
+   <extension
+         point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
+      <editpartProvider
+            class="ms.design.RotativeImageEditPartProvider">
+         <Priority
+               name="Highest">
+         </Priority>
+      </editpartProvider>
+   </extension>
 </plugin>

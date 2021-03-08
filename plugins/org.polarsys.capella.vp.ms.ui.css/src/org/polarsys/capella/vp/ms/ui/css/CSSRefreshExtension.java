@@ -83,7 +83,12 @@ public class CSSRefreshExtension implements IRefreshExtensionProvider, IRefreshE
     for (Layer layer : dDiagram.getActivatedLayers()) {
       URI resource = layer.eResource().getURI();
       if (seen.add(resource)) {
-        URI cssURI = resource.trimFileExtension().appendFileExtension("css");
+        
+        URI baseCssURI = resource.trimFileExtension();        
+        String filename = baseCssURI.lastSegment() + ".css";
+        URI cssURI = baseCssURI.appendFileExtension("css");
+        
+        URI diagramCssURI = baseCssURI.trimSegments(1).appendSegment(dDiagram.getDescription().getName()).appendSegment(filename);
         
         try {
           URL cssURL = FileLocator.find(new URL(cssURI.toString()));
@@ -92,7 +97,13 @@ public class CSSRefreshExtension implements IRefreshExtensionProvider, IRefreshE
               StyleSheet ss = engine.parseStyleSheet(is);
             }
           }
-
+          URL diagramCssURL = FileLocator.find(new URL(diagramCssURI.toString()));
+          if (diagramCssURL != null) {
+            try (InputStream is = diagramCssURL.openStream()){
+              StyleSheet ss = engine.parseStyleSheet(is);
+            }
+          }
+          
           if (workspaceBaseURI != null) {
             URI customCSSURI = workspaceBaseURI.appendSegment(cssURI.segment(cssURI.segmentCount() - 1));
             String customCSSPlatformString = customCSSURI.toPlatformString(true);

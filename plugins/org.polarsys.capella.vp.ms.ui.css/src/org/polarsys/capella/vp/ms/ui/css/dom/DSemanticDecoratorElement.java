@@ -16,6 +16,8 @@ import org.eclipse.e4.ui.css.core.engine.CSSEngine;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
+import org.polarsys.capella.core.data.capellacore.TypedElement;
+import org.polarsys.capella.core.data.cs.Part;
 import org.w3c.dom.Element;
 
 public class DSemanticDecoratorElement extends EObjectElement {
@@ -27,7 +29,11 @@ public class DSemanticDecoratorElement extends EObjectElement {
   }
 
   protected EObject getTarget() {
-    return ((DSemanticDecorator)getNativeWidget()).getTarget();
+    EObject target =  ((DSemanticDecorator)getNativeWidget()).getTarget();
+    if (target instanceof Part) {
+      target = ((TypedElement) target).getType();
+    }
+    return target;
   }
 
   @Override
