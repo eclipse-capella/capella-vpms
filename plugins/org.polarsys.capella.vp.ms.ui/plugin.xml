@@ -225,7 +225,7 @@
                  <test
                        forcePluginActivation="true"
                        property="msdiagramproperties.lineId"
-                       value="statemachines">
+                       value="statemachines2">
                  </test>
               </iterate>
            </and>
