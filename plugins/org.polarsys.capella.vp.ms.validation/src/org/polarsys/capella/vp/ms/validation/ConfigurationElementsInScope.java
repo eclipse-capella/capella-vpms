@@ -39,7 +39,7 @@ public class ConfigurationElementsInScope extends AbstractValidationRule {
           errors.add(ConstraintStatus.createStatus(ctx, Collections.singleton(e), "Included element ''{0}'' is not in the scope of ''{1}''", e, ctx.getTarget()));
         }
       }
-      for (EObject e : c.getIncluded()) {
+      for (EObject e : c.getExcluded()) {
         if (!(c.getScope().contains(e))) {
           errors.add(ConstraintStatus.createStatus(ctx, Collections.singleton(e), "Excluded element ''{0}'' is not in the scope of ''{1}''", e, ctx.getTarget()));
         }
