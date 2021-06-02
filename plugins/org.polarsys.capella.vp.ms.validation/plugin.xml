@@ -49,5 +49,16 @@
          </constraints>
       </constraintProvider>
    </extension>
+   <extension
+         point="org.polarsys.capella.core.validation.ui.ide.capellaQuickFix">
+      <resolver
+            class="org.polarsys.capella.vp.ms.validation.ConfigurationElementsInScope$Quickfix"
+            desc="Remove the reference to the element not in scope"
+            label="Remove reference to element">
+         <rules
+               ruleId="ElementsMustBeInScope">
+         </rules>
+      </resolver>
+   </extension>
 
 </plugin>
