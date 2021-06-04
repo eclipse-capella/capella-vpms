@@ -88,7 +88,7 @@ public class ScenarioMsRefreshExtension extends DefaultMsRefreshExtension {
         CSSAdapter style = CSSAdapter.getAdapter(edge).clear();
         Collection<CSConfiguration> applied = new ArrayList<>(getAllScopeConfigurations(fopScope));
         applied.retainAll(getAllScopeConfigurations(fipScope));
-        updateStyle(style, exchange, applied);
+        updateStyle(edge.getParentDiagram(), style, exchange, applied);
         applyExecutionStyleFromEdge(edge, style);
       }
 
@@ -125,12 +125,12 @@ public class ScenarioMsRefreshExtension extends DefaultMsRefreshExtension {
 
         Classifier sender = (Classifier) msg.getSendingPart().getType();
         for (ComponentPort port : getRequiringPorts(sender.getOwnedFeatures(), op.getAllocatingInterface())){
-          updateStyle(style, port, getAllScopeConfigurations(out));
+          updateStyle(edge.getParentDiagram(), style, port, getAllScopeConfigurations(out));
         }
 
         Classifier receiver = (Classifier) msg.getReceivingPart().getType();
         for (ComponentPort port : getProvidingPorts(receiver.getOwnedFeatures(), op.getAllocatingInterface())) {
-          updateStyle(style, port, getAllScopeConfigurations(in));
+          updateStyle(edge.getParentDiagram(), style, port, getAllScopeConfigurations(in));
         }
  
         applyExecutionStyleFromEdge(edge, style);

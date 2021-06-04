@@ -99,7 +99,7 @@ public class DefaultMsRefreshExtension extends AbstractMsRefreshExtension {
       CSSAdapter style = CSSAdapter.getAdapter(edge).clear();
       Collection<CSConfiguration> applied = new ArrayList<>(getAllScopeConfigurations(outScope));
       applied.retainAll(getAllScopeConfigurations(inScope));
-      updateStyle(style, edge.getTarget(), applied);
+      updateStyle(edge.getParentDiagram(), style, edge.getTarget(), applied);
     }
 
     };
