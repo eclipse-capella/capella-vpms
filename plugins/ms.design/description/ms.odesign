@@ -376,6 +376,9 @@
           </ownedTools>
         </toolSections>
       </layers>
+      <layers name="Layer_Configuration_MarkUndefined" label="Emphasize Undefined Configuration Elements">
+        <nodeMappings/>
+      </layers>
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="LAConfigurations" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/Logical Architecture" representationName="Logical Architecture Blank">
       <metamodel href="../../org.polarsys.capella.vp.ms/models/ms.ecore#/"/>
@@ -486,6 +489,9 @@
           </ownedTools>
         </toolSections>
       </layers>
+      <layers name="Layer_Configuration_MarkUndefined" label="Emphasize Undefined Configuration Elements">
+        <nodeMappings/>
+      </layers>
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="SAConfigurations" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/System Analysis" representationName="System Architecture Blank">
       <layers name="SAB_Layer_Configuration" label="Configurations" reusedMappings="//@ownedViewpoints[name='ms']/@ownedRepresentationExtensions[name='LAConfigurations']/@layers[name='LAB_Layer_Configuration']/@edgeMappings[name='LAB_Layer_Configuration_ChildConfiguration_Edge']">
@@ -569,6 +575,9 @@
             </initialOperation>
           </ownedTools>
         </toolSections>
+      </layers>
+      <layers name="Layer_Configuration_MarkUndefined" label="Emphasize Undefined Configuration Elements">
+        <nodeMappings/>
       </layers>
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="PAConfigurations" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/Physical Architecture" representationName="Physical Architecture Blank">
@@ -661,6 +670,9 @@
           </ownedTools>
         </toolSections>
       </layers>
+      <layers name="Layer_Configuration_MarkUndefined" label="Emphasize Undefined Configuration Elements">
+        <nodeMappings/>
+      </layers>
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="CEIConfigurations" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/Common" representationName="Contextual Component External Interfaces">
       <layers name="CEI_Layer_Configuration" label="Configurations">
@@ -735,6 +747,9 @@
             </initialOperation>
           </ownedTools>
         </toolSections>
+      </layers>
+      <layers name="Layer_Configuration_MarkUndefined" label="Emphasize Undefined Configuration Elements">
+        <nodeMappings/>
       </layers>
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="CDIConfigurations" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/Common" representationName="Contextual Component Detailed Interfaces">
@@ -811,6 +826,9 @@
           </ownedTools>
         </toolSections>
       </layers>
+      <layers name="Layer_Configuration_MarkUndefined" label="Emphasize Undefined Configuration Elements">
+        <nodeMappings/>
+      </layers>
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="OADFBConfigurations" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/Operational Analysis" representationName="Operational Activity Interaction Blank">
       <metamodel href="../../org.polarsys.capella.vp.ms/models/ms.ecore#/"/>
@@ -858,6 +876,9 @@
             </initialOperation>
           </ownedTools>
         </toolSections>
+      </layers>
+      <layers name="Layer_Configuration_MarkUndefined" label="Emphasize Undefined Configuration Elements">
+        <nodeMappings/>
       </layers>
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="LADFBConfigurations" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/Logical Architecture" representationName="Logical Data Flow Blank">
@@ -907,6 +928,9 @@
           </ownedTools>
         </toolSections>
       </layers>
+      <layers name="Layer_Configuration_MarkUndefined" label="Emphasize Undefined Configuration Elements">
+        <nodeMappings/>
+      </layers>
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="SADFBConfigurations" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/System Analysis" representationName="System Data Flow Blank">
       <metamodel href="../../org.polarsys.capella.vp.ms/models/ms.ecore#/"/>
@@ -955,6 +979,9 @@
           </ownedTools>
         </toolSections>
       </layers>
+      <layers name="Layer_Configuration_MarkUndefined" label="Emphasize Undefined Configuration Elements">
+        <nodeMappings/>
+      </layers>
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="PADFBConfigurations" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/Physical Architecture" representationName="Physical Data Flow Blank">
       <metamodel href="../../org.polarsys.capella.vp.ms/models/ms.ecore#/"/>
@@ -1002,6 +1029,9 @@
             </initialOperation>
           </ownedTools>
         </toolSections>
+      </layers>
+      <layers name="Layer_Configuration_MarkUndefined" label="Emphasize Undefined Configuration Elements">
+        <nodeMappings/>
       </layers>
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="ESConfigurations" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/Common" representationName="Component Exchanges Scenario">
@@ -1053,6 +1083,9 @@
           </ownedTools>
         </toolSections>
       </layers>
+      <layers name="Layer_Configuration_MarkUndefined" label="Emphasize Undefined Configuration Elements">
+        <nodeMappings/>
+      </layers>
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="ISConfigurations" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/Common" representationName="Component Interfaces Scenario">
       <metamodel href="../../org.polarsys.capella.vp.ms/models/ms.ecore#/"/>
@@ -1102,6 +1135,9 @@
             </initialOperation>
           </ownedTools>
         </toolSections>
+      </layers>
+      <layers name="Layer_Configuration_MarkUndefined" label="Emphasize Undefined Configuration Elements">
+        <nodeMappings/>
       </layers>
     </ownedRepresentationExtensions>
     <ownedRepresentationExtensions xsi:type="description_2:DiagramExtensionDescription" name="MS Style Customisations" viewpointURI="viewpoint:/org.polarsys.capella.core.sirius.analysis/((Logical Architecture)|(System Analysis)|(Physical Architecture)|(Common)).*" representationName="(.*Architecture Blank|Contextual Component (External|Detailed) Interfaces|.* Data Flow Blank)">

@@ -19,8 +19,10 @@ import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.diagram.AbstractDNode;
+import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.DDiagramElement;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
+import org.eclipse.sirius.diagram.description.Layer;
 import org.polarsys.capella.core.data.cs.Part;
 import org.polarsys.capella.vp.ms.CSConfiguration;
 import org.polarsys.capella.vp.ms.ui.css.CSSAdapter;
@@ -97,10 +99,10 @@ public class ConfigurationScopeVisitor implements ScopeVisitor<Collection<CSConf
   protected void updateStyle(DDiagramElement element, Collection<CSConfiguration> appliedConfigurations) {
     CSSAdapter style = CSSAdapter.getAdapter(element).clear();
     EObject target = getTarget(element);
-    updateStyle(style, target, appliedConfigurations);
+    updateStyle(element.getParentDiagram(), style, target, appliedConfigurations);
   }
 
-  protected void updateStyle(CSSAdapter style, EObject semantic, Collection<CSConfiguration> appliedConfigurations) {
+  protected void updateStyle(DDiagram diagram, CSSAdapter style, EObject semantic, Collection<CSConfiguration> appliedConfigurations) {
     if (semantic != null) {
 
       boolean allIncluded = true;
@@ -129,10 +131,12 @@ public class ConfigurationScopeVisitor implements ScopeVisitor<Collection<CSConf
             allIncluded = false;
             allUndefined = false;
         }
-        if (!included && !excluded) {
+
+        if (!included && !excluded && showUndefined(diagram)) {
           style.addCSSClass("vpms-undefined");
           style.addCSSClass("vpms-undefined-" + c.getName());
         }
+        
       }
 
       if (atLeastOneConfigApplied) {
@@ -142,11 +146,22 @@ public class ConfigurationScopeVisitor implements ScopeVisitor<Collection<CSConf
         if (allExcluded) {
           style.addCSSClass("vpms-all-excluded");
         }
-        if (allUndefined) {
+
+        if (allUndefined && showUndefined(diagram)) {
           style.addCSSClass("vpms-all-undefined");
         }
+
       }
     }
+  }
+
+  private boolean showUndefined(DDiagram d) {
+    for (Layer l : d.getActivatedLayers()) {
+      if (l.getName().equals("Layer_Configuration_MarkUndefined")) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**

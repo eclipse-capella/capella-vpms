@@ -43,53 +43,74 @@ For each element, only configurations that have the element in its scope are con
 	edge-color: DarkViolet;
 }
 
-
 FunctionInputPort.vpms-all-undefined {
-	image: 'ms.design/images/FlowPort.gif';
-}
-
-FunctionOutputPort.vpms-all-undefined {
-	image: 'ms.design/images/FlowPort.gif';
-}
-
-ComponentPort.vpms-all-undefined {
-	image: 'ms.design/images/FlowPort.gif';
-}
-
-PhysicalPort.vpms-all-undefined {
-	image: 'ms.design/images/FlowPort.gif';
+	image: '/ms.design/images/vpms-rotating/FunctionInputPort.png';
 }
 
 FunctionInputPort.vpms-excluded {
-	image: 'ms.design/images/FlowPort-red.gif';
-}
-
-FunctionOutputPort.vpms-excluded {
-	image: 'ms.design/images/FlowPort-red.gif';
-}
-
-ComponentPort.vpms-excluded {
-	image: 'ms.design/images/FlowPort-red.gif';
-}
-
-PhysicalPort.vpms-excluded {
-	image: 'ms.design/images/FlowPort-red.gif';
+	image: '/ms.design/images/vpms-rotating/FunctionInputPort-red.png';
 }
 
 FunctionInputPort.vpms-included.vpms-excluded {
-	image: 'ms.design/images/FlowPort-conflict.gif';
+	image: '/ms.design/images/vpms-rotating/FunctionInputPort-purple.png';
+}
+
+FunctionOutputPort.vpms-all-undefined {
+	image: '/ms.design/images/vpms-rotating/FunctionOutputPort.png';
+}
+
+FunctionOutputPort.vpms-excluded {
+	image: '/ms.design/images/vpms-rotating/FunctionOutputPort-red.png';
 }
 
 FunctionOutputPort.vpms-included.vpms-excluded {
-	image: 'ms.design/images/FlowPort-conflict.gif';
+	image: '/ms.design/images/vpms-rotating/FunctionOutputPort-purple.png';
+}
+
+ComponentPort[orientation='IN'].vpms-all-undefined {
+	image: '/ms.design/images/vpms-rotating/InFlowPort.png';
+}
+
+ComponentPort[orientation='IN'].vpms-excluded {
+	image: '/ms.design/images/vpms-rotating/InFlowPort-red.png';
+}
+
+ComponentPort[orientation='IN'].vpms-excluded.vpms-included {
+	image: '/ms.design/images/vpms-rotating/InFlowPort-purple.png';
+}
+
+ComponentPort[orientation='OUT'].vpms-all-undefined {
+	image: '/ms.design/images/vpms-rotating/OutFlowPort.png';
+}
+
+ComponentPort[orientation='OUT'].vpms-excluded {
+	image: '/ms.design/images/vpms-rotating/OutFlowPort-red.png';
+}
+
+ComponentPort[orientation='OUT'].vpms-excluded.vpms-included {
+	image: '/ms.design/images/vpms-rotating/OutFlowPort-purple.png';
+}
+
+ComponentPort.vpms-all-undefined {
+	image: '/ms.design/images/FlowPort.png';
+}
+
+ComponentPort.vpms-excluded {
+	image: '/ms.design/images/FlowPort-red.png';
 }
 
 ComponentPort.vpms-included.vpms-excluded {
-	image: 'ms.design/images/FlowPort-conflict.gif';
+	image: '/ms.design/images/FlowPort-purple.png';
+}
+
+PhysicalPort.vpms-all-undefined {
+	image: '/ms.design/images/FlowPort.png';
+}
+
+PhysicalPort.vpms-excluded {
+	image: '/ms.design/images/FlowPort-red.png';
 }
 
 PhysicalPort.vpms-included.vpms-excluded {
-	image: 'ms.design/images/FlowPort-conflict.gif';
+	image: '/ms.design/images/FlowPort-purple.png';
 }
-
-

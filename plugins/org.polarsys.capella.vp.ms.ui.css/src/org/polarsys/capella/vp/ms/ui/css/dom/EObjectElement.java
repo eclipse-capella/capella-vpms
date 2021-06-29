@@ -12,11 +12,16 @@
  *******************************************************************************/
 package org.polarsys.capella.vp.ms.ui.css.dom;
 
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 import org.eclipse.e4.ui.css.core.dom.ElementAdapter;
 import org.eclipse.e4.ui.css.core.engine.CSSEngine;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.polarsys.capella.common.helpers.EObjectLabelProviderHelper;
 import org.polarsys.capella.vp.ms.ui.css.CSSAdapter;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -71,17 +76,32 @@ public class EObjectElement extends ElementAdapter implements NodeList {
       return getCSSClass();
     }
 
-    // must be careful here: 
-    // in dom, if the attribute is the default, we must return null, not the default
-    // e.g. to match Component[actor]
     EObject widget = (EObject) getNativeWidget();
     for (EAttribute ea : widget.eClass().getEAllAttributes()) {
       if (attr.equals(ea.getName())){
-        if (widget.eIsSet(ea)) {
-          return EcoreUtil.convertToString(ea.getEAttributeType(), widget.eGet(ea));
+        return EcoreUtil.convertToString(ea.getEAttributeType(), widget.eGet(ea));
+      }
+    }
+
+    // treat references as absent if they're not set to anything, this way you can test
+    // e.g. 
+    //     ComponentPort[providedInterfaces] {
+    //          something: something;
+    //     }
+    // and apply only if the port provides at least one interface
+    for (EReference ref : widget.eClass().getEAllReferences()) {
+      if (ref.getName().equals(attr)) {
+        if (widget.eIsSet(ref)){
+          if (ref.isMany()) {
+            Collection<EObject> c = (Collection<EObject>) widget.eGet(ref);
+            return c.stream().map(EObjectLabelProviderHelper::getText).collect(Collectors.joining(","));
+          } else {
+            return EObjectLabelProviderHelper.getText(widget.eGet(ref));
+          }
         }
       }
     }
+
     return null;
   }
 

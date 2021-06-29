@@ -63,8 +63,12 @@ public class CSSRefreshExtension implements IRefreshExtensionProvider, IRefreshE
   @Override
   public void postRefresh(DDiagram dDiagram) {
 
+    // in capella 1.4.1 this is null for diagrams that are being created
     Session session = SessionManager.INSTANCE.getSession(dDiagram);
-    URI workspaceBaseURI = session.getSessionResource().getURI().trimSegments(1);
+    URI workspaceBaseURI = null;
+    if (session != null) {
+      workspaceBaseURI = session.getSessionResource().getURI().trimSegments(1);
+    }
     
     DiagramCSSEngine engine = new DiagramCSSEngine();
     engine.setErrorHandler(new CSSErrorHandler() {
@@ -79,10 +83,13 @@ public class CSSRefreshExtension implements IRefreshExtensionProvider, IRefreshE
     for (Layer layer : dDiagram.getActivatedLayers()) {
       URI resource = layer.eResource().getURI();
       if (seen.add(resource)) {
-        URI cssURI = resource.trimFileExtension().appendFileExtension("css");
-        URI customCSSURI = workspaceBaseURI.appendSegment(cssURI.segment(cssURI.segmentCount() - 1));
-        String customCSSPlatformString = customCSSURI.toPlatformString(true);
-        IFile customCSSFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(customCSSPlatformString));
+        
+        URI baseCssURI = resource.trimFileExtension();        
+        String filename = baseCssURI.lastSegment() + ".css";
+        URI cssURI = baseCssURI.appendFileExtension("css");
+        
+        URI diagramCssURI = baseCssURI.trimSegments(1).appendSegment(dDiagram.getDescription().getName()).appendSegment(filename);
+        
         try {
           URL cssURL = FileLocator.find(new URL(cssURI.toString()));
           if (cssURL != null) {
@@ -90,16 +97,25 @@ public class CSSRefreshExtension implements IRefreshExtensionProvider, IRefreshE
               StyleSheet ss = engine.parseStyleSheet(is);
             }
           }
-                    
-          if (customCSSFile.exists()) {     
-            try (InputStream is = customCSSFile.getContents()){
-              engine.parseStyleSheet(is);
-            } catch (CoreException e1) {
-              // TODO Auto-generated catch block
-              e1.printStackTrace();
+          URL diagramCssURL = FileLocator.find(new URL(diagramCssURI.toString()));
+          if (diagramCssURL != null) {
+            try (InputStream is = diagramCssURL.openStream()){
+              StyleSheet ss = engine.parseStyleSheet(is);
             }
           }
-
+          
+          if (workspaceBaseURI != null) {
+            URI customCSSURI = workspaceBaseURI.appendSegment(cssURI.segment(cssURI.segmentCount() - 1));
+            String customCSSPlatformString = customCSSURI.toPlatformString(true);
+            IFile customCSSFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(customCSSPlatformString));
+            if (customCSSFile.exists()) {     
+              try (InputStream is = customCSSFile.getContents()){
+                engine.parseStyleSheet(is);
+              } catch (CoreException e) {
+                e.printStackTrace();
+              }
+            }
+          }
         } catch (MalformedURLException e) {
         } catch (IOException e) {
           e.printStackTrace();
