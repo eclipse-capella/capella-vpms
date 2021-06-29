@@ -20,6 +20,6 @@ location m2doc "https://s3-eu-west-1.amazonaws.com/obeo-networkaggregation-relea
 	org.apache.poi.feature.feature.group
 }
 
-location sirius "https://download.eclipse.org/sirius/updates/stable/6.4.0-S20201119-043506/2020-06" {
+location sirius-tests "https://download.eclipse.org/sirius/updates/releases/6.5.1/2020-06/tests/" {
 	org.eclipse.sirius.tests.feature.group
 }
