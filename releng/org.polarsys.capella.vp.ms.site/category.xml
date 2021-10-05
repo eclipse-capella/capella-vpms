@@ -12,7 +12,7 @@
        Thales - initial API and implementation
  -->
 <site>
-   <feature url="features/org.polarsys.capella.vp.ms.feature_0.16.2.qualifier.jar" id="org.polarsys.capella.vp.ms.feature" version="0.16.2.qualifier">
+   <feature url="features/org.polarsys.capella.vp.ms.feature_0.16.3.qualifier.jar" id="org.polarsys.capella.vp.ms.feature" version="0.16.3.qualifier">
       <category name="org.polarsys.capella.addon.vpms"/>
    </feature>
    <feature url="features/org.polarsys.capella.vp.ms.ag.feature_0.16.2.qualifier.jar" id="org.polarsys.capella.vp.ms.ag.feature" version="0.16.2.qualifier">
