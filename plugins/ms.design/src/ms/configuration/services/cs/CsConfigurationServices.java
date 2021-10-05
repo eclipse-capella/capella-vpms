@@ -1085,7 +1085,18 @@ public class CsConfigurationServices {
   }
 
   public Collection<EObject> msSituationExpressionComponentPkgLines(EObject target){
-    return msComponentPkgLines(target, HAS_STATEMACHINE);
+    Collection<EObject> result = new ArrayList<>();
+    for (EObject e : target.eContents()) {
+      if (e instanceof ComponentPkg) {
+        for (Iterator<EObject> deeper = e.eAllContents(); deeper.hasNext();) {
+          if (deeper.next() instanceof StateMachine) {
+            result.add(e);
+            break;
+          }
+        }
+      }
+    }
+    return result;
   }
 
   public Collection<EObject> msComponentLines(PhysicalComponent c, Predicate<Component> predicate){
@@ -1154,6 +1165,9 @@ public class CsConfigurationServices {
   public Collection<? extends EObject> msSituationExpressionStateMachineLines(EObject container){
     if (container instanceof Component) {
       return ((Component) container).getOwnedStateMachines();
+    }
+    if (container instanceof ComponentPkg) {
+      return ((ComponentPkg) container).getOwnedStateMachines();
     }
     return Collections.emptyList();
   }
