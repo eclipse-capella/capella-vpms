@@ -20,12 +20,12 @@
   <parent>
     <groupId>org.polarsys</groupId>
     <artifactId>org.polarsys.capella.vp.ms-addon</artifactId>
-    <version>0.18.0-SNAPSHOT</version>
+    <version>0.18.1-SNAPSHOT</version>
   </parent>
 
   <modules>
     <module>ms.design</module>
-	<module>org.polarsys.capella.core.data.common.statemachine.validation</module>
+    <module>org.polarsys.capella.core.data.common.statemachine.validation</module>
     <module>org.polarsys.capella.vp.ms</module>
     <module>org.polarsys.capella.vp.ms.af</module>
     <module>org.polarsys.capella.vp.ms.doc</module>
