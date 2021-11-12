@@ -109,8 +109,8 @@ public final class InteractionUtils {
                 if (exec2.getStart() == ae) {
                   if (execStack.isEmpty()) {
                     result.add(exec2);
-                    execStack.push(exec2);
                   }
+                  execStack.push(exec2);
                 }
                 if (exec2.getFinish() == ae) {
                   execStack.pop();
