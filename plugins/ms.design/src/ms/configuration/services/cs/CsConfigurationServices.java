@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2021 THALES GLOBAL SERVICES.
+ * Copyright (c) 2017, 2023 THALES GLOBAL SERVICES.
  *  
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -48,7 +48,7 @@ import org.eclipse.sirius.diagram.DNode;
 import org.eclipse.sirius.diagram.DNodeContainer;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.eclipse.sirius.diagram.EdgeTarget;
-import org.eclipse.sirius.diagram.business.internal.metamodel.description.extensions.INodeMappingExt;
+import org.eclipse.sirius.diagram.model.business.internal.description.extensions.INodeMappingExt;
 import org.eclipse.sirius.diagram.business.internal.metamodel.helper.EdgeMappingHelper;
 import org.eclipse.sirius.diagram.business.internal.metamodel.helper.NodeMappingHelper;
 import org.eclipse.sirius.diagram.description.DiagramElementMapping;
@@ -62,7 +62,7 @@ import org.eclipse.sirius.table.metamodel.table.DColumn;
 import org.eclipse.sirius.table.metamodel.table.DLine;
 import org.eclipse.sirius.table.metamodel.table.DTable;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
-import org.eclipse.sirius.viewpoint.SiriusPlugin;
+import org.eclipse.sirius.tools.api.SiriusPlugin;
 import org.eclipse.sirius.viewpoint.description.DAnnotation;
 import org.eclipse.sirius.viewpoint.description.DModelElement;
 import org.eclipse.sirius.viewpoint.description.DescriptionFactory;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2020 THALES GLOBAL SERVICES.
+ * Copyright (c) 2017, 2023 THALES GLOBAL SERVICES.
  *  
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -28,7 +28,7 @@ import org.polarsys.kitalpha.emde.model.ElementExtension;
  *
  * @see org.polarsys.capella.vp.ms.MsPackage#getFSMType()
  * @model annotation="http://www.polarsys.org/kitalpha/emde/1.0.0/constraint ExtendedElement='
- *        http://www.polarsys.org/capella/core/common/5.0.0#//StateMachine'"
+ *        http://www.polarsys.org/capella/core/common/6.0.0#//StateMachine'"
  *        annotation="http://www.polarsys.org/kitalpha/emde/1.0.0/constraintMapping Mapping='
  *        platform:/plugin/org.polarsys.capella.core.data.gen/model/CapellaCommon.ecore#//StateMachine'"
  * @generated

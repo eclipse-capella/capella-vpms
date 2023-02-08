@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2020 Altran.
+ * Copyright (c) 2017, 2023 Altran.
  *  
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -31,7 +31,7 @@ import org.polarsys.kitalpha.emde.model.ElementExtension;
  *
  * @see org.polarsys.capella.vp.ms.MsPackage#getComparison()
  * @model annotation="http://www.polarsys.org/kitalpha/emde/1.0.0/constraint ExtendedElement='
- *        http://www.polarsys.org/capella/core/cs/5.0.0#//Component'"
+ *        http://www.polarsys.org/capella/core/cs/6.0.0#//Component'"
  *        annotation="http://www.polarsys.org/kitalpha/emde/1.0.0/constraintMapping Mapping='
  *        platform:/plugin/org.polarsys.capella.core.data.gen/model/CompositeStructure.ecore#//Component'"
  * @generated

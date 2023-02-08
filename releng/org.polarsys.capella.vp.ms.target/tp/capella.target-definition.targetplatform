@@ -1,0 +1,54 @@
+/*******************************************************************************
+ * Copyright (c)  2020, 2023 THALES GLOBAL SERVICES.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Thales - initial API and implementation
+ *******************************************************************************/
+target "VPMS"
+
+include "https://download.eclipse.org/capella/core/updates/releases/6.0.0/targets/capella.target-definition.targetplatform"
+include "https://git.eclipse.org/c/sirius/org.eclipse.sirius.git/plain/releng/org.eclipse.sirius.targets/modules/swtbot-3.0.tpd?h=v6.4.0"
+
+
+with source, requirements
+
+// Duplicated from Sirius because there's already a Orbit location in Capella TP definition (include "https://git.eclipse.org/c/sirius/org.eclipse.sirius.git/plain/releng/org.eclipse.sirius.targets/modules/orbit.tpd?h=v6.4.0")
+location Orbit-Sirius "https://download.eclipse.org/tools/orbit/downloads/drops/R20190602212107/repository" {
+    org.apache.log4j lazy
+    org.easymock lazy
+    org.hamcrest.core lazy
+    org.hamcrest.library lazy
+    org.junit [4.11.0,5.0.0)
+    javax.servlet lazy
+    javax.websocket lazy
+    com.google.gson lazy
+    org.slf4j.api [1.7.2,1.7.3)
+    ch.qos.logback.slf4j [1.0.7,1.0.8)
+    ch.qos.logback.classic [1.0.7,1.0.8)
+    ch.qos.logback.core [1.0.7,1.0.8)
+    org.apache.xalan 2.7.1
+    org.antlr.runtime [4.7.1,4.7.2)
+    org.reactivestreams [1.0.2,1.0.3)
+    com.graphql.java.dataloader [2.1.1,2.1.2)
+    com.graphql.java [11.0.0,11.0.1)
+}
+
+location capella-master "https://download.eclipse.org/capella/core/updates/releases/6.0.0/org.polarsys.capella.rcp.site" {
+	org.polarsys.capella.rcp.feature.group
+}
+
+location capella-tests-master "https://download.eclipse.org/capella/core/updates/releases/6.0.0/org.polarsys.capella.test.site" {
+	org.polarsys.capella.test.feature.feature.group
+}
+
+location m2doc "https://s3-eu-west-1.amazonaws.com/obeo-networkaggregation-releases/capella-extensions/6.0.0_M2Doc3.2.2/full" {
+	org.apache.poi.feature.feature.group
+}
+
+location sirius-tests "https://download.eclipse.org/sirius/updates/releases/7.0.4/2021-06/tests/" {
+	org.eclipse.sirius.tests.feature.group
+}

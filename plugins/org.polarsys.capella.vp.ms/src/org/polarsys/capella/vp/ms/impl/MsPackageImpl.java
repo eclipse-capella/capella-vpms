@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2020 THALES GLOBAL SERVICES and others.
+ * Copyright (c) 2017, 2023 THALES GLOBAL SERVICES and others.
  *  
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -829,16 +829,16 @@ public class MsPackageImpl extends EPackageImpl implements MsPackage {
   protected void createConstraintAnnotations() {
     String source = "http://www.polarsys.org/kitalpha/emde/1.0.0/constraint"; //$NON-NLS-1$
     addAnnotation(csConfigurationEClass, source, new String[] { "ExtendedElement", //$NON-NLS-1$
-        " http://www.polarsys.org/capella/core/cs/5.0.0#//Component http://www.polarsys.org/capella/core/cs/5.0.0#//ComponentPkg" //$NON-NLS-1$
+        " http://www.polarsys.org/capella/core/cs/6.0.0#//Component http://www.polarsys.org/capella/core/cs/6.0.0#//ComponentPkg" //$NON-NLS-1$
     });
     addAnnotation(fsmTypeEClass, source,
-        new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/common/5.0.0#//StateMachine" //$NON-NLS-1$ //$NON-NLS-2$
+        new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/common/6.0.0#//StateMachine" //$NON-NLS-1$ //$NON-NLS-2$
         });
     addAnnotation(situationEClass, source,
-        new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/cs/5.0.0#//Component" //$NON-NLS-1$ //$NON-NLS-2$
+        new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/cs/6.0.0#//Component" //$NON-NLS-1$ //$NON-NLS-2$
         });
     addAnnotation(comparisonEClass, source,
-        new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/cs/5.0.0#//Component" //$NON-NLS-1$ //$NON-NLS-2$
+        new String[] { "ExtendedElement", " http://www.polarsys.org/capella/core/cs/6.0.0#//Component" //$NON-NLS-1$ //$NON-NLS-2$
         });
   }
 
