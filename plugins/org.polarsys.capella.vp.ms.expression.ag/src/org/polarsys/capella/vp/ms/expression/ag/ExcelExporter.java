@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2021 THALES GLOBAL SERVICES.
+ * Copyright (c) 2020, 2024 THALES GLOBAL SERVICES.
  *  
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -20,7 +20,6 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -28,7 +27,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.polarsys.capella.common.data.modellingcore.AbstractNamedElement;
 import org.polarsys.capella.common.helpers.EcoreUtil2;
 import org.polarsys.capella.core.data.capellacommon.AbstractState;
 import org.polarsys.capella.core.data.capellacommon.CapellacommonPackage;
@@ -52,7 +50,6 @@ public class ExcelExporter extends MsSwitch<Object> {
 
   List<StateMachine> statemachines = new ArrayList<>();
   Map<Situation, List<Multimap<StateMachine, BooleanExpression>>> exportmap = new LinkedHashMap<>();
-  Function<StateMachine, String> headers = (StateMachine s) -> (((AbstractNamedElement) s.eContainer()).getName() + "/" + s.getName());
 
   // this maps the root disjunctions to a collection of literals that make up the conjunctions
   Multimap<BooleanExpression, BooleanExpression> literals;
@@ -80,37 +77,34 @@ public class ExcelExporter extends MsSwitch<Object> {
     // create the headers
     int rowIndex = 0;
     Row row = sheet1.createRow(rowIndex++);
+    row.createCell(0).setCellValue("situation");
     for (int i = 0; i < statemachines.size(); i++) {
       Cell cell = row.createCell(i+1);
-      cell.setCellValue(headers.apply(statemachines.get(i)));
+      cell.setCellValue(statemachines.get(i).getName());
     }
 
+    // filling the table
     MsExpressionUnparser unparser = new MsExpressionUnparser(MsExpressionUnparser.Mode.NAME);
 
     for (Situation situation : exportmap.keySet()) {
-
-      row = sheet1.createRow(rowIndex++);
-      Cell sitCell = row.createCell(0);
-      sitCell.setCellValue(situation.getName());
-
-      StringBuilder[] printableRecord = new StringBuilder[statemachines.size() + 1]; // +1 for the situation column (first column)
-      for (int i = 0; i < printableRecord.length; i++) {
-        printableRecord[i] = new StringBuilder();
-      }
-      printableRecord[0].append(situation.getName());
-
       for (Multimap<StateMachine, BooleanExpression> r : exportmap.get(situation)) {
+        row = sheet1.createRow(rowIndex++);
+        row.createCell(0).setCellValue(situation.getName());
         for (StateMachine sm : r.keySet()) {
           int colIndex = statemachines.indexOf(sm) + 1;
           Cell cell = row.createCell(colIndex);
           cell.setCellValue(r.get(sm).stream().map(be -> unparser.unparse(be)).collect(Collectors.joining(", ")));
         }
-        row = sheet1.createRow(rowIndex++);
       }
+      sheet1.createRow(rowIndex++); // empty line between each situation's segment
     }
+
+    // autoresize every column
     for (int i = 0; i < statemachines.size() + 1; i++) {
       sheet1.autoSizeColumn(i);
     }
+
+    // save & close
     wb.write(out);
     wb.close();
   }
@@ -153,6 +147,7 @@ public class ExcelExporter extends MsSwitch<Object> {
     return this;
   }
 
+  @Override
   public Object caseBooleanOperation(BooleanOperation op) {
     for (BooleanExpression child : op.getChildren()) {
       doSwitch(child);
@@ -178,12 +173,14 @@ public class ExcelExporter extends MsSwitch<Object> {
     return this;
   }
 
+  @Override
   public Object caseInStateExpression(InStateExpression e) {
     BooleanExpression top = findTop(e);
     literals.put(top, e);
     return this;
   }
   
+  @Override
   public Object caseInSituationExpression(InSituationExpression e) {
     BooleanExpression top = findTop(e);
     literals.put(top, e);

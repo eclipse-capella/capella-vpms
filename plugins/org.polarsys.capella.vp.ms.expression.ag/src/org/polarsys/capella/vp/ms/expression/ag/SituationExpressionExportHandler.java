@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2021 THALES GLOBAL SERVICES.
+ * Copyright (c) 2020, 2024 THALES GLOBAL SERVICES.
  *  
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -15,12 +15,9 @@ package org.polarsys.capella.vp.ms.expression.ag;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.commands.AbstractHandler;
@@ -77,10 +74,7 @@ public class SituationExpressionExportHandler extends AbstractHandler {
     Session session = SessionManager.INSTANCE.getSession(table.getTarget());
     URI sessionURI = session.getSessionResource().getURI();
 
-    // make a file that probably doesn't exist yet..
-    DateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-    String ts = format.format(new Date());
-    String excel = sessionURI.trimSegments(1).appendSegment(table.getName() + "_" + ts).appendFileExtension("xlsx").toPlatformString(true);
+    String excel = sessionURI.trimSegments(1).appendSegment(table.getName()).appendFileExtension("xlsx").toPlatformString(true);
 
     IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(excel));
 
@@ -89,6 +83,9 @@ public class SituationExpressionExportHandler extends AbstractHandler {
     try {
       exporter.export(toExport, columnOrder, bytes);
       ByteArrayInputStream inbb = new ByteArrayInputStream(bytes.toByteArray());
+      if (file.exists()) {
+        file.delete(false, new NullProgressMonitor());
+      }
       file.create(inbb, true, new NullProgressMonitor());
     } catch (IOException | CoreException e) {
       throw new ExecutionException("IOException during export", e);
