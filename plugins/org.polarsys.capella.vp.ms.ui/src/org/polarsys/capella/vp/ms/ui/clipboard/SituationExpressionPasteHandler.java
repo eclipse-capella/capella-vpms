@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.antlr.v4.runtime.ANTLRErrorListener;
 import org.antlr.v4.runtime.BaseErrorListener;
@@ -30,6 +31,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.RecordingCommand;
@@ -42,10 +44,13 @@ import org.eclipse.sirius.table.metamodel.table.DColumn;
 import org.eclipse.sirius.table.metamodel.table.DLine;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.statushandlers.StatusManager;
+import org.polarsys.capella.common.data.modellingcore.IState;
 import org.polarsys.capella.common.linkedtext.ui.LinkedTextDocument;
 import org.polarsys.capella.common.linkedtext.ui.LinkedTextHyperlink;
 import org.polarsys.capella.core.data.capellacommon.StateMachine;
 import org.polarsys.capella.core.linkedtext.ui.CapellaEmbeddedLinkedTextEditorInput;
+import org.polarsys.capella.vp.ms.BooleanExpression;
+import org.polarsys.capella.vp.ms.InStateExpression;
 import org.polarsys.capella.vp.ms.Situation;
 import org.polarsys.capella.vp.ms.expression.parser.DefaultMsExpressionVisitor;
 import org.polarsys.capella.vp.ms.expression.parser.LinkedText2Situation;
@@ -91,7 +96,9 @@ public class SituationExpressionPasteHandler extends AbstractHandler {
         List<String> errors = new ArrayList<>();
         ParseTree tree = MsExpressionUtil.parse(toParse.get(), createErrorListener(errors));
         if (errors.isEmpty()) {
-          splitExpression.put(rowSm, new DefaultMsExpressionVisitor(createResolver(LinkedTextDocument.load(input))).visit(tree));
+          BooleanExpression expression = new DefaultMsExpressionVisitor(createResolver(LinkedTextDocument.load(input))).visit(tree);
+          validateClipboardContentExists(targetCell, expression);
+          splitExpression.put(rowSm, expression);
         } else {
           StatusManager.getManager().handle(new Status(IStatus.ERROR, Activator.PLUGIN_ID, errors.get(0)), StatusManager.BLOCK);
           return null;
@@ -104,6 +111,40 @@ public class SituationExpressionPasteHandler extends AbstractHandler {
       return splitExpression;
     }
     return null;
+  }
+  
+  private void validateClipboardContentExists(DCell targetCell, BooleanExpression expression) {
+	// Gather States contained by the StateMachine
+	TreeIterator<EObject> eAllContents = targetCell.getTarget().eAllContents();
+	ArrayList<IState> containedIStates = new ArrayList<IState>();
+	while (eAllContents.hasNext()) {
+	  EObject eObject = (EObject) eAllContents.next();
+	  if(eObject instanceof IState) {
+		containedIStates.add((IState) eObject);
+	  }
+	}
+	// Gather States from clipboard and check that they are all contained by the current StateMachine
+	ArrayList<IState> pastedIStates = getPastedStates(expression);
+	pastedIStates.removeAll(containedIStates);
+	if(!pastedIStates.isEmpty()) {
+		throw new NoSuchElementException("This expression cannot be pasted because this state machine does not contain the states: "+pastedIStates.stream().map(IState::getName).collect(Collectors.joining(", ")));
+	}
+  }
+  
+  private ArrayList<IState> getPastedStates(BooleanExpression exp) {
+		ArrayList<IState> pastedIStates = new ArrayList<IState>();
+		if(exp instanceof InStateExpression) {
+			pastedIStates.add(((InStateExpression)exp).getState());
+		} else {
+			for (EObject eObject : exp.eContents()) {
+				if(eObject instanceof InStateExpression) {
+					pastedIStates.add(((InStateExpression)eObject).getState());
+				} else if (eObject instanceof BooleanExpression){
+					pastedIStates.addAll(getPastedStates((BooleanExpression)eObject));
+				}
+			}
+		}
+		return pastedIStates;
   }
 
   private void pasteContent(DCell targetCell, LinkedText2Situation.SplitExpression expression) {
